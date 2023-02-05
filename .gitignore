@@ -1,0 +1,37 @@
+# Specify filepatterns you want git to ignore.
+
+# npm/node.js directory
+node_modules/
+./node_modules/*
+./blockchain/node_modules/
+./front-end/node_modules/
+
+# work directory
+work/
+./blockchain/work/
+./front-end/work/
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+.vscode
+./client/src/work
+
+# Hardhat files
+cache
+artifacts
+
+
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts
+
