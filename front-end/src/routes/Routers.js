@@ -2,12 +2,11 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Certifications from "../pages/Certifications";
+import Governance from "../pages/Governance";
 import Home from "../pages/Home";
+import NftDetails from "../pages/NftDetails";
 import Wallet from "../pages/Wallet";
-/* import Market from "../pages/Market";
-import Create from "../pages/Create";
-import Contact from "../pages/Contact";
-import NftDetails from "../pages/NftDetails"; */
+
 
 const Routers = () => {
   return (
@@ -15,11 +14,10 @@ const Routers = () => {
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/certifications" element={<Certifications />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/governance" element={<Governance />} />
       <Route path="/wallet" element={<Wallet />} />
-{/*       <Route path="/market" element={<Market />} />
-      <Route path="/create" element={<Create />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/market/:id" element={<NftDetails />} /> */}
+
+      {/* <Route path="/wallet/:id" element={<NftDetails />} /> */}
     </Routes>
   );
 };
