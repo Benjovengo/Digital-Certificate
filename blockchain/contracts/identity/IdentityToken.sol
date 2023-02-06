@@ -184,7 +184,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         override(ERC721, ERC721URIStorage)
         returns (string memory)
     {
-        // @dev set the minimum block number to be a valid identity
+        // @dev set the minimum block number to retrieve the identity data
         require(
             block.number >= blockLockStart[tokenId],
             "ERROR: minimum block height not achieved!"
