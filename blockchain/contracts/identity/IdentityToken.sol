@@ -51,6 +51,44 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         bytes32 _identityHash,
         bytes32 _accountPublicKey
     ) public onlyOwner returns (uint256) {
+        /// @notice Add a new identity and increment IDs
+        serialNumberId.increment();
+        uint256 newIdSerialNumber = serialNumberId.current();
+        _mint(_blockchainAddress, newIdSerialNumber);
+        _setTokenURI(newIdSerialNumber, _identityURI);
+
+        /// @notice add identity data for operational functions
+        uniqueSerialNumber[_blockchainAddress] = newIdSerialNumber;
+        verificationHash[newIdSerialNumber] = _identityHash;
+        publicKey[newIdSerialNumber] = _accountPublicKey;
+        isActive[newIdSerialNumber] = true;
+
+        return newIdSerialNumber;
+    }
+
+    /** @notice Update identity - burn old one and mint the new one
+     *
+     * @param _blockchainAddress Address of the owner of the idendity
+     * @param _identityURI Path to the JSON file containing the personal information
+     * @param _identityHash The hash of the JSON file with submitted information
+     * @param _accountPublicKey The public key associated with the blockchain account
+     *
+     * @return newIdSerialNumber The unique serial number of the account
+     */
+    function update(
+        address _blockchainAddress,
+        string memory _identityURI,
+        bytes32 _identityHash,
+        bytes32 _accountPublicKey
+    ) public onlyOwner returns (uint256) {
+        require(
+            uniqueSerialNumber[_blockchainAddress] != 0,
+            "The identity does not exist!"
+        );
+
+        burnIdentity(_blockchainAddress); // burn the old identity
+
+        /// @notice Add a new identity and increment IDs
         serialNumberId.increment();
         uint256 newIdSerialNumber = serialNumberId.current();
         _mint(_blockchainAddress, newIdSerialNumber);
@@ -78,7 +116,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return publicKey[uniqueSerialNumber[_accountAddress]];
     }
 
-    /** @notice Set the identity for the idendity
+    /** @notice Set the identity status for the idendity
      *
      * @param _accountAddress The address of the account to set the activity
      * @param _activityStatus The activity status for that identity: true:active, or false:inactive
@@ -88,6 +126,15 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         onlyOwner
     {
         isActive[uniqueSerialNumber[_accountAddress]] = _activityStatus;
+    }
+
+    /** @notice Get the identity status for the idendity
+     *
+     * @param _accountAddress The address of the account to set the activity
+     * @return isActive The activity status for that identity: true:active, or false:inactive
+     */
+    function getActive(address _accountAddress) public view returns (bool) {
+        return isActive[uniqueSerialNumber[_accountAddress]];
     }
 
     /** @notice Burn the identity
