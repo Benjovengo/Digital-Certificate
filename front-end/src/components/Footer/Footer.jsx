@@ -97,6 +97,7 @@ const Footer = () => {
             <h5>Newsletter</h5>
             <input type="text" className="newsletter" placeholder="Email" />
             <div className="social__links d-flex gap-3 align-items-center ">
+              <span>Follow us!!!</span>
               <span>
                 <a href="https://www.facebook.com" target="_blank">
                   <i className="ri-facebook-line"></i>
