@@ -27,7 +27,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     /// @dev Mappings - values for each individual
     mapping(address => uint256) private uniqueSerialNumber; // the serial number for each identity
     mapping(uint256 => bytes32) private verificationHash; // to verify that the information is valid
-    mapping(uint256 => bytes32) private publicKey; // used to encrypt message to the user
+    mapping(uint256 => string) private publicKey; // used to encrypt message to the user
     mapping(uint256 => bool) private isActive; // ideintity activity = is person alive
 
     /** @notice Constructor method
@@ -48,7 +48,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         address _blockchainAddress,
         string memory _identityURI,
         bytes32 _identityHash,
-        bytes32 _accountPublicKey
+        string memory _accountPublicKey
     ) public onlyOwner returns (uint256) {
         /// @notice Add a new identity and increment IDs
         serialNumberId.increment();
@@ -77,7 +77,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         address _blockchainAddress,
         string memory _identityURI,
         bytes32 _identityHash,
-        bytes32 _accountPublicKey
+        string memory _accountPublicKey
     ) public onlyOwner returns (uint256) {
         require(
             uniqueSerialNumber[_blockchainAddress] != 0,
@@ -109,7 +109,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     function getPublicKey(address _accountAddress)
         public
         view
-        returns (bytes32)
+        returns (string memory)
     {
         return publicKey[uniqueSerialNumber[_accountAddress]];
     }
