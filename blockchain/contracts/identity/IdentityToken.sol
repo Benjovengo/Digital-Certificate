@@ -149,6 +149,18 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
      * @dev Created by OpenZeppelin Wizard at https://docs.openzeppelin.com/contracts/4.x/wizard
      */
 
+    function _transfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override(ERC721) {
+        require(
+            msg.sender == this.owner(),
+            "Only the contract owner can transfer identity tokens."
+        );
+        super._transfer(from, to, tokenId);
+    }
+
     function _burn(uint256 tokenId)
         internal
         override(ERC721, ERC721URIStorage)
