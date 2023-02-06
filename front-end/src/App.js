@@ -1,8 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 
-import GetEvents from './GetEvents';
-
 function App() {
   return (
     <div className="App">
@@ -19,7 +17,6 @@ function App() {
         >
           Learn React
         </a>
-        <GetEvents />
       </header>
     </div>
   );
