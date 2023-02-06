@@ -17,7 +17,7 @@ const HeroSection = () => {
                 Your
                 <div className="hero__diploma__top">
                   <h3 className="hero__diploma">diplomas</h3>
-                  <h3 className="hero__diploma__and">and</h3>
+                  <h3 className="hero__diploma__and">&</h3>
                 </div>
                 
                 <h3 className="hero__diploma">certifications</h3>
