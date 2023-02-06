@@ -1,0 +1,52 @@
+.header {
+  background: #20202E;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 111;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo h2 {
+  background-clip: text;
+  -webkit-text-fill-color: #141414;
+  margin-bottom: 0;
+}
+
+.img__logo {
+  height: 1.65em;
+  margin: -0.15em 0em 0em -1em;
+}
+
+
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  column-gap: 2.7rem;
+  margin-bottom: 0;
+}
+
+.nav__item a {
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav__item a:hover {
+  color: #AAA;
+}
+
+.active {
+  color: #F89104 !important;
+}
+

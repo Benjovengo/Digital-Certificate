@@ -33,12 +33,7 @@ const Header = () => {
         <Container>
           <div className="navigation">
             <div className="logo">
-              <h2 className=" d-flex gap-2 align-items-center ">
-                <span>
-                  <i className="ri-fire-fill"></i>
-                </span>
-                NFTs
-              </h2>
+              <img src='DigitalCertLogo.png' alt='digital certifications logo' className='img__logo' ></img>
             </div>
 
             <div className="nav__menu">
@@ -60,10 +55,11 @@ const Header = () => {
 
             <div className="nav__right d-flex align-items-center gap-5 ">
               <button className="btn d-flex gap-2 align-items-center">
-                <span>
-                  <i class="ri-wallet-line"></i>
-                </span>
-                <Link to="/wallet">Connect MetaMask</Link>
+                <Link to="/wallet">
+                  <span>
+                    <i class="ri-wallet-line"></i>
+                  </span> Connect MetaMask
+                </Link>
               </button>
 
               <span className="mobile__menu">
