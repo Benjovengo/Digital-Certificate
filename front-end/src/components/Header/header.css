@@ -75,3 +75,8 @@
 .nav__right .btn a:hover {
   color: #fff;
 }
+
+/* Responsive Design - Small Screens */
+@media only screen and (max-width: 768px) {
+  
+}
