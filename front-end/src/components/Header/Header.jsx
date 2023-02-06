@@ -11,7 +11,11 @@ const NAV__LINKS = [
     url: "/home",
   },
   {
-    display: "Wallet",
+    display: "Certifications",
+    url: "/certifications",
+  },
+  {
+    display: "Wallet & ID",
     url: "/wallet",
   },
 ];
