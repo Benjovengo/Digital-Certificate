@@ -1,9 +1,9 @@
-.img__logo {
+.footer .img__logo {
   height: 1.65em;
   margin: -0.15em 0em 0em 0em;
 }
 
-.logo p {
+.footer .logo p {
   margin-right: 2em;
   text-align: justify;
 }
