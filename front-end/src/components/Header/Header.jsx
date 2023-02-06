@@ -15,6 +15,10 @@ const NAV__LINKS = [
     url: "/certifications",
   },
   {
+    display: "Governance",
+    url: "/governance",
+  },
+  {
     display: "Wallet & ID",
     url: "/wallet",
   },
