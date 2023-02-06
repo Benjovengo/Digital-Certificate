@@ -69,14 +69,12 @@ const Header = ({ account, setAccount }) => {
 
             <div className="nav__right d-flex align-items-center gap-3 ">
               <button className="btn d-flex gap-1 align-items-center"  onClick={connectHandler}>
-                <Link to="#">
                   {account? (
                     <div><i className="ri-wallet-line"></i> {account.slice(0,6) + '...' + account.slice(38,42)}</div>
                     //<p><b>Address:</b> {account}</p>
                   ) : (
                     <div><i className="ri-wallet-line"></i> Connect MetaMask</div>
                   )}
-                </Link>
               </button>
 
               <span className="mobile__menu">
