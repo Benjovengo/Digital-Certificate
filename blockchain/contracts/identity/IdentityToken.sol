@@ -38,16 +38,16 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
 
     /** @notice Mint new identity
      *
-     * @param _identityURI Path to the JSON file containing the personal information
      * @param _blockchainAddress Address of the owner of the idendity
+     * @param _identityURI Path to the JSON file containing the personal information
      * @param _identityHash The hash of the JSON file with submitted information
      * @param _accountPublicKey The public key associated with the blockchain account
      *
      * @return newIdSerialNumber The unique serial number of the account
      */
     function mint(
-        string memory _identityURI,
         address _blockchainAddress,
+        string memory _identityURI,
         bytes32 _identityHash,
         bytes32 _accountPublicKey
     ) public onlyOwner returns (uint256) {
@@ -78,10 +78,10 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return publicKey[uniqueSerialNumber[_accountAddress]];
     }
 
-    /** @notice Set the identity as true:active, or false:inactive
+    /** @notice Set the identity for the idendity
      *
      * @param _accountAddress The address of the account to set the activity
-     * @param _activityStatus The activity status for that identity
+     * @param _activityStatus The activity status for that identity: true:active, or false:inactive
      */
     function setActive(address _accountAddress, bool _activityStatus)
         public
@@ -90,7 +90,10 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         isActive[uniqueSerialNumber[_accountAddress]] = _activityStatus;
     }
 
-    /** @notice Burn the identity */
+    /** @notice Burn the identity
+     *
+     * @param _accountAddress The address of the identity to be burnt
+     */
     function burnIdentity(address _accountAddress) public onlyOwner {
         _burn(uniqueSerialNumber[_accountAddress]);
     }
