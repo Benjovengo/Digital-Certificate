@@ -11,6 +11,7 @@
     "@typechain/hardhat": "^6.1.5",
     "@types/chai": "^4.3.4",
     "@types/node": "^18.11.18",
+    "chai": "^4.3.7",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
     "hardhat-contract-sizer": "^2.7.0",
