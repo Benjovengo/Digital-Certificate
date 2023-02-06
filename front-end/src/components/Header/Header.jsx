@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Container } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 
 import './header.css'
+import { connectHandler } from './Connect';
 
 
 const NAV__LINKS = [
@@ -27,6 +28,31 @@ const NAV__LINKS = [
 
 
 const Header = () => {
+
+  const headerRef = useRef(null);
+  const menuRef = useRef(null);
+
+  let [provider, setProvider] = useState(null)
+  let [account, setAccount] = useState(null)
+
+  connectHandler(account, setAccount)
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        headerRef.current.classList.add("header__shrink");
+      } else {
+        headerRef.current.classList.remove("header__shrink");
+      }
+    });
+  }, []);
+
+  const toggleMenu = () => menuRef.current.classList.toggle("active__menu");
+
+
   return (
     <>
       <header className="header">
@@ -36,7 +62,7 @@ const Header = () => {
               <img src='DigitalCertLogo.png' alt='digital certifications logo' className='img__logo' ></img>
             </div>
 
-            <div className="nav__menu">
+            <div className="nav__menu" ref={menuRef} onClick={toggleMenu}>
               <ul className="nav__list">
                 {NAV__LINKS.map((item, index) => (
                   <li className="nav__item" key={index}>
@@ -54,7 +80,7 @@ const Header = () => {
             </div>
 
             <div className="nav__right d-flex align-items-center gap-5 ">
-              <button className="btn d-flex gap-2 align-items-center">
+              <button className="btn d-flex gap-2 align-items-center"  onClick={connectHandler}>
                 <Link to="/wallet">
                   <span>
                     <i className="ri-wallet-line"></i>
@@ -63,7 +89,7 @@ const Header = () => {
               </button>
 
               <span className="mobile__menu">
-                <i className="ri-menu-line"></i>
+                <i className="ri-menu-line lines__menu" onClick={toggleMenu}></i>
               </span>
             </div>
 
