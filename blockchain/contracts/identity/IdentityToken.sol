@@ -24,11 +24,15 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private serialNumberId; // personal ID number
 
-    /// @dev Mappings - values for each individual
+    /// @dev Mappings - values for each identity
     mapping(address => uint256) private uniqueSerialNumber; // the serial number for each identity
     mapping(uint256 => bytes32) private verificationHash; // to verify that the information is valid
     mapping(uint256 => string) private publicKey; // used to encrypt message to the user
     mapping(uint256 => bool) private isActive; // ideintity activity = is person alive
+
+    /// @dev block lock parameters
+    uint256 private blockHeight = 0; // used in conjunction with the blockLockStart
+    mapping(uint256 => uint256) private blockLockStart; // to require a certain block height to begin using the identity
 
     /** @notice Constructor method
      *
@@ -61,6 +65,9 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         verificationHash[newIdSerialNumber] = _identityHash;
         publicKey[newIdSerialNumber] = _accountPublicKey;
         isActive[newIdSerialNumber] = true;
+
+        // @dev set the minimum block number to be a valid identity
+        blockLockStart[newIdSerialNumber] = block.number + blockHeight;
 
         return newIdSerialNumber;
     }
@@ -97,6 +104,9 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         verificationHash[newIdSerialNumber] = _identityHash;
         publicKey[newIdSerialNumber] = _accountPublicKey;
         isActive[newIdSerialNumber] = true;
+
+        // @dev set the minimum block number to be a valid identity
+        blockLockStart[newIdSerialNumber] = block.number + blockHeight;
 
         return newIdSerialNumber;
     }
@@ -174,6 +184,11 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         override(ERC721, ERC721URIStorage)
         returns (string memory)
     {
+        // @dev set the minimum block number to be a valid identity
+        require(
+            block.number >= blockLockStart[tokenId],
+            "ERROR: minimum block height not achieved!"
+        );
         return super.tokenURI(tokenId);
     }
 }
