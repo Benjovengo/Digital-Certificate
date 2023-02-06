@@ -42,7 +42,6 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
      * @param _identityURI Path to the JSON file containing the personal information
      * @param _identityHash The hash of the JSON file with submitted information
      * @param _accountPublicKey The public key associated with the blockchain account
-     *
      * @return newIdSerialNumber The unique serial number of the account
      */
     function mint(
@@ -72,7 +71,6 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
      * @param _identityURI Path to the JSON file containing the personal information
      * @param _identityHash The hash of the JSON file with submitted information
      * @param _accountPublicKey The public key associated with the blockchain account
-     *
      * @return newIdSerialNumber The unique serial number of the account
      */
     function update(
