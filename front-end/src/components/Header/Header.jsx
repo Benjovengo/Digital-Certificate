@@ -57,7 +57,7 @@ const Header = () => {
               <button className="btn d-flex gap-2 align-items-center">
                 <Link to="/wallet">
                   <span>
-                    <i class="ri-wallet-line"></i>
+                    <i className="ri-wallet-line"></i>
                   </span> Connect MetaMask
                 </Link>
               </button>
