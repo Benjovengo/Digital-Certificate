@@ -27,7 +27,6 @@
 }
 
 
-
 .nav__list {
   display: flex;
   align-items: center;
@@ -99,6 +98,17 @@
     background: linear-gradient(#14141f83, #14141f83);
     z-index: 222222;
     display: none;
+  }
+
+  .logo h2 {
+    background-clip: text;
+    -webkit-text-fill-color: #141414;
+    margin-bottom: 0;
+  }
+  
+  .img__logo {
+    height: 1.65em;
+    margin: -0.15em 0em 0em -1em;
   }
 
   .active__menu {
