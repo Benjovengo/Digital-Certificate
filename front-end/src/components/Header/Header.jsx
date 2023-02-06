@@ -67,11 +67,11 @@ const Header = ({ account, setAccount }) => {
               </ul>
             </div>
 
-            <div className="nav__right d-flex align-items-center gap-5 ">
-              <button className="btn d-flex gap-2 align-items-center"  onClick={connectHandler}>
+            <div className="nav__right d-flex align-items-center gap-3 ">
+              <button className="btn d-flex gap-1 align-items-center"  onClick={connectHandler}>
                 <Link to="#">
                   {account? (
-                    <div>Logged in as {account.slice(0,6) + '...' + account.slice(38,42)}</div>
+                    <div><i className="ri-wallet-line"></i> {account.slice(0,6) + '...' + account.slice(38,42)}</div>
                     //<p><b>Address:</b> {account}</p>
                   ) : (
                     <div><i className="ri-wallet-line"></i> Connect MetaMask</div>

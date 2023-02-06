@@ -100,6 +100,12 @@
     display: none;
   }
 
+  .lines__menu {
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
   .logo h2 {
     background-clip: text;
     -webkit-text-fill-color: #141414;
@@ -107,8 +113,8 @@
   }
   
   .img__logo {
-    height: 1.65em;
-    margin: -0.15em 0em 0em -1em;
+    height: 0.9em;
+    margin: -0.15em 0em 0em 0em;
   }
 
   .active__menu {
@@ -118,11 +124,12 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 250px;
+    width: 225px;
     height: 100%;
     background: #343444;
-    z-index: 333333;
+    z-index: 222;
     flex-direction: column;
+    padding-right: 10px;
     padding-top: 40px;
   }
 
