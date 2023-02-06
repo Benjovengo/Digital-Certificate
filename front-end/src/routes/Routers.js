@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import Certifications from "../pages/Certifications";
 import Home from "../pages/Home";
 import Wallet from "../pages/Wallet";
 /* import Market from "../pages/Market";
@@ -12,6 +13,7 @@ const Routers = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/certifications" element={<Certifications />} />
       <Route path="/home" element={<Home />} />
       <Route path="/wallet" element={<Wallet />} />
 {/*       <Route path="/market" element={<Market />} />
