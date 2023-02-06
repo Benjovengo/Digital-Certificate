@@ -2,9 +2,41 @@
   margin-top: 120px;
 }
 
-.hero__content h2 {
+.hero__header {
+  color: #FFF;
+  font-size: 1.5rem;
   line-height: normal;
-  font-size: 2.5rem;
+}
+
+.hero__diploma {
+  color: #FFF;
+  font-family: 'Cinzel', serif;
+  font-size: 4.35rem;
+  margin: 0;
+  text-align: left;
+}
+
+.hero__diploma__top {
+  color: #FFF;
+  font-family: 'Cinzel', serif;
+  font-size: 4.35rem;
+  margin: 0;
+  text-align: center;
+}
+
+.hero__diploma__and {
+  color: #AAA;
+  font-family: 'Cinzel', serif;
+  font-size: 3.35rem;
+  margin: -0.1em 0;
+  text-align: center;
+}
+
+.hero__left {
+  color: #FFF;
+  font-size: 1.5rem;
+  line-height: normal;
+  text-align: right;
 }
 
 .hero__nft {
@@ -14,23 +46,13 @@
   -webkit-text-stroke: 3px transparent;
   -webkit-text-fill-color: #14141f;
   margin-left: 0px !important;
-  display: inline-block;
   font-size: 3.0rem;
-}
-
-.hero__header {
-  color: #FFF;
-  font-size: 2.5rem;
-  line-height: normal;
-}
-
-.hero__diploma {
-  color: #FFF;
-  font-family: 'Cinzel', serif;
-  font-size: 3.0rem;
-  margin: 0;
   text-align: right;
 }
+
+
+
+
 
 .hero__btns {
   margin-top: 40px;
