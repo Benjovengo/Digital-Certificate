@@ -29,7 +29,6 @@ const NAV__LINKS = [
 
 const Header = ({ account, setAccount }) => {
 
-  const headerRef = useRef(null);
   const menuRef = useRef(null);
 
   const connectHandler = async () => {

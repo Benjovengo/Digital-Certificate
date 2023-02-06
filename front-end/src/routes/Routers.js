@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Certifications from "../pages/Certifications";
 import Governance from "../pages/Governance";
 import Home from "../pages/Home";
-import NftDetails from "../pages/NftDetails";
+//import NftDetails from "../pages/NftDetails";
 import Wallet from "../pages/Wallet";
 
 

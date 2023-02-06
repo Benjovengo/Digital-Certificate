@@ -99,27 +99,27 @@ const Footer = () => {
             <div className="social__links d-flex gap-3 align-items-center ">
               <span>Follow us!!!</span>
               <span>
-                <a href="https://www.facebook.com" target="_blank">
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
                   <i className="ri-facebook-line"></i>
                 </a>
               </span>
               <span>
-                <a href="https://www.instagram.com" target="_blank">
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                   <i className="ri-instagram-line"></i>
                 </a>
               </span>
               <span>
-                <a href="https://www.twitter.com" target="_blank">
+                <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
                   <i className="ri-twitter-line"></i>
                 </a>
               </span>
               <span>
-                <a href="https://web.telegram.org" target="_blank">
+                <a href="https://web.telegram.org" target="_blank" rel="noopener noreferrer">
                   <i className="ri-telegram-line"></i>
                 </a>
               </span>
               <span>
-                <a href="https://discord.com" target="_blank">
+                <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
                   <i className="ri-discord-line"></i>
                 </a>
               </span>
