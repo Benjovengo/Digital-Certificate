@@ -57,6 +57,10 @@
   padding: 5px 25px;
 }
 
+.nav__right .btn:hover {
+  background: #D87E01;
+}
+
 .nav__right .btn a {
   color: #fff;
   font-size: 0.9rem;
