@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Container } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
-
 import './header.css'
-import { connectHandler } from './Connect';
+
+const ethers = require("ethers")
 
 
 const NAV__LINKS = [
@@ -27,28 +27,16 @@ const NAV__LINKS = [
 
 
 
-const Header = () => {
+const Header = ({ account, setAccount }) => {
 
   const headerRef = useRef(null);
   const menuRef = useRef(null);
 
-  let [provider, setProvider] = useState(null)
-  let [account, setAccount] = useState(null)
-
-  connectHandler(account, setAccount)
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
-      ) {
-        headerRef.current.classList.add("header__shrink");
-      } else {
-        headerRef.current.classList.remove("header__shrink");
-      }
-    });
-  }, []);
+  const connectHandler = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    account = ethers.utils.getAddress(accounts[0])
+    setAccount(account)
+  }
 
   const toggleMenu = () => menuRef.current.classList.toggle("active__menu");
 
