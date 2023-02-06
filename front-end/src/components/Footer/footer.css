@@ -32,7 +32,7 @@
 }
 
 .list__item a:hover {
-  color: rgba(255, 255, 255, 0.772);
+  color: #F89104;
 }
 
 .newsletter {
@@ -50,6 +50,10 @@
 
 ::placeholder {
   color: rgba(255, 255, 255, 0.772);
+}
+
+.social__links {
+  color: #FFF;
 }
 
 .social__links span a {
