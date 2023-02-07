@@ -5,12 +5,27 @@ import { Buffer } from 'buffer';
 import "./cryptography.css"
 
 import { encryptData, decryptData } from '../../../scripts/cryptography';
-import uploadFile from '../../../scripts/pinata-ipfs';
+//import uploadFile from '../../../scripts/pinata-ipfs';
+import axios from "axios";
 
 const ethers = require("ethers")
 
 const Cryptography = () => {
 
+  const uploadFile = async () => {
+
+    var config = {
+      method: 'get',
+      url: 'https://api.pinata.cloud/data/testAuthentication',
+      headers: {
+        'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+        'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
+      },
+    };
+  
+    const res = await axios(config)
+    console.log(res.data)
+  }
 
   const getPublicKey = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
