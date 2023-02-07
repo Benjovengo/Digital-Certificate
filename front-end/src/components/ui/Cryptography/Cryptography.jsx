@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Buffer } from 'buffer';
 
 // Style
@@ -52,9 +52,73 @@ const Cryptography = () => {
     const decrypted = await decryptData(account, encrypted)
 
     document.getElementById('publicKeyText').innerHTML = decrypted
-
   }
   
+
+
+
+
+
+
+
+  const [fileImg, setFileImg] = useState(null);
+  const [name, setName] = useState("")
+  const [desc, setDesc] = useState("")
+
+  const sendFileToIPFS = async (e) => {
+
+    e.preventDefault();
+
+    if (fileImg) {
+        try {
+
+            const formData = new FormData();
+            formData.append("file", fileImg);
+
+            const resFile = await axios({
+                method: "post",
+                url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+                data: formData,
+                headers: {
+                    'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+                    'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
+                    "Content-Type": "multipart/form-data"
+                },
+            });
+
+            const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+            //console.log(response.data.IpfsHash);
+            console.log(ImgHash)
+           // sendJSONtoIPFS(ImgHash)
+
+
+        } catch (error) {
+            console.log("File to IPFS: ")
+            console.log(error)
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -63,6 +127,15 @@ const Cryptography = () => {
         <button onClick={() => {getPublicKey()}}>Get Public Key</button>
         <h3 id='publicKeyText'>Public Key</h3>
         <button onClick={() => {uploadFile()}}>Use DotEnv</button>
+
+        <form onSubmit={sendFileToIPFS}>
+          <input type="file" onChange={(e) => setFileImg(e.target.files[0])} required />
+          <input type="text" onChange={(e) => setName(e.target.value)} placeholder='name' required value={name} />
+          <input type="text" onChange={(e) => setDesc(e.target.value)} placeholder="desc" required value={desc} />
+          <br />
+          <button type='submit' >Submit</button>
+        </form>
+
       </div>
     </>
     
