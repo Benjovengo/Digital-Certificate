@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@metamask/eth-sig-util": "^5.0.2",
+    "@pinata/sdk": "^2.1.0",
     "@testing-library/react": "^13.4.0",
     "ascii85": "^1.0.2",
     "bootstrap": "^5.2.3",
@@ -11,6 +12,7 @@
     "dotenv": "^16.0.3",
     "eslint-config-react-app": "^7.0.1",
     "ethers": "^5.7.2",
+    "fs": "^0.0.1-security",
     "mysql": "^2.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -50,6 +52,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0",
+    "dotenv-webpack": "^8.0.1",
     "list-files": "^1.1.4",
     "path-browserify": "^1.0.1",
     "stream-browserify": "^3.0.0"
