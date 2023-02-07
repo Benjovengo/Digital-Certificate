@@ -1,4 +1,5 @@
 import React from 'react'
+import {Buffer} from 'buffer';
 
 import "./cryptography.css"
 
@@ -16,8 +17,8 @@ const Cryptography = () => {
       method: 'eth_getEncryptionPublicKey',
       params: [account],
     });
-    //const publicKey = Buffer.from(keyB64, 'base64');
-    document.getElementById('publicKeyText').innerHTML = 'Fábio'
+    const publicKey = Buffer.from(keyB64, 'base64');
+    document.getElementById('publicKeyText').innerHTML = publicKey
 
   }
   
