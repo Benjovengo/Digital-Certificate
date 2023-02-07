@@ -23,7 +23,7 @@ const HeroSection = () => {
                 <h3 className="hero__diploma">certifications</h3>
                 <p className="hero__left">are now the most valuable</p>
                 <h4 className="hero__nft">NFTs</h4>
-                <p className="hero__left">of your collection</p>
+                <p className="hero__left">on your collection</p>
               </div>
               <p className="hero__abstract">
                 Have your diplomas and certificates registered and stored as unique, secure NFTs on the blockchain. Preserve and verify your achievements for a lifetime.
