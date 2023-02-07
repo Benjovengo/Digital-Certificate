@@ -1,15 +1,22 @@
 import React from 'react'
 import { Buffer } from 'buffer';
 
-
+// Style
 import "./cryptography.css"
 
+// Data encryption
 import { encryptData, decryptData } from '../../../scripts/cryptography';
-//import uploadFile from '../../../scripts/pinata-ipfs';
-import axios from "axios";
 
+// Pinata
+import axios from "axios";
+const FormData = require('form-data')
+const JWT = `Bearer ${process.env.REACT_APP_PINATA_JWT}`
+
+// Ethers
 const ethers = require("ethers")
 
+
+// Main Function
 const Cryptography = () => {
 
   const uploadFile = async () => {
@@ -18,7 +25,7 @@ const Cryptography = () => {
       method: 'get',
       url: 'https://api.pinata.cloud/data/testAuthentication',
       headers: {
-        'Authorization': `Bearer ${process.env.REACT_APP_PINATA_JWT}`
+        'Authorization': JWT
       },
     };
   
