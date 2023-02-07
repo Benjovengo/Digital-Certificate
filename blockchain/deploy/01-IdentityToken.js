@@ -4,8 +4,8 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
-const createConfigJSON = require("./scripts/configAddress")
-
+const createConfigJSON = require("./scripts/setupConfig")
+const createABIFile = require("./scripts/createABI")
 
 let identityTokenAddress
 
@@ -29,14 +29,18 @@ async function main() {
 const runMain = async () => {
   try {
     await main()
-/*     // copy files to client-side
-    createABIFile() */
-
-    // create config.json with deployed addresses
+    /// Setup
+    const contractPath = 'identity/' /// don't remove the forward slash! unless it is in the root of contracts folder
     const contractName = "IdentityToken"
     const contractAddress = identityTokenAddress
     const useNetwork = "localhost"
+    
+    // Save ABI component to client-side
+    createABIFile(contractPath, contractName)
+
+    // create config.json with deployed addresses
     createConfigJSON(contractName, contractAddress, useNetwork)
+
     // terminate without errors
     process.exit(0)
   } catch (error) {
