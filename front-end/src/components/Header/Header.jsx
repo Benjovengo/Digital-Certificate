@@ -20,7 +20,7 @@ const NAV__LINKS = [
     url: "/governance",
   },
   {
-    display: "Wallet & ID",
+    display: "Identity",
     url: "/wallet",
   },
 ];
