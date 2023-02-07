@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import "./App.css";
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/Layout/Layout"
 
 function App() {
   let [account, setAccount] = useState(null)
