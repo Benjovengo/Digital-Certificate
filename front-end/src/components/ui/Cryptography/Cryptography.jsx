@@ -13,13 +13,12 @@ const ethers = require("ethers")
 const Cryptography = () => {
 
   const uploadFile = async () => {
-
+    /// Config Pinata API
     var config = {
       method: 'get',
       url: 'https://api.pinata.cloud/data/testAuthentication',
       headers: {
-        'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
-        'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
+        'Authorization': `Bearer ${process.env.REACT_APP_PINATA_JWT}`
       },
     };
   
