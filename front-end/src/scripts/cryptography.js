@@ -9,5 +9,5 @@ export const encryptData = (_publicKey, _data) => {
     version: 'x25519-xsalsa20-poly1305',
   });
 
-  return "DEBUG: Fabio Pereira Benjovengo"
+  return enc
 }
