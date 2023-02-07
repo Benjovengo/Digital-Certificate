@@ -1,7 +1,10 @@
 import React from 'react'
-import {Buffer} from 'buffer';
+import { Buffer } from 'buffer';
+
 
 import "./cryptography.css"
+
+import { encryptData } from '../../../scripts/cryptography';
 
 
 const ethers = require("ethers")
@@ -18,7 +21,11 @@ const Cryptography = () => {
       params: [account],
     });
     const publicKey = Buffer.from(keyB64, 'base64');
-    document.getElementById('publicKeyText').innerHTML = publicKey
+
+    const data = "Fabio Pereira Benjovengo"
+    const encrypted = encryptData(publicKey, data)
+
+    document.getElementById('publicKeyText').innerHTML = encrypted
 
   }
   
