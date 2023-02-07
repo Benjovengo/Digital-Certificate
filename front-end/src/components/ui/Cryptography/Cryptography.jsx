@@ -65,6 +65,55 @@ const Cryptography = () => {
   const [name, setName] = useState("")
   const [desc, setDesc] = useState("")
 
+
+
+
+
+  const sendJSONtoIPFS = async (ImgHash) => {
+
+    try {
+
+        const resJSON = await axios({
+            method: "post",
+            url: "https://api.pinata.cloud/pinning/pinJsonToIPFS",
+            data: {
+                "name": name,
+                "description": desc,
+                "image": ImgHash
+            },
+            headers: {
+                'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+                'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
+            },
+        });
+
+        console.log("final ", `ipfs://${resJSON.data.IpfsHash}`)
+        const tokenURI = `ipfs://${resJSON.data.IpfsHash}`;
+        console.log("Token URI", tokenURI);
+        //mintNFT(tokenURI, currentAccount)   // pass the winner
+
+    } catch (error) {
+        console.log("JSON to IPFS: ")
+        console.log(error);
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const sendFileToIPFS = async (e) => {
 
     e.preventDefault();
