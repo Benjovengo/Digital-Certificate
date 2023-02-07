@@ -4,7 +4,7 @@ import { Buffer } from 'buffer';
 
 import "./cryptography.css"
 
-import { encryptData } from '../../../scripts/cryptography';
+import { encryptData, decryptData } from '../../../scripts/cryptography';
 
 
 const ethers = require("ethers")
@@ -22,6 +22,7 @@ const Cryptography = () => {
     });
     const publicKey = Buffer.from(keyB64, 'base64');
 
+    // ENCRYPT
     const data = "Fabio Pereira Benjovengo"
     const encrypted = encryptData(publicKey, data)
 
@@ -30,10 +31,13 @@ const Cryptography = () => {
       Buffer.from(encrypted.nonce, 'base64'),
       Buffer.from(encrypted.ciphertext, 'base64'),
     ]);
-
     const bufNumber = buf.toJSON().data
 
-    document.getElementById('publicKeyText').innerHTML = bufNumber
+
+    //DECRYPT
+    const decrypted = decryptData(account, bufNumber)
+
+    document.getElementById('publicKeyText').innerHTML = decrypted
 
   }
   

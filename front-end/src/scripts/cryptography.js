@@ -1,5 +1,18 @@
 import { encrypt } from '@metamask/eth-sig-util'
-//const ascii85 = require('ascii85');
+
+
+export const decryptData = (_account, _data) => {
+  const structuredData = {
+    version: 'x25519-xsalsa20-poly1305',
+    ephemPublicKey: _data.slice(0, 32).toString('base64'),
+    nonce: _data.slice(32, 56).toString('base64'),
+    ciphertext: _data.slice(56).toString('base64'),
+  };
+
+  return "DEBUG!!"
+}
+
+
 
 
 export const encryptData = (_publicKey, _data) => {
