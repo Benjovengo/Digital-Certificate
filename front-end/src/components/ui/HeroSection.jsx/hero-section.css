@@ -1,5 +1,6 @@
 .hero__section {
   background-image: url("../../../assets/images/hero_backgound.png");
+  line-height: normal;
   margin-top: 60px;
 }
 
@@ -38,6 +39,7 @@
   color: #FFF;
   font-size: 1.5rem;
   line-height: normal;
+  margin: 0;
   text-align: right;
 }
 
@@ -47,12 +49,18 @@
   background-clip: text;
   -webkit-text-stroke: 3px transparent;
   -webkit-text-fill-color: #14141f;
+  margin: 0;
   margin-left: 0px !important;
   font-size: 5.6rem;
   text-align: right;
 }
 
 
+.hero__abstract {
+  line-height: normal;
+  margin: 2em 0 0 1em;
+  text-align: justify;
+}
 
 
 
