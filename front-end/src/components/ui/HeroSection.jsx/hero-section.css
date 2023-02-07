@@ -69,24 +69,29 @@
 }
 
 .explore__btn,
-.create__btn {
+.certifications__btn {
+  background-color: #3642a8;
   border: none;
   outline: none;
   padding: 7px 25px !important;
   border-radius: 50px !important;
   border: 1px solid #5142fc !important;
   font-size: 0.9rem;
-  background: transparent;
+}
+
+.explore__btn:hover,
+.certifications__btn:hover {
+  background-color: #4b50e6;
 }
 
 .explore__btn i,
-.create__btn i {
+.certifications__btn i {
   color: #fff;
   font-size: 1rem;
 }
 
 .explore__btn a,
-.create__btn a {
+.certifications__btn a {
   text-decoration: none;
   color: #fff;
 }
@@ -123,12 +128,12 @@
     line-height: 25px;
   }
 
-  .create__btn,
+  .certifications__btn,
   .explore__btn {
     padding: 4px 25px !important;
   }
 
-  .create__btn a,
+  .certifications__btn a,
   .explore__btn a {
     font-size: 0.7rem;
   }

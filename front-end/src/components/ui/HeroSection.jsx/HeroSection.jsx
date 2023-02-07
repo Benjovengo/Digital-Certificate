@@ -34,7 +34,7 @@ const HeroSection = () => {
                   <i className="ri-book-read-fill"></i>{" "}
                   <Link to="/about">Explore the Features</Link>
                 </button>
-                <button className=" create__btn d-flex align-items-center gap-2">
+                <button className="certifications__btn d-flex align-items-center gap-2">
                   <i className="ri-award-fill"></i>
                   <Link to="/about">Your Certifications</Link>
                 </button>
