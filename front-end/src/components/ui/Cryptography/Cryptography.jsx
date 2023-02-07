@@ -5,11 +5,12 @@ import { Buffer } from 'buffer';
 import "./cryptography.css"
 
 import { encryptData, decryptData } from '../../../scripts/cryptography';
-
+import uploadFile from '../../../scripts/pinata-ipfs';
 
 const ethers = require("ethers")
 
 const Cryptography = () => {
+
 
   const getPublicKey = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -40,6 +41,7 @@ const Cryptography = () => {
         <h1>Cryptography</h1>
         <button onClick={() => {getPublicKey()}}>Get Public Key</button>
         <h3 id='publicKeyText'>Public Key</h3>
+        <button onClick={() => {uploadFile()}}>Use DotEnv</button>
       </div>
     </>
     
