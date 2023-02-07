@@ -31,11 +31,11 @@ const HeroSection = () => {
 
               <div className="hero__btns d-flex align-items-center gap-4">
                 <button className=" explore__btn d-flex align-items-center gap-2">
-                  <i className="ri-ball-pen-line"></i>{" "}
+                  <i className="ri-book-read-fill"></i>{" "}
                   <Link to="/about">Explore the Features</Link>
                 </button>
                 <button className=" create__btn d-flex align-items-center gap-2">
-                  <i className="ri-rocket-line"></i>
+                  <i className="ri-award-fill"></i>
                   <Link to="/about">Your Certifications</Link>
                 </button>
               </div>
