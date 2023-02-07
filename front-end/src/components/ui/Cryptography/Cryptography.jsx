@@ -26,16 +26,8 @@ const Cryptography = () => {
     const data = "Fabio Pereira Benjovengo"
     const encrypted = encryptData(publicKey, data)
 
-    const buf = Buffer.concat([
-      Buffer.from(encrypted.ephemPublicKey, 'base64'),
-      Buffer.from(encrypted.nonce, 'base64'),
-      Buffer.from(encrypted.ciphertext, 'base64'),
-    ]);
-    const bufNumber = buf.toJSON().data
-
-
     //DECRYPT
-    const decrypted = decryptData(account, bufNumber)
+    const decrypted = await decryptData(account, encrypted)
 
     document.getElementById('publicKeyText').innerHTML = decrypted
 
