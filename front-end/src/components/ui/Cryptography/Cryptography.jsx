@@ -70,42 +70,31 @@ const Cryptography = () => {
 
 
   const sendJSONtoIPFS = async (ImgHash) => {
+  try {
+    const resJSON = await axios({
+      method: "post",
+      url: "https://api.pinata.cloud/pinning/pinJsonToIPFS",
+      data: {
+        "name": name,
+        "description": desc,
+        "image": ImgHash
+      },
+      headers: {
+        'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+        'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
+      },
+    });
 
-    try {
+    console.log("final ", `ipfs://${resJSON.data.IpfsHash}`)
+    const tokenURI = `ipfs://${resJSON.data.IpfsHash}`;
+    console.log("Token URI", tokenURI);
+    //mintNFT(tokenURI, currentAccount)   // pass the winner
 
-        const resJSON = await axios({
-            method: "post",
-            url: "https://api.pinata.cloud/pinning/pinJsonToIPFS",
-            data: {
-                "name": name,
-                "description": desc,
-                "image": ImgHash
-            },
-            headers: {
-                'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
-                'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
-            },
-        });
-
-        console.log("final ", `ipfs://${resJSON.data.IpfsHash}`)
-        const tokenURI = `ipfs://${resJSON.data.IpfsHash}`;
-        console.log("Token URI", tokenURI);
-        //mintNFT(tokenURI, currentAccount)   // pass the winner
-
-    } catch (error) {
-        console.log("JSON to IPFS: ")
-        console.log(error);
-    }
-
-
-}
-
-
-
-
-
-
-
+  } catch (error) {
+      console.log("JSON to IPFS: ")
+      console.log(error);
+  }
+  }
 
 
 
@@ -119,34 +108,34 @@ const Cryptography = () => {
     e.preventDefault();
 
     if (fileImg) {
-        try {
+      try {
 
-            const formData = new FormData();
-            formData.append("file", fileImg);
+        const formData = new FormData();
+        formData.append("file", fileImg);
 
-            const resFile = await axios({
-                method: "post",
-                url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
-                data: formData,
-                headers: {
-                    'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
-                    'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
-                    "Content-Type": "multipart/form-data"
-                },
-            });
+        const resFile = await axios({
+          method: "post",
+          url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+          data: formData,
+          headers: {
+            'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
+            'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
+            "Content-Type": "multipart/form-data"
+          },
+        });
 
-            const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
-            //console.log(response.data.IpfsHash);
-            console.log(ImgHash)
-           // sendJSONtoIPFS(ImgHash)
+        const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+        //console.log(response.data.IpfsHash);
+        console.log(ImgHash)
+        sendJSONtoIPFS(ImgHash)
 
 
-        } catch (error) {
-            console.log("File to IPFS: ")
-            console.log(error)
-        }
+      } catch (error) {
+          console.log("File to IPFS: ")
+          console.log(error)
+      }
     }
-}
+  }
 
 
 
