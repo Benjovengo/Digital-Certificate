@@ -140,9 +140,45 @@
 }
 
 @media only screen and (max-width: 576px) {
+
+  .hero__section {
+    line-height: normal;
+    margin-top: 10px;
+  }
+  
+  .hero__header {
+    font-size: 1rem;
+  }
+
+  .hero__diploma {
+    font-size: 2.35rem;
+    margin: 0;
+  }
+  
+  .hero__diploma__and {
+    font-size: 2.35rem;
+    margin-right: 3em;
+  }
+
+  .hero__nft {
+    background: linear-gradient(-45deg, #e250e5, #4b50e6, #e250e5, #4b50e6);
+    background-size: 100% 100%;
+    background-clip: text;
+    -webkit-text-stroke: 3px transparent;
+    -webkit-text-fill-color: #14141f;
+    margin: 0;
+    margin-left: 0px !important;
+    font-size: 3.1rem;
+    text-align: right;
+  }
+
+
+
   .hero__img {
     width: 100%;
     margin: auto;
     margin-top: 50px;
   }
+
+
 }
