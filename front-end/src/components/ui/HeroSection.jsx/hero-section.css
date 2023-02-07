@@ -142,6 +142,7 @@
 @media only screen and (max-width: 576px) {
 
   .hero__section {
+    background-position: -525px 0px;
     line-height: normal;
     margin-top: 10px;
   }
