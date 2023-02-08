@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from  'react'
 import { Container, Row, Col } from "reactstrap";
 
 /// Style
 import "./create-id.css"
 
 const CreateId = () => {
+
+  /// Set today's date
+  var currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 3);
+  var today = currentDate.toISOString().substring(0,10);
+
+
   return (
     <>
       <section className='create__id__wrapper'>
@@ -32,8 +39,8 @@ const CreateId = () => {
                     <input type="text" id="issuedBy" name="issuedBy"></input>
                   </Col>
                   <Col>
-                    <label htmlFor="issuedDate">Issue date:</label><br/>
-                    <input type="date" id="vacDate" disabled></input>
+                    <label htmlFor="issuedDate" id='dateInput'>Issue date:</label><br/>
+                    <input id="issueDate" type="date" name="issueDate" defaultValue={today} disabled/> 
                   </Col>
                 </Row>
                 <Row>
