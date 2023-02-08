@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from  'react'
+import React, { useState } from  'react'
 import { Container, Row, Col } from "reactstrap";
 
 import profilePhoto from "../../../assets/images/ProfilePhoto.png"
@@ -137,20 +137,20 @@ const CreateId = () => {
                       </Col>
                       <Col xs={7} className='mt-2'>
                         <p>First name</p>
-                        <h6 id='firstNamePreview'></h6>
+                        <h6 id='firstNamePreview'> </h6>
                         <p>Last name</p>
-                        <h6 id='lastNamePreview'></h6>
+                        <h6 id='lastNamePreview'> </h6>
                         <p>Issued by</p>
-                        <h6 id='issuedByPreview'></h6>
+                        <h6 id='issuedByPreview'> </h6>
                         <p>Date issued</p>
-                        <h6 id='dateIssuedPreview'></h6>
+                        <h6 id='dateIssuedPreview'> </h6>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
                         <p>Address</p>
                         <label className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</label>
-                        <img id="barcode1" className='barcode__img' />
+                        <img id="barcode1" className='barcode__img' alt='barcode' />
                       </Col>
                     </Row>
                   </div>

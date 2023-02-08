@@ -1,6 +1,6 @@
 // Pinata
 import axios from "axios";
-const FormData = require('form-data')
+//const FormData = require('form-data')
 
 const uploadJSONtoIPFS = async (_firstName, _lastName, _imgURL, _issuedBy, _dateIssued) => {
   let tokenURI
