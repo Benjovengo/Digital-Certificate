@@ -17,4 +17,12 @@
 .preview__id__wrapper h1,
 .preview__id__wrapper p {
   color: #000;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.identity__photo__preview {
+  padding: 0em;
+  width: 100%;
 }

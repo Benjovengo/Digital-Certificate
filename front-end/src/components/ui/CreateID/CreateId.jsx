@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from  'react'
 import { Container, Row, Col } from "reactstrap";
 
+import profilePhoto from "../../../assets/images/ProfilePhoto.png"
+
 /// Style
 import "./create-id.css"
 
@@ -90,7 +92,7 @@ const CreateId = () => {
         <Container fluid>
           <Row>
 
-            <Col>
+            <Col className='me-3'>
                 <Row>
                   <Col>
                     <h1>Your ID</h1>
@@ -98,16 +100,21 @@ const CreateId = () => {
                 </Row>
                 <Row>
                   <div className='preview__id__wrapper'>
-                    <Col className='mt-5'>
-                      <p>First name</p>
-                      <p><span id='firstNamePreview'></span></p>
-                      <p>Last name</p>
-                      <p><span id='lastNamePreview'></span></p>
-                      <p>Issued by</p>
-                      <p><span id='issuedByPreview'></span></p>
-                      <p>Date issued</p>
-                      <p><span id='dateIssuedPreview'></span></p>
-                    </Col>
+                    <Row className='mt-5 ms-2'>
+                      <Col>
+                        <img src={profilePhoto} className="identity__photo__preview" alt="id photo" />
+                      </Col>
+                      <Col xs={7}>
+                        <p>First name</p>
+                        <p><span id='firstNamePreview'></span></p>
+                        <p>Last name</p>
+                        <p><span id='lastNamePreview'></span></p>
+                        <p>Issued by</p>
+                        <p><span id='issuedByPreview'></span></p>
+                        <p>Date issued</p>
+                        <p><span id='dateIssuedPreview'></span></p>
+                      </Col>
+                    </Row>
                   </div>
                 </Row>
             </Col>
