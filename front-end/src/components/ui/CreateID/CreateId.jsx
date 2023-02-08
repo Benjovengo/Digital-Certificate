@@ -92,7 +92,7 @@ const CreateId = () => {
         <Container fluid>
           <Row>
 
-            <Col className='me-3'>
+            <Col>
                 <Row>
                   <Col>
                     <h1>Your ID</h1>
@@ -126,36 +126,40 @@ const CreateId = () => {
             </Col>
 
             <Col xs={8}>
-              <h1>Create ID Form</h1>
-              <p> <span>Disclaimer!</span><br/> This functionality is only intended for use by trusted issuers and is temporarily available to everyone during the testing phase of the project. Please exercise caution and reserve its usage for its intended purpose only.</p>
-              <form>
-                <Row>
-                  <Col>
-                    <label htmlFor="firstName" value={name}>First name:</label><br/>
-                    <input type="text" id="firstName" name="firstName" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
-                  </Col>
-                  <Col>
-                    <label htmlFor="lastName">Last name:</label><br/>
-                    <input type="text" id="lastName" name="lastName" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <label htmlFor="issuedBy">Issued by (Country):</label><br/>
-                    <input type="text" id="issuedBy" name="issuedBy" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
-                  </Col>
-                  <Col>
-                    <label htmlFor="issuedDate" id='dateInput'>Issue date:</label><br/>
-                    <input id="issueDate" type="date" name="issueDate" defaultValue={today} disabled/> 
-                  </Col>
-                </Row>
-                <Row>
-                <input type="file" accept="image/png, image/gif, image/jpeg" onChange={(e) => handleImage(e)} required />
-                </Row>
-                <Row>
-                  <button className='submit__btn submit'>Create ID</button>
-                </Row>
-              </form>
+              <div className="form__column__wrapper">
+                <h1>Create ID Form</h1>
+                <p> <span>Disclaimer!</span><br/> This functionality is only intended for use by trusted issuers and is temporarily available to everyone during the testing phase of the project. Please exercise caution and reserve its usage for its intended purpose only.</p>
+                <form className='input__form'>
+                  <Row>
+                    <Col>
+                      <label htmlFor="firstName" value={name}>First name:</label><br/>
+                      <input type="text" id="firstName" name="firstName" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
+                    </Col>
+                    <Col>
+                      <label htmlFor="lastName">Last name:</label><br/>
+                      <input type="text" id="lastName" name="lastName" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <label htmlFor="issuedBy">Issued by (Country):</label><br/>
+                      <input type="text" id="issuedBy" name="issuedBy" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
+                    </Col>
+                    <Col>
+                      <label htmlFor="issuedDate" id='dateInput'>Issue date:</label><br/>
+                      <input id="issueDate" type="date" name="issueDate" defaultValue={today} disabled/> 
+                    </Col>
+                  </Row>
+                  <Row>
+                  <input type="file" accept="image/png, image/gif, image/jpeg" onChange={(e) => handleImage(e)} required />
+                  </Row>
+                  <Row>
+                    <Col className="d-flex justify-content-end">
+                    <button className='submit__btn submit'>Create ID</button>
+                    </Col>
+                  </Row>
+                </form>
+              </div>
             </Col>
           </Row>
         </Container>

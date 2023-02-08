@@ -10,7 +10,7 @@
   color: #000;
   height: auto;
   margin: 0;
-  padding: 0 1em;
+  padding: 0 0em;
   width: 100%;
 }
 
@@ -29,7 +29,7 @@
 
 .identity__address {
   font-family: 'Ubuntu Mono', monospace;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   width: 100%;
 }
 
@@ -37,6 +37,11 @@
 
 
 
+
+
+.form__column__wrapper {
+  padding: 0 3em;
+}
 
 
 
@@ -47,8 +52,14 @@
 .submit__btn {
   background: #F89104;
   border: none;
+  border-radius: 0 !important;
+  color: #FFF;
+  font-size: 0.9rem;
   outline: none;
   padding: 7px 25px !important;
-  border-radius: 0 !important;
-  font-size: 0.9rem;
+  width: auto;
+}
+
+.submit__btn:hover {
+  background: #D87E01;
 }
