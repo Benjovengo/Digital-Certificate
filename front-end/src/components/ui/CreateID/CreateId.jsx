@@ -21,7 +21,7 @@ const CreateId = () => {
 
 
   /**
-   * Handle browse file
+   * Handle browse file.
    * 
    * @dev Validate if file type is image.
    * 
@@ -38,8 +38,9 @@ const CreateId = () => {
   }
 
   /**
+   * Handle first name input changes.
    * 
-   * @param {event} e Change preview label
+   * @param {event} e Change preview label.
    */
   const changeFirstName = (e) => {
     if (e.target.value) {
@@ -47,6 +48,20 @@ const CreateId = () => {
     } 
     else {
       document.getElementById('firstNamePreview').innerHTML = 'John'
+    }
+  };
+
+  /**
+   * Handle last name input changes.
+   * 
+   * @param {event} e Change preview label.
+   */
+  const changeLastName = (e) => {
+    if (e.target.value) {
+      document.getElementById('lastNamePreview').innerHTML = e.target.value
+    } 
+    else {
+      document.getElementById('lastNamePreview').innerHTML = 'Doe'
     }
   };
 
@@ -59,6 +74,8 @@ const CreateId = () => {
               <h1>Your ID</h1>
               <p>First name</p>
               <p><span id='firstNamePreview'></span></p>
+              <p>Last name</p>
+              <p><span id='lastNamePreview'></span></p>
             </Col>
             <Col xs={8}>
               <h1>Create ID Form</h1>
@@ -71,7 +88,7 @@ const CreateId = () => {
                   </Col>
                   <Col>
                     <label htmlFor="lastName">Last name:</label><br/>
-                    <input type="text" id="lastName" name="lastName" required></input>
+                    <input type="text" id="lastName" name="lastName" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
                   </Col>
                 </Row>
                 <Row>
