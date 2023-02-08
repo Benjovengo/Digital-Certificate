@@ -13,7 +13,7 @@ import "./IdentityToken.sol";
  * @custom:security Use this contract only for tests! Do NOT store any real information in this project!
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
-contract SellingContract is IERC721Receiver {
+contract IdentityManager is IERC721Receiver {
     /// State variables
     address private tokenIdAddress;
 
