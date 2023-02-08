@@ -73,19 +73,27 @@
 }
 
 
-
-
-
-
-
 .form__column__wrapper {
   padding: 0 3em;
 }
 
+.input__form label {
+  font-family: 'Playfair Display SC', serif;
+  margin-top: 0.5em;
+}
 
+.input__form input[type="text"] {
+  padding: 0 0.25em;
+  width: 100%;
+}
 
-
-
+.input__form input[type="file"] {
+  background: #24242d;
+  border-radius: 3px;
+  margin: 1.0em 0.7em;
+  padding: 1em 1em;
+  width: 100%;
+}
 
 
 .submit__btn {
@@ -101,4 +109,15 @@
 
 .submit__btn:hover {
   background: #D87E01;
+}
+
+
+.form__column__wrapper h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  margin-top: 2em;
+}
+
+.highlight__text {
+  color: #F89104;
 }

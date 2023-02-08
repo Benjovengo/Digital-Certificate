@@ -139,7 +139,6 @@ const CreateId = () => {
             <Col xs={8}>
               <div className="form__column__wrapper">
                 <h2 className='main__header'>Create ID Form</h2>
-                <p> <span>Disclaimer!</span><br/> This functionality is only intended for use by trusted issuers and is temporarily available to everyone during the testing phase of the project. Please exercise caution and reserve its usage for its intended purpose only.</p>
                 <form className='input__form'>
                   <Row>
                     <Col>
@@ -171,7 +170,8 @@ const CreateId = () => {
                   </Row>
                 </form>
                 <h3>Your data will be encrypted before being uploaded to IPFS!</h3>
-                <p>This includes not only the text fields, but also your <span>picture is encrypted</span> to ensure complete privacy.</p>
+                <p>This includes not only the text fields, but also your <span className='highlight__text'>picture will be encrypted</span> to ensure complete privacy.</p>
+                <p><b>Disclaimer!</b><br/> This functionality is only intended for use by trusted issuers and is temporarily available to everyone during the testing phase of the project. Please exercise caution and reserve its usage for its intended purpose only.</p>
               </div>
             </Col>
           </Row>
