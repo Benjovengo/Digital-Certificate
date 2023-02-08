@@ -106,10 +106,10 @@ const CreateId = () => {
                 <Row>
                   <div className='preview__id__wrapper'>
                     <Row className='mt-5 ms-2'>
-                      <Col>
+                      <Col className='mt-2'>
                         <img src={profilePhoto} className="identity__photo__preview" alt="id" />
                       </Col>
-                      <Col xs={7}>
+                      <Col xs={7} className='mt-2'>
                         <p>First name</p>
                         <p><span id='firstNamePreview'></span></p>
                         <p>Last name</p>
@@ -139,17 +139,17 @@ const CreateId = () => {
                   <Row>
                     <Col>
                       <label htmlFor="firstName" value={name}>First name:</label><br/>
-                      <input type="text" id="firstName" name="firstName" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
+                      <input type="text" id="firstName" name="firstName" maxlength="30" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
                     </Col>
                     <Col>
                       <label htmlFor="lastName">Last name:</label><br/>
-                      <input type="text" id="lastName" name="lastName" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
+                      <input type="text" id="lastName" name="lastName" maxlength="30" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <label htmlFor="issuedBy">Issued by (Country):</label><br/>
-                      <input type="text" id="issuedBy" name="issuedBy" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
+                      <input type="text" id="issuedBy" name="issuedBy" maxlength="30" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
                     </Col>
                     <Col>
                       <label htmlFor="issuedDate" id='dateInput'>Issue date:</label><br/>
