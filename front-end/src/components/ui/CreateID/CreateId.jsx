@@ -18,13 +18,26 @@ const CreateId = () => {
               <form>
                 <Row>
                   <Col>
-                    <label htmlFor="firstName">First Name:</label><br/>
+                    <label htmlFor="firstName">First name:</label><br/>
                     <input type="text" id="firstName" name="firstName"></input>
                   </Col>
                   <Col>
-                    <label htmlFor="lastName">Last Name:</label><br/>
+                    <label htmlFor="lastName">Last name:</label><br/>
                     <input type="text" id="lastName" name="lastName"></input>
                   </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <label htmlFor="issuedBy">Issued by:</label><br/>
+                    <input type="text" id="issuedBy" name="issuedBy"></input>
+                  </Col>
+                  <Col>
+                    <label htmlFor="issuedDate">Issue date:</label><br/>
+                    <input type="date" id="vacDate" disabled></input>
+                  </Col>
+                </Row>
+                <Row>
+                  <button className='submit'>Create ID</button>
                 </Row>
               </form>
             </Col>
