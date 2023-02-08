@@ -6,6 +6,9 @@ import profilePhoto from "../../../assets/images/ProfilePhoto.png"
 /// Style
 import "./create-id.css"
 
+/// Send file to IPFS
+import sendFileToIPFS from '../../../scripts/identity/uploadIPFS';
+
 
 /// Barcode
 const JsBarcode = require("jsbarcode");
@@ -95,7 +98,13 @@ const CreateId = () => {
    * Submit Form - handler
    */
   const handleSubmit = (e) => {
-    alert('Submitted!')
+    e.preventDefault()
+
+    setName(e.target.firstName.value + ' ' + e.target.lastName.value)
+    setDesc('Identity Data')
+
+    sendFileToIPFS(fileImg)
+    //alert(e.target.firstName.value + ' ' + e.target.lastName.value)
   }
 
 
@@ -156,7 +165,7 @@ const CreateId = () => {
                 <form className='input__form' onSubmit={handleSubmit}>
                   <Row>
                     <Col>
-                      <label htmlFor="firstName" value={name}>First name:</label><br/>
+                      <label htmlFor="firstName">First name:</label><br/>
                       <input type="text" id="firstName" name="firstName" maxLength="30" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
                     </Col>
                     <Col>
@@ -175,7 +184,7 @@ const CreateId = () => {
                     </Col>
                   </Row>
                   <Row>
-                  <input type="file" accept="image/png, image/gif, image/jpeg" onChange={(e) => handleImage(e)} required />
+                  <input type="file" id='imageFile' accept="image/png, image/gif, image/jpeg" onChange={(e) => handleImage(e)} required />
                   </Row>
                   <Row>
                     <Col className="d-flex justify-content-end">
