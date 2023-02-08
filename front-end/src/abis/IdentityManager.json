@@ -1,0 +1,96 @@
+[
+ {
+  "inputs": [
+   {
+    "internalType": "address",
+    "name": "_nftTokenAddress",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "nonpayable",
+  "type": "constructor"
+ },
+ {
+  "anonymous": false,
+  "inputs": [
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "_idSerialNumber",
+    "type": "uint256"
+   }
+  ],
+  "name": "idCreation",
+  "type": "event"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "string",
+    "name": "_tokenURI",
+    "type": "string"
+   },
+   {
+    "internalType": "bytes32",
+    "name": "_identityHash",
+    "type": "bytes32"
+   },
+   {
+    "internalType": "string",
+    "name": "_accountPublicKey",
+    "type": "string"
+   }
+  ],
+  "name": "createNewId",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "identityToken",
+  "outputs": [
+   {
+    "internalType": "contract IdentityToken",
+    "name": "",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   },
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   },
+   {
+    "internalType": "bytes",
+    "name": "",
+    "type": "bytes"
+   }
+  ],
+  "name": "onERC721Received",
+  "outputs": [
+   {
+    "internalType": "bytes4",
+    "name": "",
+    "type": "bytes4"
+   }
+  ],
+  "stateMutability": "pure",
+  "type": "function"
+ }
+]
