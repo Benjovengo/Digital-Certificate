@@ -17,13 +17,11 @@ async function main() {
 
 
   /// Get IdentityToken address
-  /// Path to the src/ folder of the front-end application
-  const configFilePath = "../front-end/src/config.json";
+  const configFilePath = "../front-end/src/config.json"; /// Path to the src/ folder of the front-end application
   let jsonRaw = fs.readFileSync(configFilePath,'utf8');
   let json = JSON.parse(jsonRaw);
   let chainId = Object.keys(json)[0];
   identityTokenAddress = json[chainId]["IdentityToken"]["address"];
-  console.log('IdentityToken Address (READ): ', identityTokenAddress);
 
 
   // deploy token contract
