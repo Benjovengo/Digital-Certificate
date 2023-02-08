@@ -32,23 +32,34 @@ describe('Identity Manager', () => {
   })
 
   it('Issue new identity - mint NFT token.', async () => {
+
     // hard-coded setup for minting
+    const blockchainAddress = account01.address;
     const identityURI = "path to the URI";
     const hash = web3.utils.soliditySha3('Identity Hash');
-    const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dC74a9a98Af6108adD8EB17A4262d3dc9";
+    const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
 
-    // create new ID transaction
-    await identityManager.createNewId(identityURI, hash, publicKey);
+    await identityManager.connect(account01).createNewId(identityURI, hash, publicKey)
     // get the owner of the identity/token
     const result = await identityToken.ownerOf(1);
     expect(result).to.equal(account01.address);
   })
 
 
-
 })
 
+
+
 // TEMPLATES ==========================================================================================
+
+//ADDRESSES
+/**
+
+    console.log('\nIdentityManager:   ', identityManager.address)
+    console.log('Deployer Address:  ', deployer.address);
+    console.log('Account01 Address: ', account01.address,'\n')
+
+ */
 
 //console.log('\nOwner:    ', , '\n')
 
