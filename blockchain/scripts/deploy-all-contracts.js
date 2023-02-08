@@ -14,4 +14,3 @@ for (const contract of contracts) {
       }
   });
 }
-
