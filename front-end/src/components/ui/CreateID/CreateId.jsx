@@ -15,6 +15,10 @@ const CreateId = () => {
   currentDate.setDate(currentDate.getDate() + 3);
   var today = currentDate.toISOString().substring(0,10);
 
+  /// Set default values for preview
+  document.getElementById('firstNamePreview').innerHTML = 'John'
+
+
 
   /**
    * Handle browse file
@@ -33,9 +37,17 @@ const CreateId = () => {
     }
   }
 
-
-  const handleChange = (e) => {
-    document.getElementById('test').innerHTML = e.target.value
+  /**
+   * 
+   * @param {event} e Change preview label
+   */
+  const changeFirstName = (e) => {
+    if (e.target.value) {
+      document.getElementById('firstNamePreview').innerHTML = e.target.value
+    } 
+    else {
+      document.getElementById('firstNamePreview').innerHTML = 'John'
+    }
   };
 
   return (
@@ -45,7 +57,8 @@ const CreateId = () => {
           <Row>
             <Col>
               <h1>Your ID</h1>
-              <p>Current Value: <span id='test'></span></p>
+              <p>First name</p>
+              <p><span id='firstNamePreview'></span></p>
             </Col>
             <Col xs={8}>
               <h1>Create ID Form</h1>
@@ -54,7 +67,7 @@ const CreateId = () => {
                 <Row>
                   <Col>
                     <label htmlFor="firstName" value={name}>First name:</label><br/>
-                    <input type="text" id="firstName" name="firstName" onChange={(e) => handleChange(e)} onKeyUp={(e) => handleChange(e)} required></input>
+                    <input type="text" id="firstName" name="firstName" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
                   </Col>
                   <Col>
                     <label htmlFor="lastName">Last name:</label><br/>
