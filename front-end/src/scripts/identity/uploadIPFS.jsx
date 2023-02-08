@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
-import { Buffer } from 'buffer';
+//import React, { useState } from 'react'
+//import { Buffer } from 'buffer';
 
 // Pinata
 import axios from "axios";
 const FormData = require('form-data')
-const JWT = `Bearer ${process.env.REACT_APP_PINATA_JWT}`
+//const JWT = `Bearer ${process.env.REACT_APP_PINATA_JWT}`
 
 
 
 const sendFileToIPFS = async (_fileImg) => {
+
+  let ImgHash
 
   if (_fileImg) {
     try {
@@ -27,7 +29,7 @@ const sendFileToIPFS = async (_fileImg) => {
         },
       });
 
-      const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+      ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
       //console.log(response.data.IpfsHash);
       console.log(ImgHash)
 
@@ -37,6 +39,7 @@ const sendFileToIPFS = async (_fileImg) => {
         console.log(error)
     }
   }
+  return ImgHash
 }
 
 

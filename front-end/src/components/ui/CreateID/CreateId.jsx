@@ -97,14 +97,14 @@ const CreateId = () => {
   /**
    * Submit Form - handler
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     setName(e.target.firstName.value + ' ' + e.target.lastName.value)
     setDesc('Identity Data')
 
-    sendFileToIPFS(fileImg)
-    //alert(e.target.firstName.value + ' ' + e.target.lastName.value)
+    const pictureUrl = await sendFileToIPFS(fileImg)
+    alert(pictureUrl)
   }
 
 
