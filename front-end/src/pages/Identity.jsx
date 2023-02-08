@@ -1,8 +1,14 @@
 import React from 'react'
 
+// TEMP
+import Cryptography from '../components/ui/Cryptography/Cryptography'
+
 const Identity = () => {
   return (
-    <div>Identity</div>
+    <>
+      <div>Identity</div>
+      <Cryptography />
+    </>
   )
 }
 
