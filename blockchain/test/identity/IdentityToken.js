@@ -10,7 +10,7 @@ describe('Identity ERC-721 Token', () => {
     // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
     [deployer, account01, identityManager] = await ethers.getSigners();
 
-    // Deploy FashionToken
+    // Deploy IdentityToken
     const IdentityToken = await ethers.getContractFactory('IdentityToken');
     identityToken = await IdentityToken.deploy();
   })
