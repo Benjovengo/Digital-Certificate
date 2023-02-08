@@ -34,6 +34,10 @@ const CreateId = () => {
   }
 
 
+  const handleChange = (e) => {
+    document.getElementById('test').innerHTML = e.target.value
+  };
+
   return (
     <>
       <section className='create__id__wrapper'>
@@ -41,6 +45,7 @@ const CreateId = () => {
           <Row>
             <Col>
               <h1>Your ID</h1>
+              <p>Current Value: <span id='test'></span></p>
             </Col>
             <Col xs={8}>
               <h1>Create ID Form</h1>
@@ -48,8 +53,8 @@ const CreateId = () => {
               <form>
                 <Row>
                   <Col>
-                    <label htmlFor="firstName">First name:</label><br/>
-                    <input type="text" id="firstName" name="firstName" required></input>
+                    <label htmlFor="firstName" value={name}>First name:</label><br/>
+                    <input type="text" id="firstName" name="firstName" onChange={(e) => handleChange(e)} onKeyUp={(e) => handleChange(e)} required></input>
                   </Col>
                   <Col>
                     <label htmlFor="lastName">Last name:</label><br/>
