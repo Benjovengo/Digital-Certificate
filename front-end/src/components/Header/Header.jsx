@@ -21,7 +21,7 @@ const NAV__LINKS = [
   },
   {
     display: "Identity",
-    url: "/wallet",
+    url: "/identity",
   },
 ];
 

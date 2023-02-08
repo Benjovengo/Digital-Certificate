@@ -5,7 +5,7 @@ import Certifications from "../pages/Certifications";
 import Governance from "../pages/Governance";
 import Home from "../pages/Home";
 //import NftDetails from "../pages/NftDetails";
-import Wallet from "../pages/Wallet";
+import Identity from "../pages/Identity";
 
 
 const Routers = () => {
@@ -15,9 +15,9 @@ const Routers = () => {
       <Route path="/certifications" element={<Certifications />} />
       <Route path="/home" element={<Home />} />
       <Route path="/governance" element={<Governance />} />
-      <Route path="/wallet" element={<Wallet />} />
+      <Route path="/identity" element={<Identity />} />
 
-      {/* <Route path="/wallet/:id" element={<NftDetails />} /> */}
+      {/* <Route path="/identity/:id" element={<NftDetails />} /> */}
     </Routes>
   );
 };
