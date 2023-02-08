@@ -16,8 +16,8 @@ const JsBarcode = require("jsbarcode");
 const CreateId = () => {
   /// React Hooks
   const [fileImg, setFileImg] = useState(null);
-  const [name, setName] = useState("")
-  const [desc, setDesc] = useState("")
+  //const [name, setName] = useState("")
+  //const [desc, setDesc] = useState("")
 
   /// Set today's date
   var currentDate = new Date();
