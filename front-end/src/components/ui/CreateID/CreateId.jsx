@@ -6,6 +6,10 @@ import profilePhoto from "../../../assets/images/ProfilePhoto.png"
 /// Style
 import "./create-id.css"
 
+
+/// Barcode
+const JsBarcode = require("jsbarcode");
+
 const CreateId = () => {
   /// React Hooks
   const [fileImg, setFileImg] = useState(null);
@@ -23,6 +27,7 @@ const CreateId = () => {
     document.getElementById('lastNamePreview').innerHTML = 'Benjovengo'
     document.getElementById('issuedByPreview').innerHTML = 'Brazil'
     document.getElementById('dateIssuedPreview').innerHTML = today
+    JsBarcode("#barcode1", "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
   }
 
 
@@ -119,6 +124,7 @@ const CreateId = () => {
                       <Col>
                         <p>Address</p>
                         <p className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</p>
+                        <img id="barcode1" className='barcode__img' />
                       </Col>
                     </Row>
                   </div>
