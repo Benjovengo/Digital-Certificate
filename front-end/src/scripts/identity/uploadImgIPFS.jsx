@@ -8,7 +8,7 @@ const FormData = require('form-data')
 
 
 
-const sendFileToIPFS = async (_fileImg) => {
+const uploadImgToIPFS = async (_fileImg) => {
 
   let ImgHash
 
@@ -31,7 +31,7 @@ const sendFileToIPFS = async (_fileImg) => {
 
       ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
       //console.log(response.data.IpfsHash);
-      console.log(ImgHash)
+      //console.log(ImgHash)
 
 
     } catch (error) {
@@ -42,5 +42,4 @@ const sendFileToIPFS = async (_fileImg) => {
   return ImgHash
 }
 
-
-export default sendFileToIPFS
+export default uploadImgToIPFS

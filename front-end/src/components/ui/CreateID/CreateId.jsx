@@ -7,8 +7,8 @@ import profilePhoto from "../../../assets/images/ProfilePhoto.png"
 import "./create-id.css"
 
 /// Send file to IPFS
-import sendFileToIPFS from '../../../scripts/identity/uploadIPFS';
-
+import uploadImgToIPFS from '../../../scripts/identity/uploadImgIPFS';
+import uploadJSONtoIPFS from '../../../scripts/identity/uploadJsonIPFS';
 
 /// Barcode
 const JsBarcode = require("jsbarcode");
@@ -103,8 +103,15 @@ const CreateId = () => {
     setName(e.target.firstName.value + ' ' + e.target.lastName.value)
     setDesc('Identity Data')
 
-    const pictureUrl = await sendFileToIPFS(fileImg)
-    alert(pictureUrl)
+    const pictureUrl = await uploadImgToIPFS(fileImg)
+    
+    ///_firstName, _lastName, _imgURL, _issuedBy, _dateIssued
+    let givenFirstName = e.target.firstName.value
+    let givenLastName = e.target.lastName.value
+    let givenIssuedBy = e.target.issuedBy.value
+
+    const metadataUrl = await uploadJSONtoIPFS(givenFirstName, givenLastName, pictureUrl, givenIssuedBy, today)
+    alert(metadataUrl)
   }
 
 
