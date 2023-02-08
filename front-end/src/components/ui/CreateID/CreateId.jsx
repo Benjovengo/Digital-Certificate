@@ -99,8 +99,8 @@ const CreateId = () => {
 
             <Col>
                 <Row>
-                  <Col>
-                    <h1>Your ID</h1>
+                  <Col className='text-center'>
+                    <h2 className='main__header'>Your digital ID</h2>
                   </Col>
                 </Row>
                 <Row>
@@ -111,45 +111,50 @@ const CreateId = () => {
                       </Col>
                       <Col xs={7} className='mt-2'>
                         <p>First name</p>
-                        <p><span id='firstNamePreview'></span></p>
+                        <h6 id='firstNamePreview'></h6>
                         <p>Last name</p>
-                        <p><span id='lastNamePreview'></span></p>
+                        <h6 id='lastNamePreview'></h6>
                         <p>Issued by</p>
-                        <p><span id='issuedByPreview'></span></p>
+                        <h6 id='issuedByPreview'></h6>
                         <p>Date issued</p>
-                        <p><span id='dateIssuedPreview'></span></p>
+                        <h6 id='dateIssuedPreview'></h6>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
                         <p>Address</p>
-                        <p className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</p>
+                        <label className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</label>
                         <img id="barcode1" className='barcode__img' />
                       </Col>
                     </Row>
                   </div>
                 </Row>
+                <Row>
+                  <Col className="d-flex justify-content-center mt-4">
+                  <button className='submit__btn'>View more info</button>
+                  </Col>
+                </Row>
             </Col>
 
             <Col xs={8}>
               <div className="form__column__wrapper">
-                <h1>Create ID Form</h1>
+                <h2 className='main__header'>Create ID Form</h2>
                 <p> <span>Disclaimer!</span><br/> This functionality is only intended for use by trusted issuers and is temporarily available to everyone during the testing phase of the project. Please exercise caution and reserve its usage for its intended purpose only.</p>
                 <form className='input__form'>
                   <Row>
                     <Col>
                       <label htmlFor="firstName" value={name}>First name:</label><br/>
-                      <input type="text" id="firstName" name="firstName" maxlength="30" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
+                      <input type="text" id="firstName" name="firstName" maxLength="30" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
                     </Col>
                     <Col>
                       <label htmlFor="lastName">Last name:</label><br/>
-                      <input type="text" id="lastName" name="lastName" maxlength="30" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
+                      <input type="text" id="lastName" name="lastName" maxLength="30" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <label htmlFor="issuedBy">Issued by (Country):</label><br/>
-                      <input type="text" id="issuedBy" name="issuedBy" maxlength="30" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
+                      <input type="text" id="issuedBy" name="issuedBy" maxLength="30" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
                     </Col>
                     <Col>
                       <label htmlFor="issuedDate" id='dateInput'>Issue date:</label><br/>
@@ -165,6 +170,8 @@ const CreateId = () => {
                     </Col>
                   </Row>
                 </form>
+                <h3>Your data will be encrypted before being uploaded to IPFS!</h3>
+                <p>This includes not only the text fields, but also your <span>picture is encrypted</span> to ensure complete privacy.</p>
               </div>
             </Col>
           </Row>

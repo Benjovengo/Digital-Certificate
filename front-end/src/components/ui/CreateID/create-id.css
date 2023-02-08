@@ -20,12 +20,37 @@
   line-height: normal;
   margin: 0;
   padding: 0;
-
   overflow: hidden;
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.main__header {
+  font-family: 'Cinzel', serif;
+}
+
+.preview__id__wrapper p {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 0.25em 0 -0.25em 0;
+}
+
+.preview__id__wrapper h6 {
+  color: #D87E01;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 1.1rem;
+  line-height: normal;
+  margin: -0.2em 0 0.3em 0;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 
 .view__info__wrapper {
   margin-top: 5em;
@@ -35,6 +60,7 @@
   padding: 0em;
   width: 100%;
 }
+
 
 .identity__address {
   font-family: 'Ubuntu Mono', monospace;
