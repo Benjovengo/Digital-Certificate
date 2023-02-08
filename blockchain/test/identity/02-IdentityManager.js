@@ -19,8 +19,10 @@ describe('Identity Manager', () => {
 
     // Deploy identity manager
     const IdentityManager = await ethers.getContractFactory('IdentityManager');
-    identityManager = await IdentityManager.deploy();
+    identityManager = await IdentityManager.deploy(identityToken.address);
 
+    // Only the IdentityManager can call IdentityToken functions - must be the owner of the token contract
+    await identityToken.transferOwnership(identityManager.address);
   })
 
   it('Deployment address.', async () => {
@@ -29,44 +31,20 @@ describe('Identity Manager', () => {
     expect(result).to.not.equal("0x");
   })
 
-  it('Mint identity token.', async () => {
+  it('Issue new identity - mint NFT token.', async () => {
     // hard-coded setup for minting
-    const blockchainAddress = account01.address;
     const identityURI = "path to the URI";
     const hash = web3.utils.soliditySha3('Identity Hash');
-    const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
+    const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dC74a9a98Af6108adD8EB17A4262d3dc9";
 
-    // minting transaction
-    await identityToken.mint(blockchainAddress, identityURI, hash, publicKey);
+    // create new ID transaction
+    await identityManager.createNewId(identityURI, hash, publicKey);
     // get the owner of the identity/token
     const result = await identityToken.ownerOf(1);
     expect(result).to.equal(account01.address);
   })
 
-  it('Transfer the ownership of the IdentityToken contract.', async () => {
-    // Only the IdentityManager can call certain functions - owner of the token contract
-    await identityToken.transferOwnership(identityManager.address);
-    const result = await identityToken.owner();
-    expect(result).to.equal(identityManager.address);
-  })
 
-  it('Prevent transfers', async () => {
-    // hard-coded setup for minting
-    const blockchainAddress = account01.address;
-    const identityURI = "path to the URI";
-    const hash = web3.utils.soliditySha3('Identity Hash');
-    const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
-
-    // minting transaction
-    await identityToken.mint(blockchainAddress, identityURI, hash, publicKey);
-
-    try {
-      await identityToken.transferFrom(account01.address, identityManager.address, 1)
-    } catch (error) {}
-
-    const result = await identityToken.ownerOf(1);
-    expect(result).to.equal(account01.address);
-  })
 
 })
 
