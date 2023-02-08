@@ -40,7 +40,7 @@ const CreateId = () => {
         <Container>
           <Row>
             <Col>
-              <h1>Create ID</h1>
+              <h1>Your ID</h1>
             </Col>
             <Col xs={8}>
               <h1>Create ID Form</h1>
