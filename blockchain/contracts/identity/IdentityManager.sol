@@ -21,6 +21,11 @@ contract SellingContract is IERC721Receiver {
     IdentityToken public identityToken;
 
     /**
+     * Events
+     */
+    event idCreation(uint256 _idSerialNumber);
+
+    /**
      * Constructor Method
      *
      * @param _nftTokenAddress the address of the IdentityToken contract on the blockchain
@@ -29,7 +34,9 @@ contract SellingContract is IERC721Receiver {
         tokenIdAddress = _nftTokenAddress;
     }
 
-    // Receive confirmation for ERC-721 token - called upon a safe transfer
+    /**
+     * Receive confirmation for ERC-721 token - called upon a safe transfer
+     */
     function onERC721Received(
         address,
         address,
@@ -39,7 +46,37 @@ contract SellingContract is IERC721Receiver {
         return IERC721Receiver.onERC721Received.selector;
     }
 
-    function approveTransfer(uint256 _nftID) public {
-        identityToken.approve(msg.sender, _nftID);
+    /**
+     * Create a new ID
+     *
+     * @param _tokenURI The address of the IdentityToken contract on the blockchain
+     * @param _identityHash The hash of the JSON file with submitted information
+     * @param _accountPublicKey The public key associated with the blockchain ac
+     *
+     * @dev everyone can call this function for testing purposes
+     * @dev in a production environment, it should not be possible for everyone to call this function
+     */
+    function createNewId(
+        string memory _tokenURI,
+        bytes32 _identityHash,
+        string memory _accountPublicKey
+    ) public {
+        /// require that the identity URI is not blank
+        require(
+            (keccak256(abi.encodePacked((_tokenURI))) ==
+                keccak256(abi.encodePacked(("")))),
+            "ERROR! Invalid token URI. Token URI must contain data."
+        );
+
+        /// Issue ID - Mint NFT
+        uint256 newIdSerialNumber = identityToken.mint(
+            msg.sender,
+            _tokenURI,
+            _identityHash,
+            _accountPublicKey
+        );
+
+        /// Emit event with the ID serial number
+        emit idCreation(newIdSerialNumber);
     }
 }
