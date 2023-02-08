@@ -32,6 +32,7 @@ contract IdentityManager is IERC721Receiver {
      */
     constructor(address _nftTokenAddress) {
         tokenIdAddress = _nftTokenAddress;
+        identityToken = IdentityToken(_nftTokenAddress);
     }
 
     /**
