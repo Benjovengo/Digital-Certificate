@@ -4,22 +4,35 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
-const createConfigJSON = require("./scripts/setupConfig")
+const fs = require("fs"); // to setup the files to be used by the web interface
+const addEntryConfigJSON = require("./scripts/addAddress")
 const createABIFile = require("./scripts/createABI")
 
-let identityTokenAddress
+let identityTokenAddress;
+let identityManagerAddress;
 
 async function main() {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
-  [deployer, account01, identityManager] = await ethers.getSigners();
+  [deployer, account01] = await ethers.getSigners();
+
+
+  /// Get IdentityToken address
+  /// Path to the src/ folder of the front-end application
+  const configFilePath = "../front-end/src/config.json";
+  let jsonRaw = fs.readFileSync(configFilePath,'utf8');
+  let json = JSON.parse(jsonRaw);
+  let chainId = Object.keys(json)[0];
+  identityTokenAddress = json[chainId]["IdentityToken"]["address"];
+  console.log('IdentityToken Address (READ): ', identityTokenAddress);
+
 
   // deploy token contract
-  const IdentityToken = await ethers.getContractFactory('IdentityToken')
-  const identityToken = await IdentityToken.deploy()
-  await identityToken.deployed();
-  identityTokenAddress = identityToken.address
+  const IdentityManager = await ethers.getContractFactory('IdentityManager')
+  const identityManager = await IdentityManager.deploy(identityTokenAddress)
+  await identityManager.deployed();
+  identityManagerAddress = identityManager.address
 
-  console.log(`Identity Token contract deployed to ${identityToken.address}`);
+  console.log(`Identity Manager contract deployed to ${identityManager.address}`);
 
 }
 
@@ -31,15 +44,15 @@ const runMain = async () => {
     await main()
     /// Setup
     const contractPath = 'identity/' /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractName = "IdentityToken"
-    const contractAddress = identityTokenAddress
+    const contractName = "IdentityManager"
+    const contractAddress = identityManagerAddress
     const useNetwork = "localhost"
     
     // Save ABI component to client-side
     createABIFile(contractPath, contractName)
 
     // create config.json with deployed addresses
-    createConfigJSON(contractName, contractAddress, useNetwork)
+    addEntryConfigJSON(contractName, contractAddress)
 
     // terminate without errors
     process.exit(0)
