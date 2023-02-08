@@ -91,6 +91,17 @@ const CreateId = () => {
     }
   };
 
+  /**
+   * Submit Form - handler
+   */
+  const handleSubmit = (e) => {
+    alert('Submitted!')
+  }
+
+
+  /**
+   * Render Identity Page
+   */
   return (
     <>
       <section className='create__id__wrapper'>
@@ -142,7 +153,7 @@ const CreateId = () => {
             <Col xs={8}>
               <div className="form__column__wrapper">
                 <h2 className='main__header'>Create ID Form</h2>
-                <form className='input__form'>
+                <form className='input__form' onSubmit={handleSubmit}>
                   <Row>
                     <Col>
                       <label htmlFor="firstName" value={name}>First name:</label><br/>
