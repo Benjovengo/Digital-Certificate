@@ -19,6 +19,8 @@ const CreateId = () => {
   window.onload = function(e) {
     document.getElementById('firstNamePreview').innerHTML = 'John'
     document.getElementById('lastNamePreview').innerHTML = 'Doe'
+    document.getElementById('issuedByPreview').innerHTML = 'Brazil'
+    document.getElementById('dateIssuedPreview').innerHTML = today
   }
 
 
@@ -68,20 +70,48 @@ const CreateId = () => {
     }
   };
 
+  /**
+   * Handle issued by input changes.
+   * 
+   * @param {event} e Change preview label.
+   */
+  const changeIssuedBy = (e) => {
+    if (e.target.value) {
+      document.getElementById('issuedByPreview').innerHTML = e.target.value
+    } 
+    else {
+      document.getElementById('issuedByPreview').innerHTML = 'Brazil'
+    }
+  };
+
   return (
     <>
       <section className='create__id__wrapper'>
         <Container fluid>
           <Row>
+
             <Col>
-            <div className='preview__id__wrapper'>
-              <h1>Your ID</h1>
-              <p>First name</p>
-              <p><span id='firstNamePreview'></span></p>
-              <p>Last name</p>
-              <p><span id='lastNamePreview'></span></p>
-            </div>
+                <Row>
+                  <Col>
+                    <h1>Your ID</h1>
+                  </Col>
+                </Row>
+                <Row>
+                  <div className='preview__id__wrapper'>
+                    <Col className='mt-5'>
+                      <p>First name</p>
+                      <p><span id='firstNamePreview'></span></p>
+                      <p>Last name</p>
+                      <p><span id='lastNamePreview'></span></p>
+                      <p>Issued by</p>
+                      <p><span id='issuedByPreview'></span></p>
+                      <p>Date issued</p>
+                      <p><span id='dateIssuedPreview'></span></p>
+                    </Col>
+                  </div>
+                </Row>
             </Col>
+
             <Col xs={8}>
               <h1>Create ID Form</h1>
               <p> <span>Disclaimer:</span> this function must be reserved for trusted issuers. It is enabled to anyone just during the testing phase of the project!</p>
@@ -98,8 +128,8 @@ const CreateId = () => {
                 </Row>
                 <Row>
                   <Col>
-                    <label htmlFor="issuedBy">Issued by:</label><br/>
-                    <input type="text" id="issuedBy" name="issuedBy"></input>
+                    <label htmlFor="issuedBy">Issued by (Country):</label><br/>
+                    <input type="text" id="issuedBy" name="issuedBy" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
                   </Col>
                   <Col>
                     <label htmlFor="issuedDate" id='dateInput'>Issue date:</label><br/>
