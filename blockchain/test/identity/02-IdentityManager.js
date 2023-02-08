@@ -3,20 +3,28 @@ const { ethers } = require('hardhat');
 const web3 = require('web3');
 
 describe('Identity Manager', () => {
-  let deployer, account01, identityManager;
+  /// Accounts
+  let deployer, account01;
+  /// Contracts
   let identityToken;
+  let identityManager;
 
   beforeEach(async () => {
     // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
-    [deployer, account01, identityManager] = await ethers.getSigners();
+    [deployer, account01] = await ethers.getSigners();
 
-    // Deploy FashionToken
+    // Deploy identity NFT token
     const IdentityToken = await ethers.getContractFactory('IdentityToken');
     identityToken = await IdentityToken.deploy();
+
+    // Deploy identity manager
+    const IdentityManager = await ethers.getContractFactory('IdentityManager');
+    identityManager = await IdentityManager.deploy();
+
   })
 
   it('Deployment address.', async () => {
-    const result = await identityToken.address;
+    const result = await identityManager.address;
     expect(result).to.not.equal("");
     expect(result).to.not.equal("0x");
   })
