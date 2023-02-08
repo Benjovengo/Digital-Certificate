@@ -100,9 +100,7 @@ const CreateId = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    setName(e.target.firstName.value + ' ' + e.target.lastName.value)
-    setDesc('Identity Data')
-
+    /// Upload picture
     const pictureUrl = await uploadImgToIPFS(fileImg)
     
     ///_firstName, _lastName, _imgURL, _issuedBy, _dateIssued
@@ -110,8 +108,9 @@ const CreateId = () => {
     let givenLastName = e.target.lastName.value
     let givenIssuedBy = e.target.issuedBy.value
 
+    /// Upload identity data
     const metadataUrl = await uploadJSONtoIPFS(givenFirstName, givenLastName, pictureUrl, givenIssuedBy, today)
-    alert(metadataUrl)
+    alert('Uploaded to: ' + metadataUrl)
   }
 
 

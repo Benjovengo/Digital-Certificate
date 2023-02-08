@@ -9,7 +9,6 @@ const uploadJSONtoIPFS = async (_firstName, _lastName, _imgURL, _issuedBy, _date
       method: "post",
       url: "https://api.pinata.cloud/pinning/pinJsonToIPFS",
       data: {
-        "name": 'Test',
         "firstName": _firstName,
         "lastName": _lastName,
         "image": _imgURL,
