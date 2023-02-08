@@ -28,6 +28,7 @@ exec(command,
 function execWrapper(command) {
   return new Promise((resolve, reject) => {
      exec(command, (error, out, err) => {
+      console.log(out)
        if (error) return reject(error);
        resolve({out: out, err: err});
      })
@@ -42,7 +43,7 @@ async function test() {
   ];
   for (var i in contractNames) {
           try{
-              console.log(contractNames[i])
+              console.log('Deploying contract ' + contractNames[i])
               command = `npx hardhat run ${contractNames[i]} --network localhost`
               var promise = execWrapper(command)//any promise, doesn't matter now 
               await promise;
