@@ -16,7 +16,10 @@ const CreateId = () => {
   var today = currentDate.toISOString().substring(0,10);
 
   /// Set default values for preview
-  document.getElementById('firstNamePreview').innerHTML = 'John'
+  window.onload = function(e) {
+    document.getElementById('firstNamePreview').innerHTML = 'John'
+    document.getElementById('lastNamePreview').innerHTML = 'Doe'
+  }
 
 
 
@@ -68,14 +71,16 @@ const CreateId = () => {
   return (
     <>
       <section className='create__id__wrapper'>
-        <Container>
+        <Container fluid>
           <Row>
             <Col>
+            <div className='preview__id__wrapper'>
               <h1>Your ID</h1>
               <p>First name</p>
               <p><span id='firstNamePreview'></span></p>
               <p>Last name</p>
               <p><span id='lastNamePreview'></span></p>
+            </div>
             </Col>
             <Col xs={8}>
               <h1>Create ID Form</h1>

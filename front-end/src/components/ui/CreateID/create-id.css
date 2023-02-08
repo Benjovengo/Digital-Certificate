@@ -1,3 +1,8 @@
 .create__id__wrapper{
   color: #FFF;
+  margin: 0 1em;
+}
+
+.preview__id__wrapper {
+  background-color: #55555f;
 }
