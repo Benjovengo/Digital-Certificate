@@ -61,9 +61,9 @@ contract IdentityManager is IERC721Receiver {
         bytes32 _identityHash,
         string memory _accountPublicKey
     ) public {
-        /// require that the identity URI is not blank
+        /// Require that the identity URI is not blank
         require(
-            (keccak256(abi.encodePacked((_tokenURI))) ==
+            (keccak256(abi.encodePacked((_tokenURI))) !=
                 keccak256(abi.encodePacked(("")))),
             "ERROR! Invalid token URI. Token URI must contain data."
         );
