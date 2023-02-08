@@ -19,8 +19,8 @@ const CreateId = () => {
 
   /// Set default values for preview
   window.onload = function(e) {
-    document.getElementById('firstNamePreview').innerHTML = 'John'
-    document.getElementById('lastNamePreview').innerHTML = 'Doe'
+    document.getElementById('firstNamePreview').innerHTML = 'Fábio'
+    document.getElementById('lastNamePreview').innerHTML = 'Benjovengo'
     document.getElementById('issuedByPreview').innerHTML = 'Brazil'
     document.getElementById('dateIssuedPreview').innerHTML = today
   }
@@ -102,7 +102,7 @@ const CreateId = () => {
                   <div className='preview__id__wrapper'>
                     <Row className='mt-5 ms-2'>
                       <Col>
-                        <img src={profilePhoto} className="identity__photo__preview" alt="id photo" />
+                        <img src={profilePhoto} className="identity__photo__preview" alt="id" />
                       </Col>
                       <Col xs={7}>
                         <p>First name</p>
@@ -115,13 +115,19 @@ const CreateId = () => {
                         <p><span id='dateIssuedPreview'></span></p>
                       </Col>
                     </Row>
+                    <Row>
+                      <Col>
+                        <p>Address</p>
+                        <p className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</p>
+                      </Col>
+                    </Row>
                   </div>
                 </Row>
             </Col>
 
             <Col xs={8}>
               <h1>Create ID Form</h1>
-              <p> <span>Disclaimer:</span> this function must be reserved for trusted issuers. It is enabled to anyone just during the testing phase of the project!</p>
+              <p> <span>Disclaimer!</span><br/> This functionality is only intended for use by trusted issuers and is temporarily available to everyone during the testing phase of the project. Please exercise caution and reserve its usage for its intended purpose only.</p>
               <form>
                 <Row>
                   <Col>
@@ -147,7 +153,7 @@ const CreateId = () => {
                 <input type="file" accept="image/png, image/gif, image/jpeg" onChange={(e) => handleImage(e)} required />
                 </Row>
                 <Row>
-                  <button className='submit'>Create ID</button>
+                  <button className='submit__btn submit'>Create ID</button>
                 </Row>
               </form>
             </Col>

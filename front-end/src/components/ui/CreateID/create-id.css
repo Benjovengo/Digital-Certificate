@@ -26,3 +26,29 @@
   padding: 0em;
   width: 100%;
 }
+
+.identity__address {
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.submit__btn {
+  background: #F89104;
+  border: none;
+  outline: none;
+  padding: 7px 25px !important;
+  border-radius: 0 !important;
+  font-size: 0.9rem;
+}
