@@ -49,6 +49,16 @@ const CreateId = () => {
    */
   const handleImage = (e) => {
     const file = e.target.files[0];
+
+    /// Update preview image
+    let reader = new FileReader();
+    let imgTag = document.getElementById('previewImage');
+    imgTag.title = file.name;
+    reader.onload = function(e) {
+      imgTag.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
     if (file && file.type.startsWith("image")) {
       setFileImg(file);
     } else {
@@ -128,6 +138,7 @@ const CreateId = () => {
 
     /// Upload picture
     const pictureUrl = await uploadImgToIPFS(fileImg)
+    //document.getElementById('previewImage').src = fileImg.files[0]
     /// Set identity fields
     let givenFirstName = e.target.firstName.value
     let givenLastName = e.target.lastName.value
