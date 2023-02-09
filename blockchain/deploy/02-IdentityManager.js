@@ -21,7 +21,7 @@ async function main() {
   let jsonRaw = fs.readFileSync(configFilePath,'utf8');
   let json = JSON.parse(jsonRaw);
   let chainId = Object.keys(json)[0];
-  identityTokenAddress = json[chainId]["IdentityToken"]["address"];
+  identityTokenAddress = json[chainId]["identityToken"]["address"];
 
 
   // deploy token contract
@@ -42,7 +42,7 @@ const runMain = async () => {
     await main()
     /// Setup
     const contractPath = 'identity/' /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractName = "IdentityManager"
+    const contractName = "identityManager" // Lowercase  first letter
     const contractAddress = identityManagerAddress
     const useNetwork = "localhost"
     

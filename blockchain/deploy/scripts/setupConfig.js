@@ -11,11 +11,11 @@ const configFilePath = "../front-end/src/config.json";
  * @param {string} _network the name of the network to be used: "localhost" or "goerli"
  */
 const createConfigJSON = (_name, _address, _network) => {
-  /// Set the chain ID - 5: Goerli testnet; 31337: hardhat local network;
+  /// Set the chain ID - 5: Goerli testnet; 1337: hardhat local network;
   let chainId = 0;
   switch(_network) {
     case "localhost":
-      chainId = 31337;
+      chainId = 1337;
       break;
     case "goerli":
       chainId = 5;

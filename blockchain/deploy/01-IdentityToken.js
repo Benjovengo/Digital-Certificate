@@ -31,7 +31,7 @@ const runMain = async () => {
     await main()
     /// Setup
     const contractPath = 'identity/' /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractName = "IdentityToken"
+    const contractName = "identityToken" // Lowercase first letter
     const contractAddress = identityTokenAddress
     const useNetwork = "localhost"
     
