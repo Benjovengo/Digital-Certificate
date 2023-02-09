@@ -2,7 +2,6 @@ import { ethers } from 'ethers';
 
 /** Contract(s) and Address(es) */
 import IdentityToken from '../../abis/IdentityToken.json'; // contract ABI
-import IdentityManager from '../../abis/IdentityManager.json'; // contract ABI
 import config from '../../config.json'; // contract addresses
 
 
@@ -18,7 +17,6 @@ export const fetchIdentity = async () => {
 
   /// Javascript "version" of the smart contract
   const identityToken = new ethers.Contract(config[network.chainId].identityToken.address, IdentityToken, signer);
-  const identityManager = new ethers.Contract(config[network.chainId].identityManager.address, IdentityManager, signer);
 
   // Get the logged account address
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
