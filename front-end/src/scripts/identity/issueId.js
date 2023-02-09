@@ -1,8 +1,8 @@
 import { ethers } from 'ethers';
 
 /** Contract(s) and Address(es) */
-import IdentityManager from '../abis/IdentityManager.json'; // contract ABI
-import config from '../config.json'; // contract addresses
+import IdentityManager from '../../abis/IdentityManager.json'; // contract ABI
+import config from '../../config.json'; // contract addresses
 
 /* Register new product */
 export const issueNewId = async (_tokenURI, _hash, _publicKey) => {
