@@ -33,6 +33,7 @@ export const fetchIdentity = async () => {
   /// Fetch Identity Info
   const response = await fetch(uri)
   const identityJSON = await response.json()
+  identityJSON['address'] = account
 
   /// DEBUG logs
   // console.log('Token Serial Number: ', serialNumber)
