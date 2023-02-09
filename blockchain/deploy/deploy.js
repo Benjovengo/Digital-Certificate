@@ -35,7 +35,7 @@ async function main() {
   console.log(`Identity Manager contract deployed to ${identityManager.address}`);
 
   // Only the IdentityManager can call IdentityToken functions - must be the owner of the token contract
-  await identityToken.transferOwnership(identityTokenAddress);
+  await identityToken.transferOwnership(identityManagerAddress);
 
 }
 

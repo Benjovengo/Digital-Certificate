@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import { Buffer } from 'buffer';
 
 /** Contract(s) and Address(es) */
+import IdentityToken from '../../abis/IdentityToken.json'; // contract ABI
 import IdentityManager from '../../abis/IdentityManager.json'; // contract ABI
 import config from '../../config.json'; // contract addresses
 
@@ -23,22 +24,21 @@ export const issueNewId = async (_tokenURI) => {
   const signer = provider.getSigner(); // get the signer
 
   /// Javascript "version" of the smart contract
+  const identityToken = new ethers.Contract(config[network.chainId].identityToken.address, IdentityToken, signer);
   const identityManager = new ethers.Contract(config[network.chainId].identityManager.address, IdentityManager, signer);
 
   /// Get the public key for the account
-  //const publicKey = await getPublicKey()
-
-/// DEBUG - hard coded values like in testing
-  const hash = web3.utils.soliditySha3('Identity Hash');
-  const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
+  const publicKey = await getPublicKey()
 
   /// Create new Id Token
   await identityManager.createNewId(_tokenURI, publicKey)
-  //console.log(await identityManager.debug())
 
-    console.log('\nToken URI:  ', _tokenURI)
-    console.log('Hash:       ', hash)
-    console.log('Public Key: ', publicKey, '\n\n')
+  /// DEBUG logs
+  // console.log('\nIdentity Token Owner:     ', await identityToken.owner())
+  // console.log('Identity Manager Address: ', identityManager.address)
+  // console.log('\nToken URI:  ', _tokenURI)
+  // console.log('Hash:       ', hash)
+  // console.log('Public Key: ', publicKey, '\n\n')
 }
 
 
@@ -56,5 +56,5 @@ const getPublicKey = async () => {
   });
   const publicKey = Buffer.from(keyB64, 'base64');
 
-  return publicKey;
+  return publicKey.toString();
 }
