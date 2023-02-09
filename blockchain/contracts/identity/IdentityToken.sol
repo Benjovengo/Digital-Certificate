@@ -104,6 +104,19 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return newIdSerialNumber;
     }
 
+    /** @notice Get the tokenURI serial number
+     *
+     * @param _accountAddress The blockchain address of the identity
+     * @return serialNumber The serial number of the token associated with the account
+     */
+    function getSerialNumber(address _accountAddress)
+        public
+        view
+        returns (uint256)
+    {
+        return uniqueSerialNumber[_accountAddress];
+    }
+
     /** @notice Get the hash
      *
      * @param _accountAddress The blockchain address of the identity
