@@ -2,6 +2,26 @@
 import axios from "axios";
 //const FormData = require('form-data')
 
+import { encryptData } from "./cryptography";
+
+import { Buffer } from 'buffer';
+// Ethers.js
+const ethers = require("ethers")
+
+const getPublicKey = async () => {
+  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+  const account = ethers.utils.getAddress(accounts[0])
+
+  // Key is returned as base64
+  const keyB64 = await window.ethereum.request({
+    method: 'eth_getEncryptionPublicKey',
+    params: [account],
+  });
+  const publicKey = Buffer.from(keyB64, 'base64');
+
+  return publicKey
+}
+
 const uploadJSONtoIPFS = async (_firstName, _lastName, _imgURL, _issuedBy, _dateIssued) => {
   let tokenURI
   const plainData = {
@@ -11,11 +31,14 @@ const uploadJSONtoIPFS = async (_firstName, _lastName, _imgURL, _issuedBy, _date
     "issuedBy": _issuedBy,
     "dateIssued": _dateIssued
   }
+  /// Encrypt identity data
+  const encryptedData = encryptData(await getPublicKey(), plainData)
+
   try {
     const resJSON = await axios({
       method: "post",
       url: "https://api.pinata.cloud/pinning/pinJsonToIPFS",
-      data: plainData,
+      data: encryptedData,
       headers: {
         'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
         'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
