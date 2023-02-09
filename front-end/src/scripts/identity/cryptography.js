@@ -37,7 +37,7 @@ export const decryptData = async (_account, _data) => {
  * Encrypt data
  * 
  * @param {bytes64} _publicKey Public key associated with the logged MetaMask account
- * @param {bytes64} _data Data to be encrypted
+ * @param {string} _data Data to be encrypted
  * @returns {bytes64} Encrypted data
  */
 export const encryptData = (_publicKey, _data) => {
