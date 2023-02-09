@@ -122,7 +122,7 @@ const CreateId = () => {
 
     /// Uploading completed
     console.log('New ID created.')
-    alert('Uploaded to: ' + metadataUrl)
+    //alert('Uploaded to: ' + metadataUrl)
   }
 
 
