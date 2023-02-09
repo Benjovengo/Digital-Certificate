@@ -1,8 +1,12 @@
 import { ethers } from 'ethers';
+import { Buffer } from 'buffer';
 
 /** Contract(s) and Address(es) */
 import IdentityToken from '../../abis/IdentityToken.json'; // contract ABI
 import config from '../../config.json'; // contract addresses
+
+/** Decrypt data */
+import { decryptData } from './cryptography';
 
 
 /** Fetch identity data for the logged blockchain address 
@@ -23,7 +27,7 @@ export const fetchIdentity = async () => {
   const account = ethers.utils.getAddress(accounts[0])
   
   /// Test if the address has an issued identity associated with it
-  let identityJSON
+  let identityJSON = ''
   /// Create new Id Token
   const serialNumber = Number(await identityToken.getSerialNumber(account))
 
@@ -31,10 +35,31 @@ export const fetchIdentity = async () => {
     /// Get Token URI
     const uri = await identityToken.tokenURI(serialNumber)
 
+
+    var enc = new TextEncoder(); // always utf-8
+
     /// Fetch Identity Info
     const response = await fetch(uri)
-    identityJSON = await response.json()
-    identityJSON['address'] = account
+    const encryptedJSON = await response.json()
+    //console.log('Type Of: ', typeof encryptedJSON)
+    //console.log(Object.keys(encryptedJSON))
+
+    const encryptedArray = encryptedJSON["encryptedData"]["data"]
+    console.log(encryptedArray)
+
+
+    const encryptedUint8Array = Uint8Array.from(encryptedArray)
+    console.log(encryptedUint8Array)
+
+      //DECRYPT
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+      const account = ethers.utils.getAddress(accounts[0])
+
+    //DECRYPT
+    const decrypted = await decryptData(account, encryptedUint8Array)
+    console.log(decrypted)
+    
+    //identityJSON = decryptData(account, encryptedUint8Array)
   } else {
     identityJSON = ''
   }
