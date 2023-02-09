@@ -5,7 +5,7 @@ import { Buffer } from 'buffer';
 import "./cryptography.css"
 
 // Data encryption
-import { encryptData, decryptData } from '../../../scripts/cryptography';
+import { encryptData, decryptData } from '../../../scripts/identity/cryptography';
 
 // Pinata
 import axios from "axios";
