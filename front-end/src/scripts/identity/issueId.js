@@ -33,11 +33,12 @@ export const issueNewId = async (_tokenURI) => {
   const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
 
   /// Create new Id Token
-  //await identityManager.createNewId(_tokenURI, hash, publicKey)
+  await identityManager.createNewId(_tokenURI, publicKey)
+  //console.log(await identityManager.debug())
 
     console.log('\nToken URI:  ', _tokenURI)
     console.log('Hash:       ', hash)
-    console.log('Public Key: ', publicKey, '\n')
+    console.log('Public Key: ', publicKey, '\n\n')
 }
 
 
