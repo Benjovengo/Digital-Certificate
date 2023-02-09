@@ -31,15 +31,14 @@ const uploadJSONtoIPFS = async (_firstName, _lastName, _imgURL, _issuedBy, _date
     "issuedBy": _issuedBy,
     "dateIssued": _dateIssued
   }
-  const plainDataDebug = `${_firstName}, ${_lastName}`
   /// Encrypt identity data
-  const encryptedData = encryptData(await getPublicKey(), plainDataDebug)
-  
+  const encryptedData = encryptData(await getPublicKey(), plainData)
+
   try {
     const resJSON = await axios({
       method: "post",
       url: "https://api.pinata.cloud/pinning/pinJsonToIPFS",
-      data: {encryptedData},
+      data: encryptedData,
       headers: {
         'pinata_api_key': `${process.env.REACT_APP_PINATA_API_KEY}`,
         'pinata_secret_api_key': `${process.env.REACT_APP_PINATA_API_SECRET}`,
