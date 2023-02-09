@@ -118,7 +118,7 @@ const CreateId = () => {
     const metadataUrl = await uploadJSONtoIPFS(givenFirstName, givenLastName, pictureUrl, givenIssuedBy, today)
 
     /// Mint NFT ID token
-
+    issueNewId(metadataUrl)
 
     /// Uploading completed
     console.log('New ID created.')

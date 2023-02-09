@@ -1,19 +1,51 @@
 import { ethers } from 'ethers';
+import { Buffer } from 'buffer';
 
 /** Contract(s) and Address(es) */
 import IdentityManager from '../../abis/IdentityManager.json'; // contract ABI
 import config from '../../config.json'; // contract addresses
 
-/* Register new product */
-export const issueNewId = async (_tokenURI, _hash, _publicKey) => {
+/// Required to create the hash
+const web3 = require('web3');
+
+
+
+/** Register new product */
+export const issueNewId = async (_tokenURI) => {
+  /// Get the token URI hash
+  const urlSplit = _tokenURI.split('/');
+  const hashString = urlSplit[urlSplit.length - 1];
+  const hash = web3.utils.soliditySha3(hashString);
+
   // Setup provider and network
   let provider = new ethers.providers.Web3Provider(window.ethereum);
   const network = await provider.getNetwork();
   const signer = provider.getSigner(); // get the signer
 
-  // Javascript "version" of the smart contract
+  /// Javascript "version" of the smart contract
   const identityManager = new ethers.Contract(config[network.chainId].identityManager.address, IdentityManager, signer);
 
+  /// Get the public key for the account
+  const publicKey = getPublicKey()
+
   /// Create new Id Token
-  await identityManager.register(_tokenURI, _hash, _publicKey)
+  await identityManager.register(_tokenURI, hash, publicKey)
+}
+
+
+
+/** Retrieve the public key for the logged MetaMask account */
+const getPublicKey = async () => {
+  /// Get the account address
+  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+  const account = ethers.utils.getAddress(accounts[0])
+
+  /// Key is returned as base64
+  const keyB64 = await window.ethereum.request({
+    method: 'eth_getEncryptionPublicKey',
+    params: [account],
+  });
+  const publicKey = Buffer.from(keyB64, 'base64');
+
+  return publicKey;
 }
