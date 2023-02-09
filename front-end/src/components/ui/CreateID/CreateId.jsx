@@ -122,7 +122,7 @@ const CreateId = () => {
 
     /// Uploading completed
     console.log('New ID created.')
-    //alert('Uploaded to: ' + metadataUrl)
+    alert('Use the console.logs as placeholders to set an uploading bool to show and hide an overlay to show that the creation of the ID is in progress.')
   }
 
 
