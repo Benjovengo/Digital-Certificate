@@ -33,10 +33,4 @@ export const fetchIdentity = async () => {
   /// DEBUG logs
   console.log('Token Serial Number: ', serialNumber)
   console.log('Token URI: ', uri)
-
-  // console.log('\nIdentity Token Owner:     ', await identityToken.owner())
-  // console.log('Identity Manager Address: ', identityManager.address)
-  // console.log('\nToken URI:  ', _tokenURI)
-  // console.log('Hash:       ', hash)
-  // console.log('Public Key: ', publicKey, '\n\n')
 }
