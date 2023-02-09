@@ -23,7 +23,8 @@
     "reactstrap": "^9.1.5",
     "remixicon": "^2.5.0",
     "sass": "^1.57.1",
-    "swiper": "^8.4.6"
+    "swiper": "^8.4.6",
+    "web3": "^1.8.2"
   },
   "scripts": {
     "start": "craco start",
