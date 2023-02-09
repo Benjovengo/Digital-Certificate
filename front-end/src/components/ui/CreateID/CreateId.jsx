@@ -100,16 +100,24 @@ const CreateId = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    /// Uploading...
+    console.log('Creating new ID...')
+
+
     /// Upload picture
     const pictureUrl = await uploadImgToIPFS(fileImg)
-    
-    ///_firstName, _lastName, _imgURL, _issuedBy, _dateIssued
+    /// Set identity fields
     let givenFirstName = e.target.firstName.value
     let givenLastName = e.target.lastName.value
     let givenIssuedBy = e.target.issuedBy.value
-
     /// Upload identity data
     const metadataUrl = await uploadJSONtoIPFS(givenFirstName, givenLastName, pictureUrl, givenIssuedBy, today)
+
+    /// Mint NFT ID token
+
+
+    /// Uploading completed
+    console.log('New ID created.')
     alert('Uploaded to: ' + metadataUrl)
   }
 
