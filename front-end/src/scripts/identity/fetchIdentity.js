@@ -27,10 +27,17 @@ export const fetchIdentity = async () => {
   /// Create new Id Token
   const serialNumber = Number(await identityToken.getSerialNumber(account))
 
-  /// Fetch Data
+  /// Get Token URI
   const uri = await identityToken.tokenURI(serialNumber)
 
+  /// Fetch Identity Info
+  const response = await fetch(uri)
+  const identityJSON = await response.json()
+
   /// DEBUG logs
-  console.log('Token Serial Number: ', serialNumber)
-  console.log('Token URI: ', uri)
+  // console.log('Token Serial Number: ', serialNumber)
+  // console.log('Token URI: ', uri)
+  // console.log(identityJSON)
+
+  return identityJSON
 }
