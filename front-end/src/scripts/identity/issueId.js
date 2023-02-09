@@ -15,7 +15,7 @@ export const issueNewId = async (_tokenURI) => {
   /// Get the token URI hash
   const urlSplit = _tokenURI.split('/');
   const hashString = urlSplit[urlSplit.length - 1];
-  const hash = web3.utils.soliditySha3(hashString);
+  //const hash = web3.utils.soliditySha3(hashString);
 
   // Setup provider and network
   let provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -26,10 +26,18 @@ export const issueNewId = async (_tokenURI) => {
   const identityManager = new ethers.Contract(config[network.chainId].identityManager.address, IdentityManager, signer);
 
   /// Get the public key for the account
-  const publicKey = await getPublicKey()
+  //const publicKey = await getPublicKey()
+
+/// DEBUG - hard coded values like in testing
+  const hash = web3.utils.soliditySha3('Identity Hash');
+  const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
 
   /// Create new Id Token
-  await identityManager.createNewId(_tokenURI, hash, publicKey)
+  //await identityManager.createNewId(_tokenURI, hash, publicKey)
+
+    console.log('\nToken URI:  ', _tokenURI)
+    console.log('Hash:       ', hash)
+    console.log('Public Key: ', publicKey, '\n')
 }
 
 
