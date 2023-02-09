@@ -120,9 +120,10 @@ const CreateId = () => {
    */
   const identityFromBlockchain = async () => {
 
-    let identityData
+    let identityData = ''
     try {
       identityData = await fetchIdentity()
+      console.log(identityData)
     } catch(error) {
       console.log('Error loading ID from the blockchain!')
     }
@@ -134,8 +135,8 @@ const CreateId = () => {
       document.getElementById('lastNamePreview').innerHTML = identityData.lastName
       document.getElementById('issuedByPreview').innerHTML = identityData.issuedBy
       document.getElementById('dateIssuedPreview').innerHTML = identityData.dateIssued
-      document.getElementById('addressPreview').innerHTML = identityData.address
-      JsBarcode("#barcode1", identityData.address)
+      //document.getElementById('addressPreview').innerHTML = identityData.address
+      //JsBarcode("#barcode1", identityData.address)
     } else {
       // Refresh preview card
       document.getElementById('previewImage').src = identityData.image
