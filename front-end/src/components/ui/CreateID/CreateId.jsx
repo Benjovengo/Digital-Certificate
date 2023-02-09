@@ -104,6 +104,12 @@ const CreateId = () => {
    */
   const identityFromBlockchain = async () => {
     const identityData = await fetchIdentity()
+
+    // Refresh preview card
+    document.getElementById('firstNamePreview').innerHTML = identityData.firstName
+    document.getElementById('lastNamePreview').innerHTML = identityData.lastName
+    document.getElementById('issuedByPreview').innerHTML = identityData.issuedBy
+    document.getElementById('dateIssuedPreview').innerHTML = identityData.dateIssued
     console.log(identityData)
   }
 
