@@ -36,10 +36,9 @@ describe('Identity Manager', () => {
     // hard-coded setup for minting
     const blockchainAddress = account01.address;
     const identityURI = "path to the URI";
-    const hash = web3.utils.soliditySha3('Identity Hash');
     const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
 
-    await identityManager.connect(account01).createNewId(identityURI, hash, publicKey)
+    await identityManager.connect(account01).createNewId(identityURI, publicKey)
     // get the owner of the identity/token
     const result = await identityToken.ownerOf(1);
     expect(result).to.equal(account01.address);

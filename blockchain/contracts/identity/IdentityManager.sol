@@ -51,7 +51,6 @@ contract IdentityManager is IERC721Receiver {
      * Create a new ID
      *
      * @param _tokenURI The address of the IdentityToken contract on the blockchain
-     * @param _identityHash The hash of the JSON file with submitted information
      * @param _accountPublicKey The public key associated with the blockchain ac
      *
      * @dev everyone can call this function for testing purposes
@@ -59,7 +58,6 @@ contract IdentityManager is IERC721Receiver {
      */
     function createNewId(
         string memory _tokenURI,
-        bytes32 _identityHash,
         string memory _accountPublicKey
     ) public {
         /// Require that the identity URI is not blank
@@ -73,7 +71,6 @@ contract IdentityManager is IERC721Receiver {
         uint256 newIdSerialNumber = identityToken.mint(
             msg.sender,
             _tokenURI,
-            _identityHash,
             _accountPublicKey
         );
 
