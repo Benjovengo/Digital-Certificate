@@ -106,10 +106,13 @@ const CreateId = () => {
     const identityData = await fetchIdentity()
 
     // Refresh preview card
+    document.getElementById('previewImage').src = identityData.image
     document.getElementById('firstNamePreview').innerHTML = identityData.firstName
     document.getElementById('lastNamePreview').innerHTML = identityData.lastName
     document.getElementById('issuedByPreview').innerHTML = identityData.issuedBy
     document.getElementById('dateIssuedPreview').innerHTML = identityData.dateIssued
+    document.getElementById('addressPreview').innerHTML = identityData.address
+    JsBarcode("#barcode1", identityData.address)
     console.log(identityData)
   }
 
@@ -160,7 +163,7 @@ const CreateId = () => {
                   <div className='preview__id__wrapper'>
                     <Row className='mt-5 ms-2'>
                       <Col className='mt-2'>
-                        <img src={profilePhoto} className="identity__photo__preview" alt="id" />
+                        <img id='previewImage' src={profilePhoto} className="identity__photo__preview" alt="id" />
                       </Col>
                       <Col xs={7} className='mt-2'>
                         <p>First name</p>
@@ -176,7 +179,7 @@ const CreateId = () => {
                     <Row>
                       <Col>
                         <p>Address</p>
-                        <label className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</label>
+                        <label id='addressPreview' className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</label>
                         <img id="barcode1" className='barcode__img' alt='barcode' />
                       </Col>
                     </Row>
