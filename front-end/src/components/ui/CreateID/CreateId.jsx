@@ -10,6 +10,10 @@ import "./create-id.css"
 import uploadImgToIPFS from '../../../scripts/identity/uploadImgIPFS';
 import uploadJSONtoIPFS from '../../../scripts/identity/uploadJsonIPFS';
 
+/// Blockchain integration
+import { issueNewId } from '../../../scripts/identity/issueId';
+
+
 /// Barcode
 const JsBarcode = require("jsbarcode");
 
