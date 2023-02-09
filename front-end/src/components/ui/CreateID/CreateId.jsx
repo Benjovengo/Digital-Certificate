@@ -12,6 +12,7 @@ import uploadJSONtoIPFS from '../../../scripts/identity/uploadJsonIPFS';
 
 /// Blockchain integration
 import { issueNewId } from '../../../scripts/identity/issueId';
+import { fetchIdentity } from '../../../scripts/identity/fetchIdentity';
 
 
 /// Barcode
@@ -169,7 +170,7 @@ const CreateId = () => {
                 </Row>
                 <Row>
                   <Col className="d-flex justify-content-center mt-4">
-                    <button className='submit__btn'>Load your ID</button>
+                    <button className='submit__btn' onClick={() => {fetchIdentity()}} >Load your ID</button>
                   </Col>
                   <Col className="d-flex justify-content-center mt-4">
                     <button className='submit__btn'>View more info</button>
