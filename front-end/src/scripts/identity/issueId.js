@@ -26,10 +26,10 @@ export const issueNewId = async (_tokenURI) => {
   const identityManager = new ethers.Contract(config[network.chainId].identityManager.address, IdentityManager, signer);
 
   /// Get the public key for the account
-  const publicKey = getPublicKey()
+  const publicKey = await getPublicKey()
 
   /// Create new Id Token
-  await identityManager.register(_tokenURI, hash, publicKey)
+  await identityManager.createNewId(_tokenURI, hash, publicKey)
 }
 
 
