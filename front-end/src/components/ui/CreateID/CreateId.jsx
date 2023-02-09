@@ -40,7 +40,8 @@ const CreateId = () => {
     document.getElementById('lastNamePreview').innerHTML = 'Benjovengo'
     document.getElementById('issuedByPreview').innerHTML = 'Brazil'
     document.getElementById('dateIssuedPreview').innerHTML = today
-    JsBarcode("#barcode1", account ? account : "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+    document.getElementById('addressPreview').innerHTML = (account ? account : "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+    JsBarcode("#barcode1", (account ? account : "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"))
   }
 
 
@@ -118,17 +119,34 @@ const CreateId = () => {
    * Load data from the blockchain
    */
   const identityFromBlockchain = async () => {
-    const identityData = await fetchIdentity()
 
-    // Refresh preview card
-    document.getElementById('previewImage').src = identityData.image
-    document.getElementById('firstNamePreview').innerHTML = identityData.firstName
-    document.getElementById('lastNamePreview').innerHTML = identityData.lastName
-    document.getElementById('issuedByPreview').innerHTML = identityData.issuedBy
-    document.getElementById('dateIssuedPreview').innerHTML = identityData.dateIssued
-    document.getElementById('addressPreview').innerHTML = identityData.address
-    JsBarcode("#barcode1", identityData.address)
-    //console.log(identityData)
+    let identityData
+    try {
+      identityData = await fetchIdentity()
+    } catch(error) {
+      console.log('Error loading ID from the blockchain!')
+    }
+
+    if (identityData !== '') {
+      // Refresh preview card
+      document.getElementById('previewImage').src = identityData.image
+      document.getElementById('firstNamePreview').innerHTML = identityData.firstName
+      document.getElementById('lastNamePreview').innerHTML = identityData.lastName
+      document.getElementById('issuedByPreview').innerHTML = identityData.issuedBy
+      document.getElementById('dateIssuedPreview').innerHTML = identityData.dateIssued
+      document.getElementById('addressPreview').innerHTML = identityData.address
+      JsBarcode("#barcode1", identityData.address)
+    } else {
+      // Refresh preview card
+      document.getElementById('previewImage').src = identityData.image
+      document.getElementById('firstNamePreview').innerHTML = 'UNKNOWN'
+      document.getElementById('lastNamePreview').innerHTML = 'UNKNOWN'
+      document.getElementById('issuedByPreview').innerHTML = 'UNKNOWN'
+      document.getElementById('dateIssuedPreview').innerHTML = ''
+      document.getElementById('addressPreview').innerHTML = 'ADD AN ID USING THE FORM ON THE RIGHT'
+      JsBarcode("#barcode1", '0x0000000000000000000000000000000000000000')
+    }
+    
   }
 
   /**
@@ -195,7 +213,7 @@ const CreateId = () => {
                     <Row>
                       <Col>
                         <p>Address</p>
-                        <label id='addressPreview' className='identity__address'>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</label>
+                        <label id='addressPreview' className='identity__address'></label>
                         <img id="barcode1" className='barcode__img' alt='barcode' />
                       </Col>
                     </Row>

@@ -22,16 +22,22 @@ export const fetchIdentity = async () => {
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
   const account = ethers.utils.getAddress(accounts[0])
   
+  /// Test if the address has an issued identity associated with it
+  let identityJSON
   /// Create new Id Token
   const serialNumber = Number(await identityToken.getSerialNumber(account))
 
-  /// Get Token URI
-  const uri = await identityToken.tokenURI(serialNumber)
+  if (serialNumber !== 0) {
+    /// Get Token URI
+    const uri = await identityToken.tokenURI(serialNumber)
 
-  /// Fetch Identity Info
-  const response = await fetch(uri)
-  const identityJSON = await response.json()
-  identityJSON['address'] = account
+    /// Fetch Identity Info
+    const response = await fetch(uri)
+    identityJSON = await response.json()
+    identityJSON['address'] = account
+  } else {
+    identityJSON = ''
+  }
 
   /// DEBUG logs
   // console.log('Token Serial Number: ', serialNumber)
