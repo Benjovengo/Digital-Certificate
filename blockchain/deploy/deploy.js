@@ -5,6 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const fs = require("fs"); // to setup the files to be used by the web interface
+const createConfigJSON = require("./scripts/setupConfig")
 const addEntryConfigJSON = require("./scripts/addAddress")
 const createABIFile = require("./scripts/createABI")
 
@@ -45,16 +46,25 @@ const runMain = async () => {
   try {
     await main()
     /// Setup
-    const contractPath = 'identity/' /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractName = "identityManager" // Lowercase  first letter
-    const contractAddress = identityManagerAddress
+    const contractPaths = ['identity/', 'identity/'] /// don't remove the forward slash! unless it is in the root of contracts folder
+    const contractNames = ["IdentityToken", "IdentityManager"] // Uppercase  first letter
+    const instanceNames = ["identityToken", "identityManager"] // Lowercase  first letter
+    const contractAddresses = [identityTokenAddress, identityManagerAddress]
     const useNetwork = "localhost"
     
-    // Save ABI component to client-side
-    createABIFile(contractPath, contractName)
-
-    // create config.json with deployed addresses
-    addEntryConfigJSON(contractName, contractAddress)
+    for (let i = 0; i < contractNames.length; i++) {
+      // Save ABI component to client-side
+      createABIFile(contractPaths[i], contractNames[i])
+      if (i==0) {
+        // create config.json with deployed addresses
+        createConfigJSON(instanceNames[i], contractAddresses[i], useNetwork)
+      }
+      else {
+        // create config.json with deployed addresses
+        addEntryConfigJSON(instanceNames[i], contractAddresses[i])
+      }
+      
+    }
 
     // terminate without errors
     process.exit(0)
