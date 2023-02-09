@@ -11,6 +11,7 @@ import uploadImgToIPFS from '../../../scripts/identity/uploadImgIPFS';
 import uploadJSONtoIPFS from '../../../scripts/identity/uploadJsonIPFS';
 
 /// Blockchain integration
+import { ethers } from 'ethers';
 import { issueNewId } from '../../../scripts/identity/issueId';
 import { fetchIdentity } from '../../../scripts/identity/fetchIdentity';
 
@@ -30,12 +31,16 @@ const CreateId = () => {
   var today = currentDate.toISOString().substring(0,10);
 
   /// Set default values for preview
-  window.onload = function(e) {
+  window.onload = async function(e) {
+    // Get the logged account address
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    const account = ethers.utils.getAddress(accounts[0])
+
     document.getElementById('firstNamePreview').innerHTML = 'Fábio'
     document.getElementById('lastNamePreview').innerHTML = 'Benjovengo'
     document.getElementById('issuedByPreview').innerHTML = 'Brazil'
     document.getElementById('dateIssuedPreview').innerHTML = today
-    JsBarcode("#barcode1", "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
+    JsBarcode("#barcode1", account ? account : "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266")
   }
 
 
@@ -123,7 +128,7 @@ const CreateId = () => {
     document.getElementById('dateIssuedPreview').innerHTML = identityData.dateIssued
     document.getElementById('addressPreview').innerHTML = identityData.address
     JsBarcode("#barcode1", identityData.address)
-    console.log(identityData)
+    //console.log(identityData)
   }
 
   /**
