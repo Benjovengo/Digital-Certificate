@@ -100,6 +100,14 @@ const CreateId = () => {
   };
 
   /**
+   * Load data from the blockchain
+   */
+  const identityFromBlockchain = async () => {
+    const identityData = await fetchIdentity()
+    console.log(identityData)
+  }
+
+  /**
    * Submit Form - handler
    */
   const handleSubmit = async (e) => {
@@ -170,7 +178,7 @@ const CreateId = () => {
                 </Row>
                 <Row>
                   <Col className="d-flex justify-content-center mt-4">
-                    <button className='submit__btn' onClick={() => {fetchIdentity()}} >Load your ID</button>
+                    <button className='submit__btn' onClick={() => {identityFromBlockchain()}} >Load your ID</button>
                   </Col>
                   <Col className="d-flex justify-content-center mt-4">
                     <button className='submit__btn'>View more info</button>
