@@ -2,16 +2,16 @@ import { ethers } from 'ethers';
 import { Buffer } from 'buffer';
 
 /** Contract(s) and Address(es) */
-import IdentityToken from '../../abis/IdentityToken.json'; // contract ABI
+//import IdentityToken from '../../abis/IdentityToken.json'; // contract ABI
 import IdentityManager from '../../abis/IdentityManager.json'; // contract ABI
 import config from '../../config.json'; // contract addresses
 
 /// Required to create the hash
-const web3 = require('web3');
+//const web3 = require('web3');
 
 
 
-/** Register new product */
+/** Issue new Id */
 export const issueNewId = async (_tokenURI) => {
   /// Get the token URI hash
   const urlSplit = _tokenURI.split('/');
@@ -24,7 +24,7 @@ export const issueNewId = async (_tokenURI) => {
   const signer = provider.getSigner(); // get the signer
 
   /// Javascript "version" of the smart contract
-  const identityToken = new ethers.Contract(config[network.chainId].identityToken.address, IdentityToken, signer);
+  //const identityToken = new ethers.Contract(config[network.chainId].identityToken.address, IdentityToken, signer);
   const identityManager = new ethers.Contract(config[network.chainId].identityManager.address, IdentityManager, signer);
 
   /// Get the public key for the account
