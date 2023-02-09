@@ -2,6 +2,14 @@ import { Buffer } from 'buffer';
 import { encrypt } from '@metamask/eth-sig-util'
 
 
+/**
+ * Decrypt message
+ * 
+ * @param {string} _account Account logged in MetaMask
+ * @param {bytes64} _data Encrypted data
+ * @returns {string} Decrypted message
+ */
+
 export const decryptData = async (_account, _data) => {
   const structuredData = {
     version: 'x25519-xsalsa20-poly1305',
@@ -19,14 +27,19 @@ export const decryptData = async (_account, _data) => {
     method: 'eth_decrypt',
     params: [ct, _account],
   });
-  // Decode the base85 to final bytes
 
   return decrypt
 }
 
 
 
-
+/**
+ * Encrypt data
+ * 
+ * @param {bytes64} _publicKey Public key associated with the logged MetaMask account
+ * @param {bytes64} _data Data to be encrypted
+ * @returns {bytes64} Encrypted data
+ */
 export const encryptData = (_publicKey, _data) => {
   const enc = encrypt({
     publicKey: _publicKey.toString('base64'),
@@ -40,7 +53,6 @@ export const encryptData = (_publicKey, _data) => {
     Buffer.from(enc.ciphertext, 'base64'),
   ]);
 
-  //const bufNumber = buf.toJSON().data
   
   return buf
 }
