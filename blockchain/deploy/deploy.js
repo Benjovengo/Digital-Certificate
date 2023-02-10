@@ -25,7 +25,7 @@ async function main() {
   await identityToken.deployed();
   identityTokenAddress = identityToken.address
 
-  console.log(`Identity Token contract deployed to ${identityToken.address}`);
+  console.log(`Identity Token deployed to        ${identityToken.address}`);
 
 
   // deploy identity manager contract
@@ -34,7 +34,7 @@ async function main() {
   await identityManager.deployed();
   identityManagerAddress = identityManager.address
 
-  console.log(`Identity Manager contract deployed to ${identityManager.address}`);
+  console.log(`Identity Manager deployed to      ${identityManager.address}`);
 
   // Only the IdentityManager can call IdentityToken functions - must be the owner of the token contract
   await identityToken.transferOwnership(identityManagerAddress);
@@ -46,7 +46,7 @@ async function main() {
   await certificationToken.deployed();
   certificationTokenAddress = certificationToken.address
 
-  console.log(`Certification Token contract deployed to ${certificationToken.address}`);
+  console.log(`Certification Token deployed to   ${certificationToken.address}`);
 
 
   // deploy certification manager contract
@@ -55,7 +55,7 @@ async function main() {
   await certificationManager.deployed();
   certificationManagerAddress = identityManager.address
 
-  console.log(`Certification Manager contract deployed to ${certificationManager.address}`);
+  console.log(`Certification Manager deployed to ${certificationManager.address}`);
 
   // Only the CertificationManager can call CertificationToken functions - must be the owner of the token contract
   await certificationToken.transferOwnership(certificationManagerAddress);
