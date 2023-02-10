@@ -1,5 +1,5 @@
-import { ethers } from 'ethers';
-import { Buffer } from 'buffer';
+import { ethers } from 'ethers'
+import { Buffer } from 'buffer'
 
 /** Retrieve the public key for the logged MetaMask account */
 export const getPublicKey = async () => {
@@ -10,10 +10,9 @@ export const getPublicKey = async () => {
   /// Key is returned as base64
   const keyB64 = await window.ethereum.request({
     method: 'eth_getEncryptionPublicKey',
-    params: [account],
-  });
-  const publicKey = Buffer.from(keyB64, 'base64');
+    params: [account]
+  })
+  const publicKey = Buffer.from(keyB64, 'base64')
 
-  return publicKey.toString();
+  return publicKey.toString()
 }
-
