@@ -1,5 +1,7 @@
 import React, { useLayoutEffect } from 'react'
 
+import CreateCertification from '../components/ui/CreateCertification/CreateCertification';
+
 const Certifications = () => {
 
   /** Start the page at the top */
@@ -9,7 +11,10 @@ const Certifications = () => {
 
 
   return (
-    <div>Certifications</div>
+    <>
+      <div>Certifications</div>
+      <CreateCertification />
+    </>
   )
 }
 
