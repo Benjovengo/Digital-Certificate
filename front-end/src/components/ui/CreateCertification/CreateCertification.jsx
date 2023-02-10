@@ -14,7 +14,7 @@ const CreateCertification = () => {
     <section className='create__certification__wrapper'>
         <Container>
           <Row>
-            <h1>Create Certification</h1>
+            <h2 className='main__header'>Create Certification</h2>
               <Col>
                 <div className="form__wrapper">
                   <Row>

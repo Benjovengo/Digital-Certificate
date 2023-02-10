@@ -2,6 +2,10 @@
   color: white;
 }
 
+.main__header {
+  font-family: 'Cinzel', serif;
+}
+
 .form__wrapper label {
   font-family: 'Playfair Display SC', serif;
   margin-top: 0.5em;
