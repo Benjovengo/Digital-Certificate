@@ -20,12 +20,12 @@ const CreateCertification = () => {
                   <Row>
                     <Col>
                       <label htmlFor="institution">Institution</label><br/>
-                      <input type="text" id="institution" name="institution" maxLength="100" required/>
+                      <input type="text" id="institution" name="institution" maxLength="100" placeholder='The Blockchain University' required/>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <label htmlFor="blockchainAddress">Address</label><br/>
+                      <label htmlFor="blockchainAddress">Address (of the owner of the certificate)</label><br/>
                       <input type="text" id="blockchainAddress" name="blockchainAddress" maxLength="42" placeholder='0x000000000000000000000000000000000000000000000000' required />
                     </Col>
                   </Row>
