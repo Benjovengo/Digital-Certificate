@@ -126,7 +126,7 @@ const CreateId = () => {
     } catch(error) {
       console.log('Error loading ID from the blockchain!')
     }
-    console.log('Identity Data:', identityData)
+    //console.log('Identity Data:', identityData)
 
     if (identityData !== '') {
       // Refresh preview card
