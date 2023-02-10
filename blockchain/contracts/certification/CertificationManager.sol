@@ -17,6 +17,8 @@ contract CertificationManager is IERC721Receiver {
     /// State variables
     address private certTokenAddress;
 
+    string public DEBUG = "DEBUG";
+
     /// Contracts
     CertificationToken public certificationToken;
 
