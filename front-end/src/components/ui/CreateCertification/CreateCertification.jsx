@@ -35,6 +35,10 @@ const CreateCertification = () => {
                       <label htmlFor="advisor">Advisor</label><br/>
                       <input type="text" id="advisor" name="advisor" maxLength="200"></input>
                     </Col>
+                    <Col>
+                      <label htmlFor="coAdvisor">Co-advisor</label><br/>
+                      <input type="text" id="coAdvisor" name="coAdvisor" maxLength="200"></input>
+                    </Col>
                   </Row>
                   <Row>
                     <Col>
