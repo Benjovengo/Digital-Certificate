@@ -53,7 +53,7 @@ async function main() {
   const CertificationManager = await ethers.getContractFactory('CertificationManager')
   const certificationManager = await CertificationManager.deploy(certificationTokenAddress)
   await certificationManager.deployed();
-  certificationManagerAddress = identityManager.address
+  certificationManagerAddress = certificationManager.address
 
   console.log(`Certification Manager deployed to ${certificationManager.address}`);
 
