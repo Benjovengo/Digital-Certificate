@@ -9,13 +9,22 @@ import "./create-certification.css"
 const CreateCertification = () => {
   
 
+  /**
+   * Submit Form - handler
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    console.log('DEBUG')
+  }
+
   return (
     <>
     <section className='create__certification__wrapper'>
         <Container>
           <Row>
             <h2 className='main__header'>Create Certification</h2>
-              <Col>
+              <form onSubmit={handleSubmit}>
                 <div className="form__wrapper">
                   <Row>
                     <Col>
@@ -65,7 +74,7 @@ const CreateCertification = () => {
                     </Col>
                   </Row>
                 </div>
-              </Col>
+              </form>
           </Row>
         </Container>
       </section>
