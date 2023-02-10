@@ -15,7 +15,7 @@ import "./CertificationToken.sol";
  */
 contract CertificationManager is IERC721Receiver {
     /// State variables
-    address private tokenIdAddress;
+    address private certTokenAddress;
 
     /// Contracts
     CertificationToken public certificationToken;
@@ -23,7 +23,7 @@ contract CertificationManager is IERC721Receiver {
     /**
      * Events
      */
-    event idCreation(uint256 _idSerialNumber);
+    event certCreation(uint256 _idSerialNumber);
 
     /**
      * Constructor Method
@@ -31,7 +31,7 @@ contract CertificationManager is IERC721Receiver {
      * @param _nftTokenAddress the address of the CertificationToken contract on the blockchain
      */
     constructor(address _nftTokenAddress) {
-        tokenIdAddress = _nftTokenAddress;
+        certTokenAddress = _nftTokenAddress;
         certificationToken = CertificationToken(_nftTokenAddress);
     }
 
@@ -52,7 +52,7 @@ contract CertificationManager is IERC721Receiver {
      *
      * @param _tokenURI The address of the CertificationToken contract on the blockchain
      * @param _certificationHash The SHA-256 hash of the certificate info
-     * @param _accountPublicKey The public key associated with the blockchain ac
+     * @param _accountPublicKey The public key associated with the blockchain account
      *
      * @dev everyone can call this function for testing purposes
      * @dev in a production environment, it should not be possible for everyone to call this function
@@ -88,6 +88,6 @@ contract CertificationManager is IERC721Receiver {
         }
 
         /// Emit event with the ID serial number
-        emit idCreation(newIdSerialNumber);
+        emit certCreation(newIdSerialNumber);
     }
 }
