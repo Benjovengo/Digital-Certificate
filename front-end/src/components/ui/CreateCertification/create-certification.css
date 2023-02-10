@@ -12,6 +12,11 @@
   width: 100%;
 }
 
+.form__wrapper input[type="number"] {
+  padding: 0 0.25em;
+  width: 30%;
+}
+
 .form__wrapper input[type="date"] {
   text-align: center;
   width: 50%;
