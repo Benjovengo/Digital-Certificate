@@ -17,7 +17,7 @@ import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * @custom:security Use this contract only for tests! Do NOT store any real information in this project!
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
-contract CertificationsToken is
+contract CertificationToken is
     ERC721,
     ERC721URIStorage,
     ERC721Burnable,
