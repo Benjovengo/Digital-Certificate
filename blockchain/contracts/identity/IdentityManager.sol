@@ -51,7 +51,7 @@ contract IdentityManager is IERC721Receiver {
      * Create a new ID
      *
      * @param _tokenURI The address of the IdentityToken contract on the blockchain
-     * @param _accountPublicKey The public key associated with the blockchain ac
+     * @param _accountPublicKey The public key associated with the blockchain account
      *
      * @dev everyone can call this function for testing purposes
      * @dev in a production environment, it should not be possible for everyone to call this function
