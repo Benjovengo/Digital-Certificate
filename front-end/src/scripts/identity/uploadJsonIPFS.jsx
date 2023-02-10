@@ -20,7 +20,7 @@ const FormData = require('form-data')
 
       const formData = new FormData();
       const base64Data = 'aGVsbG8gd29ybGQ='; // "hello world" encoded in base64
-      formData.append('file', new Blob([Buffer.from([base64Data], 'base64')], { type: 'application/octet-stream' }), 'hello.dat');
+      formData.append('file', new Blob([base64Data], { type: 'application/octet-stream' }), 'hello.dat');
 
       console.log(formData)
 
