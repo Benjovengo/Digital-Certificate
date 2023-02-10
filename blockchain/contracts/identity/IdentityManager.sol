@@ -67,12 +67,20 @@ contract IdentityManager is IERC721Receiver {
             "ERROR! Invalid token URI. Token URI must contain data."
         );
 
-        /// Issue ID - Mint NFT
+        /// Store the serial number for the minted identity NFT
+        uint256 currentSerialNumber = identityToken.getSerialNumber(msg.sender);
+
+        /// Issue new ID - Mint NFT
         uint256 newIdSerialNumber = identityToken.mint(
             msg.sender,
             _tokenURI,
             _accountPublicKey
         );
+
+        /// Burn old ID
+        if (currentSerialNumber != 0) {
+            identityToken.burnIdentity(msg.sender);
+        }
 
         /// Emit event with the ID serial number
         emit idCreation(newIdSerialNumber);

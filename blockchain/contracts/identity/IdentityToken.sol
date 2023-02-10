@@ -68,42 +68,6 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return newIdSerialNumber;
     }
 
-    /** @notice Update identity - burn old one and mint the new one
-     *
-     * @param _blockchainAddress Address of the owner of the idendity
-     * @param _identityURI Path to the JSON file containing the personal information
-     * @param _accountPublicKey The public key associated with the blockchain account
-     * @return newIdSerialNumber The unique serial number of the account
-     */
-    function update(
-        address _blockchainAddress,
-        string memory _identityURI,
-        string memory _accountPublicKey
-    ) public onlyOwner returns (uint256) {
-        require(
-            uniqueSerialNumber[_blockchainAddress] != 0,
-            "The identity does not exist!"
-        );
-
-        burnIdentity(_blockchainAddress); // burn the old identity
-
-        /// @notice Add a new identity and increment IDs
-        serialNumberId.increment();
-        uint256 newIdSerialNumber = serialNumberId.current();
-        _mint(_blockchainAddress, newIdSerialNumber);
-        _setTokenURI(newIdSerialNumber, _identityURI);
-
-        /// @notice add identity data for operational functions
-        uniqueSerialNumber[_blockchainAddress] = newIdSerialNumber;
-        publicKey[newIdSerialNumber] = _accountPublicKey;
-        isActive[newIdSerialNumber] = true;
-
-        // @dev set the minimum block number to be a valid identity
-        blockLockStart[newIdSerialNumber] = block.number + blockHeight;
-
-        return newIdSerialNumber;
-    }
-
     /** @notice Get the tokenURI serial number
      *
      * @param _accountAddress The blockchain address of the identity
