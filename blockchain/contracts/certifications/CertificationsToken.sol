@@ -12,7 +12,7 @@ import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * @title Certifications NFT - Digital Identity (Digital Certification)
  * @author Fábio Benjovengo
  *
- * @notice NFT token to store the information for a certification.
+ * @notice NFT token to store the information for a certification/diploma.
  *
  * @custom:security Use this contract only for tests! Do NOT store any real information in this project!
  * @custom:security-contact fabio.benjovengo@gmail.com
@@ -27,12 +27,13 @@ contract CertificationsToken is
 
     /// @dev Counter to create the unique serial number for each certification
     using Counters for Counters.Counter;
-    Counters.Counter private serialNumberId; // personal ID number
+    Counters.Counter private certSerialNumber; // certification number
 
     /// @dev Mappings - values for each identity
-    mapping(address => uint256) private uniqueSerialNumber; // the serial number for each identity
+    mapping(address => uint256) private uniqueSerialNumber; // the serial number for each certification
+    mapping(uint256 => bytes32) private certHash; // hash of the registered certification (for verification purposes)
     mapping(uint256 => string) private publicKey; // used to encrypt message to the user
-    mapping(uint256 => bool) private isActive; // ideintity activity = is person alive
+    mapping(uint256 => bool) private finished; // false:in progress; true: finished
 
     /// @dev block lock parameters
     uint256 private blockHeight = 0; // used in conjunction with the blockLockStart
@@ -42,32 +43,35 @@ contract CertificationsToken is
      *
      * @dev Hard coded token name and symbol
      */
-    constructor() ERC721("Digital Blockchain Identity", "DBI") {}
+    constructor() ERC721("Blockchain Certification and Diploma", "BCD") {}
 
-    /** @notice Mint new identity
+    /** @notice Mint new certification/diploma
      *
-     * @param _blockchainAddress Address of the owner of the idendity
-     * @param _identityURI Path to the JSON file containing the personal information
+     * @param _blockchainAddress Address of the owner of the certification
+     * @param _certificationURI Path to the JSON file containing the personal information
+     * @param _certificationHash SHA-256 hash of the certification data
      * @param _accountPublicKey The public key associated with the blockchain account
      * @return newIdSerialNumber The unique serial number of the account
      */
     function mint(
         address _blockchainAddress,
-        string memory _identityURI,
+        string memory _certificationURI,
+        bytes32 _certificationHash,
         string memory _accountPublicKey
     ) public onlyOwner returns (uint256) {
         /// @notice Add a new identity and increment IDs
-        serialNumberId.increment();
-        uint256 newIdSerialNumber = serialNumberId.current();
+        certSerialNumber.increment();
+        uint256 newIdSerialNumber = certSerialNumber.current();
         _mint(_blockchainAddress, newIdSerialNumber);
-        _setTokenURI(newIdSerialNumber, _identityURI);
+        _setTokenURI(newIdSerialNumber, _certificationURI);
 
         /// @notice add identity data for operational functions
         uniqueSerialNumber[_blockchainAddress] = newIdSerialNumber;
+        certHash[newIdSerialNumber] = _certificationHash;
         publicKey[newIdSerialNumber] = _accountPublicKey;
-        isActive[newIdSerialNumber] = true;
+        finished[newIdSerialNumber] = true;
 
-        // @dev set the minimum block number to be a valid identity
+        // @dev set the minimum block number to be a valid certification
         blockLockStart[newIdSerialNumber] = block.number + blockHeight;
 
         return newIdSerialNumber;
@@ -86,7 +90,7 @@ contract CertificationsToken is
         return uniqueSerialNumber[_accountAddress];
     }
 
-    /** @notice Get the hash
+    /** @notice Get the associated publicKey
      *
      * @param _accountAddress The blockchain address of the identity
      * @return publicKey A public key to encrypt info for a specific account
@@ -99,32 +103,32 @@ contract CertificationsToken is
         return publicKey[uniqueSerialNumber[_accountAddress]];
     }
 
-    /** @notice Set the identity status for the idendity
+    /** @notice Set the status for the certification
      *
      * @param _accountAddress The address of the account to set the activity
      * @param _activityStatus The activity status for that identity: true:active, or false:inactive
      */
-    function setActive(address _accountAddress, bool _activityStatus)
+    function setStatus(address _accountAddress, bool _activityStatus)
         public
         onlyOwner
     {
-        isActive[uniqueSerialNumber[_accountAddress]] = _activityStatus;
+        finished[uniqueSerialNumber[_accountAddress]] = _activityStatus;
     }
 
-    /** @notice Get the identity status for the idendity
+    /** @notice Get the status for the certification
      *
      * @param _accountAddress The address of the account to set the activity
-     * @return isActive The activity status for that identity: true:active, or false:inactive
+     * @return finished The activity status for that identity: true:active, or false:inactive
      */
-    function getActive(address _accountAddress) public view returns (bool) {
-        return isActive[uniqueSerialNumber[_accountAddress]];
+    function getStatus(address _accountAddress) public view returns (bool) {
+        return finished[uniqueSerialNumber[_accountAddress]];
     }
 
     /** @notice Burn the identity
      *
      * @param _accountAddress The address of the identity to be burnt
      */
-    function burnIdentity(address _accountAddress) public onlyOwner {
+    function burnCertification(address _accountAddress) public onlyOwner {
         _burn(uniqueSerialNumber[_accountAddress]);
     }
 
