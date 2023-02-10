@@ -222,6 +222,25 @@
   "inputs": [
    {
     "internalType": "address",
+    "name": "_accountAddress",
+    "type": "address"
+   }
+  ],
+  "name": "getSerialNumber",
+  "outputs": [
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "address",
     "name": "owner",
     "type": "address"
    },
@@ -494,35 +513,6 @@
   ],
   "name": "transferOwnership",
   "outputs": [],
-  "stateMutability": "nonpayable",
-  "type": "function"
- },
- {
-  "inputs": [
-   {
-    "internalType": "address",
-    "name": "_blockchainAddress",
-    "type": "address"
-   },
-   {
-    "internalType": "string",
-    "name": "_identityURI",
-    "type": "string"
-   },
-   {
-    "internalType": "string",
-    "name": "_accountPublicKey",
-    "type": "string"
-   }
-  ],
-  "name": "update",
-  "outputs": [
-   {
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-   }
-  ],
   "stateMutability": "nonpayable",
   "type": "function"
  }

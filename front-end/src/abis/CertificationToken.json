@@ -154,6 +154,11 @@
     "internalType": "address",
     "name": "_accountAddress",
     "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "_index",
+    "type": "uint256"
    }
   ],
   "name": "burnCertification",
@@ -186,6 +191,11 @@
     "internalType": "address",
     "name": "_accountAddress",
     "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "_index",
+    "type": "uint256"
    }
   ],
   "name": "getPublicKey",
@@ -205,6 +215,11 @@
     "internalType": "address",
     "name": "_accountAddress",
     "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "_index",
+    "type": "uint256"
    }
   ],
   "name": "getSerialNumber",
@@ -224,6 +239,11 @@
     "internalType": "address",
     "name": "_accountAddress",
     "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "_index",
+    "type": "uint256"
    }
   ],
   "name": "getStatus",
@@ -422,6 +442,11 @@
     "internalType": "address",
     "name": "_accountAddress",
     "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "_index",
+    "type": "uint256"
    },
    {
     "internalType": "bool",

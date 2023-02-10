@@ -31,11 +31,6 @@
     "type": "string"
    },
    {
-    "internalType": "bytes32",
-    "name": "_identityHash",
-    "type": "bytes32"
-   },
-   {
     "internalType": "string",
     "name": "_accountPublicKey",
     "type": "string"

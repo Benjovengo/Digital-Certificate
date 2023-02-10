@@ -25,6 +25,19 @@
  },
  {
   "inputs": [],
+  "name": "DEBUG",
+  "outputs": [
+   {
+    "internalType": "string",
+    "name": "",
+    "type": "string"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
   "name": "certificationToken",
   "outputs": [
    {
