@@ -12,6 +12,7 @@ const createABIFile = require("./scripts/createABI")
 let identityTokenAddress;
 let identityManagerAddress;
 let certificationTokenAddress;
+let certificationManagerAddress;
 
 async function main() {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
@@ -47,6 +48,18 @@ async function main() {
 
   console.log(`Certification Token contract deployed to ${certificationToken.address}`);
 
+
+  // deploy certification manager contract
+  const CertificationManager = await ethers.getContractFactory('CertificationManager')
+  const certificationManager = await CertificationManager.deploy(certificationTokenAddress)
+  await certificationManager.deployed();
+  certificationManagerAddress = identityManager.address
+
+  console.log(`Certification Manager contract deployed to ${certificationManager.address}`);
+
+  // Only the CertificationManager can call CertificationToken functions - must be the owner of the token contract
+  await certificationToken.transferOwnership(certificationManagerAddress);
+
 }
 
 
@@ -56,10 +69,10 @@ const runMain = async () => {
   try {
     await main()
     /// Setup
-    const contractPaths = ['identity/', 'identity/', 'certification/'] /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractNames = ["IdentityToken", "IdentityManager", "CertificationToken"] // Uppercase  first letter
-    const instanceNames = ["identityToken", "identityManager", "certificationToken"] // Lowercase  first letter
-    const contractAddresses = [identityTokenAddress, identityManagerAddress, certificationTokenAddress]
+    const contractPaths = ['identity/', 'identity/', 'certification/', 'certification/'] /// don't remove the forward slash! unless it is in the root of contracts folder
+    const contractNames = ["IdentityToken", "IdentityManager", "CertificationToken", "CertificationManager"] // Uppercase  first letter
+    const instanceNames = ["identityToken", "identityManager", "certificationToken", "certificationManager"] // Lowercase  first letter
+    const contractAddresses = [identityTokenAddress, identityManagerAddress, certificationTokenAddress, certificationManagerAddress]
     const useNetwork = "localhost"
     
     for (let i = 0; i < contractNames.length; i++) {
