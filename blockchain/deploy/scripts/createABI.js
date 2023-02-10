@@ -8,15 +8,15 @@ const fs = require("fs"); // to setup the files to be used by the web interface
  * @param {string} _name 
  */
 const createABIFile = (_path, _name) => {
-  // Fashion Token ABI
+  // Token ABI
   let jsonFile = fs.readFileSync(`./artifacts/contracts/${_path}${_name}.sol/${_name}.json`)
   let jsonData = JSON.parse(jsonFile);
-  let stringfyData = JSON.stringify(jsonData.abi, null, " ")
+  let stringData = JSON.stringify(jsonData.abi, null, " ")
 
   let abiFilePath = `../front-end/src/abis/${_name}.json`
 
   var options = { flag : 'w' };
-  fs.writeFileSync(abiFilePath, stringfyData , options, function(err) {
+  fs.writeFileSync(abiFilePath, stringData , options, function(err) {
     if (err) throw err;
   })
 }
