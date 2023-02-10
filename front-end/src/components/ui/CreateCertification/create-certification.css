@@ -35,6 +35,6 @@
 
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: red;
+  color: #AAA;
   opacity: 1; /* Firefox */
 }
