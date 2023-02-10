@@ -18,16 +18,18 @@ export const issueNewCertification = async (_tokenURI, _hash) => {
   /// Get the public key for the account
   const publicKey = await getPublicKey()
 
-
-  console.log(_hash)
-
-
   /// Create new Id Token
-  const hash = '0x9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
-  await certificationManager.createNewCertification(_tokenURI, hash, publicKey)
+  const newHash = buf2hex(_hash).substring(0, 66);
+  await certificationManager.createNewCertification(_tokenURI, newHash, publicKey)
 
 }
 
+/** Convert from ArrayBuffer to string */
+function buf2hex(buffer) { // buffer is an ArrayBuffer
+  return '0x' + [...new Uint8Array(buffer)]
+      .map(x => x.toString(16).padStart(2, '0'))
+      .join('');
+}
 
 
 /** Retrieve the public key for the logged MetaMask account */
