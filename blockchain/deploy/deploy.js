@@ -11,13 +11,14 @@ const createABIFile = require("./scripts/createABI")
 
 let identityTokenAddress;
 let identityManagerAddress;
+let certificationTokenAddress;
 
 async function main() {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
   [deployer, account01] = await ethers.getSigners();
 
 
-  // deploy token contract
+  // deploy identity token contract
   const IdentityToken = await ethers.getContractFactory('IdentityToken')
   const identityToken = await IdentityToken.deploy()
   await identityToken.deployed();
@@ -26,7 +27,7 @@ async function main() {
   console.log(`Identity Token contract deployed to ${identityToken.address}`);
 
 
-  // deploy token contract
+  // deploy identity manager contract
   const IdentityManager = await ethers.getContractFactory('IdentityManager')
   const identityManager = await IdentityManager.deploy(identityTokenAddress)
   await identityManager.deployed();
@@ -37,6 +38,15 @@ async function main() {
   // Only the IdentityManager can call IdentityToken functions - must be the owner of the token contract
   await identityToken.transferOwnership(identityManagerAddress);
 
+
+  // deploy certification token contract
+  const CertificationToken = await ethers.getContractFactory('CertificationToken')
+  const certificationToken = await CertificationToken.deploy()
+  await certificationToken.deployed();
+  certificationTokenAddress = certificationToken.address
+
+  console.log(`Certification Token contract deployed to ${certificationToken.address}`);
+
 }
 
 
@@ -46,10 +56,10 @@ const runMain = async () => {
   try {
     await main()
     /// Setup
-    const contractPaths = ['identity/', 'identity/'] /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractNames = ["IdentityToken", "IdentityManager"] // Uppercase  first letter
-    const instanceNames = ["identityToken", "identityManager"] // Lowercase  first letter
-    const contractAddresses = [identityTokenAddress, identityManagerAddress]
+    const contractPaths = ['identity/', 'identity/', 'certification/'] /// don't remove the forward slash! unless it is in the root of contracts folder
+    const contractNames = ["IdentityToken", "IdentityManager", "CertificationToken"] // Uppercase  first letter
+    const instanceNames = ["identityToken", "identityManager", "certificationToken"] // Lowercase  first letter
+    const contractAddresses = [identityTokenAddress, identityManagerAddress, certificationTokenAddress]
     const useNetwork = "localhost"
     
     for (let i = 0; i < contractNames.length; i++) {
