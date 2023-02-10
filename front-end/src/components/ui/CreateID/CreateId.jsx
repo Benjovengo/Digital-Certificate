@@ -236,17 +236,17 @@ const CreateId = () => {
                   <Row>
                     <Col>
                       <label htmlFor="firstName">First name:</label><br/>
-                      <input type="text" id="firstName" name="firstName" maxLength="30" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
+                      <input type="text" id="firstName" name="firstName" maxLength="50" onChange={(e) => changeFirstName(e)} onKeyUp={(e) => changeFirstName(e)} required></input>
                     </Col>
                     <Col>
                       <label htmlFor="lastName">Last name:</label><br/>
-                      <input type="text" id="lastName" name="lastName" maxLength="30" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
+                      <input type="text" id="lastName" name="lastName" maxLength="50" onChange={(e) => changeLastName(e)} onKeyUp={(e) => changeLastName(e)} required></input>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <label htmlFor="issuedBy">Issued by (Country):</label><br/>
-                      <input type="text" id="issuedBy" name="issuedBy" maxLength="30" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
+                      <input type="text" id="issuedBy" name="issuedBy" maxLength="50" onChange={(e) => changeIssuedBy(e)} onKeyUp={(e) => changeIssuedBy(e)} required></input>
                     </Col>
                     <Col>
                       <label htmlFor="issuedDate" id='dateInput'>Issue date:</label><br/>
