@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react'
 
 // TEMP
-import Cryptography from '../components/ui/Cryptography/Cryptography'
+//import Cryptography from '../components/ui/Cryptography/Cryptography'
 import CreateId from '../components/ui/CreateID/CreateId'
 
 const Identity = () => {
@@ -14,7 +14,6 @@ const Identity = () => {
   return (
     <>
       <div>Identity</div>
-      <Cryptography />
       <CreateId />
     </>
   )
