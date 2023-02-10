@@ -81,7 +81,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return uniqueSerialNumber[_accountAddress];
     }
 
-    /** @notice Get the hash
+    /** @notice Get the associated publicKey
      *
      * @param _accountAddress The blockchain address of the identity
      * @return publicKey A public key to encrypt info for a specific account
@@ -94,7 +94,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return publicKey[uniqueSerialNumber[_accountAddress]];
     }
 
-    /** @notice Set the identity status for the idendity
+    /** @notice Set the status for the idendity
      *
      * @param _accountAddress The address of the account to set the activity
      * @param _activityStatus The activity status for that identity: true:active, or false:inactive
@@ -106,7 +106,7 @@ contract IdentityToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         isActive[uniqueSerialNumber[_accountAddress]] = _activityStatus;
     }
 
-    /** @notice Get the identity status for the idendity
+    /** @notice Get the status for the idendity
      *
      * @param _accountAddress The address of the account to set the activity
      * @return isActive The activity status for that identity: true:active, or false:inactive
