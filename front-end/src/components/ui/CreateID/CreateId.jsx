@@ -120,12 +120,13 @@ const CreateId = () => {
    */
   const identityFromBlockchain = async () => {
 
-    let identityData
+    let identityData = ''
     try {
       identityData = await fetchIdentity()
     } catch(error) {
       console.log('Error loading ID from the blockchain!')
     }
+    console.log('Identity Data:', identityData)
 
     if (identityData !== '') {
       // Refresh preview card

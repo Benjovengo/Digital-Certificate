@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import IdentityToken from '../../abis/IdentityToken.json'; // contract ABI
 import config from '../../config.json'; // contract addresses
 
+import axios from "axios";
 
 /** Fetch identity data for the logged blockchain address 
  * 
@@ -23,7 +24,7 @@ export const fetchIdentity = async () => {
   const account = ethers.utils.getAddress(accounts[0])
   
   /// Test if the address has an issued identity associated with it
-  let identityJSON
+  let identityJSON = ''
   /// Create new Id Token
   const serialNumber = Number(await identityToken.getSerialNumber(account))
 
@@ -31,10 +32,18 @@ export const fetchIdentity = async () => {
     /// Get Token URI
     const uri = await identityToken.tokenURI(serialNumber)
 
+    console.log('URI: ', uri)
     /// Fetch Identity Info
-    const response = await fetch(uri)
-    identityJSON = await response.json()
-    identityJSON['address'] = account
+    //const response = await fetch(uri)
+    let response
+    axios.get(uri, {
+      responseType: "blob",
+    }).then((resp) => {
+        response = new Blob([resp.data], { type: "application/octet-stream" })
+    })
+    /* identityJSON = await response.json()
+    identityJSON['address'] = account */
+    console.log(account)
   } else {
     identityJSON = ''
   }
