@@ -1,0 +1,40 @@
+.create__certification__wrapper {
+  color: white;
+}
+
+.form__wrapper label {
+  font-family: 'Playfair Display SC', serif;
+  margin-top: 0.5em;
+}
+
+.form__wrapper input[type="text"] {
+  padding: 0 0.25em;
+  width: 100%;
+}
+
+.form__wrapper input[type="date"] {
+  text-align: center;
+  width: 50%;
+}
+
+.submit__btn {
+  background: #F89104;
+  border: none;
+  border-radius: 0 !important;
+  color: #FFF;
+  font-size: 0.9rem;
+  outline: none;
+  padding: 7px 25px !important;
+  width: auto;
+}
+
+.submit__btn:hover {
+  background: #D87E01;
+}
+
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: red;
+  opacity: 1; /* Firefox */
+}
