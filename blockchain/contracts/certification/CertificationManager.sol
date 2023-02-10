@@ -69,11 +69,6 @@ contract CertificationManager is IERC721Receiver {
             "ERROR! Invalid token URI. Token URI must contain data."
         );
 
-        /// Store the serial number for the minted certification NFT
-        uint256 currentSerialNumber = certificationToken.getSerialNumber(
-            msg.sender
-        );
-
         /// Issue new ID - Mint NFT
         uint256 newIdSerialNumber = certificationToken.mint(
             msg.sender,
@@ -81,11 +76,6 @@ contract CertificationManager is IERC721Receiver {
             _certificationHash,
             _accountPublicKey
         );
-
-        /// Burn old ID
-        if (currentSerialNumber != 0) {
-            certificationToken.burnCertification(msg.sender);
-        }
 
         /// Emit event with the ID serial number
         emit certCreation(newIdSerialNumber);

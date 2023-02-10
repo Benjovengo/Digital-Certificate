@@ -30,10 +30,15 @@ contract CertificationToken is
     Counters.Counter private certSerialNumber; // certification number
 
     /// @dev Mappings - values for each identity
-    mapping(address => uint256) private uniqueSerialNumber; // the serial number for each certification
     mapping(uint256 => bytes32) private certHash; // hash of the registered certification (for verification purposes)
     mapping(uint256 => string) private publicKey; // used to encrypt message to the user
     mapping(uint256 => bool) private finished; // false:in progress; true: finished
+
+    ///   SerialNumber  [cert #]
+    mapping(address => uint256[]) private certificatesOwned; // array with the serial numbers of the certificates owned by an account
+    mapping(uint256 => uint256) private indexOfOwnersList; /* index of a certificate inside the owner's list of certificates
+                                                              use it to get the array index of a certificate based on serial number
+                                                              - easier way to find a certificate */
 
     /// @dev block lock parameters
     uint256 private blockHeight = 0; // used in conjunction with the blockLockStart
@@ -65,11 +70,16 @@ contract CertificationToken is
         _mint(_blockchainAddress, newIdSerialNumber);
         _setTokenURI(newIdSerialNumber, _certificationURI);
 
-        /// @notice add identity data for operational functions
-        uniqueSerialNumber[_blockchainAddress] = newIdSerialNumber;
+        /// @notice add certificate data for operational functions
         certHash[newIdSerialNumber] = _certificationHash;
         publicKey[newIdSerialNumber] = _accountPublicKey;
         finished[newIdSerialNumber] = true;
+
+        /// @notice Add certificate serial number to owner's address list
+        certificatesOwned[_blockchainAddress].push(newIdSerialNumber);
+        indexOfOwnersList[newIdSerialNumber] =
+            certificatesOwned[_blockchainAddress].length -
+            1; // starts in zero
 
         // @dev set the minimum block number to be a valid certification
         blockLockStart[newIdSerialNumber] = block.number + blockHeight;
@@ -80,56 +90,70 @@ contract CertificationToken is
     /** @notice Get the tokenURI serial number
      *
      * @param _accountAddress The blockchain address of the identity
+     * @param _index Index of the certificate in owner's list
      * @return serialNumber The serial number of the token associated with the account
      */
-    function getSerialNumber(address _accountAddress)
+    function getSerialNumber(address _accountAddress, uint256 _index)
         public
         view
         returns (uint256)
     {
-        return uniqueSerialNumber[_accountAddress];
+        return certificatesOwned[_accountAddress][_index];
     }
 
     /** @notice Get the associated publicKey
      *
      * @param _accountAddress The blockchain address of the identity
+     * @param _index Index of the certificate in owner's list
      * @return publicKey A public key to encrypt info for a specific account
      */
-    function getPublicKey(address _accountAddress)
+    function getPublicKey(address _accountAddress, uint256 _index)
         public
         view
         returns (string memory)
     {
-        return publicKey[uniqueSerialNumber[_accountAddress]];
+        return publicKey[certificatesOwned[_accountAddress][_index]];
     }
 
     /** @notice Set the status for the certification
      *
      * @param _accountAddress The address of the account to set the activity
+     * @param _index Index of the certificate in owner's list
      * @param _activityStatus The activity status for that identity: true:active, or false:inactive
      */
-    function setStatus(address _accountAddress, bool _activityStatus)
-        public
-        onlyOwner
-    {
-        finished[uniqueSerialNumber[_accountAddress]] = _activityStatus;
+    function setStatus(
+        address _accountAddress,
+        uint256 _index,
+        bool _activityStatus
+    ) public onlyOwner {
+        finished[certificatesOwned[_accountAddress][_index]] = _activityStatus;
     }
 
     /** @notice Get the status for the certification
      *
      * @param _accountAddress The address of the account to set the activity
+     * @param _index Index of the certificate in owner's list
      * @return finished The activity status for that identity: true:active, or false:inactive
      */
-    function getStatus(address _accountAddress) public view returns (bool) {
-        return finished[uniqueSerialNumber[_accountAddress]];
+    function getStatus(address _accountAddress, uint256 _index)
+        public
+        view
+        returns (bool)
+    {
+        return finished[certificatesOwned[_accountAddress][_index]];
     }
 
     /** @notice Burn the identity
      *
      * @param _accountAddress The address of the identity to be burnt
+     * @param _index Index of the certificate in owner's list
      */
-    function burnCertification(address _accountAddress) public onlyOwner {
-        _burn(uniqueSerialNumber[_accountAddress]);
+    function burnCertification(address _accountAddress, uint256 _index)
+        public
+        onlyOwner
+    {
+        certificatesOwned[_accountAddress][_index] = 0;
+        _burn(certificatesOwned[_accountAddress][_index]);
     }
 
     /**
