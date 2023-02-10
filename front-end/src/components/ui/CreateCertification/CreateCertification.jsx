@@ -4,6 +4,9 @@ import { Container, Row, Col } from "reactstrap";
 /// Style
 import "./create-certification.css"
 
+// Blockchain interaction
+import uploadCertificationJSONtoIPFS from '../../../scripts/certificates/uploadCertJsonIPFS';
+import { issueNewCertification } from '../../../scripts/certificates/addCertificate';
 
 
 const CreateCertification = () => {
@@ -15,7 +18,27 @@ const CreateCertification = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log('DEBUG')
+    console.log('Creating a certification on the blockchain...')
+
+    //javascript file to add a certificate
+    const institution = e.target.institution.value;
+    const blockchainAddress = e.target.blockchainAddress.value;
+    const workTitle = e.target.workTitle.value;
+    const advisor = e.target.advisor.value;
+    const coAdvisor = e.target.coAdvisor.value;
+    const degree = e.target.degree.value;
+    const gpa = e.target.gpa.value;
+    const date = e.target.date.value;
+    
+    const metadata = await uploadCertificationJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, coAdvisor, degree, gpa, date);
+
+    const metadataURI = metadata['tokenURI']
+    const metadataHash = metadata['hash']
+
+
+    await issueNewCertification(metadataURI, metadataHash)
+    
+    console.log('Certification successfully added!')
   }
 
   return (
@@ -40,7 +63,7 @@ const CreateCertification = () => {
                   </Row>
                   <Row>
                     <Col>
-                      <label htmlFor="workTitle">Title</label><br/>
+                      <label htmlFor="workTitle">Title of the work</label><br/>
                       <input type="text" id="workTitle" name="workTitle" maxLength="200" placeholder='Sliding mode approaches for the longitudinal control of an autonomous robotic blimp'/>
                     </Col>
                   </Row>
