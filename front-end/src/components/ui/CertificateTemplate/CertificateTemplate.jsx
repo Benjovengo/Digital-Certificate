@@ -1,14 +1,24 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Container, Row, Col } from "reactstrap";
 import html2pdf from 'html2pdf.js'
 
 import './certificate-template.css'
-  
+
+/// QR code generation
+var QRCode = require('qrcode')
 
 
 const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree, area, advisor, certificateId, hash }) => {
 
 
+  useEffect(() => {
+    var canvas = document.getElementById('canvas')
+
+    QRCode.toCanvas(canvas, hash, function (error) {
+      if (error) console.error(error)
+      console.log('success!');
+    })
+  }, [hash])
 
   /**
    * Export certificate to pdf
@@ -31,6 +41,7 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
   }
 
 
+
   return (
     <>
     <Container>
@@ -45,6 +56,11 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
             <h3>{advisor}</h3>
             <h2>Serial number: {certificateId}</h2>
             <p>Hash: {hash}</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <canvas id="canvas"></canvas>
           </Col>
         </Row>
       </div>
