@@ -33,7 +33,8 @@ export const fetchCertificatesList = async () => {
   }
 
   /// DEBUG logs
-  //console.log('Account: ', account)
+  /* console.log('Account: ', account)
+  console.log('List: ', certificates) */
 
   return certificates
 
