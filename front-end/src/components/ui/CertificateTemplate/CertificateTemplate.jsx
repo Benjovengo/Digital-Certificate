@@ -15,7 +15,7 @@ const CertificateTemplate = () => {
             <p>0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</p>
             <h2>Degree</h2>
             <h2>Area</h2>
-            <h3>advisor</h3>
+            <h3>Advisor</h3>
           </Col>
         </Row>
       </div>

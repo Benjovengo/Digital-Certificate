@@ -20,6 +20,15 @@ const DisplayCertificates = () => {
 
   const handleSelectCertification = (event) => {
     setSelectedOption(event.target.value);
+
+
+    console.log('Selected Option hook: ', selectedOption)
+
+    if (event.target.value === 2) {
+      console.log('DEBUG 2')
+    } else {
+      console.log('DEBUG OTHER:', event.target.value)
+    }
   };
   
 
@@ -37,7 +46,7 @@ const DisplayCertificates = () => {
           <Row>
             <Col>
               <select size="10" multiple onChange={handleSelectCertification}>
-                <option value="" disabled>Select a Certification</option>
+                {/* <option value="" disabled>Select a Certification</option> */}
                 {options.map((option, index) => (
                   <option key={index} value={option.value}>
                     {option.label}
