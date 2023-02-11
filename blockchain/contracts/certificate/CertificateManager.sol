@@ -60,6 +60,7 @@ contract CertificateManager is IERC721Receiver {
      * @dev in a production environment, it should not be possible for everyone to call this function
      */
     function createNewCertificate(
+        address _blockchainAddress,
         string memory _tokenURI,
         bytes32 _certificateHash,
         string memory _accountPublicKey
@@ -73,7 +74,7 @@ contract CertificateManager is IERC721Receiver {
 
         /// Issue new ID - Mint NFT
         uint256 newIdSerialNumber = certificateToken.mint(
-            msg.sender,
+            _blockchainAddress,
             _tokenURI,
             _certificateHash,
             _accountPublicKey

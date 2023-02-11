@@ -39,7 +39,7 @@ describe('Certificate Manager', () => {
     const hash = '0x9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
     const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
 
-    await certificateManager.connect(account01).createNewCertificate(certificateURI, hash, publicKey)
+    await certificateManager.connect(account01).createNewCertificate(account01.address, certificateURI, hash, publicKey)
     // get the owner of the certificate/token
     const result = await certificateToken.ownerOf(1);
     expect(result).to.equal(account01.address);

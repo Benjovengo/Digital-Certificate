@@ -6,7 +6,7 @@ import CertificateManager from '../../abis/CertificateManager.json' // contract 
 import config from '../../config.json' // contract addresses
 
 /** Issue new Id */
-export const issueNewCertificate = async (_tokenURI, _hash) => {
+export const issueNewCertificate = async (_blockchainAddress, _tokenURI, _hash) => {
   // Setup provider and network
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const network = await provider.getNetwork()
@@ -19,7 +19,7 @@ export const issueNewCertificate = async (_tokenURI, _hash) => {
 
   /// Create new Id Token
   const newHash = buf2hex(_hash).substring(0, 66)
-  await certificateManager.createNewCertificate(_tokenURI, newHash, publicKey)
+  await certificateManager.createNewCertificate(_blockchainAddress, _tokenURI, newHash, publicKey)
 }
 
 /** Convert from ArrayBuffer to string */

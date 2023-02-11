@@ -36,7 +36,7 @@ const CreateCertificate = () => {
     const metadataHash = metadata['hash']
 
 
-    await issueNewCertificate(metadataURI, metadataHash)
+    await issueNewCertificate(blockchainAddress, metadataURI, metadataHash)
     
     console.log('Certificate successfully added!')
   }
