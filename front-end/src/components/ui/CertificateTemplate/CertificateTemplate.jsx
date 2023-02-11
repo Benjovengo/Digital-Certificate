@@ -16,7 +16,6 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
 
     QRCode.toCanvas(canvas, hash, function (error) {
       if (error) console.error(error)
-      console.log('success!');
     })
   }, [hash])
 
