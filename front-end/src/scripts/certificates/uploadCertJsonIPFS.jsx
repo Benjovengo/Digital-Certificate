@@ -8,20 +8,20 @@ async function getSHA256 (_message) {
   return hash
 }
 
-const uploadCertificateJSONtoIPFS = async (_institution, _blockchainAddress, _workTitle, _advisor, _coAdvisor, _degree, _gpa, _date) => {
+const uploadCertificateJSONtoIPFS = async (_institution, _blockchainAddress, _workTitle, _advisor, _studyingArea, _degree, _gpa, _date) => {
   let tokenURI
   const plainData = {
     institution: _institution,
     blockchainAddress: _blockchainAddress,
     workTitle: _workTitle,
     advisor: _advisor,
-    coAdvisor: _coAdvisor,
+    studyingArea: _studyingArea,
     degree: _degree,
     gpa: _gpa,
     date: _date
   }
 
-  const hash = await getSHA256(_institution + _blockchainAddress + _workTitle + _advisor + _coAdvisor + _degree + _gpa + _date)
+  const hash = await getSHA256(_institution + _blockchainAddress + _workTitle + _advisor + _studyingArea + _degree + _gpa + _date)
 
   try {
     const resJSON = await axios({

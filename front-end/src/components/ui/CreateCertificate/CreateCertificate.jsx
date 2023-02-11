@@ -25,12 +25,12 @@ const CreateCertificate = () => {
     const blockchainAddress = e.target.blockchainAddress.value;
     const workTitle = e.target.workTitle.value;
     const advisor = e.target.advisor.value;
-    const coAdvisor = e.target.coAdvisor.value;
+    const studyingArea = e.target.studyingArea.value;
     const degree = e.target.degree.value;
     const gpa = e.target.gpa.value;
     const date = e.target.date.value;
     
-    const metadata = await uploadCertificateJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, coAdvisor, degree, gpa, date);
+    const metadata = await uploadCertificateJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, studyingArea, degree, gpa, date);
 
     const metadataURI = metadata['tokenURI']
     const metadataHash = metadata['hash']
@@ -69,12 +69,12 @@ const CreateCertificate = () => {
                   </Row>
                   <Row>
                     <Col>
-                      <label htmlFor="advisor">Advisor</label><br/>
-                      <input type="text" id="advisor" name="advisor" maxLength="200"/>
+                      <label htmlFor="studyingArea">Area/Field</label><br/>
+                      <input type="text" id="studyingArea" name="studyingArea" maxLength="200"/>
                     </Col>
                     <Col>
-                      <label htmlFor="coAdvisor">Co-advisor</label><br/>
-                      <input type="text" id="coAdvisor" name="coAdvisor" maxLength="200"/>
+                      <label htmlFor="advisor">Advisor</label><br/>
+                      <input type="text" id="advisor" name="advisor" maxLength="200"/>
                     </Col>
                   </Row>
                   <Row>
