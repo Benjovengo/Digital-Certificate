@@ -6,7 +6,7 @@ import './certificate-template.css'
   
 
 
-const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree, area, advisor }) => {
+const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree, area, advisor, certificateId }) => {
 
 
 
@@ -43,6 +43,7 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
             <h2>{degree}</h2>
             <h2>{area}</h2>
             <h3>{advisor}</h3>
+            <h2>Serial number: {certificateId}</h2>
           </Col>
         </Row>
       </div>
