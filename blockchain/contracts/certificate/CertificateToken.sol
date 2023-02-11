@@ -9,28 +9,23 @@ import "../../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC72
 import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @title Certifications NFT - Digital Identity (Digital Certification)
+ * @title Certificates NFT - Digital Identity (Digital Certificate)
  * @author Fábio Benjovengo
  *
- * @notice NFT token to store the information for a certification/diploma.
+ * @notice NFT token to store the information for a certificate/diploma.
  *
  * @custom:security Use this contract only for tests! Do NOT store any real information in this project!
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
-contract CertificationToken is
-    ERC721,
-    ERC721URIStorage,
-    ERC721Burnable,
-    Ownable
-{
+contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     /** @notice State Variables */
 
-    /// @dev Counter to create the unique serial number for each certification
+    /// @dev Counter to create the unique serial number for each certificate
     using Counters for Counters.Counter;
-    Counters.Counter private certSerialNumber; // certification number
+    Counters.Counter private certSerialNumber; // certificate number
 
     /// @dev Mappings - values for each identity
-    mapping(uint256 => bytes32) private certHash; // hash of the registered certification (for verification purposes)
+    mapping(uint256 => bytes32) private certHash; // hash of the registered certificate (for verification purposes)
     mapping(uint256 => string) private publicKey; // used to encrypt message to the user
     mapping(uint256 => bool) private finished; // false:in progress; true: finished
 
@@ -48,30 +43,30 @@ contract CertificationToken is
      *
      * @dev Hard coded token name and symbol
      */
-    constructor() ERC721("Blockchain Certification and Diploma", "BCD") {}
+    constructor() ERC721("Blockchain Certificate and Diploma", "BCD") {}
 
-    /** @notice Mint new certification/diploma
+    /** @notice Mint new certificate/diploma
      *
-     * @param _blockchainAddress Address of the owner of the certification
-     * @param _certificationURI Path to the JSON file containing the personal information
-     * @param _certificationHash SHA-256 hash of the certification data
+     * @param _blockchainAddress Address of the owner of the certificate
+     * @param _certificateURI Path to the JSON file containing the personal information
+     * @param _certificateHash SHA-256 hash of the certificate data
      * @param _accountPublicKey The public key associated with the blockchain account
      * @return newIdSerialNumber The unique serial number of the account
      */
     function mint(
         address _blockchainAddress,
-        string memory _certificationURI,
-        bytes32 _certificationHash,
+        string memory _certificateURI,
+        bytes32 _certificateHash,
         string memory _accountPublicKey
     ) public onlyOwner returns (uint256) {
         /// @notice Add a new identity and increment IDs
         certSerialNumber.increment();
         uint256 newIdSerialNumber = certSerialNumber.current();
         _mint(_blockchainAddress, newIdSerialNumber);
-        _setTokenURI(newIdSerialNumber, _certificationURI);
+        _setTokenURI(newIdSerialNumber, _certificateURI);
 
         /// @notice add certificate data for operational functions
-        certHash[newIdSerialNumber] = _certificationHash;
+        certHash[newIdSerialNumber] = _certificateHash;
         publicKey[newIdSerialNumber] = _accountPublicKey;
         finished[newIdSerialNumber] = true;
 
@@ -81,7 +76,7 @@ contract CertificationToken is
             certificatesOwned[_blockchainAddress].length -
             1; // starts in zero
 
-        // @dev set the minimum block number to be a valid certification
+        // @dev set the minimum block number to be a valid certificate
         blockLockStart[newIdSerialNumber] = block.number + blockHeight;
 
         return newIdSerialNumber;
@@ -115,7 +110,7 @@ contract CertificationToken is
         return publicKey[certificatesOwned[_accountAddress][_index]];
     }
 
-    /** @notice Set the status for the certification
+    /** @notice Set the status for the certificate
      *
      * @param _accountAddress The address of the account to set the activity
      * @param _index Index of the certificate in owner's list
@@ -129,7 +124,7 @@ contract CertificationToken is
         finished[certificatesOwned[_accountAddress][_index]] = _activityStatus;
     }
 
-    /** @notice Get the status for the certification
+    /** @notice Get the status for the certificate
      *
      * @param _accountAddress The address of the account to set the activity
      * @param _index Index of the certificate in owner's list
@@ -148,7 +143,7 @@ contract CertificationToken is
      * @param _accountAddress The address of the identity to be burnt
      * @param _index Index of the certificate in owner's list
      */
-    function burnCertification(address _accountAddress, uint256 _index)
+    function burnCertificate(address _accountAddress, uint256 _index)
         public
         onlyOwner
     {

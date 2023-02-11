@@ -8,7 +8,7 @@ async function getSHA256 (_message) {
   return hash
 }
 
-const uploadCertificationJSONtoIPFS = async (_institution, _blockchainAddress, _workTitle, _advisor, _coAdvisor, _degree, _gpa, _date) => {
+const uploadCertificateJSONtoIPFS = async (_institution, _blockchainAddress, _workTitle, _advisor, _coAdvisor, _degree, _gpa, _date) => {
   let tokenURI
   const plainData = {
     institution: _institution,
@@ -45,4 +45,4 @@ const uploadCertificationJSONtoIPFS = async (_institution, _blockchainAddress, _
   return { tokenURI, hash }
 }
 
-export default uploadCertificationJSONtoIPFS
+export default uploadCertificateJSONtoIPFS

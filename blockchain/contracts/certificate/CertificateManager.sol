@@ -2,10 +2,10 @@
 pragma solidity ^0.8.17;
 
 import "../../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
-import "./CertificationToken.sol";
+import "./CertificateToken.sol";
 
 /**
- * @title Certification Manager - Digital Certification
+ * @title Certificate Manager - Digital Certificate
  * @author Fábio Benjovengo
  *
  * @notice Manages the information about the certificartes stored as an NFT token.
@@ -13,14 +13,14 @@ import "./CertificationToken.sol";
  * @custom:security Use this contract only for tests! Do NOT store any real information in this project!
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
-contract CertificationManager is IERC721Receiver {
+contract CertificateManager is IERC721Receiver {
     /// State variables
     address private certTokenAddress;
 
     string public DEBUG = "DEBUG";
 
     /// Contracts
-    CertificationToken public certificationToken;
+    CertificateToken public certificateToken;
 
     /**
      * Events
@@ -30,11 +30,11 @@ contract CertificationManager is IERC721Receiver {
     /**
      * Constructor Method
      *
-     * @param _nftTokenAddress the address of the CertificationToken contract on the blockchain
+     * @param _nftTokenAddress the address of the CertificateToken contract on the blockchain
      */
     constructor(address _nftTokenAddress) {
         certTokenAddress = _nftTokenAddress;
-        certificationToken = CertificationToken(_nftTokenAddress);
+        certificateToken = CertificateToken(_nftTokenAddress);
     }
 
     /**
@@ -50,21 +50,21 @@ contract CertificationManager is IERC721Receiver {
     }
 
     /**
-     * Create a new certification
+     * Create a new certificate
      *
-     * @param _tokenURI The address of the CertificationToken contract on the blockchain
-     * @param _certificationHash The SHA-256 hash of the certificate info
+     * @param _tokenURI The address of the CertificateToken contract on the blockchain
+     * @param _certificateHash The SHA-256 hash of the certificate info
      * @param _accountPublicKey The public key associated with the blockchain account
      *
      * @dev everyone can call this function for testing purposes
      * @dev in a production environment, it should not be possible for everyone to call this function
      */
-    function createNewCertification(
+    function createNewCertificate(
         string memory _tokenURI,
-        bytes32 _certificationHash,
+        bytes32 _certificateHash,
         string memory _accountPublicKey
     ) public {
-        /// Require that the certification URI is not blank
+        /// Require that the certificate URI is not blank
         require(
             (keccak256(abi.encodePacked((_tokenURI))) !=
                 keccak256(abi.encodePacked(("")))),
@@ -72,10 +72,10 @@ contract CertificationManager is IERC721Receiver {
         );
 
         /// Issue new ID - Mint NFT
-        uint256 newIdSerialNumber = certificationToken.mint(
+        uint256 newIdSerialNumber = certificateToken.mint(
             msg.sender,
             _tokenURI,
-            _certificationHash,
+            _certificateHash,
             _accountPublicKey
         );
 

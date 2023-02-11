@@ -2,14 +2,14 @@ import React from 'react'
 import { Container, Row, Col } from "reactstrap";
 
 /// Style
-import "./create-certification.css"
+import "./create-certificate.css"
 
 // Blockchain interaction
-import uploadCertificationJSONtoIPFS from '../../../scripts/certificates/uploadCertJsonIPFS';
-import { issueNewCertification } from '../../../scripts/certificates/addCertificate';
+import uploadCertificateJSONtoIPFS from '../../../scripts/certificates/uploadCertJsonIPFS';
+import { issueNewCertificate } from '../../../scripts/certificates/addCertificate';
 
 
-const CreateCertification = () => {
+const CreateCertificate = () => {
   
 
   /**
@@ -18,7 +18,7 @@ const CreateCertification = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log('Creating a certification on the blockchain...')
+    console.log('Creating a certificate on the blockchain...')
 
     //javascript file to add a certificate
     const institution = e.target.institution.value;
@@ -30,23 +30,23 @@ const CreateCertification = () => {
     const gpa = e.target.gpa.value;
     const date = e.target.date.value;
     
-    const metadata = await uploadCertificationJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, coAdvisor, degree, gpa, date);
+    const metadata = await uploadCertificateJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, coAdvisor, degree, gpa, date);
 
     const metadataURI = metadata['tokenURI']
     const metadataHash = metadata['hash']
 
 
-    await issueNewCertification(metadataURI, metadataHash)
+    await issueNewCertificate(metadataURI, metadataHash)
     
-    console.log('Certification successfully added!')
+    console.log('Certificate successfully added!')
   }
 
   return (
     <>
-    <section className='create__certification__wrapper'>
+    <section className='create__certificate__wrapper'>
         <Container>
           <Row>
-            <h2 className='main__header'>Create Certification</h2>
+            <h2 className='main__header'>Create Certificate</h2>
               <form onSubmit={handleSubmit}>
                 <div className="form__wrapper">
                   <Row>
@@ -107,4 +107,4 @@ const CreateCertification = () => {
   )
 }
 
-export default CreateCertification
+export default CreateCertificate

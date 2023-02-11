@@ -38,10 +38,10 @@
  },
  {
   "inputs": [],
-  "name": "certificationToken",
+  "name": "certificateToken",
   "outputs": [
    {
-    "internalType": "contract CertificationToken",
+    "internalType": "contract CertificateToken",
     "name": "",
     "type": "address"
    }
@@ -58,7 +58,7 @@
    },
    {
     "internalType": "bytes32",
-    "name": "_certificationHash",
+    "name": "_certificateHash",
     "type": "bytes32"
    },
    {
@@ -67,7 +67,7 @@
     "type": "string"
    }
   ],
-  "name": "createNewCertification",
+  "name": "createNewCertificate",
   "outputs": [],
   "stateMutability": "nonpayable",
   "type": "function"

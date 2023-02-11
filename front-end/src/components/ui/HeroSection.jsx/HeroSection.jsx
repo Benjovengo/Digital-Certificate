@@ -20,7 +20,7 @@ const HeroSection = () => {
                   <h3 className="hero__diploma__and">&</h3>
                 </div>
                 
-                <h3 className="hero__diploma">certifications</h3>
+                <h3 className="hero__diploma">certificates</h3>
                 <p className="hero__left">are now the most valuable</p>
                 <h4 className="hero__nft">NFTs</h4>
                 <p className="hero__left">on your collection</p>
@@ -34,9 +34,9 @@ const HeroSection = () => {
                   <i className="ri-book-read-fill"></i>{" "}
                   <Link to="/about">Explore the Features</Link>
                 </button>
-                <button className="certifications__btn d-flex align-items-center gap-2">
+                <button className="certificates__btn d-flex align-items-center gap-2">
                   <i className="ri-award-fill"></i>
-                  <Link to="/about">Your Certifications</Link>
+                  <Link to="/about">Your Certificates</Link>
                 </button>
               </div>
             </div>

@@ -1,8 +1,8 @@
 {
-  "name": "dao-certifications",
+  "name": "dao-certificates",
   "version": "1.0.0",
   "author": "Fabio Benjovengo",
-  "description": "A decentralized certification system.",
+  "description": "A decentralized certificate system.",
   "license": "UNLICENSED",
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.1",

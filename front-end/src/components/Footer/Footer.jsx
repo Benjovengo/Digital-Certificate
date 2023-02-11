@@ -53,7 +53,7 @@ const Footer = () => {
         <Row>
           <Col lg="3" md="6" sm="6" className="mb-2">
             <div className="logo">
-              <img src='DigitalCertLogo.png' alt='digital certifications logo' className='img__logo' ></img>
+              <img src='DigitalCertLogo.png' alt='digital certificates logo' className='img__logo' ></img>
               <p>
               Digital diploma leverages blockchain technology to enhance the security and validity of degrees from courses and universities, making it easier for companies to select top candidates.
               </p>

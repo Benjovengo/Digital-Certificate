@@ -12,8 +12,8 @@ const NAV__LINKS = [
     url: "/home",
   },
   {
-    display: "Certifications",
-    url: "/certifications",
+    display: "Certificates",
+    url: "/certificates",
   },
   {
     display: "Governance",
@@ -46,7 +46,7 @@ const Header = ({ account, setAccount }) => {
         <Container>
           <div className="navigation">
             <div className="logo">
-              <img src='DigitalCertLogo.png' alt='digital certifications logo' className='img__logo' ></img>
+              <img src='DigitalCertLogo.png' alt='digital certificates logo' className='img__logo' ></img>
             </div>
 
             <div className="nav__menu" ref={menuRef} onClick={toggleMenu}>

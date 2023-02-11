@@ -5,7 +5,7 @@ import "../../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.
 import "./IdentityToken.sol";
 
 /**
- * @title Identity Manager - Digital Identity (Digital Certification)
+ * @title Identity Manager - Digital Identity (Digital Certificate)
  * @author Fábio Benjovengo
  *
  * @notice Manages the ID information stored as an NFT token.

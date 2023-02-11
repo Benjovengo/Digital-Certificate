@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import Certifications from "../pages/Certifications";
+import Certificates from "../pages/Certificates";
 import Governance from "../pages/Governance";
 import Home from "../pages/Home";
 //import NftDetails from "../pages/NftDetails";
@@ -12,7 +12,7 @@ const Routers = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/certifications" element={<Certifications />} />
+      <Route path="/certificates" element={<Certificates />} />
       <Route path="/home" element={<Home />} />
       <Route path="/governance" element={<Governance />} />
       <Route path="/identity" element={<Identity />} />

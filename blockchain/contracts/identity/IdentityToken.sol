@@ -9,7 +9,7 @@ import "../../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC72
 import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @title Identity NFT - Digital Identity (Digital Certification)
+ * @title Identity NFT - Digital Identity (Digital Certificate)
  * @author Fábio Benjovengo
  *
  * @notice NFT token to store identity information.
