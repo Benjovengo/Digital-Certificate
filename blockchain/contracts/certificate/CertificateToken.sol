@@ -164,6 +164,14 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return certificatesOwned[_accountAddress];
     }
 
+    /** @notice Get the hash of a certification
+     *
+     * @param _serialNumber The serial number of the certification
+     */
+    function getHash(uint256 _serialNumber) public view returns (bytes32) {
+        return certHash[_serialNumber];
+    }
+
     /**
      * @notice The following functions are overrides required by Solidity.
      *

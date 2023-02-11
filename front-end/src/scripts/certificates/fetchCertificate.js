@@ -65,7 +65,7 @@ export const fetchCertificateJSON = async (_serialNumber) => {
     /// Fetch Certificate Info
     const response = await fetch(uri)
     certificateJSON = await response.json()
-    certificateJSON.address = account
+    certificateJSON.hash = await certificateToken.getHash(_serialNumber)
   } else {
     certificateJSON = ''
   }
