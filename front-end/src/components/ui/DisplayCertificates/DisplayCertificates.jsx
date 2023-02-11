@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from "reactstrap";
 
 import './display-certificates.css'
@@ -17,15 +17,30 @@ const DisplayCertificates = () => {
     {value: 4, label: 'Option 4'}
   ];
   const [selectedOption, setSelectedOption] = useState(null);
+  const [fullName, setFullName] = useState('');
+  const [institution, setInstitution] = useState('');
+  const [degree, setDegree] = useState('');
+  const [area, setArea] = useState('');
+  const [advisor, setAdvisor] = useState('');
+
+
+
+
+
 
   const handleSelectCertification = (event) => {
     setSelectedOption(event.target.value);
 
 
-    console.log('Selected Option hook: ', selectedOption)
+    setFullName('Fábio Benjovengo')
+    setInstitution('Unicamp') 
 
-    if (event.target.value === 2) {
+    if (event.target.value === '2') {
       console.log('DEBUG 2')
+      setFullName('Fábio Pereira Benjovengo')
+      setInstitution('State University of Campinas - Unicamp') 
+      console.log('Value: ', options[1].value)
+      console.log('LAbel: ', options[1].label)
     } else {
       console.log('DEBUG OTHER:', event.target.value)
     }
@@ -55,7 +70,13 @@ const DisplayCertificates = () => {
               </select>
             </Col>
             <Col xs={9}>
-              <CertificateTemplate />
+              { (fullName==='') ?
+              <>
+                <h1>No certificate page!</h1>
+              </> : <>
+                <CertificateTemplate institution={institution} fullName={fullName} />
+              </>
+              }
             </Col>
           </Row>
           
