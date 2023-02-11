@@ -39,6 +39,7 @@ const DisplayCertificates = () => {
     */
   const certificatesHeader = async () => {
     const list = await fetchCertificatesList() // list of certificates for the logged account
+    setCertificateArray(list)
 
     let certificateHeaders = [] // placeholder for the headers objects
     let JSON // placeholder for the TokenURI
@@ -61,10 +62,9 @@ const DisplayCertificates = () => {
   const handleSelectCertification = async (event) => {
     // setSelectedOption(event.target.value);
 
-    const list = await fetchCertificatesList()
-    console.log(list)
+    const serialNumber = Number(event.target.value)
+    const JSON = await fetchCertificateJSON(serialNumber)
 
-    const JSON = await fetchCertificateJSON(1)
     console.log(JSON)
 
     setFullName('Fábio Benjovengo')
