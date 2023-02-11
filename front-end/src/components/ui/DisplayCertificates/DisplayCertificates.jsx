@@ -5,6 +5,7 @@ import './display-certificates.css'
 
 // Blockchain integration
 import { fetchCertificatesList, fetchCertificateJSON } from '../../../scripts/certificates/fetchCertificate';
+import { fetchIdentity } from '../../../scripts/identity/fetchIdentity';
 
 // Template
 import CertificateTemplate from '../CertificateTemplate/CertificateTemplate';
@@ -69,10 +70,13 @@ const DisplayCertificates = () => {
     const JSON = await fetchCertificateJSON(serialNumber)
     // console.log(JSON)
 
+    const identity = await fetchIdentity()
+    //console.log(identity)
+
     // Set hooks
     setCertificateId(serialNumber)
     setInstitution(JSON.institution)
-    setFullName('Hard-coded Name - get from IDENTITY') // GET THIS FROM IDENTITY!!!
+    setFullName(identity.firstName + ' ' + identity.lastName )
     setBlockchainAddress(JSON.blockchainAddress)
     setDegree(JSON.degree)
     setArea(JSON.studyingArea)
