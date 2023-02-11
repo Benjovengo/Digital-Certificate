@@ -32,6 +32,9 @@ export const fetchCertificatesList = async () => {
     certificates.push(Number(listOfCertificates[i]));
   }
 
+  /// DEBUG logs
+  //console.log('Account: ', account)
+
   return certificates
 
 }
@@ -69,11 +72,6 @@ export const fetchCertificateJSON = async (_serialNumber) => {
   } else {
     certificateJSON = ''
   }
-
-  /// DEBUG logs
-/*   console.log('Token Serial Number: ', _serialNumber)
-  console.log('Token URI: ', uri)
-  console.log(certificateJSON) */
 
   return certificateJSON
 }
