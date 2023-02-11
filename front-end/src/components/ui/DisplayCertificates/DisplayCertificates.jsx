@@ -19,8 +19,9 @@ const DisplayCertificates = () => {
    const [certificateArray, setCertificateArray] = useState([]); // array of the serial numbers of the certificates
    const [headers, setHeaders] = useState([]); // headers for the certificates
   // Per certificate hooks
-  const [fullName, setFullName] = useState('');
   const [institution, setInstitution] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [blockchainAddress, setBlockchainAddress] = useState('');
   const [degree, setDegree] = useState('');
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
@@ -67,18 +68,13 @@ const DisplayCertificates = () => {
 
     console.log(JSON)
 
-    setFullName('Fábio Benjovengo')
-    setInstitution('Unicamp')
+    setInstitution(JSON.institution)
+    setFullName('Fábio Pereira Benjovengo') // GET THIS FROM IDENTITY!!!
+    setBlockchainAddress(JSON.blockchainAddress)
+    setDegree(JSON.degree)
+    setArea(JSON.studyingArea)
+    setAdvisor(JSON.advisor)
 
-    if (event.target.value === '2') {
-      /* console.log('DEBUG 2') */
-      setFullName('Fábio Pereira Benjovengo')
-      setInstitution('State University of Campinas - Unicamp') 
-      /* console.log('Value: ', headers[1].value)
-      console.log('LAbel: ', headers[1].label) */
-    } else {
-      console.log('DEBUG OTHER:', event.target.value)
-    }
   };
   
 
@@ -109,7 +105,7 @@ const DisplayCertificates = () => {
               <>
                 <h1>No certificate page!</h1>
               </> : <>
-                <CertificateTemplate institution={institution} fullName={fullName} />
+                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} />
               </>
               }
             </Col>
