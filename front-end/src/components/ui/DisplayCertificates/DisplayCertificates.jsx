@@ -3,6 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 
 import './display-certificates.css'
 
+// Blockchain integration
+import { fetchCertificate } from '../../../scripts/certificates/fetchCertificate';
+
 // Template
 import CertificateTemplate from '../CertificateTemplate/CertificateTemplate';
 
@@ -28,19 +31,22 @@ const DisplayCertificates = () => {
 
 
 
-  const handleSelectCertification = (event) => {
+  const handleSelectCertification = async (event) => {
     setSelectedOption(event.target.value);
 
+    const list = await fetchCertificate()
 
     setFullName('Fábio Benjovengo')
-    setInstitution('Unicamp') 
+    setInstitution('Unicamp')
+
+
 
     if (event.target.value === '2') {
-      console.log('DEBUG 2')
+      /* console.log('DEBUG 2') */
       setFullName('Fábio Pereira Benjovengo')
       setInstitution('State University of Campinas - Unicamp') 
-      console.log('Value: ', options[1].value)
-      console.log('LAbel: ', options[1].label)
+      /* console.log('Value: ', options[1].value)
+      console.log('LAbel: ', options[1].label) */
     } else {
       console.log('DEBUG OTHER:', event.target.value)
     }
