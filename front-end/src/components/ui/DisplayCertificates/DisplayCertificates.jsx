@@ -45,7 +45,7 @@ const DisplayCertificates = () => {
                 ))}
               </select>
             </Col>
-            <Col>
+            <Col xs={9}>
               <CertificateTemplate />
             </Col>
           </Row>
