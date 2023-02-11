@@ -11,23 +11,33 @@ import CertificateTemplate from '../CertificateTemplate/CertificateTemplate';
 
 const DisplayCertificates = () => {
 
-
-  // HARD-CODED
-  const options = [
-    {value: 1, label: 'Option 1'},
-    {value: 2, label: 'Option 2'},
-    {value: 3, label: 'Option 3'},
-    {value: 4, label: 'Option 4'}
-  ];
+  // Hooks
   const [selectedOption, setSelectedOption] = useState(null);
   const [fullName, setFullName] = useState('');
   const [institution, setInstitution] = useState('');
   const [degree, setDegree] = useState('');
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
+  const [headers, setHeaders] = useState([])
 
 
+  useEffect(()=>{
+    certificatesHeader()
+   },[])
 
+
+  const certificatesHeader = async () => {
+    const list = await fetchCertificatesList() // list of certificates for the logged account
+
+    let getHeaders = []
+    let JSON
+    for (let i = 0; i < list.length; i++) {
+      JSON = await fetchCertificateJSON(list[i])
+      getHeaders.push({value: list[i], label: JSON.institution})
+    }
+
+    setHeaders(getHeaders)
+  }
 
 
 
@@ -49,8 +59,8 @@ const DisplayCertificates = () => {
       /* console.log('DEBUG 2') */
       setFullName('Fábio Pereira Benjovengo')
       setInstitution('State University of Campinas - Unicamp') 
-      /* console.log('Value: ', options[1].value)
-      console.log('LAbel: ', options[1].label) */
+      /* console.log('Value: ', headers[1].value)
+      console.log('LAbel: ', headers[1].label) */
     } else {
       console.log('DEBUG OTHER:', event.target.value)
     }
@@ -72,7 +82,7 @@ const DisplayCertificates = () => {
             <Col>
               <select size="10" multiple onChange={handleSelectCertification}>
                 {/* <option value="" disabled>Select a Certification</option> */}
-                {options.map((option, index) => (
+                {headers.map((option, index) => (
                   <option key={index} value={option.value}>
                     {option.label}
                   </option>

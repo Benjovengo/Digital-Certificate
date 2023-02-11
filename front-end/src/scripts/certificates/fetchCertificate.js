@@ -89,9 +89,9 @@ export const fetchCertificateJSON = async (_serialNumber) => {
   }
 
   /// DEBUG logs
-  console.log('Token Serial Number: ', _serialNumber)
+/*   console.log('Token Serial Number: ', _serialNumber)
   console.log('Token URI: ', uri)
-  console.log(certificateJSON)
+  console.log(certificateJSON) */
 
   return certificateJSON
 }
