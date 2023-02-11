@@ -5,10 +5,12 @@
 
 .template__wrapper h1 {
   color: black;
+  font-family: 'Playfair Display SC', serif;
 }
 
 .template__wrapper h2 {
   color: black;
+  font-family: 'Playfair Display SC', serif;
 }
 
 .template__wrapper h3 {
@@ -17,4 +19,5 @@
 
 .template__wrapper p {
   color: black;
+  font-family: 'Montserrat', sans-serif;
 }

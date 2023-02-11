@@ -48,11 +48,14 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
         <Row>
           <Col>
             <h1>{institution}</h1>
+            <p>The Board of trustees of {institution}, upon recommendation of the faculty, in particular professor {advisor} (advisor), has conferred upon</p>
             <h2>{fullName}</h2>
-            <p>{blockchainAddress}</p>
+            <p><span>{blockchainAddress}</span></p>
+            <p>the degree of</p>
             <h2>{degree}</h2>
+            <p>in</p>
             <h2>{area}</h2>
-            <h3>{advisor}</h3>
+            <p>With all the rights, honors, and privileges thereunto appertaining. In witness whereof, the seal of the University and the signatures as authorizes by the Board of Trustees, {institution}, are hereunto affixed, this <b>date</b>.</p>
             <h2>Serial number: {certificateId}</h2>
             <p>Hash: {hash}</p>
           </Col>
