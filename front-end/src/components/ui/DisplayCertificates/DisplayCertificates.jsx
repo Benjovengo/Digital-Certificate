@@ -3,6 +3,8 @@ import { Container, Row, Col } from "reactstrap";
 
 import './display-certificates.css'
 
+// Template
+import CertificateTemplate from '../CertificateTemplate/CertificateTemplate';
 
 const DisplayCertificates = () => {
 
@@ -27,30 +29,27 @@ const DisplayCertificates = () => {
       <section className="display__certificate__wrapper">
         <Container fluid>
           <Row>
+            <Col className='d-flex justify-content-center'>
             <h2 className="main__header">Display Certificate</h2>
+            <p>Access your certificates and diplomas!</p>
+            </Col>
           </Row>
-          <Col>
-            <form id="form2">
-              <select size="8" multiple>
+          <Row>
+            <Col>
+              <select size="10" multiple onChange={handleSelectCertification}>
                 <option value="" disabled>Select a Certification</option>
-                <option value='blue'>Blue</option>
-                <option value='green'>Green</option>
-                <option value='red'>Red</option>
-                <option value='yellow'>Yellow</option>
-                <option value='orange'>Orange</option>
+                {options.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
-            </form>
-
-            <select size="10" multiple onChange={handleSelectCertification}>
-              <option value="" disabled>Select a Certification</option>
-              {options.map((option, index) => (
-                <option key={index} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-
-          </Col>
+            </Col>
+            <Col>
+              <CertificateTemplate />
+            </Col>
+          </Row>
+          
 
         </Container>
       </section>
