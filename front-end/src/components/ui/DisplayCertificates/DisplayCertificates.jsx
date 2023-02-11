@@ -65,16 +65,15 @@ const DisplayCertificates = () => {
 
     const serialNumber = Number(event.target.value)
     const JSON = await fetchCertificateJSON(serialNumber)
+    // console.log(JSON)
 
-    console.log(JSON)
-
+    // Set hooks
     setInstitution(JSON.institution)
     setFullName('Fábio Pereira Benjovengo') // GET THIS FROM IDENTITY!!!
     setBlockchainAddress(JSON.blockchainAddress)
     setDegree(JSON.degree)
     setArea(JSON.studyingArea)
     setAdvisor(JSON.advisor)
-
   };
   
 
