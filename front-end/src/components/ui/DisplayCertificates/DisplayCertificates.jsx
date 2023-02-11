@@ -73,10 +73,12 @@ const DisplayCertificates = () => {
     const identity = await fetchIdentity()
     //console.log(identity)
 
+    let identityName = (identity? identity.firstName + ' ' + identity.lastName : 'Identity Not Found')
+
     // Set hooks
     setCertificateId(serialNumber)
     setInstitution(JSON.institution)
-    setFullName(identity.firstName + ' ' + identity.lastName )
+    setFullName(identityName)
     setBlockchainAddress(JSON.blockchainAddress)
     setDegree(JSON.degree)
     setArea(JSON.studyingArea)
