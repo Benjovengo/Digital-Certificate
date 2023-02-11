@@ -10,6 +10,7 @@ node_modules/
 work/
 ./blockchain/work/
 ./front-end/work/
+rename.py
 node_modules
 .env
 coverage
