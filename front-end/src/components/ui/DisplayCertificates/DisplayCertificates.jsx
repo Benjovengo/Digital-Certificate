@@ -16,7 +16,7 @@ const DisplayCertificates = () => {
   ];
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleChange = (event) => {
+  const handleSelectCertification = (event) => {
     setSelectedOption(event.target.value);
   };
   
@@ -32,23 +32,24 @@ const DisplayCertificates = () => {
           <Col>
             <form id="form2">
               <select size="8" multiple>
-                <option value="" disabled>Select Certification</option>
+                <option value="" disabled>Select a Certification</option>
                 <option value='blue'>Blue</option>
                 <option value='green'>Green</option>
                 <option value='red'>Red</option>
                 <option value='yellow'>Yellow</option>
                 <option value='orange'>Orange</option>
               </select>
-
-              <select multiple onChange={handleChange}>
-                {options.map((option, index) => (
-                  <option key={index} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-
             </form>
+
+            <select size="10" multiple onChange={handleSelectCertification}>
+              <option value="" disabled>Select a Certification</option>
+              {options.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+
           </Col>
 
         </Container>
