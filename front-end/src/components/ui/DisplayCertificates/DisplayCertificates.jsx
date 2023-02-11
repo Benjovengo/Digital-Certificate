@@ -26,6 +26,7 @@ const DisplayCertificates = () => {
   const [degree, setDegree] = useState('');
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
+  const [hash, setHash] = useState('');
 
 
   /** Update (on loading) the list of certificates to be selected */
@@ -76,6 +77,7 @@ const DisplayCertificates = () => {
     setDegree(JSON.degree)
     setArea(JSON.studyingArea)
     setAdvisor(JSON.advisor)
+    setHash(JSON.hash)
   };
   
 
@@ -86,8 +88,12 @@ const DisplayCertificates = () => {
         <Container fluid>
           <Row>
             <Col className='d-flex justify-content-center'>
-            <h2 className="main__header">Display Certificate</h2>
-            <p>Access your certificates and diplomas!</p>
+              <h2 className="main__header">Display Certificate</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col className='d-flex justify-content-center'>
+              <p>Access your certificates and diplomas anywhere!</p>
             </Col>
           </Row>
           <Row>
@@ -106,7 +112,7 @@ const DisplayCertificates = () => {
               <>
                 <h1>No certificate page!</h1>
               </> : <>
-                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} />
+                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} hash={hash} />
               </>
               }
             </Col>
