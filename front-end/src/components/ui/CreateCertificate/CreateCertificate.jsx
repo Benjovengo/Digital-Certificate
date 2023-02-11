@@ -83,8 +83,8 @@ const CreateCertificate = () => {
                       <input type="text" id="degree" name="degree" maxLength="200"/>
                     </Col>
                     <Col>
-                      <label htmlFor="gpa">GPA</label><br/>
-                      <input type="number" id="gpa" name="gpa" placeholder='4.0'/>
+                      <label htmlFor="gpa">GPA (from 0.0 to 4.0)</label><br/>
+                      <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4" placeholder='4.0'/>
                     </Col>
                     <Col>
                       <label htmlFor="date">Date</label><br/>
