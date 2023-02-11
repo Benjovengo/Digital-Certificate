@@ -11,38 +11,55 @@ import CertificateTemplate from '../CertificateTemplate/CertificateTemplate';
 
 const DisplayCertificates = () => {
 
-  // Hooks
-  const [selectedOption, setSelectedOption] = useState(null);
+  /** Hooks
+   * 
+   */
+  // const [selectedOption, setSelectedOption] = useState(null);
+   // Hooks for the entire list of certificates associated with the logged account
+   const [certificateArray, setCertificateArray] = useState([]); // array of the serial numbers of the certificates
+   const [headers, setHeaders] = useState([]); // headers for the certificates
+  // Per certificate hooks
   const [fullName, setFullName] = useState('');
   const [institution, setInstitution] = useState('');
   const [degree, setDegree] = useState('');
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
-  const [headers, setHeaders] = useState([])
 
 
+  /** Update (on loading) the list of certificates to be selected */
   useEffect(()=>{
     certificatesHeader()
    },[])
 
 
+
+   /** Get the headline fort the certificates owned by the logged address
+    * 
+    * @dev set hook to be used on the 'select multiple' element
+    */
   const certificatesHeader = async () => {
     const list = await fetchCertificatesList() // list of certificates for the logged account
 
-    let getHeaders = []
-    let JSON
+    let certificateHeaders = [] // placeholder for the headers objects
+    let JSON // placeholder for the TokenURI
+
+    // loop through all the certificates
     for (let i = 0; i < list.length; i++) {
       JSON = await fetchCertificateJSON(list[i])
-      getHeaders.push({value: list[i], label: JSON.institution})
+      certificateHeaders.push({value: list[i], label: JSON.institution + ' - ' + JSON.degree})
     }
 
-    setHeaders(getHeaders)
+    // Set hook for the headers to be used on the 'select' element
+    setHeaders(certificateHeaders)
   }
 
 
-
+  /** Select a certification to be displayed
+   * 
+   * @param {event} event Properties of the 'select' element
+   */
   const handleSelectCertification = async (event) => {
-    setSelectedOption(event.target.value);
+    // setSelectedOption(event.target.value);
 
     const list = await fetchCertificatesList()
     console.log(list)
@@ -52,8 +69,6 @@ const DisplayCertificates = () => {
 
     setFullName('Fábio Benjovengo')
     setInstitution('Unicamp')
-
-
 
     if (event.target.value === '2') {
       /* console.log('DEBUG 2') */
