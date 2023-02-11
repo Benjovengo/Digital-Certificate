@@ -34,24 +34,6 @@ export const fetchCertificatesList = async () => {
 
   return certificates
 
-/*   if (serialNumber !== 0) {
-    /// Get Token URI
-    const uri = await certificateToken.tokenURI(serialNumber)
-
-    /// Fetch Certificate Info
-    const response = await fetch(uri)
-    certificateJSON = await response.json()
-    certificateJSON.address = account
-  } else {
-    certificateJSON = ''
-  } */
-
-  /// DEBUG logs
-  // console.log('Token Serial Number: ', serialNumber)
-  // console.log('Token URI: ', uri)
-  // console.log(certificateJSON)
-
-  /* return certificateJSON */
 }
 
 
