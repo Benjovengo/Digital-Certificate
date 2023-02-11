@@ -151,6 +151,19 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         _burn(certificatesOwned[_accountAddress][_index]);
     }
 
+    /** @notice List of the certificates owned by an account
+     *
+     * @param _accountAddress Address of the owner of the certificates
+     * @return certificatesOwned[_accountAddress] Array of the serial numbers of the owned certificates
+     */
+    function listCertificates(address _accountAddress)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        return certificatesOwned[_accountAddress];
+    }
+
     /**
      * @notice The following functions are overrides required by Solidity.
      *
