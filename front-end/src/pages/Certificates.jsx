@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react'
 
 import CreateCertificate from '../components/ui/CreateCertificate/CreateCertificate';
+import DisplayCertificates from '../components/ui/DisplayCertificates/DisplayCertificates';
 
 const Certificates = () => {
 
@@ -14,6 +15,7 @@ const Certificates = () => {
     <>
       <div>Certificates</div>
       <CreateCertificate />
+      <DisplayCertificates />
     </>
   )
 }
