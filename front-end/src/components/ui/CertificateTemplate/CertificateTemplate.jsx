@@ -62,10 +62,8 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
         html2canvas:  { height: divHeight },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
       };
-    
     // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
     html2pdf().set(opt).from(element).save();
-
   }
 
 
