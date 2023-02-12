@@ -132,7 +132,7 @@ const DisplayCertificates = () => {
               <select className='select__certificate' size={selectLength.toString()} multiple onChange={handleSelectCertification}>
                 {(headers.length===0)? <option value="" disabled>No certification registered!!!</option> : 
                 headers.map((option, index) => (
-                  <option key={index} value={option.value}>
+                  <option key={index} title={option.label} value={option.value}>
                     {option.label}
                   </option>
                 ))}
