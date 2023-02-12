@@ -6,35 +6,77 @@ import "../../node_modules/@openzeppelin/contracts/governance/extensions/Governo
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol";
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
-import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
+import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockCompound.sol";
 
+/**
+ * @title The Governance Contract - Governance (Digital Certificate)
+ * @author Fábio Benjovengo
+ *
+ * @notice Implementation of the governor contract, where the logic decisions are coded.
+ *
+ * @dev Use this contract only for tests! Do NOT send any real ether to this project!
+ * @dev Contract created with the help of https://wizard.openzeppelin.com/#governor
+ * @dev Beware of the compiled file size. Needs to use solc optimization to keep under the file size limit.
+ * @custom:experimental This is an experimental contract.
+ * @custom:security-contact fabio.benjovengo@gmail.com
+ */
 contract GovernorContract is
     Governor,
     GovernorSettings,
     GovernorCountingSimple,
     GovernorVotes,
     GovernorVotesQuorumFraction,
-    GovernorTimelockControl
+    GovernorTimelockCompound
 {
+    /**
+     * @dev Initializes the contract with the following parameters:
+     *
+     * @param _token: interface for the ERC20Votes
+     * @param _timelock: interface for the TimelockController
+     *
+     *
+     * @notice [1] there is no minimal number of votes an account
+     * must have to be able to create a proposal
+     * @notice this contract is compatible with OpenZeppelin's
+     * TimelockController. Allows multiple proposers and executors,
+     * in addition to the Governor itself.
+     */
     constructor(
         IVotes _token,
-        TimelockController _timelock,
+        ICompoundTimelock _timelock,
+        uint256 _quorum,
         uint256 _votingDelay,
-        uint256 _votingPeriod,
-        uint256 _quorumPercentage
+        uint256 _votingPeriod
     )
-        Governor("GovernorContract")
+        Governor("DAO Banking")
+        /**
+         * @dev settings parameters:
+         *
+         * @param _votingDelay: voting delay in number of blocks (ex: 1 block)
+         * @param _votingPeriod: voting period (ex: 1 week = (3600*24*7)/(12) for 12s per block)
+         *                       time in seconds divided by the average time per block
+         * @param 0 - proposal threshold (hard coded) [see notice [1] above]
+         */
         GovernorSettings(
-            _votingDelay, /* 1 block */
-            _votingPeriod, // 45818, /* 1 week */
-            0 // proposal threshold
+            _votingDelay,
+            _votingPeriod, /*  */
+            0 /* minimum number of votes to create a proposal */
         )
         GovernorVotes(_token)
-        GovernorVotesQuorumFraction(_quorumPercentage)
-        GovernorTimelockControl(_timelock)
+        /// @param _quorum: quorum required for a proposal to pass (using 4%)
+        GovernorVotesQuorumFraction(_quorum)
+        GovernorTimelockCompound(_timelock)
     {}
 
-    // The following functions are overrides required by Solidity.
+    /** @dev The following functions are overrides required by Solidity.
+     *
+     * @notice this overrides add the definitions set in the contructor
+     * to the functions of the parent contract `Governor.sol`
+     * @notice In inheritance, when a contract inherits from another
+     * contract, it can override the functions defined in the parent contract.
+     * The `super` keyword allows the child contract to call the
+     * implementation of the parent contract's function.
+     */
 
     function votingDelay()
         public
@@ -63,19 +105,10 @@ contract GovernorContract is
         return super.quorum(blockNumber);
     }
 
-    function getVotes(address account, uint256 blockNumber)
-        public
-        view
-        override(IGovernor, Governor)
-        returns (uint256)
-    {
-        return super.getVotes(account, blockNumber);
-    }
-
     function state(uint256 proposalId)
         public
         view
-        override(Governor, GovernorTimelockControl)
+        override(Governor, GovernorTimelockCompound)
         returns (ProposalState)
     {
         return super.state(proposalId);
@@ -105,7 +138,7 @@ contract GovernorContract is
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) internal override(Governor, GovernorTimelockControl) {
+    ) internal override(Governor, GovernorTimelockCompound) {
         super._execute(proposalId, targets, values, calldatas, descriptionHash);
     }
 
@@ -114,14 +147,14 @@ contract GovernorContract is
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) internal override(Governor, GovernorTimelockControl) returns (uint256) {
+    ) internal override(Governor, GovernorTimelockCompound) returns (uint256) {
         return super._cancel(targets, values, calldatas, descriptionHash);
     }
 
     function _executor()
         internal
         view
-        override(Governor, GovernorTimelockControl)
+        override(Governor, GovernorTimelockCompound)
         returns (address)
     {
         return super._executor();
@@ -130,7 +163,7 @@ contract GovernorContract is
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(Governor, GovernorTimelockControl)
+        override(Governor, GovernorTimelockCompound)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
