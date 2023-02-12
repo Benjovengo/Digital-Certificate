@@ -6,6 +6,9 @@
 }
 
 .inner__wrapper {
+  background-image: url('../../../assets/images/university_badge_background.png');
+  background-position: center; 
+  background-repeat: no-repeat;
   border: 5px solid #20202e;
 }
 

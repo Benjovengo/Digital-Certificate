@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import html2pdf from 'html2pdf.js'
 
 import './certificate-template.css'
-import universityBadge from '../../../assets/images/university_badge.png'
+import universityBadge from '../../../assets/images/university_badge_signed.png'
 
 /// QR code generation
 var QRCode = require('qrcode')
