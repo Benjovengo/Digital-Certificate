@@ -77,7 +77,7 @@ const DisplayCertificates = () => {
     let identityName = (identity? identity.firstName + ' ' + identity.lastName : 'Identity Not Found')
 
         // Date
-        const date = new Date();
+        const date = new Date('2023-02-11' + 'T00:00:00');
         const options = {
         weekday: 'long',
         year: 'numeric',
