@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col } from "reactstrap";
 import html2pdf from 'html2pdf.js'
 
@@ -44,7 +44,7 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
     }
 
     text.innerHTML = highlightedText;
-  }, [hash])
+  }, [hash, txHash])
 
   /**
    * Export certificate to pdf

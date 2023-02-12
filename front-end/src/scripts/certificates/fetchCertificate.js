@@ -54,10 +54,6 @@ export const fetchCertificateJSON = async (_serialNumber) => {
   /// Javascript "version" of the smart contract
   const certificateToken = new ethers.Contract(config[network.chainId].certificateToken.address, CertificateToken, signer)
 
-  // Get the logged account address
-  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-  const account = ethers.utils.getAddress(accounts[0])
-
   let uri
   let certificateJSON
   if (_serialNumber !== 0) {
