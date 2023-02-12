@@ -27,9 +27,19 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
       if (words[i] === words[i].toUpperCase()) {
         highlightedText += `<span class="highlighted">${words[i] + " "}</span>`;
       } else {
-        highlightedText += words[i] + " ";
+        if (words[i][0] === words[i][0].toUpperCase()) {
+          highlightedText += `<span class="highlighted">${words[i][0]}</span>${words[i].slice(1)} `;
+        } else {
+          highlightedText += words[i] + " ";
+        }
       }
     }
+
+
+
+    
+
+
 
     text.innerHTML = highlightedText;
   }, [hash])
