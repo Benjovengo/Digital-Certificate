@@ -85,7 +85,18 @@ const CreateCertificate = () => {
                   <Row>
                     <Col>
                       <label htmlFor="degree">Degree</label><br/>
-                      <input type="text" id="degree" name="degree" maxLength="200"/>
+                      <select id="degree" name="degree">
+                        <option value="1">Bachelor of Arts (BA) </option>
+                        <option value="2">Bachelor of Science (BSc)</option>
+                        <option value="3">Master of Arts (MA)</option>
+                        <option value="4">Master of Science (MSc)</option>
+                        <option value="5">Doctor of Medicine (MD)</option>
+                        <option value="6">Doctor of Dental Medicine (DMD)</option>
+                        <option value="7">Doctor of Veterinary Medicine (DVM)</option>
+                        <option value="8">Doctor of Juridical Science (JSD)</option>
+                        <option value="9">Doctor of Philosophy (PhD)</option>
+                        <option value="10"> Postdoctoral Fellow</option>
+                      </select>
                     </Col>
                     <Col>
                       <label htmlFor="gpa">GPA (from 0.0 to 4.0)</label><br/>
