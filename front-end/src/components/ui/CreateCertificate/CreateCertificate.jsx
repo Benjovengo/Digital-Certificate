@@ -28,7 +28,7 @@ const CreateCertificate = () => {
 
     console.log('Creating a certificate on the blockchain...')
 
-    //javascript file to add a certificate
+    // Parse values from form
     const institution = e.target.institution.value;
     const blockchainAddress = e.target.blockchainAddress.value;
     const workTitle = e.target.workTitle.value;
@@ -38,6 +38,7 @@ const CreateCertificate = () => {
     const gpa = e.target.gpa.value;
     const date = e.target.date.value;
     
+    // Javascript file to add a certificate
     const metadata = await uploadCertificateJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, studyingArea, degree, gpa, date);
 
     const metadataURI = metadata['tokenURI']
