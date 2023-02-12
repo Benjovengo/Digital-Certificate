@@ -24,7 +24,11 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
     let highlightedText = "";
 
     for (let i = 0; i < words.length; i++) {
-      highlightedText += `<span class="highlighted">${words[i][0]}</span>${words[i].slice(1)} `;
+      if (words[i] === words[i].toUpperCase()) {
+        highlightedText += `<span class="highlighted">${words[i] + " "}</span>`;
+      } else {
+        highlightedText += words[i] + " ";
+      }
     }
 
     text.innerHTML = highlightedText;
