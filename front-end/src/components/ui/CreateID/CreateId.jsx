@@ -1,4 +1,4 @@
-import React, { useState } from  'react'
+import React, { useEffect, useState } from  'react'
 import { Container, Row, Col } from "reactstrap";
 
 import profilePhoto from "../../../assets/images/ProfilePhoto.png"
@@ -44,6 +44,10 @@ const CreateId = () => {
     JsBarcode("#barcode1", (account ? account : "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"))
   }
 
+  // Try to load the identity on loading
+  useEffect(() => {
+    identityFromBlockchain()
+  },[])
 
 
   /**
@@ -139,7 +143,6 @@ const CreateId = () => {
       JsBarcode("#barcode1", identityData.address)
     } else {
       // Refresh preview card
-      document.getElementById('previewImage').src = identityData.image
       document.getElementById('firstNamePreview').innerHTML = 'UNKNOWN'
       document.getElementById('lastNamePreview').innerHTML = 'UNKNOWN'
       document.getElementById('issuedByPreview').innerHTML = 'UNKNOWN'
@@ -259,7 +262,7 @@ const CreateId = () => {
                   </Row>
                   <Row>
                     <Col className="d-flex justify-content-end">
-                    <button className='submit__btn submit'>Create ID</button>
+                    <button className='submit__btn submit'>Create/Update ID</button>
                     </Col>
                   </Row>
                 </form>
