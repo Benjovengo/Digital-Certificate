@@ -3,6 +3,9 @@
 }
 
 .select__certificate {
-  color: red;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
   max-width: 100%;
 }

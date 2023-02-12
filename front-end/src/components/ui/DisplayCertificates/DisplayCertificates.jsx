@@ -17,7 +17,7 @@ const DisplayCertificates = () => {
    */
   // const [selectedOption, setSelectedOption] = useState(null);
   // Hooks for the entire list of certificates associated with the logged account
-  // const [certificateArray, setCertificateArray] = useState([]); // array of the serial numbers of the certificates
+  const [selectLength, setSelectLength] = useState(0);
   const [headers, setHeaders] = useState([]); // headers for the certificates
   // Per certificate hooks
   const [certificateId, setCertificateId] = useState('');
@@ -55,6 +55,8 @@ const DisplayCertificates = () => {
       certificateHeaders.push({value: list[i], label: JSON.degree + ' - ' + JSON.institution})
     }
 
+    // Set hook for the size of the select multiple element
+    setSelectLength(Math.min(list.length,20))
     // Set hook for the headers to be used on the 'select' element
     setHeaders(certificateHeaders)
   }
@@ -123,7 +125,8 @@ const DisplayCertificates = () => {
           </Row>
           <Row>
             <Col md={3}>
-              <select className='select__certificate' size="10" multiple onChange={handleSelectCertification}>
+              <h3>Select a certificate</h3>
+              <select className='select__certificate' size={selectLength.toString()} multiple onChange={handleSelectCertification}>
                 {/* <option value="" disabled>Select a Certification</option> */}
                 {headers.map((option, index) => (
                   <option key={index} value={option.value}>
