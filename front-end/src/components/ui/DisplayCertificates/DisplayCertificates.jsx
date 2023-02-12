@@ -16,9 +16,9 @@ const DisplayCertificates = () => {
    * 
    */
   // const [selectedOption, setSelectedOption] = useState(null);
-   // Hooks for the entire list of certificates associated with the logged account
-   const [certificateArray, setCertificateArray] = useState([]); // array of the serial numbers of the certificates
-   const [headers, setHeaders] = useState([]); // headers for the certificates
+  // Hooks for the entire list of certificates associated with the logged account
+  // const [certificateArray, setCertificateArray] = useState([]); // array of the serial numbers of the certificates
+  const [headers, setHeaders] = useState([]); // headers for the certificates
   // Per certificate hooks
   const [certificateId, setCertificateId] = useState('');
   const [institution, setInstitution] = useState('');
@@ -28,6 +28,7 @@ const DisplayCertificates = () => {
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
   const [hash, setHash] = useState('');
+  const [date, setDate] = useState('');
 
 
   /** Update (on loading) the list of certificates to be selected */
@@ -43,7 +44,7 @@ const DisplayCertificates = () => {
     */
   const certificatesHeader = async () => {
     const list = await fetchCertificatesList() // list of certificates for the logged account
-    setCertificateArray(list)
+    //setCertificateArray(list)
 
     let certificateHeaders = [] // placeholder for the headers objects
     let JSON // placeholder for the TokenURI
@@ -74,6 +75,18 @@ const DisplayCertificates = () => {
     //console.log(identity)
 
     let identityName = (identity? identity.firstName + ' ' + identity.lastName : 'Identity Not Found')
+
+        // Date
+        const date = new Date();
+        const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+        };
+        const dateString = date.toLocaleDateString('en-US', options);
+        console.log(dateString)
+    
 
     // Set hooks
     setCertificateId(serialNumber)
