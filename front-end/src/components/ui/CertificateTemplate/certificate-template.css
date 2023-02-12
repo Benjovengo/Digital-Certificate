@@ -48,3 +48,9 @@
 .template__wrapper .degree__in__area {
   margin: 0;
 }
+
+.university__badge__img {
+  height: 6em;
+  width: auto;
+  margin: 2em 0 1em 0;
+}

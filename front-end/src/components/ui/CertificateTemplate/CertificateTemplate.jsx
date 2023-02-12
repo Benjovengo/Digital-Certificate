@@ -3,6 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import html2pdf from 'html2pdf.js'
 
 import './certificate-template.css'
+import universityBadge from '../../../assets/images/university_badge.png'
 
 /// QR code generation
 var QRCode = require('qrcode')
@@ -90,6 +91,11 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
             <Row>
               <Col className='d-flex justify-content-center'>
                 <p>With all the rights, honors, and privileges thereunto appertaining. In witness whereof, the seal of the University and the signatures as authorizes by the Board of Trustees, {institution}, are hereunto affixed, this {date}.</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <img src={universityBadge} alt="badge" className='university__badge__img' />
               </Col>
             </Row>
           </div>
