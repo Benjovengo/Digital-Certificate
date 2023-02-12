@@ -80,10 +80,8 @@ const DisplayCertificates = () => {
         var currentDate = new Date();
         currentDate.setDate(currentDate.getDate());
         const today = currentDate.toISOString().substring(0,10);
-        console.log('Today: ', today)
         // Display date
         const certDate = (JSON.date? JSON.date : today)
-        console.log('DEBUG - date: ', certDate)
         const date = new Date(certDate + 'T00:00:00');
         const options = {
         weekday: 'long',
