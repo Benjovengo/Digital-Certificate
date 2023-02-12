@@ -124,19 +124,28 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
         </Row>
        
       </div>
-      <div>
-         <Row>
+      <div className='metadata__wrapper'>
+        <Row>
           <Col className='d-flex justify-content-center'>
-            <h2>Certificate Serial Number: {certificateId}</h2>
+            <h3>Certificate Metadata</h3>
+          </Col>
+        </Row>
+         <Row>
+          <Col>
+            <p><b>Certificate Serial Number:</b> <span>{certificateId}</span></p>
+            <p className='account__address'><b>Certificate hash:</b> <span>{hash}</span></p>
             <h3><br/>Etherscan Link - put QR Code</h3>
           </Col>
         </Row>
-        <Row>
-          <Col>
-          <p className='account__address'><b>Certificate hash:</b> {hash}</p>
+        <div>
+          <Row className='justify-content-center'>
+          <Col className='text-center'>
+          <h5>Certificate Hash</h5>
           <canvas id="canvas"></canvas>
           </Col>
         </Row>
+        </div>
+        
       </div>
     </Container>
     <button onClick={handleExport}>Export to PDF</button>

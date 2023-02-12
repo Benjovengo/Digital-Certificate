@@ -66,3 +66,33 @@
   width: auto;
   margin: 2em 0 1em 0;
 }
+
+.metadata__wrapper {
+  background-color: #20202e;
+  margin-top: 2em;
+}
+
+.metadata__wrapper h3 {
+  color: white;
+  font-family: 'Playfair Display SC', serif;
+  margin: 0.75em 0 1.25em 0;
+}
+
+
+.metadata__wrapper h5 {
+  color: white;
+  font-family: 'Playfair Display SC', serif;
+  margin: 0 0 0.5em 0;
+}
+
+
+.metadata__wrapper p {
+  font-family: 'Montserrat', sans-serif;
+  line-height: normal;
+}
+
+.metadata__wrapper p span {
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 1.1rem;
+  margin-left: 0.5em;
+}
