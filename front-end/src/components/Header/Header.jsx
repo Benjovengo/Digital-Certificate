@@ -43,8 +43,8 @@ const Header = ({ account, setAccount }) => {
   return (
     <>
       <header className="header">
-        <Container>
-          <div className="navigation">
+        <Container fluid>
+          <div className="navigation me-2 ms-3">
             <div className="logo">
               <img src='DigitalCertLogo.png' alt='digital certificates logo' className='img__logo' ></img>
             </div>

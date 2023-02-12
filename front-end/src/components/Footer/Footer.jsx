@@ -49,8 +49,8 @@ const COMPANY = [
 const Footer = () => {
   return (
     <footer className="footer">
-      <Container>
-        <Row>
+      <Container fluid>
+        <Row className="me-2 ms-2">
           <Col lg="3" md="6" sm="6" className="mb-2">
             <div className="logo">
               <img src='DigitalCertLogo.png' alt='digital certificates logo' className='img__logo' ></img>
