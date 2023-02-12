@@ -78,10 +78,13 @@ const DisplayCertificates = () => {
 
         /// Get today's date
         var currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + 3);
+        currentDate.setDate(currentDate.getDate());
         const today = currentDate.toISOString().substring(0,10);
+        console.log('Today: ', today)
         // Display date
-        const date = new Date((JSON.date? JSON.date : today) + 'T00:00:00');
+        const certDate = (JSON.date? JSON.date : today)
+        console.log('DEBUG - date: ', certDate)
+        const date = new Date(certDate + 'T00:00:00');
         const options = {
         weekday: 'long',
         year: 'numeric',
@@ -90,6 +93,7 @@ const DisplayCertificates = () => {
         };
         const dateString = date.toLocaleDateString('en-US', options);
         setDateString(dateString)
+
     
 
     // Set hooks

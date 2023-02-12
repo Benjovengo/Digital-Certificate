@@ -15,7 +15,7 @@ const CreateCertificate = () => {
   window.onload = async function(e) {
     /// Set today's date
     var currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 3);
+    currentDate.setDate(currentDate.getDate());
     const today = currentDate.toISOString().substring(0,10);
     document.getElementById('date').value = today
   }
