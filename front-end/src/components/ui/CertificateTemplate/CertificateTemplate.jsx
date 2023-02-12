@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Container, Row, Col } from "reactstrap";
 import html2pdf from 'html2pdf.js'
 
+
 import './certificate-template.css'
 import universityBadge from '../../../assets/images/university_badge_signed.png'
 
@@ -45,18 +46,20 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
   function handleExport() {
     // Choose the element id which you want to export.
     var element = document.getElementById('divToExport');
-    /* element.style.width = '700px';
-    element.style.height = '900px'; */
+    /* element.style.width = '990px';
+    element.style.height = '770px'; */
+    const divHeightPx = element.style.height
+    const divHeight = Number(divHeightPx.slice(0,-2))
+    console.log(divHeight)
     var opt = {
-        margin:       0.5,
         filename:     `Certificate_${fullName.replace(/\s+/g, '')}_from.pdf`,
-        image:        { type: 'jpeg', quality: 1 },
-        html2canvas:  { scale: 1 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape',precision: '12' }
+        html2canvas:  { height: divHeight },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
       };
     
     // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
     html2pdf().set(opt).from(element).save();
+
   }
 
 
@@ -119,7 +122,10 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
             </Row>
           </div>
         </Row>
-        <Row>
+       
+      </div>
+      <div>
+         <Row>
           <Col className='d-flex justify-content-center'>
             <h2>Certificate Serial Number: {certificateId}</h2>
             <h3><br/>Etherscan Link - put QR Code</h3>

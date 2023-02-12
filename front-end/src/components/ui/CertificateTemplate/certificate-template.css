@@ -3,6 +3,9 @@
   color: black;
   margin: 0;
   padding: 3em;
+
+  height: fit-content;
+  width: fit-content;
 }
 
 .inner__wrapper {
