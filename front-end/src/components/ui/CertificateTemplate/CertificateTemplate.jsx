@@ -96,12 +96,13 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
         </Row>
         <Row>
           <Col className='d-flex justify-content-center'>
-            <h2>Serial Number: {certificateId}</h2>
+            <h2>Certificate Serial Number: {certificateId}</h2>
+            <h3><br/>Etherscan Link - put QR Code</h3>
           </Col>
         </Row>
         <Row>
           <Col>
-          <p className='account__address'><b>Hash:</b> {hash}</p>
+          <p className='account__address'><b>Certificate hash:</b> {hash}</p>
           <canvas id="canvas"></canvas>
           </Col>
         </Row>
