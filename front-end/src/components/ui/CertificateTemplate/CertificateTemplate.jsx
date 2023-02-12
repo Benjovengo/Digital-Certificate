@@ -19,6 +19,7 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
       if (error) console.error(error)
     })
 
+    // Highlight uppercase letters
     const text = document.getElementById("institution__header");
     const words = text.innerText.split(" ");
     let highlightedText = "";
@@ -34,12 +35,6 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
         }
       }
     }
-
-
-
-    
-
-
 
     text.innerHTML = highlightedText;
   }, [hash])
