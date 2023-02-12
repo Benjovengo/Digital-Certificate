@@ -83,4 +83,13 @@ contract CertificateManager is IERC721Receiver {
         /// Emit event with the ID serial number
         emit certCreation(newIdSerialNumber);
     }
+
+    /** @notice Set the transaction hash - to get the address on Etherscan
+     *
+     * @param _serialNumber The serial number of the certificate
+     * @param _transactionHash The hash of the transaction
+     */
+    function setHash(uint256 _serialNumber, bytes32 _transactionHash) public {
+        certificateToken.setTransactionHash(_serialNumber, _transactionHash);
+    }
 }

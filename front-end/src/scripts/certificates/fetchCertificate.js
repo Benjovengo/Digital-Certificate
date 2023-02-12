@@ -21,8 +21,6 @@ export const fetchCertificatesList = async () => {
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
   const account = ethers.utils.getAddress(accounts[0])
 
-  /// Test if the address has an issued certificate associated with it
-  let certificateJSON
   /// Create new Id Token
   const listOfCertificates = await certificateToken.listCertificates(account)
 

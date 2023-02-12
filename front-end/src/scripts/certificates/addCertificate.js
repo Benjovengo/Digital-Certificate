@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 
 /** Contract(s) and Address(es) */
-// import IdentityToken from '../../abis/IdentityToken.json'; // contract ABI
+import CertificateToken from '../../abis/CertificateToken.json' // contract ABI
 import CertificateManager from '../../abis/CertificateManager.json' // contract ABI
 import config from '../../config.json' // contract addresses
 
@@ -12,19 +12,22 @@ export const issueNewCertificate = async (_blockchainAddress, _tokenURI, _hash) 
   const network = await provider.getNetwork()
   const signer = provider.getSigner() // get the signer
   /// Javascript "version" of the smart contract
+  const certificateToken = new ethers.Contract(config[network.chainId].certificateToken.address, CertificateToken, signer)
   const certificateManager = new ethers.Contract(config[network.chainId].certificateManager.address, CertificateManager, signer)
 
   /// Get the public key for the account
   const publicKey = await getPublicKey()
 
+  /// Get the number of certificates of an address
+  const listOfCertificates = await certificateToken.listCertificates(_blockchainAddress)
+  const total = listOfCertificates.length
+
   /// Create new Id Token
   const newHash = buf2hex(_hash).substring(0, 66)
   const createTx = await certificateManager.createNewCertificate(_blockchainAddress, _tokenURI, newHash, publicKey)
 
-
-  console.log(createTx)
-
-  return createTx
+  // Store the hash
+  certificateManager.setHash(total, createTx.hash)
 }
 
 /** Convert from ArrayBuffer to string */
