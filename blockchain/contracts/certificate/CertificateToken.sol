@@ -25,6 +25,7 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     Counters.Counter private certSerialNumber; // certificate number
 
     /// @dev Mappings - values for each identity
+    mapping(uint256 => bytes32) private transactionHash; // hash of the mint transaction
     mapping(uint256 => bytes32) private certHash; // hash of the registered certificate (for verification purposes)
     mapping(uint256 => string) private publicKey; // used to encrypt message to the user
     mapping(uint256 => bool) private finished; // false:in progress; true: finished
@@ -170,6 +171,18 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
      */
     function getHash(uint256 _serialNumber) public view returns (bytes32) {
         return certHash[_serialNumber];
+    }
+
+    /** @notice Set the transaction hash - to get the address on Etherscan
+     *
+     * @param _serialNumber The serial number of the certificate
+     * @param _transactionHash The hash of the transaction
+     */
+    function setTransactionHash(uint256 _serialNumber, bytes32 _transactionHash)
+        public
+        onlyOwner
+    {
+        transactionHash[_serialNumber] = _transactionHash;
     }
 
     /**
