@@ -125,9 +125,10 @@ const DisplayCertificates = () => {
               <p>Access your certificates and diplomas anywhere!</p>
             </Col>
           </Row>
-          <Row>
-            <Col md={3}>
+          <Row className='justify-content-center'>
+            <Col md={3} className='text-center'>
               <h3>Select a certificate</h3>
+              <p className='certifications__list'>from the list of certifications below</p>
               <select className='select__certificate' size={selectLength.toString()} multiple onChange={handleSelectCertification}>
                 {/* <option value="" disabled>Select a Certification</option> */}
                 {headers.map((option, index) => (
