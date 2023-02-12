@@ -1,11 +1,18 @@
 .template__wrapper {
   background-color: #FAFAF5;
   color: black;
+  margin: 0;
+  padding: 3em;
+}
+
+.inner__wrapper {
+  border: 5px solid #20202e;
 }
 
 .template__wrapper h1 {
   color: black;
   font-family: 'Playfair Display SC', serif;
+  font-size: 2.5rem;
 }
 
 .template__wrapper h2 {
@@ -19,5 +26,23 @@
 
 .template__wrapper p {
   color: black;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Luxurious Script', cursive;
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1em;
+  margin: 1em 0 1em 0;
+  padding: 0 8em;
+  text-align: center;
+}
+
+.template__wrapper .account__address {
+  color: #303030;
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 0.8rem;
+  margin: -0.5em 0 0.5em 0;
+}
+
+
+.template__wrapper .degree__in__area {
+  margin: 0;
 }

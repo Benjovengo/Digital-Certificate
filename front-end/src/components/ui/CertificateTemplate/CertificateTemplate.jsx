@@ -46,22 +46,62 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
     <Container>
       <div className='template__wrapper' id="divToExport">
         <Row>
-          <Col>
-            <h1>{institution}</h1>
-            <p>The Board of trustees of {institution}, upon recommendation of the faculty, in particular professor {advisor} (advisor), has conferred upon</p>
-            <h2>{fullName}</h2>
-            <p><span>{blockchainAddress}</span></p>
-            <p>the degree of</p>
-            <h2>{degree}</h2>
-            <p>in</p>
-            <h2>{area}</h2>
-            <p>With all the rights, honors, and privileges thereunto appertaining. In witness whereof, the seal of the University and the signatures as authorizes by the Board of Trustees, {institution}, are hereunto affixed, this <b>date</b>.</p>
-            <h2>Serial number: {certificateId}</h2>
-            <p>Hash: {hash}</p>
+          <div className="inner__wrapper">
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <h1>{institution}</h1>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <p>The Board of trustees of {institution}, upon recommendation of the faculty, in particular professor {advisor} (advisor), has conferred upon</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <h2>{fullName}</h2>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <p className='account__address'>{blockchainAddress}</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <p>the degree of</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <h2>{degree}</h2>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <p className='degree__in__area'>in</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <h2>{area}</h2>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-center'>
+                <p>With all the rights, honors, and privileges thereunto appertaining. In witness whereof, the seal of the University and the signatures as authorizes by the Board of Trustees, {institution}, are hereunto affixed, this <b>date</b>.</p>
+              </Col>
+            </Row>
+          </div>
+        </Row>
+        <Row>
+          <Col className='d-flex justify-content-center'>
+            <h2>Serial Number: {certificateId}</h2>
           </Col>
         </Row>
         <Row>
           <Col>
+          <p className='account__address'><b>Hash:</b> {hash}</p>
           <canvas id="canvas"></canvas>
           </Col>
         </Row>
