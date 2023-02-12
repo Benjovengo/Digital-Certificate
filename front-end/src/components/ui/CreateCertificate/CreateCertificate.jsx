@@ -11,6 +11,14 @@ import { issueNewCertificate } from '../../../scripts/certificates/addCertificat
 
 const CreateCertificate = () => {
   
+  /// Set default values for preview
+  window.onload = async function(e) {
+    /// Set today's date
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 3);
+    const today = currentDate.toISOString().substring(0,10);
+    document.getElementById('todayDate').value = today
+  }
 
   /**
    * Submit Form - handler
@@ -87,8 +95,8 @@ const CreateCertificate = () => {
                       <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4" placeholder='4.0'/>
                     </Col>
                     <Col>
-                      <label htmlFor="date">Date</label><br/>
-                      <input type="date" id="date" name="date" disabled/>
+                      <label htmlFor="todayDate">Date</label><br/>
+                      <input type="date" id="todayDate" name="todayDate" disabled/>
                     </Col>
                   </Row>
                   <Row>
