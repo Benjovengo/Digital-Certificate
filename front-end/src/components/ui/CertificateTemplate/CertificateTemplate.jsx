@@ -18,6 +18,16 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
     QRCode.toCanvas(canvas, hash, function (error) {
       if (error) console.error(error)
     })
+
+    const text = document.getElementById("institution__header");
+    const words = text.innerText.split(" ");
+    let highlightedText = "";
+
+    for (let i = 0; i < words.length; i++) {
+      highlightedText += `<span class="highlighted">${words[i][0]}</span>${words[i].slice(1)} `;
+    }
+
+    text.innerHTML = highlightedText;
   }, [hash])
 
   /**
@@ -50,7 +60,7 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
           <div className="inner__wrapper">
             <Row>
               <Col className='d-flex justify-content-center'>
-                <h1>{institution}</h1>
+                <h1 id="institution__header">{institution}</h1>
               </Col>
             </Row>
             <Row>
