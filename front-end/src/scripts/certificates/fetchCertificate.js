@@ -68,8 +68,7 @@ export const fetchCertificateJSON = async (_serialNumber) => {
     const response = await fetch(uri)
     certificateJSON = await response.json()
     certificateJSON.hash = await certificateToken.getHash(_serialNumber)
-    certificateJSON.txHash = await certificateToken.getTxHash(_serialNumber) // Get the transaction hash
-    console.log(await certificateToken.getTxHash(_serialNumber))
+    certificateJSON.txHash = await certificateToken.getTxHash(_serialNumber - 1) // Get the transaction hash - index starts at zero
   } else {
     certificateJSON = ''
   }
