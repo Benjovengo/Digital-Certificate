@@ -52,7 +52,7 @@ const DisplayCertificates = () => {
     // loop through all the certificates
     for (let i = 0; i < list.length; i++) {
       JSON = await fetchCertificateJSON(list[i])
-      certificateHeaders.push({value: list[i], label: JSON.institution + ' - ' + JSON.degree})
+      certificateHeaders.push({value: list[i], label: JSON.degree + ' - ' + JSON.institution})
     }
 
     // Set hook for the headers to be used on the 'select' element
@@ -122,8 +122,8 @@ const DisplayCertificates = () => {
             </Col>
           </Row>
           <Row>
-            <Col>
-              <select size="10" multiple onChange={handleSelectCertification}>
+            <Col md={3}>
+              <select className='select__certificate' size="10" multiple onChange={handleSelectCertification}>
                 {/* <option value="" disabled>Select a Certification</option> */}
                 {headers.map((option, index) => (
                   <option key={index} value={option.value}>
@@ -142,7 +142,6 @@ const DisplayCertificates = () => {
               }
             </Col>
           </Row>
-          
 
         </Container>
       </section>
