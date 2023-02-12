@@ -19,7 +19,12 @@ export const issueNewCertificate = async (_blockchainAddress, _tokenURI, _hash) 
 
   /// Create new Id Token
   const newHash = buf2hex(_hash).substring(0, 66)
-  await certificateManager.createNewCertificate(_blockchainAddress, _tokenURI, newHash, publicKey)
+  const createTx = await certificateManager.createNewCertificate(_blockchainAddress, _tokenURI, newHash, publicKey)
+
+
+  console.log(createTx)
+
+  return createTx
 }
 
 /** Convert from ArrayBuffer to string */
