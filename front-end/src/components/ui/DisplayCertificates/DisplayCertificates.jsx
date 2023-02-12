@@ -141,7 +141,13 @@ const DisplayCertificates = () => {
             <Col xs={9}>
               { (fullName==='') ?
               <>
-                <h1>No certificate page!</h1>
+                <Row className='justify-content-center mt-5'>
+                  <Col className='text-center'>
+                    <h2>Please select a certification!</h2>
+                    <p>Select a certification from the list on the left to show the information.</p>
+                  </Col>
+                </Row>
+                
               </> : <>
                 <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} hash={hash} date={dateString} txHash={txHash} />
               </>
