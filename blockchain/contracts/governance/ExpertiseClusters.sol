@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-/// @notice Owned by the Timelock contract.
+/// @notice This contract is owned by the Timelock contract.
 import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 /**
