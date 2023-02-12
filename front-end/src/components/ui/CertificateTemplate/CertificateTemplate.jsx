@@ -10,7 +10,7 @@ import universityBadge from '../../../assets/images/university_badge_signed.png'
 var QRCode = require('qrcode')
 
 
-const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree, area, advisor, certificateId, hash, date }) => {
+const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree, area, advisor, certificateId, hash, date, txHash }) => {
 
 
   useEffect(() => {
@@ -134,7 +134,7 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
           <Col>
             <p><b>Certificate Serial Number:</b> <span>{certificateId}</span></p>
             <p className='account__address'><b>Certificate hash:</b> <span>{hash}</span></p>
-            <h3><br/>Etherscan Link - put QR Code</h3>
+            <h3><br/>Etherscan Link - {txHash}</h3>
           </Col>
         </Row>
         <div>

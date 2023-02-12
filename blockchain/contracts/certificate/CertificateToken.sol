@@ -173,6 +173,14 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return certHash[_serialNumber];
     }
 
+    /** @notice Get the minting transaction hash of a certification
+     *
+     * @param _serialNumber The serial number of the certification
+     */
+    function getTxHash(uint256 _serialNumber) public view returns (bytes32) {
+        return transactionHash[_serialNumber];
+    }
+
     /** @notice Set the transaction hash - to get the address on Etherscan
      *
      * @param _serialNumber The serial number of the certificate

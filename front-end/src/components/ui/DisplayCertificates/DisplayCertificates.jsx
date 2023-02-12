@@ -28,6 +28,7 @@ const DisplayCertificates = () => {
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
   const [hash, setHash] = useState('');
+  const [txHash, setTxHash] = useState('');
   const [dateString, setDateString] = useState('');
 
 
@@ -105,6 +106,7 @@ const DisplayCertificates = () => {
     setArea(JSON.studyingArea)
     setAdvisor(JSON.advisor)
     setHash(JSON.hash)
+    setTxHash(JSON.txHash)
   };
   
 
@@ -140,7 +142,7 @@ const DisplayCertificates = () => {
               <>
                 <h1>No certificate page!</h1>
               </> : <>
-                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} hash={hash} date={dateString} />
+                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} hash={hash} date={dateString} txHash={txHash} />
               </>
               }
             </Col>
