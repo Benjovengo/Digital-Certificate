@@ -223,12 +223,13 @@ const CreateId = () => {
                     </Row>
                   </div>
                 </Row>
-                <Row>
-                  <Col className="d-flex justify-content-center mt-4">
+                <Row className='justify-content-center mt-5'>
+                  <Col className='text-center'>
                     <button className='submit__btn' onClick={() => {identityFromBlockchain()}} >Load your ID</button>
                   </Col>
-                  <Col className="d-flex justify-content-center mt-4">
+                  <Col className='text-center'>
                     <button className='submit__btn'>View more info</button>
+                    <p><i>not implemented yet</i></p>
                   </Col>
                 </Row>
             </Col>
