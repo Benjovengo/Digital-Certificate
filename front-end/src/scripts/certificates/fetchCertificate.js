@@ -27,7 +27,7 @@ export const fetchCertificatesList = async () => {
   // Convert the serial numbers of the certificates from BigNumbers to Numbers
   let certificates = []
   for (let i = 0; i < listOfCertificates.length; i++) {
-    certificates.push(Number(listOfCertificates[i]));
+    certificates.push(Number(listOfCertificates[i]))
   }
 
   /// DEBUG logs
@@ -35,11 +35,7 @@ export const fetchCertificatesList = async () => {
   console.log('List: ', certificates) */
 
   return certificates
-
 }
-
-
-
 
 /** Fetch certificate data for the logged blockchain address
  *
