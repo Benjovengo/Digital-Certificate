@@ -36,7 +36,7 @@ const CreateCertificate = () => {
     const studyingArea = e.target.studyingArea.value;
     const degree = e.target.degree.value;
     const gpa = e.target.gpa.value;
-    const date = e.target.date.value;
+    const date = e.target.todayDate.value;
     
     // Javascript file to add a certificate
     const metadata = await uploadCertificateJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, studyingArea, degree, gpa, date);
