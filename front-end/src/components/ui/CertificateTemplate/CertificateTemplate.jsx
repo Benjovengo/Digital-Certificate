@@ -56,7 +56,6 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
     element.style.height = '770px'; */
     const divHeightPx = element.style.height
     const divHeight = Number(divHeightPx.slice(0,-2))
-    console.log(divHeight)
     var opt = {
         filename:     `Certificate_${fullName.replace(/\s+/g, '')}_from.pdf`,
         html2canvas:  { height: divHeight },
