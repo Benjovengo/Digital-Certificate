@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from "reactstrap";
 
 /// Style
@@ -10,15 +10,11 @@ import { issueNewCertificate } from '../../../scripts/certificates/addCertificat
 
 
 const CreateCertificate = () => {
-  
-  /// Set default values for preview
-  useEffect(() => function(e) {
-    /// Set today's date
-    var currentDate = new Date();
-    currentDate.setDate(currentDate.getDate());
-    const today = currentDate.toISOString().substring(0,10);
-    document.getElementById('date').value = today
-  }, [])
+
+  // Get today's date
+  var currentDate = new Date();
+  currentDate.setDate(currentDate.getDate());
+  const today = currentDate.toISOString().substring(0,10);
 
   /**
    * Submit Form - handler
@@ -97,7 +93,7 @@ const CreateCertificate = () => {
                     </Col>
                     <Col>
                       <label htmlFor="date">Date</label><br/>
-                      <input type="date" id="date" name="date" disabled/>
+                      <input type="date" id="date" name="date" defaultValue={today} disabled/>
                     </Col>
                   </Row>
                   <Row>
