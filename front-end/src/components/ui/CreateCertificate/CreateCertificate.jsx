@@ -17,7 +17,7 @@ const CreateCertificate = () => {
     var currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 3);
     const today = currentDate.toISOString().substring(0,10);
-    document.getElementById('todayDate').value = today
+    document.getElementById('date').value = today
   }
 
   /**
@@ -96,8 +96,8 @@ const CreateCertificate = () => {
                       <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4" placeholder='4.0'/>
                     </Col>
                     <Col>
-                      <label htmlFor="todayDate">Date</label><br/>
-                      <input type="date" id="todayDate" name="todayDate" disabled/>
+                      <label htmlFor="date">Date</label><br/>
+                      <input type="date" id="date" name="date" disabled/>
                     </Col>
                   </Row>
                   <Row>

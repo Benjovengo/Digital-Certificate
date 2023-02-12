@@ -8,7 +8,7 @@ import './certificate-template.css'
 var QRCode = require('qrcode')
 
 
-const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree, area, advisor, certificateId, hash }) => {
+const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree, area, advisor, certificateId, hash, date }) => {
 
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
             </Row>
             <Row>
               <Col className='d-flex justify-content-center'>
-                <p>With all the rights, honors, and privileges thereunto appertaining. In witness whereof, the seal of the University and the signatures as authorizes by the Board of Trustees, {institution}, are hereunto affixed, this <b>date</b>.</p>
+                <p>With all the rights, honors, and privileges thereunto appertaining. In witness whereof, the seal of the University and the signatures as authorizes by the Board of Trustees, {institution}, are hereunto affixed, this {date}.</p>
               </Col>
             </Row>
           </div>

@@ -28,7 +28,7 @@ const DisplayCertificates = () => {
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
   const [hash, setHash] = useState('');
-  const [date, setDate] = useState('');
+  const [dateString, setDateString] = useState('');
 
 
   /** Update (on loading) the list of certificates to be selected */
@@ -76,8 +76,12 @@ const DisplayCertificates = () => {
 
     let identityName = (identity? identity.firstName + ' ' + identity.lastName : 'Identity Not Found')
 
-        // Date
-        const date = new Date('2023-02-11' + 'T00:00:00');
+        /// Get today's date
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 3);
+        const today = currentDate.toISOString().substring(0,10);
+        // Display date
+        const date = new Date((JSON.date? JSON.date : today) + 'T00:00:00');
         const options = {
         weekday: 'long',
         year: 'numeric',
@@ -85,7 +89,7 @@ const DisplayCertificates = () => {
         day: 'numeric'
         };
         const dateString = date.toLocaleDateString('en-US', options);
-        console.log(dateString)
+        setDateString(dateString)
     
 
     // Set hooks
@@ -131,7 +135,7 @@ const DisplayCertificates = () => {
               <>
                 <h1>No certificate page!</h1>
               </> : <>
-                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} hash={hash} />
+                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} hash={hash} date={dateString} />
               </>
               }
             </Col>
