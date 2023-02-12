@@ -67,15 +67,35 @@
   margin: 2em 0 1em 0;
 }
 
+.export__to__pdf {
+  margin: 1.5em 0;
+}
+
+.export__to__pdf button {
+  background: #F89104;
+  border: none;
+  border-radius: 0 !important;
+  color: #FFF;
+  font-size: 0.9rem;
+  outline: none;
+  padding: 7px 25px !important;
+  width: auto;
+}
+
+.export__to__pdf button:hover {
+  background: #D87E01;
+}
+
 .metadata__wrapper {
   background-color: #20202e;
-  margin-top: 2em;
+  margin-top: 3em;
+  padding: 1em 1em 2em 1em;
 }
 
 .metadata__wrapper h3 {
   color: white;
   font-family: 'Playfair Display SC', serif;
-  margin: 0.75em 0 1.25em 0;
+  margin: 0em 0 1.25em 0;
 }
 
 
@@ -95,4 +115,18 @@
   font-family: 'Ubuntu Mono', monospace;
   font-size: 1.1rem;
   margin-left: 0.5em;
+}
+
+.metadata__wrapper a {
+  color: #F89104;
+  cursor: pointer;
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 1.1rem;
+  margin-left: 0.5em;
+  text-decoration: none;
+}
+
+.metadata__wrapper a:hover {
+  color: #D87E01;
+  text-decoration: underline;
 }

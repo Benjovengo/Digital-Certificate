@@ -14,9 +14,15 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
 
 
   useEffect(() => {
+    // Certification Hash QR Code
     var canvas = document.getElementById('canvas')
-
     QRCode.toCanvas(canvas, hash, function (error) {
+      if (error) console.error(error)
+    })
+
+    // Certification Hash QR Code
+    var canvasEtherscan = document.getElementById('canvasEtherscan')
+    QRCode.toCanvas(canvasEtherscan, `https://goerli.etherscan.io/tx/${txHash}`, function (error) {
       if (error) console.error(error)
     })
 
@@ -122,8 +128,17 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
             </Row>
           </div>
         </Row>
-       
       </div>
+
+      <div className='export__to__pdf'>
+        <Row>
+          <Col>
+            <button onClick={handleExport}>Export certificate to PDF</button>
+          </Col>
+        </Row> 
+      </div>
+      
+
       <div className='metadata__wrapper'>
         <Row>
           <Col className='d-flex justify-content-center'>
@@ -133,22 +148,27 @@ const CertificateTemplate = ({ institution, fullName, blockchainAddress, degree,
          <Row>
           <Col>
             <p><b>Certificate Serial Number:</b> <span>{certificateId}</span></p>
-            <p className='account__address'><b>Certificate hash:</b> <span>{hash}</span></p>
-            <h3><br/>Etherscan Link - {txHash}</h3>
+            <p><b>Certificate hash:</b> <span>{hash}</span></p>
+            <h5><br/>Check minting transaction on Etherscan</h5>
+            <p><a href={`https://goerli.etherscan.io/tx/${txHash}`}>{`https://goerli.etherscan.io/tx/${txHash}`}</a></p>
           </Col>
         </Row>
-        <div>
-          <Row className='justify-content-center'>
-          <Col className='text-center'>
-          <h5>Certificate Hash</h5>
-          <canvas id="canvas"></canvas>
-          </Col>
-        </Row>
+        <div className='qr__code__wrapper'>
+          <Row className='justify-content-center mt-5'>
+            <Col className='text-center'>
+              <h5>Address on Etherscan</h5>
+              <canvas id="canvasEtherscan"></canvas>
+            </Col>
+            <Col className='text-center'>
+              <h5>Certificate Hash</h5>
+              <canvas id="canvas"></canvas>
+            </Col>
+          </Row>
         </div>
         
       </div>
     </Container>
-    <button onClick={handleExport}>Export to PDF</button>
+    
 
     </>
   )
