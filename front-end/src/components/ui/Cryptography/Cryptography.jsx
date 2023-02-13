@@ -49,13 +49,17 @@ const Cryptography = () => {
     const encrypted = encryptData(publicKey, data)
 
     /// INTERMEDIARY OPERATIONS
-    let prototype = Object.getPrototypeOf(encrypted)
+    const dummyData = ""
+    const encryptDummy = encryptData(publicKey, dummyData)
+
+    let prototype = Object.getPrototypeOf(encryptDummy)
     const encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' })
     extractBinaryData(encryptedBlob).then((uint8Array) => {
       Object.setPrototypeOf(uint8Array, prototype)
 
       decryptData(account, uint8Array).then((uint8Data) => {
-        console.log('Decrypted: ', uint8Data)
+        //console.log('Decrypted: ', uint8Data)
+        document.getElementById('publicKeyText').innerHTML = uint8Data
       })
     });
 
