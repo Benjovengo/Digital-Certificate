@@ -129,6 +129,7 @@ const CreateId = () => {
       identityData = await fetchIdentity()
     } catch(error) {
       console.log('Error loading ID from the blockchain!')
+      console.log(error)
     }
     //console.log('Identity Data:', identityData)
 
