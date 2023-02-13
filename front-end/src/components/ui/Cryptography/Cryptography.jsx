@@ -302,9 +302,9 @@ const sendDataToIPFS = async (_encryptedContents, _fileName) => {
     <>
       <div className='cryptography__container'>
         <h1>Cryptography</h1>
-        <button onClick={() => {submitEncryptedFile()}}>Get Public Key</button>
+        <button onClick={() => {submitEncryptedFile()}}>Send File</button>
         <h3 id='publicKeyText'>Public Key</h3>
-        <button onClick={() => {downloadFile(fileURL)}}>Use DotEnv</button>
+        <button onClick={() => {downloadFile(fileURL)}}>Decrypt</button>
 
         <form onSubmit={sendFileToIPFS}>
           <input type="file" onChange={(e) => setFileImg(e.target.files[0])} required />
