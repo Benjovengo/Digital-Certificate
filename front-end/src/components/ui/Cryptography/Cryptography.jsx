@@ -47,15 +47,39 @@ const Cryptography = () => {
     // ENCRYPT
     const data = "Fabio Pereira Benjovengo"
     const encrypted = encryptData(publicKey, data)
+    console.log(encrypted); // [1, 2, 3, 4, 5]
+    let prototype = Object.getPrototypeOf(encrypted)
 
-    //DECRYPT
+    /// INTERMEDIARY OPERATIONS
+    const encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' })
+    extractBinaryData(encryptedBlob).then((uint8Array) => {
+      Object.setPrototypeOf(uint8Array, prototype)
+      console.log(uint8Array); // [1, 2, 3, 4, 5]
+
+      decryptData(account, uint8Array).then((uint8Data) => {
+        console.log('Decrypted: ', uint8Data)
+      })
+    });
+
+
+/*     //DECRYPT
     const decrypted = await decryptData(account, encrypted)
 
-    document.getElementById('publicKeyText').innerHTML = decrypted
+    // Display the decrypted string
+    document.getElementById('publicKeyText').innerHTML = decrypted */
   }
   
 
-
+function extractBinaryData(blob) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+    reader.readAsArrayBuffer(blob);
+    reader.onload = function() {
+      resolve(new Uint8Array(reader.result));
+    };
+    reader.onerror = reject;
+  });
+}
 
 
 
