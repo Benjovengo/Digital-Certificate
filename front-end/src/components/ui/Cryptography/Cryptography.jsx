@@ -10,7 +10,6 @@ import { encryptData, decryptData } from '../../../scripts/identity/cryptography
 // Pinata
 import axios from "axios";
 const FormData = require('form-data')
-const JWT = `Bearer ${process.env.REACT_APP_PINATA_JWT}`
 
 // Ethers
 const ethers = require("ethers")
