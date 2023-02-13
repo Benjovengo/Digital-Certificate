@@ -26,6 +26,7 @@ const Cryptography = () => {
 
   // Hooks
   const [responseIPFS, setResponseIPFS] = useState('') // data from the IPFS
+  const [encPrototype, setEncPrototype] = useState(null)
 
 
   /**
@@ -33,10 +34,54 @@ const Cryptography = () => {
    */
   useEffect(() => {
     if (responseIPFS!== '') {
-      console.log(responseIPFS)
+      if (encPrototype === null){
+        setPrototype()
+      } else {
+        decryptMessage(responseIPFS)
+      }      
     }
-  }, [responseIPFS])
+  }, [responseIPFS, encPrototype])
 
+
+  /**
+   * Decrypt a message
+   * 
+   * @param {blob} _encryptedBlob Blob containing the encrypted message
+   */
+  const decryptMessage = async (_encryptedBlob) => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    const account = ethers.utils.getAddress(accounts[0])
+    
+    extractBinaryData(_encryptedBlob).then((uint8Array) => {
+      // Set the prototype
+      Object.setPrototypeOf(uint8Array, encPrototype)
+      decryptData(account, uint8Array).then((uint8Data) => {
+        // Decrypt the message
+        document.getElementById('publicKeyText').innerHTML = uint8Data
+      })
+    });
+  }
+
+
+  /**
+   * Set the prototype for decrypting the message
+   */
+  const setPrototype = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    const account = ethers.utils.getAddress(accounts[0])
+    // Key is returned as base64
+    const keyB64 = await window.ethereum.request({
+      method: 'eth_getEncryptionPublicKey',
+      params: [account],
+    });
+    const publicKey = Buffer.from(keyB64, 'base64');
+    // Encrypt Dummy
+    if (encPrototype===null) {
+      const data = ""
+      const encryptDummy = encryptData(publicKey, data)
+      setEncPrototype(Object.getPrototypeOf(encryptDummy))
+    }
+  }
 
 
   /**
@@ -73,7 +118,7 @@ const Cryptography = () => {
 
 
 
-  const getPublicKey = async () => {
+  const submitEncryptedFile = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
     const account = ethers.utils.getAddress(accounts[0])
 
@@ -92,11 +137,13 @@ const Cryptography = () => {
     const dummyData = ""
     const encryptDummy = encryptData(publicKey, dummyData)
 
-    /// Set Prototype
-    let prototype = Object.getPrototypeOf(encryptDummy)
+    /// Blob
     const encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' })
 
-    await sendDataToIPFS(encryptedBlob) // send file to IPFS
+    await sendDataToIPFS(encryptedBlob, "encrypted.dat") // send file to IPFS    
+
+    /// Set Prototype
+    const prototype = Object.getPrototypeOf(encryptDummy)
 
     extractBinaryData(encryptedBlob).then((uint8Array) => {
       Object.setPrototypeOf(uint8Array, prototype)
@@ -123,9 +170,9 @@ function extractBinaryData(blob) {
 
 
 
-const sendDataToIPFS = async (_encryptedContents) => {
+const sendDataToIPFS = async (_encryptedContents, _fileName) => {
   try {
-    const dataFile = new File([_encryptedContents], "encrypted.dat")
+    const dataFile = new File([_encryptedContents], _fileName)
     const formData = new FormData()
     formData.append('file', dataFile)
 
@@ -140,11 +187,6 @@ const sendDataToIPFS = async (_encryptedContents) => {
         'Content-Type': 'multipart/form-data'
       }
     })
-
-    console.log(resFile)
-
-    console.log("final ", `ipfs://${resFile.data.IpfsHash}`)
-    //mintNFT(tokenURI, currentAccount)   // pass the winner
 
   } catch (error) {
       console.log("JSON to IPFS: ")
@@ -261,7 +303,7 @@ const sendDataToIPFS = async (_encryptedContents) => {
     <>
       <div className='cryptography__container'>
         <h1>Cryptography</h1>
-        <button onClick={() => {getPublicKey()}}>Get Public Key</button>
+        <button onClick={() => {submitEncryptedFile()}}>Get Public Key</button>
         <h3 id='publicKeyText'>Public Key</h3>
         <button onClick={() => {downloadFile(fileURL)}}>Use DotEnv</button>
 
