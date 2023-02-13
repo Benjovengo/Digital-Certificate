@@ -48,9 +48,9 @@ const Cryptography = () => {
     const data = "Fabio Pereira Benjovengo"
     const encrypted = encryptData(publicKey, data)
     console.log(encrypted); // [1, 2, 3, 4, 5]
-    let prototype = Object.getPrototypeOf(encrypted)
 
     /// INTERMEDIARY OPERATIONS
+    let prototype = Object.getPrototypeOf(encrypted)
     const encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' })
     extractBinaryData(encryptedBlob).then((uint8Array) => {
       Object.setPrototypeOf(uint8Array, prototype)
