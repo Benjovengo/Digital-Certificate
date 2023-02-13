@@ -191,7 +191,7 @@ const CreateId = () => {
         <Container fluid>
           <Row>
 
-            <Col>
+            <Col xs={4} className='id__preview__col'>
                 <Row>
                   <Col className='text-center'>
                     <h2 className='main__header'>Your digital ID</h2>

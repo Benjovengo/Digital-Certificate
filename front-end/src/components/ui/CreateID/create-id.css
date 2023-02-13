@@ -50,7 +50,9 @@
   white-space: nowrap;
 }
 
-
+.id__preview__col {
+  max-width: 40%;
+}
 
 .view__info__wrapper {
   margin-top: 5em;
