@@ -47,14 +47,12 @@ const Cryptography = () => {
     // ENCRYPT
     const data = "Fabio Pereira Benjovengo"
     const encrypted = encryptData(publicKey, data)
-    console.log(encrypted); // [1, 2, 3, 4, 5]
 
     /// INTERMEDIARY OPERATIONS
     let prototype = Object.getPrototypeOf(encrypted)
     const encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' })
     extractBinaryData(encryptedBlob).then((uint8Array) => {
       Object.setPrototypeOf(uint8Array, prototype)
-      console.log(uint8Array); // [1, 2, 3, 4, 5]
 
       decryptData(account, uint8Array).then((uint8Data) => {
         console.log('Decrypted: ', uint8Data)
