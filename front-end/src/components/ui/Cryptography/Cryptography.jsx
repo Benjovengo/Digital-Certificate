@@ -50,31 +50,10 @@ const Cryptography = () => {
 
     /// INTERMEDIARY OPERATIONS
     let prototype = Object.getPrototypeOf(encrypted)
-    console.log(prototype)
-
-    // create a Blob
-    let uint8Array = new Uint8Array(Object.keys(prototype).map(key => key.charCodeAt(0)));
-    const prototypeBlob = new Blob([uint8Array.buffer], { type: 'application/octet-stream' });
-    console.log(prototypeBlob)
-
-
     const encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' })
     extractBinaryData(encryptedBlob).then((uint8Array) => {
       Object.setPrototypeOf(uint8Array, prototype)
 
-      /// read file
-      extractBinaryData(prototypeBlob).then((prototypeBinary) => {
-        let uint8Array = prototypeBinary
-        let keys = [...uint8Array].map(charCode => String.fromCharCode(charCode)).join('');
-        let proto = {};
-        keys.split(',').forEach(key => proto[key] = undefined);
-
-        let obj = Object.create(proto);
-
-        console.log(obj);
-      })
-
-      /// DECRYPT
       decryptData(account, uint8Array).then((uint8Data) => {
         console.log('Decrypted: ', uint8Data)
       })
