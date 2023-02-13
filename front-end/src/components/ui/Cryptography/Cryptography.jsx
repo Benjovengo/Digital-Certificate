@@ -20,7 +20,7 @@ const ethers = require("ethers")
 const Cryptography = () => {
 
 
-  //const fileURL = "https://gateway.pinata.cloud/ipfs/QmY9J871G3YHYS5Zip9LXNnTcaHG59wNNdT9aUun1e3Kdt"
+  //const fileURL = "https://gateway.pinata.cloud/ipfs/QmY9J871G3YHYS5Zip9LXNnTcaHG59wNNdT9aUun1e3Kdt" // JSON
   const fileURL = "https://gateway.pinata.cloud/ipfs/QmScJbwbWe3SCSfn94LRHDwpLmScqHcNdqavtKZPBPi6YB"
 
 
@@ -47,7 +47,7 @@ const Cryptography = () => {
   const downloadFile = async (_fileURL) => {
     const req = new XMLHttpRequest();
     req.onreadystatechange = processRequest(req);
-    req.responseType = 'arraybuffer';
+    req.responseType = 'blob';
     req.open("GET", _fileURL);
     req.send();
   }
