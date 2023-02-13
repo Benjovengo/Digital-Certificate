@@ -19,9 +19,11 @@ const ethers = require("ethers")
 // Main Function
 const Cryptography = () => {
 
+  const req = new XMLHttpRequest();
+
   const uploadFile = async () => {
     /// Config Pinata API
-    var config = {
+    /* var config = {
       method: 'get',
       url: 'https://api.pinata.cloud/data/testAuthentication',
       headers: {
@@ -30,8 +32,30 @@ const Cryptography = () => {
     };
   
     const res = await axios(config)
-    console.log(res.data)
+    console.log(res.data) */
+
+    
+    //req.addEventListener("load", reqListener);
+    req.onreadystatechange = processRequest;
+    req.open("GET", "https://gateway.pinata.cloud/ipfs/QmY9J871G3YHYS5Zip9LXNnTcaHG59wNNdT9aUun1e3Kdt");
+    req.send();
+
   }
+
+
+  function processRequest()
+{
+  if (req.readyState == 4) {
+    var resp = req.responseText // JSON.parse(req.responseText);
+
+    console.log(req)
+
+    // resp now has the text and you can process it.
+    console.log('Download: ', resp);
+  }
+}
+
+
 
   const getPublicKey = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -81,6 +105,8 @@ function extractBinaryData(blob) {
   });
 }
 
+
+
 const sendDataToIPFS = async (_encryptedContents) => {
   try {
     const dataFile = new File([_encryptedContents], "encrypted.dat")
@@ -99,8 +125,7 @@ const sendDataToIPFS = async (_encryptedContents) => {
       }
     })
 
-
-
+    console.log(resFile)
 
     console.log("final ", `ipfs://${resFile.data.IpfsHash}`)
     //mintNFT(tokenURI, currentAccount)   // pass the winner
