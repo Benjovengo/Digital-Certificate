@@ -59,12 +59,6 @@ const Cryptography = () => {
       })
     });
 
-
-/*     //DECRYPT
-    const decrypted = await decryptData(account, encrypted)
-
-    // Display the decrypted string
-    document.getElementById('publicKeyText').innerHTML = decrypted */
   }
   
 
