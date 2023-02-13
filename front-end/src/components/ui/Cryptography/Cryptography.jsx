@@ -19,7 +19,6 @@ const ethers = require("ethers")
 // Main Function
 const Cryptography = () => {
 
-  const req = new XMLHttpRequest();
 
   const uploadFile = async () => {
     /// Config Pinata API
@@ -35,23 +34,26 @@ const Cryptography = () => {
     console.log(res.data) */
 
     
-    //req.addEventListener("load", reqListener);
-    req.onreadystatechange = processRequest;
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = processRequest(req);
+    req.responseType = 'arraybuffer';
     req.open("GET", "https://gateway.pinata.cloud/ipfs/QmY9J871G3YHYS5Zip9LXNnTcaHG59wNNdT9aUun1e3Kdt");
     req.send();
 
   }
 
 
-  function processRequest()
+  function processRequest(requestData)
 {
-  if (req.readyState == 4) {
-    var resp = req.responseText // JSON.parse(req.responseText);
+  return function() {
+    if (requestData.readyState == 4) {
+      var resp = requestData.response // JSON.parse(req.responseText);
 
-    console.log(req)
+      //console.log(req)
 
-    // resp now has the text and you can process it.
-    console.log('Download: ', resp);
+      // resp now has the text and you can process it.
+      console.log('Download: ', resp);
+    }
   }
 }
 
