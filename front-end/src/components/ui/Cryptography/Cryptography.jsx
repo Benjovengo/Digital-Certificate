@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Buffer } from 'buffer';
 
 // Style
@@ -20,39 +20,53 @@ const ethers = require("ethers")
 const Cryptography = () => {
 
 
-  const uploadFile = async () => {
-    /// Config Pinata API
-    /* var config = {
-      method: 'get',
-      url: 'https://api.pinata.cloud/data/testAuthentication',
-      headers: {
-        'Authorization': JWT
-      },
-    };
-  
-    const res = await axios(config)
-    console.log(res.data) */
+  //const fileURL = "https://gateway.pinata.cloud/ipfs/QmY9J871G3YHYS5Zip9LXNnTcaHG59wNNdT9aUun1e3Kdt"
+  const fileURL = "https://gateway.pinata.cloud/ipfs/QmScJbwbWe3SCSfn94LRHDwpLmScqHcNdqavtKZPBPi6YB"
 
-    
+
+  // Hooks
+  const [responseIPFS, setResponseIPFS] = useState('') // data from the IPFS
+
+
+  /**
+   * Perform action when there is a new response from an HTTP request on the IPFS
+   */
+  useEffect(() => {
+    if (responseIPFS!== '') {
+      console.log(responseIPFS)
+    }
+  }, [responseIPFS])
+
+
+
+  /**
+   * Download data from a file in Pinata
+   * 
+   * @param {string} _fileURL The URL of the data in Pinata (IPFS)
+   */
+  const downloadFile = async (_fileURL) => {
     const req = new XMLHttpRequest();
     req.onreadystatechange = processRequest(req);
     req.responseType = 'arraybuffer';
-    req.open("GET", "https://gateway.pinata.cloud/ipfs/QmY9J871G3YHYS5Zip9LXNnTcaHG59wNNdT9aUun1e3Kdt");
+    req.open("GET", _fileURL);
     req.send();
-
   }
 
 
-  function processRequest(requestData)
-{
+  /**
+   * Function handler for the HTTP request
+   * 
+   * @param {XMLHttpRequest} _requestData HTTP request object
+   * 
+   * @dev Set the hook for the data retrieved as the response of the HTTP request
+   */
+  function processRequest(_requestData) {
   return function() {
-    if (requestData.readyState == 4) {
-      var resp = requestData.response // JSON.parse(req.responseText);
-
-      //console.log(req)
-
-      // resp now has the text and you can process it.
-      console.log('Download: ', resp);
+    // check if successful
+    if (_requestData.readyState == 4) {
+      var response = _requestData.response
+      // set the hook
+      setResponseIPFS(response)
     }
   }
 }
@@ -249,7 +263,7 @@ const sendDataToIPFS = async (_encryptedContents) => {
         <h1>Cryptography</h1>
         <button onClick={() => {getPublicKey()}}>Get Public Key</button>
         <h3 id='publicKeyText'>Public Key</h3>
-        <button onClick={() => {uploadFile()}}>Use DotEnv</button>
+        <button onClick={() => {downloadFile(fileURL)}}>Use DotEnv</button>
 
         <form onSubmit={sendFileToIPFS}>
           <input type="file" onChange={(e) => setFileImg(e.target.files[0])} required />
