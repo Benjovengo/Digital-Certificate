@@ -52,8 +52,12 @@ const Cryptography = () => {
     const dummyData = ""
     const encryptDummy = encryptData(publicKey, dummyData)
 
+    /// Set Prototype
     let prototype = Object.getPrototypeOf(encryptDummy)
     const encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' })
+
+    await sendDataToIPFS(encryptedBlob) // send file to IPFS
+
     extractBinaryData(encryptedBlob).then((uint8Array) => {
       Object.setPrototypeOf(uint8Array, prototype)
 
@@ -64,7 +68,7 @@ const Cryptography = () => {
     });
 
   }
-  
+
 
 function extractBinaryData(blob) {
   return new Promise((resolve, reject) => {
@@ -76,6 +80,40 @@ function extractBinaryData(blob) {
     reader.onerror = reject;
   });
 }
+
+const sendDataToIPFS = async (_encryptedContents) => {
+  try {
+    const dataFile = new File([_encryptedContents], "encrypted.dat")
+    const formData = new FormData()
+    formData.append('file', dataFile)
+
+    
+    const resFile = await axios({
+      method: 'post',
+      url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+      data: formData,
+      headers: {
+        pinata_api_key: `${process.env.REACT_APP_PINATA_API_KEY}`,
+        pinata_secret_api_key: `${process.env.REACT_APP_PINATA_API_SECRET}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+
+
+
+    console.log("final ", `ipfs://${resFile.data.IpfsHash}`)
+    //mintNFT(tokenURI, currentAccount)   // pass the winner
+
+  } catch (error) {
+      console.log("JSON to IPFS: ")
+      console.log(error);
+  }
+}
+
+
+
+
 
 
 
