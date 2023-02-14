@@ -52,7 +52,7 @@ async function main () {
    * Governance Contracts
    * 
    * @dev Deployment scripts for the contracts responsible
-   *      for the governance of the system
+   *      for the governance of the system.
    */
 
 // We recommend this pattern to be able to use async/await everywhere
