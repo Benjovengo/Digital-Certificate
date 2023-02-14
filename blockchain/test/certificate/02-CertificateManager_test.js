@@ -80,6 +80,27 @@ describe('Certificate Manager', () => {
     const result = await certificateManager.getNumberOfAddresses();
     expect(result).to.equal(2);
   })
+
+  it('Get the public key associated with an account.', async () => {
+    // hard-coded setup for minting
+    const blockchainAddresses = [account01.address, account01.address, account02.address];
+    const level = 1;
+    const gpa = 388;
+    const certificateURI = "path to the URI";
+    const hash = '0x9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
+    const publicKey = ["0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429", "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429", "0xEB17A4262d3dc9B924c429C74a9a98Af6108adD8"];
+
+    for (let i = 0; i < blockchainAddresses.length; i++) {
+      await certificateManager.createNewCertificate(blockchainAddresses[i], level, gpa, certificateURI, hash, publicKey[i])
+    }
+    // get the owner of unique addresses 
+    const result01 = await certificateManager.getPublicKey(account01.address);
+    const result01Str = String(result01)
+    const result02 = await certificateManager.getPublicKey(account02.address);
+    const result02Str = String(result02)
+    expect(result01Str.toUpperCase()).to.equal("0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429".toUpperCase());
+    expect(result02Str.toUpperCase()).to.equal("0xEB17A4262d3dc9B924c429C74a9a98Af6108adD8".toUpperCase());
+  })
 })
 
 
