@@ -33,6 +33,15 @@ contract ScoreInfo {
     ExpertiseClusters public expertiseClusters;
 
     /**
+     * Constructor Method
+     *
+     * @param _expertiseClusterAddress the address of the ExpertiseClusters contract on the blockchain (after deployment)
+     */
+    constructor(address _expertiseClusterAddress) {
+        expertiseClusters = ExpertiseClusters(_expertiseClusterAddress);
+    }
+
+    /**
      * Functions and Methods
      */
 
