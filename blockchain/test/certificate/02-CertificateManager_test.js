@@ -4,14 +4,14 @@ const web3 = require('web3');
 
 describe('Certificate Manager', () => {
   /// Accounts
-  let deployer, account01;
+  let deployer, account01, account02;
   /// Contracts
   let certificateToken;
   let certificateManager;
 
   beforeEach(async () => {
     // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
-    [deployer, account01] = await ethers.getSigners();
+    [deployer, account01, account02] = await ethers.getSigners();
 
     // Deploy certificate NFT token
     const CertificateToken = await ethers.getContractFactory('CertificateToken');
@@ -32,7 +32,6 @@ describe('Certificate Manager', () => {
   })
 
   it('Issue new certificate - mint NFT token.', async () => {
-
     // hard-coded setup for minting
     const blockchainAddress = account01.address;
     const level = 1;
@@ -47,7 +46,40 @@ describe('Certificate Manager', () => {
     expect(result).to.equal(account01.address);
   })
 
+  it('Get the number of certificates for an account.', async () => {
+    // hard-coded setup for minting
+    const blockchainAddress = account01.address;
+    const level = 1;
+    const gpa = 388;
+    const certificateURI = "path to the URI";
+    const hash = '0x9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
+    const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
+    const certificatesLength = 1 // number of certificates
+    // create certificates
+    for (let i = 0; i < certificatesLength; i++) {
+      await certificateManager.connect(account01).createNewCertificate(blockchainAddress, level, gpa, certificateURI, hash, publicKey)
+    }
+    // get the number of certificates
+    const result = await certificateManager.getNumberOfCertificates(blockchainAddress);
+    expect(result).to.equal(certificatesLength);
+  })
 
+  it('Get the number of addresses with one or more certificates.', async () => {
+    // hard-coded setup for minting
+    const blockchainAddresses = [account01.address, account02.address, account01.address];
+    const level = 1;
+    const gpa = 388;
+    const certificateURI = "path to the URI";
+    const hash = '0x9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
+    const publicKey = "0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429";
+
+    for (let i = 0; i < blockchainAddresses.length; i++) {
+      await certificateManager.createNewCertificate(blockchainAddresses[i], level, gpa, certificateURI, hash, publicKey)
+    }
+    // get the owner of unique addresses 
+    const result = await certificateManager.getNumberOfAddresses();
+    expect(result).to.equal(2);
+  })
 })
 
 
