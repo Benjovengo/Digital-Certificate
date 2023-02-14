@@ -13,9 +13,9 @@ const deployIdentity = require('./01-identity')
 const deployCertificate = require('./02-certificate')
 
 // Helper functions
-const createConfigJSON = require('./scripts/setupConfig')
-const addEntryConfigJSON = require('./scripts/addAddress')
-const createABIFile = require('./scripts/createABI')
+const createConfigJSON = require('./utils/setupConfig')
+const addEntryConfigJSON = require('./utils/addAddress')
+const createABIFile = require('./utils/createABI')
 
 let identityTokenAddress
 let identityManagerAddress
