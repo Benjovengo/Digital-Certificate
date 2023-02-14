@@ -54,7 +54,7 @@ contract ExpertiseClusters is Ownable {
      */
 
     /// Stores a new certificateWeight in the contract
-    function store(uint256 _certificateLevel, uint256 _newWeight)
+    function storeWeight(uint256 _certificateLevel, uint256 _newWeight)
         public
         onlyOwner
     {
@@ -63,7 +63,7 @@ contract ExpertiseClusters is Ownable {
     }
 
     /// Reads the weight stored for a particular level of certification
-    function retrieve(uint256 _newWeight) public view returns (uint256) {
-        return certificateWeight[_newWeight];
+    function retrieveWeight(uint256 _level) public view returns (uint256) {
+        return certificateWeight[_level];
     }
 }
