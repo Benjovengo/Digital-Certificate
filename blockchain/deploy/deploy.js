@@ -1,10 +1,17 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
+/**
+ * Deployment Script
+ * 
+ * @dev The deployment scripts relative to the different parts
+ *      of the project are separated in different files for a 
+ *      better code organization.
+ */
+
 const fs = require('fs') // to setup the files to be used by the web interface
+
+// Deployment Scripts
+const deployIdentity = require('./01-identity')
+const deployCertificate = require('./02-certificate')
+
 // Helper functions
 const createConfigJSON = require('./scripts/setupConfig')
 const addEntryConfigJSON = require('./scripts/addAddress')
@@ -25,24 +32,9 @@ async function main () {
    * @dev Deployment scripts for the contracts responsible
    *      for storing and managing the identities
    */
-  // Deploy identity token contract
-  const IdentityToken = await ethers.getContractFactory('IdentityToken')
-  const identityToken = await IdentityToken.deploy()
-  await identityToken.deployed()
-  identityTokenAddress = identityToken.address
-
-  console.log(`Identity Token deployed to        ${identityToken.address}`)
-
-  // Deploy identity manager contract
-  const IdentityManager = await ethers.getContractFactory('IdentityManager')
-  const identityManager = await IdentityManager.deploy(identityTokenAddress)
-  await identityManager.deployed()
-  identityManagerAddress = identityManager.address
-
-  console.log(`Identity Manager deployed to      ${identityManager.address}`)
-
-  // Only the IdentityManager can call IdentityToken functions - must be the owner of the token contract
-  await identityToken.transferOwnership(identityManagerAddress)
+  const identityAddresses = await deployIdentity()
+  identityTokenAddress = identityAddresses[0]
+  identityManagerAddress = identityAddresses[1]
 
 
   /**
@@ -51,24 +43,9 @@ async function main () {
    * @dev Deployment scripts for the contracts responsible
    *      for storing and managing the certificates
    */
-  // Deploy certificate token contract
-  const CertificateToken = await ethers.getContractFactory('CertificateToken')
-  const certificateToken = await CertificateToken.deploy()
-  await certificateToken.deployed()
-  certificateTokenAddress = certificateToken.address
-
-  console.log(`Certificate Token deployed to     ${certificateToken.address}`)
-
-  // Deploy certificate manager contract
-  const CertificateManager = await ethers.getContractFactory('CertificateManager')
-  const certificateManager = await CertificateManager.deploy(certificateTokenAddress)
-  await certificateManager.deployed()
-  certificateManagerAddress = certificateManager.address
-
-  console.log(`Certificate Manager deployed to   ${certificateManager.address}`)
-
-  // Only the CertificateManager can call CertificateToken functions - must be the owner of the token contract
-  await certificateToken.transferOwnership(certificateManagerAddress)
+  const certificateAddresses = await deployCertificate()
+  certificateTokenAddress = certificateAddresses[0]
+  certificateManagerAddress = certificateAddresses[1]
 }
 
 /**
