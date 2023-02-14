@@ -25,19 +25,26 @@ import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
 contract ExpertiseClusters is Ownable {
-    uint256 private certificateWeight;
+    /** State variables */
+    /// @dev Mapping from the certificate level times the GPA
+    ///      to the actual weight for the total score
+    mapping(uint256 => uint256) private certificateWeight;
 
-    // Emitted when the stored certificateWeight changes
-    event ValueChanged(uint256 newValue);
+    /// @dev This event is emitted when there is a change on the weight
+    ///      for a particular level of certification
+    event ValueChanged(uint256 _certificateLevel, uint256 _newWeight);
 
-    // Stores a new certificateWeight in the contract
-    function store(uint256 newValue) public onlyOwner {
-        certificateWeight = newValue;
-        emit ValueChanged(newValue);
+    /// Stores a new certificateWeight in the contract
+    function store(uint256 _certificateLevel, uint256 _newWeight)
+        public
+        onlyOwner
+    {
+        certificateWeight[_certificateLevel] = _newWeight;
+        emit ValueChanged(_certificateLevel, _newWeight);
     }
 
-    // Reads the last stored certificateWeight
-    function retrieve() public view returns (uint256) {
-        return certificateWeight;
+    /// Reads the weight stored for a particular level of certification
+    function retrieve(uint256 _newWeight) public view returns (uint256) {
+        return certificateWeight[_newWeight];
     }
 }
