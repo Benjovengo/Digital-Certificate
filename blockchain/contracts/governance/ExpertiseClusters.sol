@@ -16,7 +16,7 @@ import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  *
  * The weights of the certificates are based on the level of the certificate
  * The GPAs are also weighted
- * The total score entry is: <weight[level]><certificate_level>*<GPA>,
+ * The total score entry is: <weight[level]>*<certificate_level>*<GPA>,
  * where the weight[level] is controlled by the governance
  *
  * @dev The weight state variable is a mapping that relates the level of the
