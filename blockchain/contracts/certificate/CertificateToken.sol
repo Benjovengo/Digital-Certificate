@@ -27,7 +27,7 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     /// @dev Mappings - values for each identity
     mapping(uint256 => bytes32) private transactionHash; // hash of the mint transaction
     mapping(uint256 => bytes32) private certHash; // hash of the registered certificate (for verification purposes)
-    mapping(uint256 => string) private publicKey; // used to encrypt message to the user
+    mapping(uint256 => bytes) private publicKey; // used to encrypt message to the user
     mapping(uint256 => bool) private finished; // false:in progress; true: finished
 
     ///   SerialNumber  [cert #]
@@ -58,25 +58,22 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         address _blockchainAddress,
         string memory _certificateURI,
         bytes32 _certificateHash,
-        string memory _accountPublicKey
+        bytes memory _accountPublicKey
     ) public onlyOwner returns (uint256) {
         /// @notice Add a new identity and increment IDs
         certSerialNumber.increment();
         uint256 newIdSerialNumber = certSerialNumber.current();
         _mint(_blockchainAddress, newIdSerialNumber);
         _setTokenURI(newIdSerialNumber, _certificateURI);
-
         /// @notice add certificate data for operational functions
         certHash[newIdSerialNumber] = _certificateHash;
         publicKey[newIdSerialNumber] = _accountPublicKey;
         finished[newIdSerialNumber] = true;
-
         /// @notice Add certificate serial number to owner's address list
         certificatesOwned[_blockchainAddress].push(newIdSerialNumber);
         indexOfOwnersList[newIdSerialNumber] =
             certificatesOwned[_blockchainAddress].length -
             1; // starts in zero
-
         // @dev set the minimum block number to be a valid certificate
         blockLockStart[newIdSerialNumber] = block.number + blockHeight;
 
@@ -106,7 +103,7 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     function getPublicKey(address _accountAddress, uint256 _index)
         public
         view
-        returns (string memory)
+        returns (bytes memory)
     {
         return publicKey[certificatesOwned[_accountAddress][_index]];
     }
