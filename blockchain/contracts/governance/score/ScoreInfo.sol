@@ -27,6 +27,7 @@ contract ScoreInfo {
     /// Read Score
     function readScoreElement(uint256 _certificate, uint256 _gpa)
         public
+        pure
         returns (uint256)
     {
         return _certificate + _gpa;
