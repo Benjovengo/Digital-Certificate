@@ -71,12 +71,13 @@ contract CertificateManager is IERC721Receiver {
      *
      * @param _blockchainAddress The address of the account on the blockchain
      * @param _level The level of the certificate
-     * @param _gpa The GPA obtained in a given certification
+     * @param _gpa 100*GPA the actual obtained in a given certification
      * @param _tokenURI The address of the CertificateToken contract on the blockchain
      * @param _certificateHash The SHA-256 hash of the certificate info
      * @param _accountPublicKey The public key associated with the blockchain account
      *
      * @dev Use _gpa = 0 to denote that there's no grade associated with that certificate
+     * @dev Use 100*GPA (for GPA with two decimals) to avoid floating point numbers
      * @dev everyone can call this function for testing purposes
      * @dev in a production environment, it should not be possible for everyone to call this function
      */
