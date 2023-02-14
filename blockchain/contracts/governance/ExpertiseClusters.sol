@@ -25,14 +25,33 @@ import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
 contract ExpertiseClusters is Ownable {
-    /** State variables */
-    /// @dev Mapping from the certificate level times the GPA
-    ///      to the actual weight for the total score
+    /**
+     * State variables
+     *
+     * @dev Some of these variables are controlled by the governance decisions.
+     */
+    /// Mapping from the certificate level times the GPA
+    /// to the actual weight for the total score
+    /// Controlled by the governance decision
     mapping(uint256 => uint256) private certificateWeight;
+    /// The expertise cluster defines the minimum values for a partucular expertise level
+    /// @dev The levels are the indices of the array
+    ///      0: novice
+    ///      1: intermediate
+    ///      2: expert
+    /// @dev Each level must be between 0 and 65535
+    uint16[3] private expertiseCluster;
 
+    /**
+     * Events
+     */
     /// @dev This event is emitted when there is a change on the weight
     ///      for a particular level of certification
     event ValueChanged(uint256 _certificateLevel, uint256 _newWeight);
+
+    /**
+     * Functions and Methods
+     */
 
     /// Stores a new certificateWeight in the contract
     function store(uint256 _certificateLevel, uint256 _newWeight)
