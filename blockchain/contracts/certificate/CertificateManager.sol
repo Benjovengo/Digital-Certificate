@@ -25,6 +25,14 @@ contract CertificateManager is IERC721Receiver {
     ///      addresses in the form of an uint256
     uint256 private idSerialNumber; // total number of addresses that have at least one certificate
     mapping(uint256 => address) private issuedAddresses;
+    /// @notice Each certificate is assigned to a blockchain address and
+    ///         each blockchain address may have several certificates.
+    /// The relevant information of the certificate for calculating the
+    /// score are the level of the certificate and the corresponding GPA.
+    /// @dev mapping from address to a mapping from certificate_index to
+    ///      its [level, gpa] (array)
+    mapping(address => mapping(uint256 => uint16[2]))
+        private certificateDetails;
 
     string public DEBUG = "DEBUG";
 
@@ -71,6 +79,8 @@ contract CertificateManager is IERC721Receiver {
      */
     function createNewCertificate(
         address _blockchainAddress,
+        uint16 _level,
+        uint16 _gpa,
         string memory _tokenURI,
         bytes32 _certificateHash,
         string memory _accountPublicKey
@@ -93,6 +103,10 @@ contract CertificateManager is IERC721Receiver {
             issuedAddresses[idSerialNumber] = _blockchainAddress;
             idSerialNumber++;
         }
+        /// Update certificate list
+        certificateDetails[_blockchainAddress][
+            numberOfCertificates[_blockchainAddress]
+        ] = [_level, _gpa];
         /// Update the number of certificates
         numberOfCertificates[_blockchainAddress]++;
         /// Emit event with the ID serial number
@@ -105,7 +119,7 @@ contract CertificateManager is IERC721Receiver {
      * @return idSerialNumber The total number of addresses with
      *         at least one issued certificate (uint256 value)
      */
-    function getNumberAddresses() external view returns (uint256) {
+    function getNumberOfAddresses() external view returns (uint256) {
         return idSerialNumber;
     }
 
