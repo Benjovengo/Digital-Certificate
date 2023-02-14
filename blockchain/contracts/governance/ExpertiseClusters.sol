@@ -11,30 +11,33 @@ import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * Define the expertise level based on the certificates and the corresponding GPA
  * grades to be in one of three levels: novice, intermediate, or expert.
  *
- * @notice Total score: the weighted sum of the certificates and its corresponding GPAs
+ * @notice Total score: the weighted sum of the certificates and its
+ *         corresponding GPAs
+ *
  * The weights of the certificates are based on the level of the certificate
  * The GPAs are also weighted
- * The total score entry is: <weight><certificate_level>*<GPA>,
- * where the weight is controlled by the governance
+ * The total score entry is: <weight[level]><certificate_level>*<GPA>,
+ * where the weight[level] is controlled by the governance
  *
- * @dev Use this contract only for tests! Do NOT send any real ether to this project!
- * @custom:experimental This is an experimental contract.
+ * @dev The weight state variable is a mapping that relates the level of the
+ *      certificate to its actual weight
+ *
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
 contract ExpertiseClusters is Ownable {
-    uint256 private value;
+    uint256 private certificateWeight;
 
-    // Emitted when the stored value changes
+    // Emitted when the stored certificateWeight changes
     event ValueChanged(uint256 newValue);
 
-    // Stores a new value in the contract
+    // Stores a new certificateWeight in the contract
     function store(uint256 newValue) public onlyOwner {
-        value = newValue;
+        certificateWeight = newValue;
         emit ValueChanged(newValue);
     }
 
-    // Reads the last stored value
+    // Reads the last stored certificateWeight
     function retrieve() public view returns (uint256) {
-        return value;
+        return certificateWeight;
     }
 }
