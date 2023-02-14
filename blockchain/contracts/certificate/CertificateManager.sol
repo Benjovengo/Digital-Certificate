@@ -33,6 +33,9 @@ contract CertificateManager is IERC721Receiver {
     ///      its [level, gpa] (array)
     mapping(address => mapping(uint256 => uint16[2]))
         private certificateDetails;
+    /// Save the public key of an account
+    /// @dev Used to encrypt message to the user
+    mapping(address => bytes) private publicKey;
 
     string public DEBUG = "DEBUG";
 
@@ -87,7 +90,7 @@ contract CertificateManager is IERC721Receiver {
         uint16 _gpa,
         string memory _tokenURI,
         bytes32 _certificateHash,
-        string memory _accountPublicKey
+        bytes memory _accountPublicKey
     ) public {
         /// Require that the certificate URI is not blank
         require(
@@ -99,13 +102,13 @@ contract CertificateManager is IERC721Receiver {
         uint256 newCertSerialNumber = certificateToken.mint(
             _blockchainAddress,
             _tokenURI,
-            _certificateHash,
-            _accountPublicKey
+            _certificateHash
         );
         /// Update the Ids tracked
         if (numberOfCertificates[_blockchainAddress] == 0) {
             issuedAddresses[idSerialNumber] = _blockchainAddress;
             idSerialNumber++;
+            publicKey[_blockchainAddress] = _accountPublicKey;
         }
         /// Update certificate list
         certificateDetails[_blockchainAddress][
@@ -141,6 +144,19 @@ contract CertificateManager is IERC721Receiver {
         returns (uint256)
     {
         return numberOfCertificates[_blockchainAddress];
+    }
+
+    /** @notice Get the associated publicKey
+     *
+     * @param _accountAddress The blockchain address of the identity
+     * @return publicKey A public key to encrypt info for a specific account
+     */
+    function getPublicKey(address _accountAddress)
+        public
+        view
+        returns (bytes memory)
+    {
+        return publicKey[_accountAddress];
     }
 
     /**

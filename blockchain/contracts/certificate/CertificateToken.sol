@@ -27,7 +27,6 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     /// @dev Mappings - values for each identity
     mapping(uint256 => bytes32) private transactionHash; // hash of the mint transaction
     mapping(uint256 => bytes32) private certHash; // hash of the registered certificate (for verification purposes)
-    mapping(uint256 => bytes) private publicKey; // used to encrypt message to the user
     mapping(uint256 => bool) private finished; // false:in progress; true: finished
 
     ///   SerialNumber  [cert #]
@@ -51,14 +50,12 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
      * @param _blockchainAddress Address of the owner of the certificate
      * @param _certificateURI Path to the JSON file containing the personal information
      * @param _certificateHash SHA-256 hash of the certificate data
-     * @param _accountPublicKey The public key associated with the blockchain account
      * @return newIdSerialNumber The unique serial number of the account
      */
     function mint(
         address _blockchainAddress,
         string memory _certificateURI,
-        bytes32 _certificateHash,
-        bytes memory _accountPublicKey
+        bytes32 _certificateHash
     ) public onlyOwner returns (uint256) {
         /// @notice Add a new identity and increment IDs
         certSerialNumber.increment();
@@ -67,7 +64,6 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         _setTokenURI(newIdSerialNumber, _certificateURI);
         /// @notice add certificate data for operational functions
         certHash[newIdSerialNumber] = _certificateHash;
-        publicKey[newIdSerialNumber] = _accountPublicKey;
         finished[newIdSerialNumber] = true;
         /// @notice Add certificate serial number to owner's address list
         certificatesOwned[_blockchainAddress].push(newIdSerialNumber);
@@ -92,20 +88,6 @@ contract CertificateToken is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         returns (uint256)
     {
         return certificatesOwned[_accountAddress][_index];
-    }
-
-    /** @notice Get the associated publicKey
-     *
-     * @param _accountAddress The blockchain address of the identity
-     * @param _index Index of the certificate in owner's list
-     * @return publicKey A public key to encrypt info for a specific account
-     */
-    function getPublicKey(address _accountAddress, uint256 _index)
-        public
-        view
-        returns (bytes memory)
-    {
-        return publicKey[certificatesOwned[_accountAddress][_index]];
     }
 
     /** @notice Set the status for the certificate
