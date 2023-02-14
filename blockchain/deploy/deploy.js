@@ -5,6 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const fs = require('fs') // to setup the files to be used by the web interface
+// Helper functions
 const createConfigJSON = require('./scripts/setupConfig')
 const addEntryConfigJSON = require('./scripts/addAddress')
 const createABIFile = require('./scripts/createABI')
@@ -18,7 +19,13 @@ async function main () {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
   [deployer, account01] = await ethers.getSigners()
 
-  // deploy identity token contract
+  /**
+   * Identity Contracts
+   * 
+   * @dev Deployment scripts for the contracts responsible
+   *      for storing and managing the identities
+   */
+  // Deploy identity token contract
   const IdentityToken = await ethers.getContractFactory('IdentityToken')
   const identityToken = await IdentityToken.deploy()
   await identityToken.deployed()
@@ -26,7 +33,7 @@ async function main () {
 
   console.log(`Identity Token deployed to        ${identityToken.address}`)
 
-  // deploy identity manager contract
+  // Deploy identity manager contract
   const IdentityManager = await ethers.getContractFactory('IdentityManager')
   const identityManager = await IdentityManager.deploy(identityTokenAddress)
   await identityManager.deployed()
@@ -37,7 +44,14 @@ async function main () {
   // Only the IdentityManager can call IdentityToken functions - must be the owner of the token contract
   await identityToken.transferOwnership(identityManagerAddress)
 
-  // deploy certificate token contract
+
+  /**
+   * Certificate Contracts
+   * 
+   * @dev Deployment scripts for the contracts responsible
+   *      for storing and managing the certificates
+   */
+  // Deploy certificate token contract
   const CertificateToken = await ethers.getContractFactory('CertificateToken')
   const certificateToken = await CertificateToken.deploy()
   await certificateToken.deployed()
@@ -45,7 +59,7 @@ async function main () {
 
   console.log(`Certificate Token deployed to     ${certificateToken.address}`)
 
-  // deploy certificate manager contract
+  // Deploy certificate manager contract
   const CertificateManager = await ethers.getContractFactory('CertificateManager')
   const certificateManager = await CertificateManager.deploy(certificateTokenAddress)
   await certificateManager.deployed()
@@ -56,6 +70,13 @@ async function main () {
   // Only the CertificateManager can call CertificateToken functions - must be the owner of the token contract
   await certificateToken.transferOwnership(certificateManagerAddress)
 }
+
+/**
+   * Governance Contracts
+   * 
+   * @dev Deployment scripts for the contracts responsible
+   *      for the governance of the system
+   */
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
