@@ -16,6 +16,10 @@ import "./CertificateToken.sol";
 contract CertificateManager is IERC721Receiver {
     /// State variables
     address private certTokenAddress;
+    /// Stores the total number of certificates an address has
+    /// @dev Used to track the certificateDetails for all certificates
+    ///      issued to a particular blockchain address
+    mapping(address => uint256) private numberOfCertificates;
 
     string public DEBUG = "DEBUG";
 
@@ -52,6 +56,7 @@ contract CertificateManager is IERC721Receiver {
     /**
      * Create a new certificate
      *
+     * @param _blockchainAddress The address of the account on the blockchain
      * @param _tokenURI The address of the CertificateToken contract on the blockchain
      * @param _certificateHash The SHA-256 hash of the certificate info
      * @param _accountPublicKey The public key associated with the blockchain account
@@ -71,7 +76,6 @@ contract CertificateManager is IERC721Receiver {
                 keccak256(abi.encodePacked(("")))),
             "ERROR! Invalid token URI. Token URI must contain data."
         );
-
         /// Issue new ID - Mint NFT
         uint256 newIdSerialNumber = certificateToken.mint(
             _blockchainAddress,
@@ -79,12 +83,30 @@ contract CertificateManager is IERC721Receiver {
             _certificateHash,
             _accountPublicKey
         );
-
+        /// Update the number of certificates
+        numberOfCertificates[_blockchainAddress]++;
         /// Emit event with the ID serial number
         emit certCreation(newIdSerialNumber);
     }
 
-    /** @notice Set the transaction hash - to get the address on Etherscan
+    /**
+     * Reads the total number of certificates owned by an account.
+     *
+     * @param _blockchainAddress The address of the account on the
+     *        blockchain
+     * @return numberOfCertificates[address] The number of certificates
+     *         owned by an account (uint256 value)
+     */
+    function getNumberOfCertificates(address _blockchainAddress)
+        external
+        view
+        returns (uint256)
+    {
+        return numberOfCertificates[_blockchainAddress];
+    }
+
+    /**
+     * Set the transaction hash - to get the address on Etherscan
      *
      * @param _serialNumber The serial number of the certificate
      * @param _transactionHash The hash of the transaction
