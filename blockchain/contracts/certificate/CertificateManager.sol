@@ -100,7 +100,17 @@ contract CertificateManager is IERC721Receiver {
     }
 
     /**
-     * Reads the total number of certificates owned by an account.
+     * Returns the total number of addresses that owns at least one certificate.
+     *
+     * @return idSerialNumber The total number of addresses with
+     *         at least one issued certificate (uint256 value)
+     */
+    function getNumberAddresses() external view returns (uint256) {
+        return idSerialNumber;
+    }
+
+    /**
+     * Returns the total number of certificates owned by an account.
      *
      * @param _blockchainAddress The address of the account on the
      *        blockchain
