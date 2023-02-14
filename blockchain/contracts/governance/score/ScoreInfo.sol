@@ -17,6 +17,18 @@ contract ScoreInfo {
     /**
      * State variables
      */
+    /// @notice Each certificate is assigned to a blockchain address and
+    ///         each blockchain address may have several certificates.
+    /// The relevant information of the certificate for calculating the
+    /// score are the level of the certificate and the corresponding GPA.
+    /// @dev mapping from address to a mapping from certificate_index to
+    ///      its [level, gpa] (array)
+    mapping(address => mapping(uint256 => uint16)) private certificateDetails;
+    /// Stores the total number of certificates an address has
+    /// @dev Used to track the certificateDetails for all certificates
+    ///      issued to a particular blockchain address
+    mapping(address => uint256) private numberOfCertificates;
+
     /// Contracts
     ExpertiseClusters public expertiseClusters;
 
