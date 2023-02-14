@@ -12,15 +12,17 @@ import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * grades to be in one of three levels: novice, intermediate, or expert.
  *
  * @notice Total score: the weighted sum of the certificates and its
- *         corresponding GPAs
+ *         corresponding GPAs.
  *
- * The weights of the certificates are based on the level of the certificate
- * The GPAs are also weighted
+ * The weights of the certificates are based on the level of the certificate.
+ * The GPAs are also weighted.
  * The total score entry is: <weight[level]>*<certificate_level>*<GPA>,
- * where the weight[level] is controlled by the governance
+ * where the weight[level] is controlled by the governance.
  *
+ * @dev This contract is the target for the actions of the governor contract.
+ * @dev This contract MUST be owned by the TimeLock contract.
  * @dev The weight state variable is a mapping that relates the level of the
- *      certificate to its actual weight
+ *      certificate to its actual weight.
  *
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
