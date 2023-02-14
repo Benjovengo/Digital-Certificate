@@ -20,6 +20,11 @@ contract CertificateManager is IERC721Receiver {
     /// @dev Used to track the certificateDetails for all certificates
     ///      issued to a particular blockchain address
     mapping(address => uint256) private numberOfCertificates;
+    /// Stores the accounts that have certificate(s) issued to them
+    /// @dev the mapping considers an ID serial number for the
+    ///      addresses in the form of an uint256
+    uint256 private idSerialNumber; // total number of addresses that have at least one certificate
+    mapping(uint256 => address) private issuedAddresses;
 
     string public DEBUG = "DEBUG";
 
@@ -77,16 +82,21 @@ contract CertificateManager is IERC721Receiver {
             "ERROR! Invalid token URI. Token URI must contain data."
         );
         /// Issue new ID - Mint NFT
-        uint256 newIdSerialNumber = certificateToken.mint(
+        uint256 newCertSerialNumber = certificateToken.mint(
             _blockchainAddress,
             _tokenURI,
             _certificateHash,
             _accountPublicKey
         );
+        /// Update the Ids tracked
+        if (numberOfCertificates[_blockchainAddress] == 0) {
+            issuedAddresses[idSerialNumber] = _blockchainAddress;
+            idSerialNumber++;
+        }
         /// Update the number of certificates
         numberOfCertificates[_blockchainAddress]++;
         /// Emit event with the ID serial number
-        emit certCreation(newIdSerialNumber);
+        emit certCreation(newCertSerialNumber);
     }
 
     /**
