@@ -40,15 +40,6 @@ const proposeAction = async () => {
   /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
   const encodedFunctionCall = expertiseClusters.interface.encodeFunctionData(_functionToCall, _args)
 
-  /* 
-  /// @dev Display the information about the function to be called in the target contract
-  console.log("\nProposal Description: ", _proposalDescription);
-  console.log("Function to call: ", _functionToCall);
-  console.log("Args: ", _args);
-  console.log("Encoded Function Call: ", encodedFunctionCall, '\n');
-  */
-  
-
   /// Add the proposal
   const proposeTx = await governorContract.propose(
     [global.expertiseClusters.address],
@@ -70,7 +61,6 @@ const proposeAction = async () => {
   /// @dev ChainID = 5 for the Goerli testnet
   const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const { chainId } = await provider.getNetwork()
-  // console.log('ChainID: ', chainId)
 
   /// Fast forward blocks
   /// @notice Speed up time (in blocks) so it is possible to vote immediately
@@ -91,7 +81,6 @@ const proposeAction = async () => {
   /// Get the state of the proposal
   /// @dev The state of the proposal. 1 is not passed. 0 is passed.
   const proposalState = await governorContract.state(proposalId);
-  // console.log(`Current Proposal State: ${proposalState}`);
 
 
   return [proposalId.toString(), proposalState]
