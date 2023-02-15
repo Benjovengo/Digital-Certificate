@@ -4,7 +4,6 @@ const { ethers } = require('hardhat')
 
 describe('Governance ERC-20 Voting Token', () => {
   let deployer, account01
-  let votingToken
 
 
   beforeEach(async () => {
@@ -13,7 +12,7 @@ describe('Governance ERC-20 Voting Token', () => {
 
     // Deploy VotingToken
     const VotingToken = await ethers.getContractFactory('VotingToken')
-    votingToken = await VotingToken.deploy()
+    global.votingToken = await VotingToken.deploy()
   })
 
 
