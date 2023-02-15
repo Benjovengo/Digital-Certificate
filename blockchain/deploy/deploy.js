@@ -6,21 +6,26 @@
  *      better code organization.
  */
 
+// Imports
 const fs = require('fs') // to setup the files to be used by the web interface
 
 // Deployment Scripts
 const deployIdentity = require('./01-identity')
 const deployCertificate = require('./02-certificate')
+const deployGovernance = require('./03-governance')
 
 // Helper functions
 const createConfigJSON = require('./utils/setupConfig')
 const addEntryConfigJSON = require('./utils/addAddress')
 const createABIFile = require('./utils/createABI')
 
+
+// Addresses variables
 let identityTokenAddress
 let identityManagerAddress
 let certificateTokenAddress
 let certificateManagerAddress
+
 
 async function main () {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
@@ -46,14 +51,18 @@ async function main () {
   const certificateAddresses = await deployCertificate()
   certificateTokenAddress = certificateAddresses[0]
   certificateManagerAddress = certificateAddresses[1]
-}
 
-/**
+
+  /**
    * Governance Contracts
    * 
    * @dev Deployment scripts for the contracts responsible
    *      for the governance of the system.
    */
+  const governanceAddresses = await deployGovernance()
+
+}
+
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
