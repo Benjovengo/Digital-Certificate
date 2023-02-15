@@ -4,8 +4,8 @@ const fastForwardBlocks = async (_amount) => {
   for (let i = 0; i < _amount; i++) {
     await provider.send("evm_mine", []);
   }
-
-  console.log(`Moved forward ${_amount} blocks.`);
+  // Console log number of blocks moved forward
+  //console.log(`Moved forward ${_amount} blocks.`);
 };
 
 module.exports = fastForwardBlocks;
