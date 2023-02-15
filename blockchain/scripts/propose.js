@@ -21,7 +21,7 @@ const fastForwardBlocks = require("./utils/speedUpTime.js")
  * @author Fábio Benjovengo
  * 
  */
-async function main() {
+const proposeAction = async () => {
 
   /// @dev Arguments
   const _functionToCall = 'store'
@@ -104,9 +104,4 @@ async function main() {
 }
 
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error)
-  process.exitCode = 1
-})
+module.exports = proposeAction
