@@ -13,24 +13,19 @@ import "../../node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20V
  * @custom:experimental This is an experimental contract.
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
-contract Token is ERC20Votes {
+contract VotingToken is ERC20Votes {
     /**
      * @dev Initializes the contract with the following parameters:
-     *
-     * @param _name: name of the voting token
-     * @param _symbol: the symbol for the token
-     * @param _initialSupply: the initial supply of tokens
      *
      * @notice ERC20Permit standard is used to build applications that
      * require conditional transfers of tokens, such as decentralized
      * exchanges or governance systems
      */
-    constructor(
-        string memory _name,
-        string memory _symbol,
-        uint256 _initialSupply
-    ) ERC20(_name, _symbol) ERC20Permit(_name) {
-        _mint(msg.sender, _initialSupply);
+    constructor()
+        ERC20("Expertise Voting Token", "EVT")
+        ERC20Permit("Expertise Voting Token")
+    {
+        _mint(msg.sender, 1000000000000000000000000);
     }
 
     /// @dev Move voting power when tokens are transferred.
