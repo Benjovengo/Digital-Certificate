@@ -13,8 +13,7 @@ const deployGovernance = async () => {
   const votingToken = await VotingToken.deploy()
   await votingToken.deployed()
   const votingTokenAddress = votingToken.address
-
-  console.log(`\x1b[37m    Voting Token deployed to          ${votingToken.address}\x1b[37m`)
+  console.log(`   \x1b[34m✔\x1b[37m Voting Token deployed to          ${votingToken.address}\x1b[37m`)
 
   return [votingTokenAddress]
 }

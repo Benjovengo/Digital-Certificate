@@ -13,15 +13,14 @@ const deployCertificate = async () => {
   const certificateToken = await CertificateToken.deploy()
   await certificateToken.deployed()
   const certificateTokenAddress = certificateToken.address
-
-  console.log(`\x1b[37m    Certificate Token deployed to     ${certificateToken.address}`)
+  console.log(`   \x1b[34m✔\x1b[37m Certificate Token deployed to     ${certificateToken.address}`)
 
   // Deploy certificate manager contract
   const CertificateManager = await ethers.getContractFactory('CertificateManager')
   const certificateManager = await CertificateManager.deploy(certificateTokenAddress)
   await certificateManager.deployed()
   const certificateManagerAddress = certificateManager.address
-  console.log(`\x1b[37m    Certificate Manager deployed to   ${certificateManager.address}`)
+  console.log(`   \x1b[34m✔\x1b[37m Certificate Manager deployed to   ${certificateManager.address}`)
 
   // Only the CertificateManager can call CertificateToken functions - must be the owner of the token contract
   await certificateToken.transferOwnership(certificateManagerAddress)
