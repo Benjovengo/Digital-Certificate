@@ -1,10 +1,12 @@
 /**
  * @title Deployment script for the Certificate Contracts
  * @author Fábio Benjovengo
- * 
+ *
  * @dev Deployment scripts for the contracts responsible
  *      for storing and managing the certificates.
  */
+const { ethers } = require('hardhat')
+
 const deployCertificate = async () => {
   console.log('\x1b[0m\nCertificate - Contracts Addresses')
 

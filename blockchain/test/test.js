@@ -1,7 +1,7 @@
 /**
  * Testing Script
  * @author Fábio Benjovengo
- * 
+ *
  * @dev This script executes the testings from ../scripts/testings folder.
  */
 
@@ -20,10 +20,8 @@ const governorTesting = require('../scripts/testings/governance/03-Governor_test
 const expertiseClustersTesting = require('../scripts/testings/governance/04-ExpertiseClusters_test')
 const governanceFunctionality = require('../scripts/testings/governance/05-Functionality')
 
-
 // display color
 const COLOR = '\x1b[1m\x1b[36m' // colors: ANSI escape codes
-
 
 /**
  * Tests
@@ -35,14 +33,12 @@ describe(COLOR + 'IDENTITY', () => {
   identityManagerTesting()
 })
 
-
 describe(COLOR + 'CERTIFICATE', () => {
   // Identity Token
   certificateTokenTesting()
   // Identity Manager
   certificateManagerTesting()
 })
-
 
 describe(COLOR + 'GOVERNANCE', () => {
   // Governance Token

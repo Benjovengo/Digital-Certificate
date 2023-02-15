@@ -31,7 +31,7 @@ const createConfigJSON = (_name, _address, _network) => {
   }
 
   /// Save the new file in the front-end root folder
-  stringfyData = JSON.stringify(data, null, ' ')
+  const stringfyData = JSON.stringify(data, null, ' ')
   const options = { flag: 'w' }
   fs.writeFileSync(configFilePath, stringfyData, options, function (err) {
     if (err) throw err

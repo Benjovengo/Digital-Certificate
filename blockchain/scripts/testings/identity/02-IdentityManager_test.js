@@ -1,7 +1,5 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
-const web3 = require('web3')
-
 
 const identityManagerTesting = async () => {
   describe('Identity Manager', () => {
@@ -17,7 +15,7 @@ const identityManagerTesting = async () => {
 
       // Deploy identity NFT token
       const IdentityToken = await ethers.getContractFactory('IdentityToken')
-      identityToken = await IdentityToken.deploy()
+      identityToken = await IdentityToken.connect(deployer).deploy()
 
       // Deploy identity manager
       const IdentityManager = await ethers.getContractFactory('IdentityManager')
@@ -35,7 +33,6 @@ const identityManagerTesting = async () => {
 
     it('Issue new identity - mint NFT token.', async () => {
       // hard-coded setup for minting
-      const blockchainAddress = account01.address
       const identityURI = 'path to the URI'
       const publicKey = '0xC74a9a98Af6108adD8EB17A4262d3dc9B924c429'
 

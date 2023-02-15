@@ -1,13 +1,14 @@
 /**
-   * @title Deployment script for the Identity Contracts
-   * @author Fábio Benjovengo
-   * 
-   * @dev Deployment scripts for the contracts responsible
-   *      for storing and managing the identities.
-   */
-  
+ * @title Deployment script for the Identity Contracts
+ * @author Fábio Benjovengo
+ *
+ * @dev Deployment scripts for the contracts responsible
+ *      for storing and managing the identities.
+ */
+const { ethers } = require('hardhat')
+
 const deployIdentity = async () => {
-  console.log('\Identity - Contracts Addresses')
+  console.log('Identity - Contracts Addresses')
 
   // Deploy identity token contract
   const IdentityToken = await ethers.getContractFactory('IdentityToken')

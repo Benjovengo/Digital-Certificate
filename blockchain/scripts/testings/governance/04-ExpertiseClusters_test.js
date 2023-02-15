@@ -10,7 +10,6 @@ const expertiseClustersTesting = async () => {
       global.expertiseClusters = await ExpertiseClusters.deploy()
     })
 
-
     it('Deployment address.', async () => {
       const result = await global.expertiseClusters.address
       expect(result).to.not.equal('')
@@ -18,8 +17,8 @@ const expertiseClustersTesting = async () => {
     })
 
     it('Change ownership to TimeLock.', async () => {
-      const transferTx = await global.expertiseClusters.transferOwnership(global.timeLock.address);
-      await transferTx.wait(1);
+      const transferTx = await global.expertiseClusters.transferOwnership(global.timeLock.address)
+      await transferTx.wait(1)
       const result = await await global.expertiseClusters.owner()
       expect(result).to.equal(global.timeLock.address)
     })

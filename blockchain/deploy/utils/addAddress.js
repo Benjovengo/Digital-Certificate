@@ -21,7 +21,7 @@ const addEntryConfigJSON = (_name, _address) => {
   }
 
   /// Save the new file in the front-end root folder
-  stringfyData = JSON.stringify(json, null, ' ')
+  const stringfyData = JSON.stringify(json, null, ' ')
   const options = { flag: 'w' }
   fs.writeFileSync(configFilePath, stringfyData, options, function (err) {
     if (err) throw err

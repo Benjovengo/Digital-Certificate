@@ -1,6 +1,5 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
-const web3 = require('web3')
 
 const identityTokenTesting = async () => {
   describe('Identity ERC-721 Token', () => {
@@ -13,7 +12,7 @@ const identityTokenTesting = async () => {
 
       // Deploy IdentityToken
       const IdentityToken = await ethers.getContractFactory('IdentityToken')
-      identityToken = await IdentityToken.deploy()
+      identityToken = await IdentityToken.connect(deployer).deploy()
     })
 
     it('Deployment address.', async () => {

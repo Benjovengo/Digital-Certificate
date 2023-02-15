@@ -1,7 +1,5 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
-const web3 = require('web3')
-
 
 const certificateManagerTesting = async () => {
   describe('Certificate Manager', () => {
@@ -17,7 +15,7 @@ const certificateManagerTesting = async () => {
 
       // Deploy certificate NFT token
       const CertificateToken = await ethers.getContractFactory('CertificateToken')
-      certificateToken = await CertificateToken.deploy()
+      certificateToken = await CertificateToken.connect(deployer).deploy()
 
       // Deploy certificate manager
       const CertificateManager = await ethers.getContractFactory('CertificateManager')
@@ -105,6 +103,5 @@ const certificateManagerTesting = async () => {
     })
   })
 }
-
 
 module.exports = certificateManagerTesting

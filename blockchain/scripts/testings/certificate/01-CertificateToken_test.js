@@ -1,7 +1,5 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
-const web3 = require('web3')
-
 
 const certificateTokenTesting = async () => {
   describe('Certificate ERC-721 Token', () => {
@@ -14,7 +12,7 @@ const certificateTokenTesting = async () => {
 
       // Deploy CertificateToken
       const CertificateToken = await ethers.getContractFactory('CertificateToken')
-      certificateToken = await CertificateToken.deploy()
+      certificateToken = await CertificateToken.connect(deployer).deploy()
     })
 
     it('Deployment address.', async () => {
@@ -75,6 +73,5 @@ const certificateTokenTesting = async () => {
     })
   })
 }
-
 
 module.exports = certificateTokenTesting

@@ -1,10 +1,12 @@
 /**
  * @title Deployment script for the Governance Contracts
  * @author Fábio Benjovengo
- * 
+ *
  * @dev Deployment scripts for the contracts responsible
  *      for the governance of the system.
  */
+const { ethers } = require('hardhat')
+
 const deployGovernance = async () => {
   console.log('\x1b[0m\nGovernance - Contracts Addresses')
 

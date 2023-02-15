@@ -1,13 +1,14 @@
 /**
  * Deployment Script
- * 
+ *
  * @dev The deployment scripts relative to the different parts
- *      of the project are separated in different files for a 
+ *      of the project are separated in different files for a
  *      better code organization.
  */
 
 // Imports
-const fs = require('fs') // to setup the files to be used by the web interface
+// const { ethers } = require('hardhat')
+// const fs = require('fs') // to setup the files to be used by the web interface
 
 // Deployment Scripts
 const deployIdentity = require('./01-identity')
@@ -19,6 +20,8 @@ const createConfigJSON = require('./utils/setupConfig')
 const addEntryConfigJSON = require('./utils/addAddress')
 const createABIFile = require('./utils/createABI')
 
+// Accounts
+// let deployer, account01
 
 // Addresses variables
 let identityTokenAddress
@@ -26,14 +29,13 @@ let identityManagerAddress
 let certificateTokenAddress
 let certificateManagerAddress
 
-
 async function main () {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
-  [deployer, account01] = await ethers.getSigners()
+  // [deployer, account01] = await ethers.getSigners()
 
   /**
    * Identity Contracts
-   * 
+   *
    * @dev Deployment scripts for the contracts responsible
    *      for storing and managing the identities
    */
@@ -41,10 +43,9 @@ async function main () {
   identityTokenAddress = identityAddresses[0]
   identityManagerAddress = identityAddresses[1]
 
-
   /**
    * Certificate Contracts
-   * 
+   *
    * @dev Deployment scripts for the contracts responsible
    *      for storing and managing the certificates
    */
@@ -52,17 +53,15 @@ async function main () {
   certificateTokenAddress = certificateAddresses[0]
   certificateManagerAddress = certificateAddresses[1]
 
-
   /**
    * Governance Contracts
-   * 
+   *
    * @dev Deployment scripts for the contracts responsible
    *      for the governance of the system.
    */
   const governanceAddresses = await deployGovernance()
-
+  console.log(governanceAddresses)
 }
-
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
@@ -79,7 +78,7 @@ const runMain = async () => {
     for (let i = 0; i < contractNames.length; i++) {
       // Save ABI component to client-side
       createABIFile(contractPaths[i], contractNames[i])
-      if (i == 0) {
+      if (i === 0) {
         // create config.json with deployed addresses
         createConfigJSON(instanceNames[i], contractAddresses[i], useNetwork)
       } else {
