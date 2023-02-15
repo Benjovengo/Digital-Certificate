@@ -3,18 +3,15 @@ const { ethers } = require('hardhat')
 
 
 describe('TimeLock Contract', () => {
-    // Run before each test
-    beforeEach(async () => {
-
+  // Run before each test
+  beforeEach(async () => {
     /// Definitions for the TimeLock contract
     const MIN_DELAY = 3600;
     const PROPOSERS = [];
     const EXECUTORS = [];
-
     // Deploy TimeLock
     const TimeLock = await ethers.getContractFactory('TimeLock')
     global.timeLock = await TimeLock.deploy(MIN_DELAY, PROPOSERS, EXECUTORS)
-
   })
 
 
