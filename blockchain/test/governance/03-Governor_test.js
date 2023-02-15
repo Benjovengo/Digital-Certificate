@@ -20,7 +20,7 @@ describe('Governor Contract', () => {
 
     /// Deploy Governor contract
     const GovernorContract = await ethers.getContractFactory('GovernorContract')
-    governorContract = await GovernorContract.deploy(global.votingToken.address, global.timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
+    global.governorContract = await GovernorContract.deploy(global.votingToken.address, global.timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
 
     /**
      * Governor Setup
@@ -32,7 +32,7 @@ describe('Governor Contract', () => {
     const executorRole = await global.timeLock.EXECUTOR_ROLE();
     const adminRole = await global.timeLock.TIMELOCK_ADMIN_ROLE();
     // Set the proposer role
-    const proposerTx = await global.timeLock.grantRole(proposerRole, governorContract.address);
+    const proposerTx = await global.timeLock.grantRole(proposerRole, global.governorContract.address);
     await proposerTx.wait(1);
     // Set the executor role
     // @dev To set the address to 0x means that anyone can be the executor
@@ -45,7 +45,7 @@ describe('Governor Contract', () => {
 
 
   it('Deployment address.', async () => {
-    const result = await governorContract.address
+    const result = await global.governorContract.address
     expect(result).to.not.equal('')
     expect(result).to.not.equal('0x')
   })
