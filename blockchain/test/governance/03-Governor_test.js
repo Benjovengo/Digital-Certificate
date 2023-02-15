@@ -25,7 +25,7 @@ describe('Governor Contract', () => {
     /**
      * Governor Setup
      */
-    /// Roles setup
+    /// Setup roles
     /// @dev This this to be placed after the deployment of the Governor contract because
     ///      the proposer role must be granted to the Governor contract address
     const proposerRole = await global.timeLock.PROPOSER_ROLE();
