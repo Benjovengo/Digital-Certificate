@@ -38,7 +38,7 @@ describe('Governor Contract', () => {
     // @dev To set the address to 0x means that anyone can be the executor
     const executorTx = await global.timeLock.grantRole(executorRole, "0x0000000000000000000000000000000000000000");
     await executorTx.wait(1);
-    /// Make nobody the admin so that it is truly controlled by the governance decisions
+    /// Make nobody the admin so that it is truly autonomous
     const revokeTx = await global.timeLock.revokeRole(adminRole, deployer.address);
     await revokeTx.wait(1)
   })
