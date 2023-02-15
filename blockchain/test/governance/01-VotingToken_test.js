@@ -9,7 +9,6 @@ describe('Governance ERC-20 Voting Token', () => {
   beforeEach(async () => {
     // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
     [deployer, account01] = await ethers.getSigners()
-
     // Deploy VotingToken
     const VotingToken = await ethers.getContractFactory('VotingToken')
     global.votingToken = await VotingToken.deploy()
