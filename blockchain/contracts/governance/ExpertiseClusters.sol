@@ -42,7 +42,8 @@ contract ExpertiseClusters is Ownable {
     ///      1: intermediate
     ///      2: expert
     /// @dev Each level must be between 0 and 65535
-    uint16[3] private expertiseCluster;
+    /// @dev All the weights are set initially to one
+    uint16[3] private expertiseCluster = [1, 1, 1];
 
     /**
      * Events
