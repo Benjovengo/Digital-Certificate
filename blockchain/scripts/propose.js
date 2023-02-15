@@ -62,7 +62,7 @@ const proposeAction = async () => {
   /// @notice Speed up time (in blocks) so it is possible to vote immediately
   /// @dev fast forward only in localhost
   if (chainId === 31337) {
-    await fastForwardBlocks(2) // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
+    await fastForwardBlocks(5) // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
   }
 
   /// Save the chainID and the proposalID

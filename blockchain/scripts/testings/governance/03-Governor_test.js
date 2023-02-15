@@ -14,7 +14,7 @@ const governorTesting = async () => {
        */
       /// Definitions for the Governor Contract
       const VOTING_DELAY = 1 // blocks
-      const VOTING_PERIOD = 5 // blocks
+      const VOTING_PERIOD = 15 // blocks
       const QUORUM_PERCENTAGE = 4 // percentage
 
       /// Deploy Governor contract
