@@ -13,7 +13,6 @@ const identityManagerTesting = require('../scripts/testings/identity/02-Identity
 const certificateTokenTesting = require('../scripts/testings/certificate/01-CertificateToken_test')
 const certificateManagerTesting = require('../scripts/testings/certificate/02-CertificateManager_test')
 
-
 // Governance Testings
 const governanceTokenTesting = require('../scripts/testings/governance/01-VotingToken_test')
 const timeLockTesting = require('../scripts/testings/governance/02-TimeLock_test')
@@ -22,7 +21,8 @@ const expertiseClustersTesting = require('../scripts/testings/governance/04-Expe
 
 
 // display color
-const COLOR = '\x1b[1m\x1b[36m'
+const COLOR = '\x1b[1m\x1b[36m' // colors: ANSI escape codes
+
 
 /**
  * Tests
