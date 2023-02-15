@@ -1,5 +1,9 @@
-const { expect } = require('chai')
-const { ethers } = require('hardhat')
+/**
+ * Testing Script
+ * @author Fábio Benjovengo
+ * 
+ * @dev This script executes the testings from ../scripts/testings folder.
+ */
 
 // Identity Testings
 const identityTokenTesting = require('../scripts/testings/identity/01-IdentityToken_test')
