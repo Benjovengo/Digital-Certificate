@@ -6,7 +6,7 @@
  *      for the governance of the system.
  */
 const deployGovernance = async () => {
-  console.log('\nGovernance - Contracts Addresses')
+  console.log('\x1b[0m\nGovernance - Contracts Addresses')
 
   // Deploy the voting token
   const VotingToken = await ethers.getContractFactory('VotingToken')
@@ -14,7 +14,7 @@ const deployGovernance = async () => {
   await votingToken.deployed()
   const votingTokenAddress = votingToken.address
 
-  console.log(`    Voting Token deployed to          ${votingToken.address}`)
+  console.log(`\x1b[37m    Voting Token deployed to          ${votingToken.address}\x1b[37m`)
 
   return [votingTokenAddress]
 }

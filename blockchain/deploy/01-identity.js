@@ -15,7 +15,7 @@ const deployIdentity = async () => {
   await identityToken.deployed()
   const identityTokenAddress = identityToken.address
   // Console log the address on the blockchain
-  console.log(`    Identity Token deployed to        ${identityToken.address}`)
+  console.log(`\x1b[37m    Identity Token deployed to        ${identityToken.address}`)
 
   // Deploy identity manager contract
   const IdentityManager = await ethers.getContractFactory('IdentityManager')
@@ -23,7 +23,7 @@ const deployIdentity = async () => {
   await identityManager.deployed()
   const identityManagerAddress = identityManager.address
   // Console log the address on the blockchain
-  console.log(`    Identity Manager deployed to      ${identityManager.address}`)
+  console.log(`\x1b[37m    Identity Manager deployed to      ${identityManager.address}`)
 
   // Transfer the ownership of the Token contract
   // @dev Only the IdentityManager can call IdentityToken
