@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const { ethers } = require('hardhat')
-const web3 = require('web3')
+
 
 describe('Governor ERC-20 Voting Token', () => {
   let deployer, account01
@@ -29,7 +29,7 @@ describe('Governor ERC-20 Voting Token', () => {
     expect(result.toString()).to.equal('1000000000000000000000000')
   })
 
-  
+
   it('Delegate vote to account.', async () => {
     await votingToken.delegate(account01.address)
     const result01 = await votingToken.numCheckpoints(account01.address)
