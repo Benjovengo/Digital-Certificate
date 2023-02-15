@@ -3,13 +3,8 @@ const { ethers } = require('hardhat')
 
 
 describe('Expertise Clusters Contract', () => {
-  // Variables
-  let deployer
   // Run before each test
   beforeEach(async () => {
-    // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
-    [deployer] = await ethers.getSigners()
-
     // Deploy ExpertiseClusters
     const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
     global.expertiseClusters = await ExpertiseClusters.deploy()
