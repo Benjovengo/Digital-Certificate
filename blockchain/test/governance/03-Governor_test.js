@@ -31,14 +31,14 @@ describe('Governor Contract', () => {
     const proposerRole = await global.timeLock.PROPOSER_ROLE();
     const executorRole = await global.timeLock.EXECUTOR_ROLE();
     const adminRole = await global.timeLock.TIMELOCK_ADMIN_ROLE();
-
+    // Set thje proposer role
     const proposerTx = await global.timeLock.grantRole(proposerRole, governorContract.address);
     await proposerTx.wait(1);
-
+    // Set the executor role
+    // @dev To set the address to 0x means that anyone can be the executor
     const executorTx = await global.timeLock.grantRole(executorRole, "0x0000000000000000000000000000000000000000");
     await executorTx.wait(1);
-
-    /// make nobody the admin
+    /// Make nobody the admin so that it is truly controlled by the governance decisions
     const revokeTx = await global.timeLock.revokeRole(adminRole, deployer.address);
     await revokeTx.wait(1)
   })
