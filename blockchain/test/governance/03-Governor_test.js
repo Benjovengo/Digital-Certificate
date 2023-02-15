@@ -31,7 +31,7 @@ describe('Governor Contract', () => {
     const proposerRole = await global.timeLock.PROPOSER_ROLE();
     const executorRole = await global.timeLock.EXECUTOR_ROLE();
     const adminRole = await global.timeLock.TIMELOCK_ADMIN_ROLE();
-    // Set thje proposer role
+    // Set the proposer role
     const proposerTx = await global.timeLock.grantRole(proposerRole, governorContract.address);
     await proposerTx.wait(1);
     // Set the executor role
