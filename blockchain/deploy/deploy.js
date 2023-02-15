@@ -28,6 +28,10 @@ let identityTokenAddress
 let identityManagerAddress
 let certificateTokenAddress
 let certificateManagerAddress
+let votingTokenAddress
+let timeLockAddress
+let governorAddress
+let expertiseClustersAddress
 
 async function main () {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
@@ -60,7 +64,10 @@ async function main () {
    *      for the governance of the system.
    */
   const governanceAddresses = await deployGovernance()
-  console.log(governanceAddresses)
+  votingTokenAddress = governanceAddresses[0]
+  timeLockAddress = governanceAddresses[1]
+  governorAddress = governanceAddresses[2]
+  expertiseClustersAddress = governanceAddresses[3]
 }
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -69,10 +76,10 @@ const runMain = async () => {
   try {
     await main()
     /// Setup
-    const contractPaths = ['identity/', 'identity/', 'certificate/', 'certificate/'] /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractNames = ['IdentityToken', 'IdentityManager', 'CertificateToken', 'CertificateManager'] // Uppercase  first letter
-    const instanceNames = ['identityToken', 'identityManager', 'certificateToken', 'certificateManager'] // Lowercase  first letter
-    const contractAddresses = [identityTokenAddress, identityManagerAddress, certificateTokenAddress, certificateManagerAddress]
+    const contractPaths = ['identity/', 'identity/', 'certificate/', 'certificate/', 'governance/', 'governance/', 'governance/', 'governance/'] /// don't remove the forward slash! unless it is in the root of contracts folder
+    const contractNames = ['IdentityToken', 'IdentityManager', 'CertificateToken', 'CertificateManager', 'VotingToken', 'TimeLock', 'GovernorContract', 'ExpertiseClusters'] // Uppercase  first letter
+    const instanceNames = ['identityToken', 'identityManager', 'certificateToken', 'certificateManager', 'votingToken', 'timeLock', 'governorContract', 'expertiseClusters'] // Lowercase  first letter
+    const contractAddresses = [identityTokenAddress, identityManagerAddress, certificateTokenAddress, certificateManagerAddress, votingTokenAddress, timeLockAddress, governorAddress, expertiseClustersAddress]
     const useNetwork = 'localhost'
 
     for (let i = 0; i < contractNames.length; i++) {
