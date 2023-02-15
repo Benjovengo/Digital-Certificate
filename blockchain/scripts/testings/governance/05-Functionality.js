@@ -3,20 +3,20 @@ const { ethers } = require('hardhat')
 
 const proposeAction = require( '../../propose')
 
+let proposal
+
 const governanceFunctionality = async () => {
   describe('Functionality Test', () => {
     // Run before each test
     beforeEach(async () => {
       // global.expertiseClusters
-      const proposalId = await proposeAction()
-      console.log(proposalId)
+      proposal = await proposeAction()
     })
 
 
-    it('Deployment address.', async () => {
-      const result = await global.expertiseClusters.address
-      expect(result).to.not.equal('')
-      expect(result).to.not.equal('0x')
+    it('Add a proposal (proposal state = 0: Pending).', async () => {
+      const proposalState = proposal[1]
+      expect(proposalState).to.equal(0)
     })
 
   })
