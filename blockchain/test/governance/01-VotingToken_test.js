@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const { ethers } = require('hardhat')
 
 
-describe('Governor ERC-20 Voting Token', () => {
+describe('Governance ERC-20 Voting Token', () => {
   let deployer, account01
   let votingToken
 
