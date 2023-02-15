@@ -18,6 +18,7 @@ const governanceTokenTesting = require('../scripts/testings/governance/01-Voting
 const timeLockTesting = require('../scripts/testings/governance/02-TimeLock_test')
 const governorTesting = require('../scripts/testings/governance/03-Governor_test')
 const expertiseClustersTesting = require('../scripts/testings/governance/04-ExpertiseClusters_test')
+const governanceFunctionality = require('../scripts/testings/governance/05-Functionality')
 
 
 // display color
@@ -52,4 +53,6 @@ describe(COLOR + 'GOVERNANCE', () => {
   governorTesting()
   // Expertise Clusters Contract
   expertiseClustersTesting()
+  // Functionality
+  governanceFunctionality()
 })
