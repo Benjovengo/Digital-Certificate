@@ -24,42 +24,34 @@ const fastForwardBlocks = require("./utils/speedUpTime.js")
 const proposeAction = async () => {
 
   /// @dev Arguments
-  const _functionToCall = 'store'
-  const _args = [169] // has to use the same value in the queue-and-execute.js script
-  const _proposalDescription = 'Description of the proposal.'
-
-  /// @dev Path to the file containing the addresses of the contracts after deployment
-  const ADDRESSES_FILE = './utils/contractsAddresses.json' // json file created upon deployment
-
-  /// @dev Get the JSON with all the addresses from file
-  const addressesFile = JSON.parse(fs.readFileSync(ADDRESSES_FILE, "utf8"));
-
-  /// @dev Get the addresses for the contracts
-  const GOVERNOR_ADDRESS = addressesFile['GOVERNOR_ADDRESS'][0];
-  const BOX_CONTRACT_ADDRESS = addressesFile['BOX_CONTRACT_ADDRESS'][0];
+  global._functionToCall = 'storeWeight'
+  global._args = [0, 45] // has to use the same value in the queue-and-execute.js script
+  global._proposalDescription = 'Change the weight of the first level.'
 
 
-  /// @dev Connect to Governor deployed contract
-  const governorContract = await hre.ethers.getContractAt("GovernorContract", GOVERNOR_ADDRESS);
+  /// @dev Connect to the Governor contract
+  const governorContract = await hre.ethers.getContractAt("GovernorContract", global.governorContract.address);
 
-  /// @dev Connect to Box deployed contract
-  const boxContract = await hre.ethers.getContractAt("Box", BOX_CONTRACT_ADDRESS);
+  /// @dev Connect to the ExpertiseClusters contract
+  const expertiseClusters = await hre.ethers.getContractAt("ExpertiseClusters", global.expertiseClusters);
 
 
-  /// @notice Encode the function to be called
+  /// Encode the function to be called
   /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
-  const encodedFunctionCall = boxContract.interface.encodeFunctionData(_functionToCall, _args)
+  const encodedFunctionCall = expertiseClusters.interface.encodeFunctionData(_functionToCall, _args)
 
+  /* 
   /// @dev Display the information about the function to be called in the target contract
   console.log("\nProposal Description: ", _proposalDescription);
   console.log("Function to call: ", _functionToCall);
   console.log("Args: ", _args);
   console.log("Encoded Function Call: ", encodedFunctionCall, '\n');
+  */
   
 
-  /// @notice Add the proposal
+  /// Add the proposal
   const proposeTx = await governorContract.propose(
-    [BOX_CONTRACT_ADDRESS],
+    [global.expertiseClusters.address],
     [0],
     [encodedFunctionCall],
     _proposalDescription
@@ -68,25 +60,17 @@ const proposeAction = async () => {
   /// Get the response of the proposal
   const proposeReceipt = await proposeTx.wait();
 
+  
   /// Get the ID of the proposal
   const proposalId = proposeReceipt.events[0].args.proposalId;
-  console.log('\nProposal ID: ', proposalId.toString())
-
+  // console.log('\nProposal ID: ', proposalId.toString())
+  
   /// Get the chainID
   /// @dev ChainID = 31337 for the Hardhat localhost
   /// @dev ChainID = 5 for the Goerli testnet
   const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const { chainId } = await provider.getNetwork()
-  console.log('ChainID: ', chainId)
-
-  /// @notice Save the chainID and the proposalID
-  fs.writeFileSync(
-    './utils/proposalsId.json',
-    JSON.stringify({
-      [chainId.toString()]: [proposalId.toString()],
-    })
-  );
-
+  // console.log('ChainID: ', chainId)
 
   /// Fast forward blocks
   /// @notice Speed up time (in blocks) so it is possible to vote immediately
@@ -95,12 +79,22 @@ const proposeAction = async () => {
     await fastForwardBlocks(2) // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
   }
 
+  /// Save the chainID and the proposalID
+  fs.writeFileSync(
+    './util/proposalsId.json',
+    JSON.stringify({
+      [chainId.toString()]: [proposalId.toString()],
+    })
+  );
+
 
   /// Get the state of the proposal
   /// @dev The state of the proposal. 1 is not passed. 0 is passed.
   const proposalState = await governorContract.state(proposalId);
-  console.log(`Current Proposal State: ${proposalState}`);
+  // console.log(`Current Proposal State: ${proposalState}`);
 
+
+  return [proposalId.toString(), proposalState]
 }
 
 
