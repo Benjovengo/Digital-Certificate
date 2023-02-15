@@ -6,6 +6,7 @@ describe('Governor ERC-20 Voting Token', () => {
   let deployer, account01
   let votingToken
 
+
   beforeEach(async () => {
     // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
     [deployer, account01] = await ethers.getSigners()
@@ -15,17 +16,20 @@ describe('Governor ERC-20 Voting Token', () => {
     votingToken = await VotingToken.deploy()
   })
 
+
   it('Deployment address.', async () => {
     const result = await votingToken.address
     expect(result).to.not.equal('')
     expect(result).to.not.equal('0x')
   })
 
+
   it('Mint voting token.', async () => {
     const result = await votingToken.balanceOf(deployer.address)
     expect(result.toString()).to.equal('1000000000000000000000000')
   })
 
+  
   it('Delegate vote to account.', async () => {
     await votingToken.delegate(account01.address)
     const result01 = await votingToken.numCheckpoints(account01.address)
