@@ -4,26 +4,11 @@ const { ethers } = require('hardhat')
 
 describe('Governor Contract', () => {
   let deployer, account01
-  let votingToken
-  let timeLock
   let governorContract
-
 
   beforeEach(async () => {
     // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
     [deployer, account01] = await ethers.getSigners()
-
-    // Deploy VotingToken
-    const VotingToken = await ethers.getContractFactory('VotingToken')
-    votingToken = await VotingToken.deploy()
-
-    // Deploy TimeLock
-    const MIN_DELAY = 3600;
-    const PROPOSERS = [];
-    const EXECUTORS = [];
-    const TimeLock = await ethers.getContractFactory('TimeLock')
-    timeLock = await TimeLock.deploy(MIN_DELAY, PROPOSERS, EXECUTORS)
-
 
     /**
      * Governor Contract Deployment
@@ -35,7 +20,7 @@ describe('Governor Contract', () => {
 
     /// Deploy Governor contract
     const GovernorContract = await ethers.getContractFactory('GovernorContract')
-    governorContract = await GovernorContract.deploy(votingToken.address, timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
+    governorContract = await GovernorContract.deploy(global.votingToken.address, global.timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
 
     /**
      * Governor Setup
@@ -43,25 +28,27 @@ describe('Governor Contract', () => {
     /// Roles setup
     /// @dev This this to be placed after the deployment of the Governor contract because
     ///      the proposer role must be granted to the Governor contract address
-    const proposerRole = await timeLock.PROPOSER_ROLE();
-    const executorRole = await timeLock.EXECUTOR_ROLE();
-    const adminRole = await timeLock.TIMELOCK_ADMIN_ROLE();
+    const proposerRole = await global.timeLock.PROPOSER_ROLE();
+    const executorRole = await global.timeLock.EXECUTOR_ROLE();
+    const adminRole = await global.timeLock.TIMELOCK_ADMIN_ROLE();
 
-    const proposerTx = await timeLock.grantRole(proposerRole, governorContract.address);
+    const proposerTx = await global.timeLock.grantRole(proposerRole, governorContract.address);
     await proposerTx.wait(1);
 
-    const executorTx = await timeLock.grantRole(executorRole, "0x0000000000000000000000000000000000000000");
+    const executorTx = await global.timeLock.grantRole(executorRole, "0x0000000000000000000000000000000000000000");
     await executorTx.wait(1);
 
     /// make nobody the admin
-    const revokeTx = await timeLock.revokeRole(adminRole, deployer.address);
-    await revokeTx.wait(1);
+    const revokeTx = await global.timeLock.revokeRole(adminRole, deployer.address);
+    await revokeTx.wait(1)
   })
+
 
   it('Deployment address.', async () => {
     const result = await governorContract.address
     expect(result).to.not.equal('')
     expect(result).to.not.equal('0x')
   })
+
 
 })
