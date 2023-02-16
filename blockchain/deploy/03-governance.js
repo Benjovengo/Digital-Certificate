@@ -14,6 +14,9 @@ const deployGovernance = async () => {
   let deployer
   [deployer] = await ethers.getSigners()
 
+  /**
+   * Governance Token
+   */
   // Deploy the voting token
   const VotingToken = await ethers.getContractFactory('VotingToken')
   const votingToken = await VotingToken.deploy()
@@ -27,9 +30,12 @@ const deployGovernance = async () => {
   console.log(
     `       Checkpoints: ${await votingToken.numCheckpoints(deployer.address)}`
   );
-    console.log('       Delegated')
+  console.log('       Delegated')
 
 
+  /**
+   * TimeLock
+   */
   /// Definitions for the TimeLock contract
   const MIN_DELAY = 3600
   const PROPOSERS = []
@@ -42,26 +48,21 @@ const deployGovernance = async () => {
   console.log(`   \x1b[34m✔\x1b[37m TimeLock deployed to              ${timeLock.address}\x1b[37m`)
   
 
+  /**
+   * Governor Contract
+   */
   /// Definitions for the Governor Contract
   const VOTING_DELAY = 1 // blocks
   const VOTING_PERIOD = 5 // blocks
   const QUORUM_PERCENTAGE = 4 // percentage
   /// Deploy Governor contract
   const GovernorContract = await ethers.getContractFactory('GovernorContract')
-  const governorContract = await GovernorContract.deploy(votingTokenAddress, timeLockAddress, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
+  const governorContract = await GovernorContract.deploy(votingToken.address, timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
   await governorContract.deployed()
   const governorAddress = governorContract.address
   console.log(`   \x1b[34m✔\x1b[37m Governor contract deployed to     ${governorContract.address}\x1b[37m`)
 
   
-  // Deploy ExpertiseClusters
-  const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
-  const expertiseClusters = await ExpertiseClusters.deploy()
-  await expertiseClusters.deployed()
-  const expertiseClustersAddress = expertiseClusters.address
-  console.log(`   \x1b[34m✔\x1b[37m Expertise clusters deployed to    ${expertiseClusters.address}\x1b[37m`)
-
-
   /**
    * Governor Setup
    */
@@ -81,7 +82,24 @@ const deployGovernance = async () => {
   /// Make nobody the admin so that it is truly autonomous
   const revokeTx = await timeLock.revokeRole(adminRole, deployer.address)
   await revokeTx.wait(1)
-  console.log(`   \x1b[34m✔\x1b[37m Roles setup for TimeLock OK.\x1b[37m`)
+  console.log(`       Roles setup for TimeLock OK.\x1b[37m`)
+
+
+    /**
+     * Expertise Clusters
+     */
+  // Deploy ExpertiseClusters
+  const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
+  const expertiseClusters = await ExpertiseClusters.deploy()
+  await expertiseClusters.deployed()
+  const expertiseClustersAddress = expertiseClusters.address
+  console.log(`   \x1b[34m✔\x1b[37m Expertise clusters deployed to    ${expertiseClusters.address}\x1b[37m`)
+
+
+  /// only the TimeLock can call the Box contract
+  const transferTx = await expertiseClusters.transferOwnership(timeLock.address);
+  await transferTx.wait(1);
+  console.log("       Ownership of 'Box' transferred to 'TimeLock' contract.\n");
 
 
   return [votingTokenAddress, timeLockAddress, governorAddress, expertiseClustersAddress]
