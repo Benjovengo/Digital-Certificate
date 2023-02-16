@@ -39,12 +39,13 @@ const proposeAction = async () => {
   
   console.log(GOVERNOR_ADDRESS)
   console.log(EXPERTISE_CLUSTERS_ADDRESS)
-  return
 
 
 
   /// @dev Connect to the Governor contract
   const governorContract = await hre.ethers.getContractAt('GovernorContract', GOVERNOR_ADDRESS)
+  console.log(governorContract)
+  return
 
   /// @dev Connect to the ExpertiseClusters contract
   const expertiseClusters = await hre.ethers.getContractAt('ExpertiseClusters', EXPERTISE_CLUSTERS_ADDRESS)
