@@ -29,17 +29,6 @@ contract GovernorContract is
     GovernorTimelockControl
 {
     /**
-     * State variables
-     */
-    // Store active proposals
-    struct ProposalDescription {
-        string description;
-        string functionToCall;
-    }
-    // @dev Proposals with status 0, 1, 4, or 5
-    ProposalDescription[] private activeProposals;
-
-    /**
      * @dev Initializes the contract with the following parameters:
      *
      * @param _token: interface for the ERC20Votes
@@ -78,19 +67,6 @@ contract GovernorContract is
         GovernorVotesQuorumFraction(_quorumPercentage)
         GovernorTimelockControl(_timelock)
     {}
-
-    function setProposal(
-        string memory _functionToCall,
-        address[] memory _targets,
-        uint256[] memory _values,
-        bytes[] memory _calldatas,
-        string memory _description
-    ) public {
-        activeProposals.push(
-            ProposalDescription(_description, _functionToCall)
-        );
-        propose(_targets, _values, _calldatas, _description);
-    }
 
     /** @dev The following functions are overrides required by Solidity.
      *
