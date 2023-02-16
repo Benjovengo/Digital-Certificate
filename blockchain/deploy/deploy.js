@@ -15,6 +15,9 @@ const deployIdentity = require('./01-identity')
 const deployCertificate = require('./02-certificate')
 const deployGovernance = require('./03-governance')
 
+// Propose an Action
+const proposeAction = require('../scripts/propose')
+
 // Helper functions
 const createConfigJSON = require('./utils/setupConfig')
 const addEntryConfigJSON = require('./utils/addAddress')
@@ -33,7 +36,9 @@ let timeLockAddress
 let governorAddress
 let expertiseClustersAddress
 
-async function main () {
+
+
+const deployment = async () => {
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
   // [deployer, account01] = await ethers.getSigners()
 
@@ -70,18 +75,28 @@ async function main () {
   expertiseClustersAddress = governanceAddresses[3]
 }
 
+
+const governanceActions = async () => {
+  console.log('\n\nGovernance Actions')
+  // Propose Action
+  const propose = await proposeAction()
+  console.log(propose)
+}
+
+
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 const runMain = async () => {
   try {
-    await main()
+    // Deploy contracts
+    await deployment()
     /// Setup
     const contractPaths = ['identity/', 'identity/', 'certificate/', 'certificate/', 'governance/', 'governance/', 'governance/', 'governance/'] /// don't remove the forward slash! unless it is in the root of contracts folder
     const contractNames = ['IdentityToken', 'IdentityManager', 'CertificateToken', 'CertificateManager', 'VotingToken', 'TimeLock', 'GovernorContract', 'ExpertiseClusters'] // Uppercase  first letter
     const instanceNames = ['identityToken', 'identityManager', 'certificateToken', 'certificateManager', 'votingToken', 'timeLock', 'governorContract', 'expertiseClusters'] // Lowercase  first letter
     const contractAddresses = [identityTokenAddress, identityManagerAddress, certificateTokenAddress, certificateManagerAddress, votingTokenAddress, timeLockAddress, governorAddress, expertiseClustersAddress]
     const useNetwork = 'localhost'
-
+    // Save information to files
     for (let i = 0; i < contractNames.length; i++) {
       // Save ABI component to client-side
       createABIFile(contractPaths[i], contractNames[i])
@@ -93,6 +108,9 @@ const runMain = async () => {
         addEntryConfigJSON(instanceNames[i], contractAddresses[i])
       }
     }
+
+    // Perform governance Actions
+    governanceActions()
 
     // terminate without errors
     process.exit(0)

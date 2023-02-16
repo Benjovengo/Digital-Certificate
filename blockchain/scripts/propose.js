@@ -27,11 +27,27 @@ const proposeAction = async () => {
   global._args = [0, 45] // has to use the same value in the queue-and-execute.js script
   global._proposalDescription = 'Change the weight of the first level.'
 
+  /// @dev Path to the file containing the addresses of the contracts after deployment
+  const ADDRESSES_FILE = '../front-end/src/config.json' // json file created on deployment
+  /// @dev Get the JSON with all the addresses from file
+  const addressesJSON = JSON.parse(fs.readFileSync(ADDRESSES_FILE, "utf8"));
+  const addresses31337 = addressesJSON['31337']
+
+  /// @dev Get the addresses for the contracts
+  const GOVERNOR_ADDRESS = (addresses31337['governorContract'])['address'];
+  const EXPERTISE_CLUSTERS_ADDRESS = (addresses31337['expertiseClusters'])['address'];
+  
+  console.log(GOVERNOR_ADDRESS)
+  console.log(EXPERTISE_CLUSTERS_ADDRESS)
+  return
+
+
+
   /// @dev Connect to the Governor contract
-  const governorContract = await hre.ethers.getContractAt('GovernorContract', global.governorContract.address)
+  const governorContract = await hre.ethers.getContractAt('GovernorContract', GOVERNOR_ADDRESS)
 
   /// @dev Connect to the ExpertiseClusters contract
-  const expertiseClusters = await hre.ethers.getContractAt('ExpertiseClusters', global.expertiseClusters)
+  const expertiseClusters = await hre.ethers.getContractAt('ExpertiseClusters', EXPERTISE_CLUSTERS_ADDRESS)
 
   /// Encode the function to be called
   /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
