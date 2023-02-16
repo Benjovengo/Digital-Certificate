@@ -24,19 +24,18 @@ const deployGovernance = async () => {
    * Governance Token
    */
   /// Deploy Governance Token
-  console.log("\n01-Deploying the Governance Token contract...");
   const VotingToken = await ethers.getContractFactory('VotingToken')
   const votingToken = await VotingToken.deploy()
   await votingToken.deployed()
-  console.log(`Deployed 'VotingToken' at ${votingToken.address}`);
+  console.log(`   \x1b[34m✔\x1b[37m Voting Token deployed to          ${votingToken.address}`)
 
   /// Delegate votes to deployer.
   const txResponse = await votingToken.delegate(deployer.address);
   await txResponse.wait(1); /// wait 1 block
   console.log(
-    `   Checkpoints: ${await votingToken.numCheckpoints(deployer.address)}`
+    `       Checkpoints: ${await votingToken.numCheckpoints(deployer.address)}`
   );
-    console.log('   Delegated')
+    console.log('       Delegated')
 
 
   /**
@@ -48,12 +47,10 @@ const deployGovernance = async () => {
   const EXECUTORS = [];
 
   /// Deploy TimeLock
-  console.log("\n02-Deploying the TimeLock contract...");
   const TimeLock = await ethers.getContractFactory('TimeLock')
   const timeLock = await TimeLock.deploy(MIN_DELAY, PROPOSERS, EXECUTORS)
   await timeLock.deployed()
-  console.log(`Deployed 'TimeLock' at ${timeLock.address}`);
-
+  console.log(`   \x1b[34m✔\x1b[37m TimeLock deployed to              ${timeLock.address}`)
 
   /**
    * Governor Contract
@@ -64,11 +61,11 @@ const deployGovernance = async () => {
   const QUORUM_PERCENTAGE = 4; // percentage
 
   /// Deploy Governor contract
-  console.log("\n03-Deploying the Governor contract...");
   const GovernorContract = await ethers.getContractFactory('GovernorContract')
   const governorContract = await GovernorContract.deploy(votingToken.address, timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
   await governorContract.deployed()
-  console.log(`Deployed 'GovernorContract' at ${governorContract.address}`);
+  console.log(`   \x1b[34m✔\x1b[37m Governor Contract deployed to     ${governorContract.address}`)
+
 
 
   
@@ -78,7 +75,6 @@ const deployGovernance = async () => {
   /// Setup roles
   /// @dev This this to be placed after the deployment of the Governor contract because
   ///      the proposer role must be granted to the Governor contract address
-  console.log("\n04-Setting up governance roles...");
   const proposerRole = await timeLock.PROPOSER_ROLE();
   const executorRole = await timeLock.EXECUTOR_ROLE();
   const adminRole = await timeLock.TIMELOCK_ADMIN_ROLE();
@@ -96,16 +92,15 @@ const deployGovernance = async () => {
    * Expertise Clusters
    */
   /// Deploy ExpertiseClusters contract
-  console.log("\n05-Deploying the ExpertiseClusters contract...");
   const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
   const expertiseClustersContract = await ExpertiseClusters.deploy()
   await expertiseClustersContract.deployed()
-  console.log(`Deployed 'ExpertiseClusters' at ${expertiseClustersContract.address}`);
+  console.log(`   \x1b[34m✔\x1b[37m Expertise Clusters deployed to    ${expertiseClustersContract.address}`)
 
   /// only the TimeLock can call the ExpertiseClusters contract
   const transferTx = await expertiseClustersContract.transferOwnership(timeLock.address);
   await transferTx.wait(1);
-  console.log("   Ownership of 'ExpertiseClusters' transferred to 'TimeLock' contract.\n");
+  console.log("       Ownership of 'ExpertiseClusters' transferred to the 'TimeLock' contract.\n");
 
 
   // @notice Save contracts' addresses
