@@ -140,7 +140,7 @@ const saveDeploymentInfo = async () => {
   if (notDeployed.length !== 0) {
     console.log('\x1b[0m\nContracts NOT Deployed')
     for (let i = 0; i < notDeployed.length; i++) {
-      console.log(`   \x1b[31mx\x1b[37m ${notDeployed[i]}`)
+      console.log(`   \x1b[31m✘\x1b[37m ${notDeployed[i]}`)
     }
   }
   const useNetwork = 'localhost'
