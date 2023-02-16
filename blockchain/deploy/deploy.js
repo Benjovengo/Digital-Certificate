@@ -16,7 +16,7 @@ const deployCertificate = require('./02-certificate')
 const deployGovernance = require('./03-governance')
 
 // Propose an Action
-const proposeAction = require('../scripts/propose')
+//const proposeAction = require('../scripts/propose')
 
 // Helper functions
 const createConfigJSON = require('./utils/setupConfig')
@@ -110,7 +110,7 @@ const runMain = async () => {
     }
 
     // Perform governance Actions
-    governanceActions()
+    //governanceActions()
 
     // terminate without errors
     process.exit(0)
