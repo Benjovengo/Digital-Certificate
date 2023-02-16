@@ -28,6 +28,8 @@ const createABIFile = require('./utils/createABI')
 // let deployer, account01
 
 // Addresses variables
+// @dev the naming convention is for the address is to
+//      concatenate the <instanceName> with the word Address
 let identityTokenAddress
 let identityManagerAddress
 let certificateTokenAddress
@@ -108,10 +110,12 @@ const runMain = async () => {
   try {
     // Deploy contracts
     await deployment()
-    // Find all files that contain an ABI
-    const filesJSON = findJsonFiles('./artifacts/contracts')
     
     // Setup
+    // @dev Traverse the directory tree and the path module to get the file
+    //      name and relative path of each file that contains the ABI for a
+    //     contract
+    const filesJSON = findJsonFiles('./artifacts/contracts')
     let contractPaths = []
     let contractNames = []
     let instanceNames = []
@@ -130,7 +134,6 @@ const runMain = async () => {
       } catch (error) {
         console.log(`Contract ${contractName} not deployed!`)
       }
-      
     }
     const useNetwork = 'localhost'
     // Save information to files
