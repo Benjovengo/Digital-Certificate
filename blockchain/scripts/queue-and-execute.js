@@ -20,11 +20,6 @@ const speedUpSeconds = require("./utils/speedUpTimeSeconds.js")
  */
 async function main() {
   console.log('\x1b[0m\nQueue and Execute')
-  // @dev Arguments - these parameters can always be found in the events emitted by the contract 
-  // const _functionToCall = 'storeWeight'
-  // const _args = [1, 169] // has to be the same as in the proposal
-  // const _proposalDescription = 'Debug description'
-
   // @dev Path to the file containing the addresses of the contracts after deployment
   const ADDRESSES_FILE = './util/contractsAddresses.json' // json file created upon deployment
 
