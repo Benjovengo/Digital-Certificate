@@ -20,10 +20,10 @@ const speedUpSeconds = require("./utils/speedUpTimeSeconds.js")
  */
 async function main() {
   console.log('\x1b[0m\nQueue and Execute')
-  /// @dev Arguments
-  const _functionToCall = 'storeWeight'
-  const _args = [1, 169] // has to be the same as in the proposal
-  const _proposalDescription = 'Debug description'
+  /// @dev Arguments - these parameters can always be found in the events emitted by the contract 
+  /// const _functionToCall = 'storeWeight'
+  /// const _args = [1, 169] // has to be the same as in the proposal
+  /// const _proposalDescription = 'Debug description'
 
   /// @dev Path to the file containing the addresses of the contracts after deployment
   const ADDRESSES_FILE = './util/contractsAddresses.json' // json file created upon deployment
@@ -41,15 +41,35 @@ async function main() {
   const expertiseClustersContract = await hre.ethers.getContractAt("ExpertiseClusters", BOX_CONTRACT_ADDRESS);
 
   /// @notice Encode the function to be called
+  /// @dev can get from past events
   /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
-  const encodedFunctionCall = expertiseClustersContract.interface.encodeFunctionData(_functionToCall, _args)
+  /// const encodedFunctionCall = expertiseClustersContract.interface.encodeFunctionData(_functionToCall, _args)
 
-  const descriptionHash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(_proposalDescription));
+  /// EVENTS!!!!!!!!
+  const eventsFilter = await governorContract.filters.ProposalCreated()
+  const events = await governorContract.queryFilter(eventsFilter, 0, "latest")
+  /* console.log('EVENTS')
+  //console.log(Object.keys(events[0]))
+  console.log('Proposal ID: ', Number(events[0]['args']['proposalId']))
+  console.log('Proposer: ', events[0]['args']['proposer'])
+  console.log('Targets', events[0]['args']['targets'])
+  console.log('Calldata: ', events[0]['args']['calldatas'])
+  console.log('Description: ', events[0]['args']['description']) */
+  const targetsEvent = events[0]['args']['targets']
+  const targetCalldatas = events[0]['args']['calldatas']
+  const descriptionHash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(events[0]['args']['description']));
+
+
+
+
+
+
+
 
   const queueTx = await governorContract.queue(
-    [expertiseClustersContract.address],
+    targetsEvent,
     [0],
-    [encodedFunctionCall],
+    targetCalldatas,
     descriptionHash
   );
   queueTx.wait(1);
@@ -72,9 +92,9 @@ async function main() {
 
   console.log(`   \x1b[34m*\x1b[37m Executing....`)
   const executeTx = await governorContract.execute(
-    [expertiseClustersContract.address],
+    targetsEvent,
     [0],
-    [encodedFunctionCall],
+    targetCalldatas,
     descriptionHash
   );
   executeTx.wait(1);
