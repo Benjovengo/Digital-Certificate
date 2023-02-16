@@ -121,6 +121,7 @@ const saveDeploymentInfo = async () => {
   let contractNames = []
   let instanceNames = []
   let contractAddresses = []
+  let notDeployed = []
   for (let i = 0; i < filesJSON.length; i++) {
     const contract = filesJSON[i]
     const contractPath = contract['path']
@@ -133,7 +134,13 @@ const saveDeploymentInfo = async () => {
       contractNames.push(contractName)
       instanceNames.push(contractNameLowercase)
     } catch (error) {
-      console.log(`Contract ${contractName} not deployed!`)
+      notDeployed.push(`${contractName} not deployed!`)
+    }
+  }
+  if (notDeployed.length !== 0) {
+    console.log('\x1b[0m\nContracts NOT Deployed')
+    for (let i = 0; i < notDeployed.length; i++) {
+      console.log(`   \x1b[31mx\x1b[37m ${notDeployed[i]}`)
     }
   }
   const useNetwork = 'localhost'

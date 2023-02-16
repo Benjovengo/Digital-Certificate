@@ -100,7 +100,7 @@ const deployGovernance = async () => {
   /// only the TimeLock can call the ExpertiseClusters contract
   const transferTx = await expertiseClustersContract.transferOwnership(timeLock.address);
   await transferTx.wait(1);
-  console.log("       Ownership of 'ExpertiseClusters' transferred to the 'TimeLock' contract.\n");
+  console.log("       Ownership of 'ExpertiseClusters' transferred to the 'TimeLock' contract.");
 
 
   // @notice Save contracts' addresses
