@@ -79,9 +79,13 @@ const deployment = async () => {
 }
 
 
-
-
-
+/**
+ * Search for JSON files that do NOT contain dbg in the name
+ * 
+ * @param {string} dir The base folder 
+ * @param {array} fileList The list of JSON files that do NOT contain dbg in the name
+ * @returns The list of JSON files that do NOT contain dbg in the name
+ */
 function findJsonFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
 
@@ -103,6 +107,50 @@ function findJsonFiles(dir, fileList = []) {
 }
 
 
+/**
+ * Save the deployment information to files for the front-end application
+ * 
+ * @dev Traverse the directory tree and the path module to get the file
+ *      name and relative path of each file that contains the ABI for a
+ *      contract.
+ */
+const saveDeploymentInfo = async () => {
+  // Setup
+  const filesJSON = findJsonFiles('./artifacts/contracts')
+  let contractPaths = []
+  let contractNames = []
+  let instanceNames = []
+  let contractAddresses = []
+  for (let i = 0; i < filesJSON.length; i++) {
+    const contract = filesJSON[i]
+    const contractPath = contract['path']
+    const contractName = contract['name'].split('.')[0]
+    const contractNameLowercase = contractName.charAt(0).toLowerCase() + contractName.slice(1)
+    const contractAddress = contractNameLowercase + 'Address'
+    try {
+      contractAddresses.push(eval(contractAddress))
+      contractPaths.push(contractPath)
+      contractNames.push(contractName)
+      instanceNames.push(contractNameLowercase)
+    } catch (error) {
+      console.log(`Contract ${contractName} not deployed!`)
+    }
+  }
+  const useNetwork = 'localhost'
+  // Save information to files
+  for (let i = 0; i < contractNames.length; i++) {
+    // Save ABI component to client-side
+    createABIFile(contractPaths[i], contractNames[i])
+    if (i === 0) {
+      // create config.json with deployed addresses
+      createConfigJSON(instanceNames[i], contractAddresses[i], useNetwork)
+    } else {
+      // create config.json with deployed addresses
+      addEntryConfigJSON(instanceNames[i], contractAddresses[i])
+    }
+  }
+}
+
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
@@ -110,44 +158,9 @@ const runMain = async () => {
   try {
     // Deploy contracts
     await deployment()
-    
-    // Setup
-    // @dev Traverse the directory tree and the path module to get the file
-    //      name and relative path of each file that contains the ABI for a
-    //     contract
-    const filesJSON = findJsonFiles('./artifacts/contracts')
-    let contractPaths = []
-    let contractNames = []
-    let instanceNames = []
-    let contractAddresses = []
-    for (let i = 0; i < filesJSON.length; i++) {
-      const contract = filesJSON[i]
-      const contractPath = contract['path']
-      const contractName = contract['name'].split('.')[0]
-      const contractNameLowercase = contractName.charAt(0).toLowerCase() + contractName.slice(1)
-      const contractAddress = contractNameLowercase + 'Address'
-      try {
-        contractAddresses.push(eval(contractAddress))
-        contractPaths.push(contractPath)
-        contractNames.push(contractName)
-        instanceNames.push(contractNameLowercase)
-      } catch (error) {
-        console.log(`Contract ${contractName} not deployed!`)
-      }
-    }
-    const useNetwork = 'localhost'
-    // Save information to files
-    for (let i = 0; i < contractNames.length; i++) {
-      // Save ABI component to client-side
-      createABIFile(contractPaths[i], contractNames[i])
-      if (i === 0) {
-        // create config.json with deployed addresses
-        createConfigJSON(instanceNames[i], contractAddresses[i], useNetwork)
-      } else {
-        // create config.json with deployed addresses
-        addEntryConfigJSON(instanceNames[i], contractAddresses[i])
-      }
-    }
+
+    // Save the deployment information to files for the front-end application
+    saveDeploymentInfo()
 
     // terminate without errors
     process.exit(0)
