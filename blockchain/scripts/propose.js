@@ -20,6 +20,7 @@ const fastForwardBlocks = require("./utils/speedUpTime.js")
  * 
  */
 async function main() {
+  console.log('\x1b[0m\nAdd a New Proposal')
 
   /// @dev Arguments
   const _functionToCall = 'storeWeight'
@@ -49,10 +50,10 @@ async function main() {
   const encodedFunctionCall = expertiseClustersContract.interface.encodeFunctionData(_functionToCall, _args)
 
   /// @dev Display the information about the function to be called in the target contract
-  console.log("\nProposal Description: ", _proposalDescription);
-  console.log("Function to call: ", _functionToCall);
-  console.log("Args: ", _args);
-  console.log("Encoded Function Call: ", encodedFunctionCall, '\n');
+  console.log(`   \x1b[34m*\x1b[37m Proposal Description: ${_proposalDescription}`)
+  console.log(`   \x1b[34m*\x1b[37m Function to call: ${_functionToCall}`)
+  console.log(`   \x1b[34m*\x1b[37m Args: ${_args}`)
+  console.log(`   \x1b[34m*\x1b[37m Encoded Function Call: ${encodedFunctionCall}`)
   
 
   /// @notice Add the proposal
@@ -68,14 +69,14 @@ async function main() {
 
   /// @notice Get the ID of the proposal
   const proposalId = proposeReceipt.events[0].args.proposalId;
-  console.log('\nProposal ID: ', proposalId.toString())
+  console.log(`   \x1b[34m*\x1b[37m Proposal ID: ${proposalId.toString()}`)
 
   /// @notice Get the chainID
   /// @dev ChainID = 31337 for the Hardhat localhost
   /// @dev ChainID = 5 for the Goerli testnet
   const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const { chainId } = await provider.getNetwork()
-  console.log('ChainID: ', chainId)
+  console.log(`   \x1b[34m*\x1b[37m ChainID: ${chainId}`)
 
   /// @notice Save the chainID and the proposalID
   fs.writeFileSync(
@@ -97,8 +98,8 @@ async function main() {
   /// @notice Get the state of the proposal
   /// @notice The state of the proposal. 1 is not passed. 0 is passed.
   const proposalState = await governorContract.state(proposalId);
-  console.log(`Current Proposal State: ${proposalState}`);
-
+  console.log(`   \x1b[34m*\x1b[37m Current Proposal State: ${proposalState}`)
+  console.log(`   \x1b[32m✔\x1b[37m Proposal is added.`)
 }
 
 

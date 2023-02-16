@@ -19,6 +19,7 @@ const fastForwardBlocks = require("./utils/speedUpTime.js")
  * 
  */
 async function main() {
+  console.log('\x1b[0m\nVote')
 
   /// @notice Definitions
   const index = 0;
@@ -55,7 +56,7 @@ async function main() {
   voteTx.wait(1);
 
   let proposalState = await governorContract.state(proposalId);
-  console.log(`Proposal State before voting period is over: ${proposalState}`);
+  console.log(`   \x1b[34m*\x1b[37m Proposal State before voting period is over: ${proposalState}`)
 
   /// @notice Fast forward blocks
   /// @notice Speed up time so we can vote
@@ -75,9 +76,8 @@ async function main() {
   ///   6: Expired
   ///   7: Executed
   proposalState = await governorContract.state(proposalId);
-  console.log(`Proposal State after voting period is over: ${proposalState}`);
-  console.log("Voting complete.");
-
+  console.log(`   \x1b[34m*\x1b[37m Proposal State after voting period is over: ${proposalState}`)
+  console.log(`   \x1b[32m✔\x1b[37m Voting is completed.`)
 }
 
 

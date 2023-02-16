@@ -19,6 +19,7 @@ const speedUpSeconds = require("./utils/speedUpTimeSeconds.js")
  * 
  */
 async function main() {
+  console.log('\x1b[0m\nQueue and Execute')
   /// @dev Arguments
   const _functionToCall = 'storeWeight'
   const _args = [1, 169] // has to be the same as in the proposal
@@ -52,8 +53,7 @@ async function main() {
     descriptionHash
   );
   queueTx.wait(1);
-
-  console.log("Proposal queued....");
+  console.log(`   \x1b[34m*\x1b[37m Proposal queued....`)
 
   /// @notice Get the chainID
   /// @dev ChainID = 31337 for the Hardhat localhost
@@ -70,7 +70,7 @@ async function main() {
     await fastForwardBlocks(2) // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
   }
 
-  console.log("Executing....");
+  console.log(`   \x1b[34m*\x1b[37m Executing....`)
   const executeTx = await governorContract.execute(
     [expertiseClustersContract.address],
     [0],
@@ -79,8 +79,13 @@ async function main() {
   );
   executeTx.wait(1);
 
-  console.log("Executed....");
-  console.log(`ExpertiseClusters value: ${await expertiseClustersContract.retrieveWeight(1)}`);
+  const weights = [
+    await expertiseClustersContract.retrieveWeight(0),
+    await expertiseClustersContract.retrieveWeight(1),
+    await expertiseClustersContract.retrieveWeight(2)
+  ]
+  console.log(`   \x1b[34m*\x1b[37m ExpertiseClusters stored weights: [${weights}]`)
+  console.log(`   \x1b[32m✔\x1b[37m Actions executed.`)
 }
 
 
