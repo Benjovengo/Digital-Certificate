@@ -8,7 +8,7 @@
 const { ethers } = require('hardhat')
 
 const deployGovernance = async () => {
-  console.log('\x1b[0m\nGovernance - Contracts Addresses')
+  console.log('\x1b[0m\nGovernance - Contracts Addresses and Setup')
 
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
   let deployer
@@ -45,6 +45,15 @@ const deployGovernance = async () => {
   const governorAddress = governorContract.address
   console.log(`   \x1b[34m✔\x1b[37m Governor contract deployed to     ${governorContract.address}\x1b[37m`)
 
+  
+  // Deploy ExpertiseClusters
+  const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
+  const expertiseClusters = await ExpertiseClusters.deploy()
+  await expertiseClusters.deployed()
+  const expertiseClustersAddress = expertiseClusters.address
+  console.log(`   \x1b[34m✔\x1b[37m Expertise clusters deployed to    ${expertiseClusters.address}\x1b[37m`)
+
+
   /**
    * Governor Setup
    */
@@ -64,17 +73,7 @@ const deployGovernance = async () => {
   /// Make nobody the admin so that it is truly autonomous
   const revokeTx = await timeLock.revokeRole(adminRole, deployer.address)
   await revokeTx.wait(1)
-  console.log(`   \x1b[34m✔\x1b[37m Roles setup OK.\x1b[37m`)
-
-
-  // Deploy ExpertiseClusters
-  const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
-  const expertiseClusters = await ExpertiseClusters.deploy()
-  await expertiseClusters.deployed()
-  const expertiseClustersAddress = expertiseClusters.address
-  console.log(`   \x1b[34m✔\x1b[37m Expertise clusters deployed to    ${expertiseClusters.address}\x1b[37m`)
-
-
+  console.log(`   \x1b[34m✔\x1b[37m Roles setup for TimeLock OK.\x1b[37m`)
 
 
   return [votingTokenAddress, timeLockAddress, governorAddress, expertiseClustersAddress]
