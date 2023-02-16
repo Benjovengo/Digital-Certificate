@@ -6,7 +6,7 @@ import "../../node_modules/@openzeppelin/contracts/governance/extensions/Governo
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol";
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
-import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockCompound.sol";
+import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
 
 /**
  * @title The Governance Contract - Governance (Digital Certificate)
@@ -26,7 +26,7 @@ contract GovernorContract is
     GovernorCountingSimple,
     GovernorVotes,
     GovernorVotesQuorumFraction,
-    GovernorTimelockCompound
+    GovernorTimelockControl
 {
     /**
      * @dev Initializes the contract with the following parameters:
@@ -43,10 +43,10 @@ contract GovernorContract is
      */
     constructor(
         IVotes _token,
-        ICompoundTimelock _timelock,
-        uint256 _quorum,
+        TimelockController _timelock,
         uint256 _votingDelay,
-        uint256 _votingPeriod
+        uint256 _votingPeriod,
+        uint256 _quorumPercentage
     )
         Governor("DAO Banking")
         /**
@@ -58,14 +58,14 @@ contract GovernorContract is
          * @param 0 - proposal threshold (hard coded) [see notice [1] above]
          */
         GovernorSettings(
-            _votingDelay,
-            _votingPeriod, /*  */
-            0 /* minimum number of votes to create a proposal */
+            _votingDelay, /* 1 block */
+            _votingPeriod, // 45818, /* 1 week */
+            0 // proposal threshold
         )
         GovernorVotes(_token)
         /// @param _quorum: quorum required for a proposal to pass (using 4%)
-        GovernorVotesQuorumFraction(_quorum)
-        GovernorTimelockCompound(_timelock)
+        GovernorVotesQuorumFraction(_quorumPercentage)
+        GovernorTimelockControl(_timelock)
     {}
 
     /** @dev The following functions are overrides required by Solidity.
@@ -105,10 +105,19 @@ contract GovernorContract is
         return super.quorum(blockNumber);
     }
 
+    function getVotes(address account, uint256 blockNumber)
+        public
+        view
+        override(IGovernor, Governor)
+        returns (uint256)
+    {
+        return super.getVotes(account, blockNumber);
+    }
+
     function state(uint256 proposalId)
         public
         view
-        override(Governor, GovernorTimelockCompound)
+        override(Governor, GovernorTimelockControl)
         returns (ProposalState)
     {
         return super.state(proposalId);
@@ -138,7 +147,7 @@ contract GovernorContract is
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) internal override(Governor, GovernorTimelockCompound) {
+    ) internal override(Governor, GovernorTimelockControl) {
         super._execute(proposalId, targets, values, calldatas, descriptionHash);
     }
 
@@ -147,14 +156,14 @@ contract GovernorContract is
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) internal override(Governor, GovernorTimelockCompound) returns (uint256) {
+    ) internal override(Governor, GovernorTimelockControl) returns (uint256) {
         return super._cancel(targets, values, calldatas, descriptionHash);
     }
 
     function _executor()
         internal
         view
-        override(Governor, GovernorTimelockCompound)
+        override(Governor, GovernorTimelockControl)
         returns (address)
     {
         return super._executor();
@@ -163,7 +172,7 @@ contract GovernorContract is
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(Governor, GovernorTimelockCompound)
+        override(Governor, GovernorTimelockControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
