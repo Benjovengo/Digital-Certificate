@@ -21,6 +21,14 @@ const deployGovernance = async () => {
   const votingTokenAddress = votingToken.address
   console.log(`   \x1b[34m✔\x1b[37m Voting Token deployed to          ${votingToken.address}\x1b[37m`)
 
+  /// Delegate votes to deployer.
+  const txResponse = await votingToken.delegate(deployer.address);
+  await txResponse.wait(1); /// wait 1 block
+  console.log(
+    `       Checkpoints: ${await votingToken.numCheckpoints(deployer.address)}`
+  );
+    console.log('       Delegated')
+
 
   /// Definitions for the TimeLock contract
   const MIN_DELAY = 3600
