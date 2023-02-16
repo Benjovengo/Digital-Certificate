@@ -20,52 +20,38 @@ const speedUpSeconds = require("./utils/speedUpTimeSeconds.js")
  */
 async function main() {
   console.log('\x1b[0m\nQueue and Execute')
-  /// @dev Arguments - these parameters can always be found in the events emitted by the contract 
-  /// const _functionToCall = 'storeWeight'
-  /// const _args = [1, 169] // has to be the same as in the proposal
-  /// const _proposalDescription = 'Debug description'
+  // @dev Arguments - these parameters can always be found in the events emitted by the contract 
+  // const _functionToCall = 'storeWeight'
+  // const _args = [1, 169] // has to be the same as in the proposal
+  // const _proposalDescription = 'Debug description'
 
-  /// @dev Path to the file containing the addresses of the contracts after deployment
+  // @dev Path to the file containing the addresses of the contracts after deployment
   const ADDRESSES_FILE = './util/contractsAddresses.json' // json file created upon deployment
 
-  /// @dev Get the JSON with all the addresses from file
+  // @dev Get the JSON with all the addresses from file
   const addressesFile = JSON.parse(fs.readFileSync(ADDRESSES_FILE, "utf8"));
 
-  /// @dev Get the addresses for the contracts
+  // @dev Get the addresses for the contracts
   const GOVERNOR_ADDRESS = addressesFile['GOVERNOR_ADDRESS'][0];
   const BOX_CONTRACT_ADDRESS = addressesFile['BOX_CONTRACT_ADDRESS'][0];
 
-  /// @dev Connect to Governor deployed contract
+  // @dev Connect to Governor deployed contract
   const governorContract = await hre.ethers.getContractAt("GovernorContract", GOVERNOR_ADDRESS);
-  /// @dev Connect to ExpertiseClusters deployed contract
+  // @dev Connect to ExpertiseClusters deployed contract
   const expertiseClustersContract = await hre.ethers.getContractAt("ExpertiseClusters", BOX_CONTRACT_ADDRESS);
-
-  /// @notice Encode the function to be called
-  /// @dev can get from past events
-  /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
-  /// const encodedFunctionCall = expertiseClustersContract.interface.encodeFunctionData(_functionToCall, _args)
-
-  /// EVENTS!!!!!!!!
+ 
+  // Get data from ProposalCreated event
+  // @dev See https://docs.openzeppelin.com/contracts/4.x/api/governance#IGovernor-ProposalCreated-uint256-address-address---uint256---string---bytes---uint256-uint256-string-
+  // @dev Events are retrieved as filter objects
   const eventsFilter = await governorContract.filters.ProposalCreated()
+  // @dev Pass the filter object through the queryFilter method for blocks from 0 to the latest
   const events = await governorContract.queryFilter(eventsFilter, 0, "latest")
-  /* console.log('EVENTS')
-  //console.log(Object.keys(events[0]))
-  console.log('Proposal ID: ', Number(events[0]['args']['proposalId']))
-  console.log('Proposer: ', events[0]['args']['proposer'])
-  console.log('Targets', events[0]['args']['targets'])
-  console.log('Calldata: ', events[0]['args']['calldatas'])
-  console.log('Description: ', events[0]['args']['description']) */
   const targetsEvent = events[0]['args']['targets']
   const targetCalldatas = events[0]['args']['calldatas']
   const descriptionHash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(events[0]['args']['description']));
 
-
-
-
-
-
-
-
+  // Queue the proposed action
+  // @dev Necessary when using the TimeLock
   const queueTx = await governorContract.queue(
     targetsEvent,
     [0],
@@ -75,15 +61,15 @@ async function main() {
   queueTx.wait(1);
   console.log(`   \x1b[34m*\x1b[37m Proposal queued....`)
 
-  /// @notice Get the chainID
-  /// @dev ChainID = 31337 for the Hardhat localhost
-  /// @dev ChainID = 5 for the Goerli testnet
+  // @notice Get the chainID
+  // @dev ChainID = 31337 for the Hardhat localhost
+  // @dev ChainID = 5 for the Goerli testnet
   const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const { chainId } = await provider.getNetwork()
   
-  /// @notice Fast forward blocks
-  /// @notice Speed up time so we can vote
-  /// @dev fast forward only in localhost
+  // @notice Fast forward blocks
+  // @notice Speed up time so we can vote
+  // @dev fast forward only in localhost
   if (chainId === 31337) {
     const MIN_DELAY = 3600;
     await speedUpSeconds(MIN_DELAY + 1)
@@ -91,6 +77,8 @@ async function main() {
   }
 
   console.log(`   \x1b[34m*\x1b[37m Executing....`)
+  // Execute the proposed action
+  // @dev The execute function uses the same arguments as the queue function
   const executeTx = await governorContract.execute(
     targetsEvent,
     [0],
