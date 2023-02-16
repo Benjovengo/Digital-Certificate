@@ -8,7 +8,7 @@ const fs = require('fs') // to setup the files to be used by the web interface
  */
 const createABIFile = (_path, _name) => {
   // Token ABI
-  const jsonFile = fs.readFileSync(`./artifacts/contracts/${_path}${_name}.sol/${_name}.json`)
+  const jsonFile = fs.readFileSync(`.\\${_path}\\${_name}.json`)
   const jsonData = JSON.parse(jsonFile)
   const stringData = JSON.stringify(jsonData.abi, null, ' ')
 

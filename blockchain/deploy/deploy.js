@@ -8,7 +8,8 @@
 
 // Imports
 // const { ethers } = require('hardhat')
-// const fs = require('fs') // to setup the files to be used by the web interface
+const fs = require('fs') // to setup the files to be used by the web interface
+const path = require('path');
 
 // Deployment Scripts
 const deployIdentity = require('./01-identity')
@@ -33,7 +34,7 @@ let certificateTokenAddress
 let certificateManagerAddress
 let votingTokenAddress
 let timeLockAddress
-let governorAddress
+let governorContractAddress
 let expertiseClustersAddress
 
 
@@ -71,17 +72,34 @@ const deployment = async () => {
   const governanceAddresses = await deployGovernance()
   votingTokenAddress = governanceAddresses[0]
   timeLockAddress = governanceAddresses[1]
-  governorAddress = governanceAddresses[2]
+  governorContractAddress = governanceAddresses[2]
   expertiseClustersAddress = governanceAddresses[3]
 }
 
 
-const governanceActions = async () => {
-  console.log('\n\nGovernance Actions')
-  // Propose Action
-  const propose = await proposeAction()
-  console.log(propose)
+
+
+
+function findJsonFiles(dir, fileList = []) {
+  const files = fs.readdirSync(dir);
+
+  files.forEach((file) => {
+    const filePath = path.join(dir, file);
+    const fileStat = fs.statSync(filePath);
+
+    if (fileStat.isDirectory()) {
+      findJsonFiles(filePath, fileList);
+    } else if (file.endsWith('.json') && !file.includes('dbg')) {
+      fileList.push({
+        path: path.relative(process.cwd(), path.dirname(filePath)) + '\\',
+        name: file,
+      });
+    }
+  });
+
+  return fileList;
 }
+
 
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -90,11 +108,30 @@ const runMain = async () => {
   try {
     // Deploy contracts
     await deployment()
-    /// Setup
-    const contractPaths = ['identity/', 'identity/', 'certificate/', 'certificate/', 'governance/', 'governance/', 'governance/', 'governance/'] /// don't remove the forward slash! unless it is in the root of contracts folder
-    const contractNames = ['IdentityToken', 'IdentityManager', 'CertificateToken', 'CertificateManager', 'VotingToken', 'TimeLock', 'GovernorContract', 'ExpertiseClusters'] // Uppercase  first letter
-    const instanceNames = ['identityToken', 'identityManager', 'certificateToken', 'certificateManager', 'votingToken', 'timeLock', 'governorContract', 'expertiseClusters'] // Lowercase  first letter
-    const contractAddresses = [identityTokenAddress, identityManagerAddress, certificateTokenAddress, certificateManagerAddress, votingTokenAddress, timeLockAddress, governorAddress, expertiseClustersAddress]
+    // Find all files that contain an ABI
+    const filesJSON = findJsonFiles('./artifacts/contracts')
+    
+    // Setup
+    let contractPaths = []
+    let contractNames = []
+    let instanceNames = []
+    let contractAddresses = []
+    for (let i = 0; i < filesJSON.length; i++) {
+      const contract = filesJSON[i]
+      const contractPath = contract['path']
+      const contractName = contract['name'].split('.')[0]
+      const contractNameLowercase = contractName.charAt(0).toLowerCase() + contractName.slice(1)
+      const contractAddress = contractNameLowercase + 'Address'
+      try {
+        contractAddresses.push(eval(contractAddress))
+        contractPaths.push(contractPath)
+        contractNames.push(contractName)
+        instanceNames.push(contractNameLowercase)
+      } catch (error) {
+        console.log(`Contract ${contractName} not deployed!`)
+      }
+      
+    }
     const useNetwork = 'localhost'
     // Save information to files
     for (let i = 0; i < contractNames.length; i++) {
@@ -108,9 +145,6 @@ const runMain = async () => {
         addEntryConfigJSON(instanceNames[i], contractAddresses[i])
       }
     }
-
-    // Perform governance Actions
-    //governanceActions()
 
     // terminate without errors
     process.exit(0)
