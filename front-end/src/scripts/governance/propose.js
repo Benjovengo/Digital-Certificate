@@ -1,7 +1,5 @@
 import { ethers } from 'ethers'
-//const { ethers } = require('hardhat')
 
-// import fastForwardBlocks from '../utils/speedUpTime'
 /** Contract(s) and Address(es) */
 import GovernorContract from '../../abis/GovernorContract.json' // contract ABI
 import ExpertiseClusters from '../../abis/ExpertiseClusters.json' // contract ABI
