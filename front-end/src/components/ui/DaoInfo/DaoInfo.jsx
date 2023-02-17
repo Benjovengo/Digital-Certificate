@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Container, Row, Col } from "reactstrap";
 
-// CSS Style
-import './DaoInfo.css'
+import './DaoInfo.css' // CSS Style
+
 
 /**
  * DAO Information/Parameters
