@@ -33,7 +33,8 @@ const DaoInfo = () => {
   }, [])
 
 
-  const handleSubmit = async (e) => {
+
+  const handleSubmitProposal = async (e) => {
     e.preventDefault()
     const functionToCall = e.target.functionToCall.value
     const weight1 = Number(e.target.weight1.value)
@@ -42,6 +43,13 @@ const DaoInfo = () => {
     const args = [1, weight2]
     const description = e.target.description.value
     addProposal(functionToCall, args, description)
+  }
+
+
+  const handleSubmitVote = async (e) => {
+    e.preventDefault()
+    
+    console.log('DEBUG: ', e.target.vote.value)
   }
 
   /**
@@ -59,10 +67,11 @@ const DaoInfo = () => {
               <div>Expertise Threshold: {weights[0]}, {weights[1]}, {weights[2]} </div>
             </Col>
           </Row>
+          {/** Add proposal */}
           <Row>
             <Col>
               <h2>Add proposal</h2>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmitProposal}>
                 <label htmlFor="functionToCall">Function </label>
                 <input type="text" id="functionToCall" name="functionToCall" defaultValue={'storeExpertiseThreshold'}/>
                 <label htmlFor="weight1">Weight 1 </label>
@@ -75,7 +84,20 @@ const DaoInfo = () => {
                 <input type="text" id="description" name="description" placeholder='Describe action to be proposed.' defaultValue={'DEBUG'}/>
                 <button type='submit'>Add proposal</button>
               </form>
-              
+            </Col>
+          </Row>
+          {/** Vote in a proposal */}
+          <Row>
+            <Col>
+              <form onSubmit={handleSubmitVote}>
+                <label htmlFor="vote">Vote:</label>
+                <select id="vote" name="vote">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                  <option value="2">Abstain</option>
+                </select>
+                <button type='submit'>Vote</button>
+              </form>
             </Col>
           </Row>
           {/* Slider to control the width of the div. */}
