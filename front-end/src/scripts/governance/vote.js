@@ -31,9 +31,6 @@ export const castVote = async (_proposalId, _vote, _reason) => {
     _reason
   );
 
-  let proposalState = await governorContract.state(_proposalId);
-  console.log(`   Proposal State before voting period is over: ${proposalState}`)
-
   // Get the chainID
   // @dev ChainID = 31337 for the Hardhat localhost
   // @dev ChainID = 5 for the Goerli testnet
@@ -47,9 +44,5 @@ export const castVote = async (_proposalId, _vote, _reason) => {
       await hardhatProvider.send('evm_mine', [])
     }
   }
-  proposalState = await governorContract.state(_proposalId);
-  console.log(`   Proposal State after voting period is over: ${proposalState}`)
-  console.log(`   Voting is completed.`)
-
-  console.log('SUCCESS!! Proposal added.')
+  console.log(`SUCCESS!! Voting is completed.`)
 }
