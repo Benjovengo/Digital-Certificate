@@ -26,7 +26,7 @@ export const fetchActiveProposals = async (_state) => {
   // Get data from ProposalCreated event
   // @dev See https://docs.openzeppelin.com/contracts/4.x/api/governance#IGovernor-ProposalCreated-uint256-address-address---uint256---string---bytes---uint256-uint256-string-
   // @dev Events are retrieved as filter objects
-  const eventsFilter = await governorContract.filters.ProposalCreated()
+  const eventsFilter = governorContract.filters.ProposalCreated()
   // @dev Pass the filter object through the queryFilter method for blocks from 0 to the latest
   const events = await governorContract.queryFilter(eventsFilter, 0, "latest")
 

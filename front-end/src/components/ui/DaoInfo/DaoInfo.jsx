@@ -6,6 +6,7 @@ import { fetchDaoParams } from '../../../scripts/governance/dao-parameters';
 import { addProposal } from '../../../scripts/governance/propose';
 import { fetchActiveProposals } from '../../../scripts/governance/active-proposals';
 import { castVote } from '../../../scripts/governance/vote';
+import { queueAndExecute } from '../../../scripts/governance/queue-and-execute';
 
 /**
  * DAO Information/Parameters
@@ -16,8 +17,8 @@ const DaoInfo = () => {
   // Hooks
   const [magnitude, setMagnitude] = useState(0); // Magnitude of the education
   const [weights, setWeights] = useState([0, 0, 0]) // Weights for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
-  const [proposalIds, setProposalIds] = useState(null) // Array with the active proposal Ids
-
+  const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
+  const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
   
   // Change in magnitude
   const handleMagnitudeChange = (event) => {
@@ -30,21 +31,34 @@ const DaoInfo = () => {
    */
   const activeProposalsList = async () => {
     const activeForVoting = 1
-    const proposalsObject = await fetchActiveProposals(activeForVoting)
-    setProposalIds(proposalsObject)
+    const votingProposalsObject = await fetchActiveProposals(activeForVoting)
+    setVotingProposalIds(votingProposalsObject)
+    const activeForExecuting = 4
+    const executingProposalsObject = await fetchActiveProposals(activeForExecuting)
+    setExecutingProposalIds(executingProposalsObject)
   }
   useEffect( () => {
-    if (proposalIds !== null) {
+    if (votingProposalIds !== null) {
       const selectElement = document.getElementById("proposalSelect")
       selectElement.innerHTML = ''
-      for (let i = 0; i < proposalIds.length; i++) {
+      for (let i = 0; i < votingProposalIds.length; i++) {
         const option = document.createElement("option")
-        option.value = proposalIds[i]['id']
-        option.text = proposalIds[i]['desc'];
+        option.value = votingProposalIds[i]['id']
+        option.text = votingProposalIds[i]['desc'];
         selectElement.appendChild(option)
       }
     }
-  }, [proposalIds])
+    if (executingProposalIds !== null) {
+      const selectExecute = document.getElementById("selectExecuteProposal")
+      selectExecute.innerHTML = ''
+      for (let i = 0; i < executingProposalIds.length; i++) {
+        const option = document.createElement("option")
+        option.value = executingProposalIds[i]['id']
+        option.text = executingProposalIds[i]['desc'];
+        selectExecute.appendChild(option)
+      }
+    }
+  }, [votingProposalIds, executingProposalIds])
 
 
 
@@ -81,10 +95,15 @@ const DaoInfo = () => {
     const inputReason = e.target.voteReason.value
     // Vote
     castVote(inputProposalId, inputVote, inputReason)
+  }
 
-    /* console.log('Proposal Id: ', e.target.proposalSelect.value)
-    console.log('Vote yes: ', e.target.vote.value)
-    console.log('Reason: ', e.target.voteReason.value) */
+
+  const handleSubmitExecute = async (e) => {
+    e.preventDefault()
+    const inputProposalId = e.target.selectExecuteProposal.value
+    console.log(inputProposalId)
+    // Queue and Execute proposal
+    queueAndExecute(inputProposalId)
   }
 
   /**
@@ -145,6 +164,11 @@ const DaoInfo = () => {
           <Row>
             <Col>
               <h2>Queue and Execute</h2>
+              <form onSubmit={handleSubmitExecute}>
+                <label htmlFor="selectExecuteProposal">Execute:</label>
+                <select name="selectExecuteProposal" id="selectExecuteProposal"></select>
+                <button type='submit'>Execute</button>
+              </form>
             </Col>
           </Row>
           {/** Slider to control the width of the div. */}
