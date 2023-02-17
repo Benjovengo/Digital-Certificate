@@ -5,7 +5,8 @@ import ExpertiseClusters from '../../abis/ExpertiseClusters.json' // contract AB
 import config from '../../config.json' // contract addresses
 
 /**
- * Fetch the parameters defined by the governance
+ * @title Fetch the parameters defined by the governance
+ * @author Fábio Benjovengo
  * 
  * @return The weights for each of the different certification levels
  */
