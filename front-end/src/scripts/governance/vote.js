@@ -27,6 +27,7 @@ export const castVote = async (_proposalId, _vote, _reason) => {
     _vote,
     _reason
   );
+  await voteTx.wait(1)
 
   // Get the chain ID
   // @dev ChainID = 31337 for the Hardhat localhost
