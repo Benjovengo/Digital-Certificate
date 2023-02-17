@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 
 import './DaoInfo.css' // CSS Style
 import { fetchDaoParams } from '../../../scripts/governance/dao-parameters';
-
+import { addProposal } from '../../../scripts/governance/propose';
 
 /**
  * DAO Information/Parameters
