@@ -9,10 +9,11 @@ import config from '../../config.json' // contract addresses
  * Fetch the proposals with the active status
  * @author Fábio Benjovengo
  * 
+ * @param {uint} _state Filter the proposals with the specified state
  * @returns Array with the active proposals object
  * @dev The object has two keys: id and desc
  */
-export const fetchActiveProposals = async () => {
+export const fetchActiveProposals = async (_state) => {
   let activeProposals = []
   // Setup provider and network
   const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -33,7 +34,7 @@ export const fetchActiveProposals = async () => {
     const eventProposalId = events[i]['args']['proposalId'].toString()
     const eventDescription = events[i]['args']['description']
     const proposalState = await governorContract.state(eventProposalId)
-    if (proposalState === 1) {
+    if (proposalState === _state) {
       const active = {
         id: eventProposalId,
         desc: eventDescription

@@ -29,12 +29,11 @@ const DaoInfo = () => {
    * Load the proposals
    */
   const activeProposalsList = async () => {
-    const proposalsObject = await fetchActiveProposals()
+    const activeForVoting = 1
+    const proposalsObject = await fetchActiveProposals(activeForVoting)
     setProposalIds(proposalsObject)
   }
   useEffect( () => {
-    // useState is asynchronous, right?
-    // document.get...
     if (proposalIds !== null) {
       const selectElement = document.getElementById("proposalSelect")
       selectElement.innerHTML = ''
@@ -98,7 +97,7 @@ const DaoInfo = () => {
           <Row>
             <Col>
               <h1>Dao Information</h1>
-              <h2>Expertise Levels</h2>
+              <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
               <div>Expertise Threshold: {weights[0]}, {weights[1]}, {weights[2]} </div>
             </Col>
@@ -142,7 +141,13 @@ const DaoInfo = () => {
               </form>
             </Col>
           </Row>
-          {/* Slider to control the width of the div. */}
+          {/** Queue and Execute */}
+          <Row>
+            <Col>
+              <h2>Queue and Execute</h2>
+            </Col>
+          </Row>
+          {/** Slider to control the width of the div. */}
           <Row>
             <Col>
               <input type="range" min="0" max="10" value={magnitude} onChange={handleMagnitudeChange} />
