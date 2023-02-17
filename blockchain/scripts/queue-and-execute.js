@@ -53,7 +53,7 @@ async function main() {
     targetCalldatas,
     descriptionHash
   );
-  queueTx.wait(1);
+  await queueTx.wait(1);
   console.log(`   \x1b[34m*\x1b[37m Proposal queued....`)
 
   // @notice Get the chainID
