@@ -2,7 +2,6 @@ import { ethers } from 'ethers'
 
 /** Contract(s) and Address(es) */
 import GovernorContract from '../../abis/GovernorContract.json' // contract ABI
-import ExpertiseClusters from '../../abis/ExpertiseClusters.json' // contract ABI
 import config from '../../config.json' // contract addresses
 
 
@@ -19,10 +18,8 @@ export const castVote = async (_proposalId, _vote, _reason) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const network = await provider.getNetwork()
   const signer = provider.getSigner() // get the signer
-
   /// Javascript "version" of the smart contracts
   const governorContract = new ethers.Contract(config[network.chainId].governorContract.address, GovernorContract, signer)
-  const expertiseClusters = new ethers.Contract(config[network.chainId].expertiseClusters.address, ExpertiseClusters, signer)
 
   /// Cast a vote
   const voteTx = await governorContract.castVoteWithReason(
@@ -31,12 +28,12 @@ export const castVote = async (_proposalId, _vote, _reason) => {
     _reason
   );
 
-  // Get the chainID
+  // Get the chain ID
   // @dev ChainID = 31337 for the Hardhat localhost
   // @dev ChainID = 5 for the Goerli testnet
   const hardhatProvider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const { chainId } = await provider.getNetwork()
-  // Fast forward blocks - speed up time so we can vote
+  // Fast forward blocks - speed up the number of blocks so it is possible to vote
   // @dev fast forward only in localhost
   if (chainId === 31337) {
     const amount = 6 // VOTING_PERIOD + 1 - the VOTING_PERIOD is defined at deployment time
