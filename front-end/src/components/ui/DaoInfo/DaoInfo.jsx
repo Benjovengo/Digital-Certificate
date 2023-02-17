@@ -39,7 +39,6 @@ const DaoInfo = () => {
       const selectElement = document.getElementById("proposalSelect")
       selectElement.innerHTML = ''
       for (let i = 0; i < proposalIds.length; i++) {
-        console.log('index: ', i)
         const option = document.createElement("option")
         option.value = proposalIds[i]['id']
         option.text = proposalIds[i]['desc'];
@@ -128,6 +127,7 @@ const DaoInfo = () => {
           {/** Vote in a proposal */}
           <Row>
             <Col>
+              <h2>Vote</h2>
               <form onSubmit={handleSubmitVote}>
                 <label htmlFor="vote">Vote:</label>
                 <select name="proposalSelect" id="proposalSelect"></select>
