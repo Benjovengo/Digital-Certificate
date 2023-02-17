@@ -32,6 +32,7 @@ const DaoInfo = () => {
               <h2>Your Expertise</h2>
             </Col>
           </Row>
+          {/* Slider to control the width of the div. */}
           <Row>
             <Col>
               <input type="range" min="0" max="10" value={magnitude} onChange={handleMagnitudeChange} />
