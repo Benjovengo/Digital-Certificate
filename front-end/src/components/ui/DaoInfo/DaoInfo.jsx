@@ -11,9 +11,11 @@ import { fetchDaoParams } from '../../../scripts/governance/dao-parameters';
  * @returns Display the parameters of the DAO
  */
 const DaoInfo = () => {
-  // Magnitude of the education
-  const [magnitude, setMagnitude] = useState(0);
+  // Hooks
+  const [magnitude, setMagnitude] = useState(0); // Magnitude of the education
+  const [weights, setWeights] = useState([0, 0, 0]) // Weights for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
 
+  
   // Change in magnitude
   const handleMagnitudeChange = (event) => {
     setMagnitude(event.target.value);
@@ -22,7 +24,7 @@ const DaoInfo = () => {
   // get params
   const params = async () => {
     const weight = await fetchDaoParams()
-    console.log(weight)
+    setWeights(weight)
   }
 
   useEffect( () => {
@@ -41,6 +43,7 @@ const DaoInfo = () => {
               <h1>Dao Information</h1>
               <h2>Expertise Levels</h2>
               <h2>Your Expertise</h2>
+              <div>Weights: {weights[0]}, {weights[1]}, {weights[2]} </div>
             </Col>
           </Row>
           {/* Slider to control the width of the div. */}
