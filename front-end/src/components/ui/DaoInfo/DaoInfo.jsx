@@ -41,7 +41,6 @@ const DaoInfo = () => {
     const weight3 = Number(e.target.weight3.value)
     const args = [1, weight2]
     const description = e.target.description.value
-    console.log('DEBUG')
     addProposal(functionToCall, args, description)
   }
 

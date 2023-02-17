@@ -48,7 +48,7 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
   // Get the chainID
   // @dev ChainID = 31337 for the Hardhat localhost
   // @dev ChainID = 5 for the Goerli testnet
-  // const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
+  const hardhatProvider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const { chainId } = await provider.getNetwork()
   /// @notice Fast forward blocks
   /// @notice Speed up time so we can vote
@@ -56,7 +56,7 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
   if (chainId === 31337) {
     const amount = 2 // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
     for (let i = 0; i < amount; i++) {
-      await provider.send('evm_mine', [])
+      await hardhatProvider.send('evm_mine', [])
     }
   }
 
