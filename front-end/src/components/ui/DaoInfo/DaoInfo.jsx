@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from "reactstrap";
 
 import './DaoInfo.css' // CSS Style
+import { fetchDaoParams } from '../../../scripts/governance/dao-parameters';
 
 
 /**
@@ -17,6 +18,16 @@ const DaoInfo = () => {
   const handleMagnitudeChange = (event) => {
     setMagnitude(event.target.value);
   };
+
+  // get params
+  const params = async () => {
+    const weight = await fetchDaoParams()
+    console.log(weight)
+  }
+
+  useEffect( () => {
+    params()
+  }, [])
 
   /**
    * Return the page elements based on the ExpertiseClusters smart contract
