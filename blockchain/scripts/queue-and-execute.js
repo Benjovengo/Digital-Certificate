@@ -80,7 +80,7 @@ async function main() {
     targetCalldatas,
     descriptionHash
   );
-  executeTx.wait(1);
+  await executeTx.wait(1);
 
   const weights = [
     await expertiseClustersContract.retrieveExpertiseThreshold(0),
