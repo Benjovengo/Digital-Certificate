@@ -40,10 +40,6 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
   /// Get the response of the proposal transaction
   const proposeReceipt = await proposeTx.wait();
 
-  /// Get the ID of the proposal
-  const proposalId = proposeReceipt.events[0].args.proposalId;
-
-
   // Get the chainID
   // @dev ChainID = 31337 for the Hardhat localhost
   // @dev ChainID = 5 for the Goerli testnet
