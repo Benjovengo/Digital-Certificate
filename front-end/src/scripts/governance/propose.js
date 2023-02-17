@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-import { fastForwardBlocks } from '../utils/speedUpTime'
+
 /** Contract(s) and Address(es) */
 import GovernorContract from '../../abis/GovernorContract.json' // contract ABI
 import ExpertiseClusters from '../../abis/ExpertiseClusters.json' // contract ABI
@@ -53,8 +53,10 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
   /// @notice Speed up time so we can vote
   /// @dev fast forward only in localhost
   if (chainId === 31337) {
-    const numberOfBlocks = 2 // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
-    fastForwardBlocks(numberOfBlocks)
+    const amount = 2 // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
+    for (let i = 0; i < amount; i++) {
+      await hardhatProvider.send('evm_mine', [])
+    }
   }
 
   console.log('SUCCESS!! Proposal added.')
