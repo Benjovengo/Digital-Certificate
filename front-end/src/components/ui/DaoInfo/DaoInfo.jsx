@@ -23,6 +23,33 @@ const DaoInfo = () => {
     setMagnitude(event.target.value);
   };
 
+
+  /**
+   * Load the proposals
+   */
+  const activeProposalsList = async () => {
+    const proposalsObject = await fetchActiveProposals()
+    setProposalIds(proposalsObject)
+  }
+  useEffect( () => {
+    // useState is asynchronous, right?
+    // document.get...
+    if (proposalIds !== null) {
+      const selectElement = document.getElementById("proposalSelect")
+      selectElement.innerHTML = ''
+      for (let i = 0; i < proposalIds.length; i++) {
+        console.log('index: ', i)
+        const option = document.createElement("option")
+        option.value = proposalIds[i]['id']
+        option.text = proposalIds[i]['desc'];
+        selectElement.appendChild(option)
+      }
+      console.log('DEBUG!!! ProposalIds', proposalIds)
+    }
+  }, [proposalIds])
+
+
+
   /**
    * Load the DAO parameters
    */
@@ -32,6 +59,7 @@ const DaoInfo = () => {
   }
   useEffect( () => {
     params()
+    activeProposalsList()
   }, [])
 
 
@@ -50,7 +78,6 @@ const DaoInfo = () => {
 
   const handleSubmitVote = async (e) => {
     e.preventDefault()
-    console.log(await fetchActiveProposals())
     
     console.log('DEBUG: ', e.target.vote.value)
   }
@@ -96,6 +123,7 @@ const DaoInfo = () => {
             <Col>
               <form onSubmit={handleSubmitVote}>
                 <label htmlFor="vote">Vote:</label>
+                <select name="proposalSelect" id="proposalSelect"></select>
                 <select id="vote" name="vote">
                   <option value="1">Yes</option>
                   <option value="0">No</option>
