@@ -98,7 +98,7 @@ const DaoInfo = () => {
   }
 
 
-  const handleSubmitExecute = async (e) => {
+  const handleSubmitExecution = async (e) => {
     e.preventDefault()
     const inputProposalId = e.target.selectExecuteProposal.value
     console.log(inputProposalId)
@@ -164,7 +164,7 @@ const DaoInfo = () => {
           <Row>
             <Col>
               <h2>Queue and Execute</h2>
-              <form onSubmit={handleSubmitExecute}>
+              <form onSubmit={handleSubmitExecution}>
                 <label htmlFor="selectExecuteProposal">Execute:</label>
                 <select name="selectExecuteProposal" id="selectExecuteProposal"></select>
                 <button type='submit'>Execute</button>
