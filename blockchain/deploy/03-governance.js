@@ -110,7 +110,7 @@ const deployGovernance = async () => {
       'GOVERNANCE_TOKEN_ADDRESS': [votingToken.address],
       'TIMELOCK_ADDRESS': [timeLock.address],
       'GOVERNOR_ADDRESS': [governorContract.address],
-      'BOX_CONTRACT_ADDRESS': [expertiseClustersContract.address],
+      'EXPERTISE_CONTRACT_ADDRESS': [expertiseClustersContract.address],
     }, null, " ")
   );
 

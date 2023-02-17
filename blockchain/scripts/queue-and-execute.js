@@ -28,12 +28,12 @@ async function main() {
 
   // @dev Get the addresses for the contracts
   const GOVERNOR_ADDRESS = addressesFile['GOVERNOR_ADDRESS'][0];
-  const BOX_CONTRACT_ADDRESS = addressesFile['BOX_CONTRACT_ADDRESS'][0];
+  const EXPERTISE_CONTRACT_ADDRESS = addressesFile['EXPERTISE_CONTRACT_ADDRESS'][0];
 
   // @dev Connect to Governor deployed contract
   const governorContract = await hre.ethers.getContractAt("GovernorContract", GOVERNOR_ADDRESS);
   // @dev Connect to ExpertiseClusters deployed contract
-  const expertiseClustersContract = await hre.ethers.getContractAt("ExpertiseClusters", BOX_CONTRACT_ADDRESS);
+  const expertiseClustersContract = await hre.ethers.getContractAt("ExpertiseClusters", EXPERTISE_CONTRACT_ADDRESS);
  
   // Get data from ProposalCreated event
   // @dev See https://docs.openzeppelin.com/contracts/4.x/api/governance#IGovernor-ProposalCreated-uint256-address-address---uint256---string---bytes---uint256-uint256-string-
