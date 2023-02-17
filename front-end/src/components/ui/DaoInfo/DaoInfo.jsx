@@ -43,7 +43,7 @@ const DaoInfo = () => {
               <h1>Dao Information</h1>
               <h2>Expertise Levels</h2>
               <h2>Your Expertise</h2>
-              <div>Weights: {weights[0]}, {weights[1]}, {weights[2]} </div>
+              <div>Expertise Threshold: {weights[0]}, {weights[1]}, {weights[2]} </div>
             </Col>
           </Row>
           {/* Slider to control the width of the div. */}

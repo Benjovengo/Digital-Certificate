@@ -45,28 +45,32 @@ contract ExpertiseClusters is Ownable {
     /// @dev All the weights are set initially to one
     uint16[3] private expertiseCluster = [1, 1, 1];
 
+
     /**
      * Events
      */
     /// @dev This event is emitted when there is a change on the weight
     ///      for a particular level of certification
     event ValueChanged(uint256 _certificateLevel, uint256 _newWeight);
+    /// @dev This event is emitted when there is a change on the
+    ///      points required for a particular level of expertise
+    event ExpertiseValueChanged(uint8 _expertiseLevel, uint256 _newWeight);
 
     /**
      * Functions and Methods
      */
 
     /// Stores a new certificateWeight in the contract
-    function storeWeight(uint256 _certificateLevel, uint16 _newWeight)
+    function storeExpertiseThreshold(uint8 _expertiseLevel, uint16 _newWeight)
         public
         onlyOwner
     {
-        expertiseCluster[_certificateLevel] = _newWeight;
-        emit ValueChanged(_certificateLevel, _newWeight);
+        expertiseCluster[_expertiseLevel] = _newWeight;
+        emit ExpertiseValueChanged(_expertiseLevel, _newWeight);
     }
 
     /// Reads the weight stored for a particular level of certification
-    function retrieveWeight(uint256 _level) public view returns (uint16) {
-        return expertiseCluster[_level];
+    function retrieveExpertiseThreshold(uint256 _expertiseLevel) public view returns (uint16) {
+        return expertiseCluster[_expertiseLevel];
     }
 }

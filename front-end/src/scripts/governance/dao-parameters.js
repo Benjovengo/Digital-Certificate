@@ -21,7 +21,7 @@ export const fetchDaoParams = async () => {
 
   let weight = []
   for (let i = 0; i < 3; i++) {
-    weight.push(await expertiseClusters.retrieveWeight(i))    
+    weight.push(await expertiseClusters.retrieveExpertiseThreshold(i))    
   }
 
   return weight
