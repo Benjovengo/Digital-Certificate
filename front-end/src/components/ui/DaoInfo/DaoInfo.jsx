@@ -4,6 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import './DaoInfo.css' // CSS Style
 import { fetchDaoParams } from '../../../scripts/governance/dao-parameters';
 import { addProposal } from '../../../scripts/governance/propose';
+import { fetchActiveProposals } from '../../../scripts/governance/active-proposals';
 
 /**
  * DAO Information/Parameters
@@ -14,6 +15,7 @@ const DaoInfo = () => {
   // Hooks
   const [magnitude, setMagnitude] = useState(0); // Magnitude of the education
   const [weights, setWeights] = useState([0, 0, 0]) // Weights for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
+  const [proposalIds, setProposalIds] = useState(null) // Array with the active proposal Ids
 
   
   // Change in magnitude
@@ -48,7 +50,8 @@ const DaoInfo = () => {
 
   const handleSubmitVote = async (e) => {
     e.preventDefault()
-
+    console.log(await fetchActiveProposals())
+    
     console.log('DEBUG: ', e.target.vote.value)
   }
 
