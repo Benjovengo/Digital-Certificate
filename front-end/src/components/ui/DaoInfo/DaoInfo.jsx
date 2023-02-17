@@ -5,6 +5,7 @@ import './DaoInfo.css' // CSS Style
 import { fetchDaoParams } from '../../../scripts/governance/dao-parameters';
 import { addProposal } from '../../../scripts/governance/propose';
 import { fetchActiveProposals } from '../../../scripts/governance/active-proposals';
+import { castVote } from '../../../scripts/governance/vote';
 
 /**
  * DAO Information/Parameters
@@ -44,7 +45,6 @@ const DaoInfo = () => {
         option.text = proposalIds[i]['desc'];
         selectElement.appendChild(option)
       }
-      console.log('DEBUG!!! ProposalIds', proposalIds)
     }
   }, [proposalIds])
 
@@ -78,8 +78,15 @@ const DaoInfo = () => {
 
   const handleSubmitVote = async (e) => {
     e.preventDefault()
-    
-    console.log('DEBUG: ', e.target.vote.value)
+    const inputProposalId = e.target.proposalSelect.value
+    const inputVote = e.target.vote.value
+    const inputReason = e.target.voteReason.value
+    // Vote
+    castVote(inputProposalId, inputVote, inputReason)
+
+    /* console.log('Proposal Id: ', e.target.proposalSelect.value)
+    console.log('Vote yes: ', e.target.vote.value)
+    console.log('Reason: ', e.target.voteReason.value) */
   }
 
   /**
@@ -129,6 +136,8 @@ const DaoInfo = () => {
                   <option value="0">No</option>
                   <option value="2">Abstain</option>
                 </select>
+                <label htmlFor="voteReason">Reason </label>
+                <input type="text" id="voteReason" name="voteReason"/>
                 <button type='submit'>Vote</button>
               </form>
             </Col>
