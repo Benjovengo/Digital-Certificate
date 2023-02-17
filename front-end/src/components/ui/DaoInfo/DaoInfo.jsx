@@ -48,7 +48,7 @@ const DaoInfo = () => {
 
   const handleSubmitVote = async (e) => {
     e.preventDefault()
-    
+
     console.log('DEBUG: ', e.target.vote.value)
   }
 
@@ -73,7 +73,9 @@ const DaoInfo = () => {
               <h2>Add proposal</h2>
               <form onSubmit={handleSubmitProposal}>
                 <label htmlFor="functionToCall">Function </label>
-                <input type="text" id="functionToCall" name="functionToCall" defaultValue={'storeExpertiseThreshold'}/>
+                <select id="functionToCall" name="functionToCall">
+                  <option value="storeExpertiseThreshold">Change Expertise Threshold</option>
+                </select>
                 <label htmlFor="weight1">Weight 1 </label>
                 <input type="number" id="weight1" name="weight1" defaultValue={1}/>
                 <label htmlFor="weight2">Weight 2 </label>
