@@ -92,8 +92,8 @@ const ExpertiseLevel = () => {
    *      update on entering the page only
    */
   useEffect( () => {
-    //expertiseParams()
-    //activeProposalsList()
+    expertiseParams()
+    activeProposalsList()
   }, [])
 
 
@@ -111,7 +111,7 @@ const ExpertiseLevel = () => {
     const weight1 = Number(e.target.weight1.value)
     const weight2 = Number(e.target.weight2.value)
     const weight3 = Number(e.target.weight3.value)
-    const args = [100, 200, 300]
+    const args = [weight1, weight2, weight3]
     const description = e.target.description.value
     // Submit new proposal
     await addProposal(functionToCall, args, description)
@@ -171,7 +171,7 @@ const ExpertiseLevel = () => {
               <form onSubmit={handleSubmitProposal}>
                 <label htmlFor="functionToCall">Function </label>
                 <select id="functionToCall" name="functionToCall">
-                  <option value="storeExpertiseClusters">Change Expertise Threshold</option>
+                  <option value="storeExpertiseThreshold">Change Expertise Threshold</option>
                 </select>
                 <label htmlFor="weight1">Weight 1 </label>
                 <input type="number" id="weight1" name="weight1" defaultValue={1}/>
