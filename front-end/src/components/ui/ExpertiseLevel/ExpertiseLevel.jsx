@@ -203,10 +203,10 @@ const ExpertiseLevel = () => {
       const expert = Number(e.target.threshold03input.value)
       args = [novice, intermediate, expert]
     } else {
-      const weight1 = Number(e.target.weight1.value)
-      const weight2 = Number(e.target.weight2.value)
-      const weight3 = Number(e.target.weight3.value)
-      const weight4 = Number(e.target.weight4.value)
+      const weight1 = Number(e.target.weight01input.value)
+      const weight2 = Number(e.target.weight02input.value)
+      const weight3 = Number(e.target.weight03input.value)
+      const weight4 = Number(e.target.weight04input.value)
       args = [weight1, weight2, weight3, weight4]
     }
     const description = e.target.description.value
