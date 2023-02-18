@@ -4,7 +4,9 @@ import { Container, Row, Col } from "reactstrap";
 import './ExpertiseLevel.css' // CSS Style
 
 import { addProposal } from '../../../scripts/governance/propose';
-import { fetchDaoParams } from '../../../scripts/governance/dao-parameters';
+import { castVote } from '../../../scripts/governance/vote';
+import { queueAndExecute } from '../../../scripts/governance/queue-and-execute';
+import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters';
 
 
 /**
@@ -29,14 +31,14 @@ const ExpertiseLevel = () => {
    */
   const handleSubmitProposal = async (e) => {
     e.preventDefault()
-    
+    // Get values from the component's input fields
     const functionToCall = e.target.functionToCall.value
     const weight1 = Number(e.target.weight1.value)
     const weight2 = Number(e.target.weight2.value)
     const weight3 = Number(e.target.weight3.value)
     const args = [1, weight2]
     const description = e.target.description.value
-
+    // Submit new proposal
     await addProposal(functionToCall, args, description)
   }
 
@@ -50,13 +52,17 @@ const ExpertiseLevel = () => {
    */
   const handleSubmitVote = async (e) => {
     e.preventDefault()
-    
-    console.log('Voting placeholder.')
+    // Get values from the component's input fields
+    const inputProposalId = e.target.proposalSelect.value
+    const inputVote = e.target.vote.value
+    const inputReason = e.target.voteReason.value
+    // Vote
+    castVote(inputProposalId, inputVote, inputReason)
   }
 
 
    /**
-   * Submit queue and execute
+   * Submit queue and execute for a successful proposal
    * 
    * @param {event} e Submitting form event
    * @dev The event has all the information about the
@@ -64,8 +70,11 @@ const ExpertiseLevel = () => {
    */
    const handleSubmitExecution = async (e) => {
     e.preventDefault()
-    
-    console.log('Queueing and execution placeholder.')
+    // Get values from the component's input fields
+    const inputProposalId = e.target.selectExecuteProposal.value
+    console.log(inputProposalId)
+    // Queue and Execute proposal
+    queueAndExecute(inputProposalId)
   }
 
 
