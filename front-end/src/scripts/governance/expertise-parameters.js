@@ -10,7 +10,7 @@ import config from '../../config.json' // contract addresses
  * 
  * @return The weights for each of the different certification levels
  */
-export const fetchDaoParams = async () => {
+export const fetchExpertiseParams = async () => {
   // Setup provider and network
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const network = await provider.getNetwork()
