@@ -22,8 +22,7 @@ const ExpertiseLevel = () => {
    * Definitions
    */
   // Hooks
-  const [magnitude, setMagnitude] = useState(0); // Magnitude of the education
-  const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // Weights for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
+  const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
   const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
   
@@ -74,9 +73,8 @@ const ExpertiseLevel = () => {
   /**
    * Load the expertise parameters
    * 
-   * @dev The expertise parameter are:
-   *      - the weights for each levels of education
-   *      - the expertise levels threshold
+   * @dev The expertise parameter are the array with
+   *      the thresholds for the levels of expertise
    */
   const expertiseParams = async () => {
     const threshold = await fetchExpertiseParams()
@@ -106,13 +104,25 @@ const ExpertiseLevel = () => {
    */
   const handleSubmitProposal = async (e) => {
     e.preventDefault()
+
+    let args
     // Get values from the component's input fields
     const functionToCall = e.target.functionToCall.value
-    const weight1 = Number(e.target.weight1.value)
-    const weight2 = Number(e.target.weight2.value)
-    const weight3 = Number(e.target.weight3.value)
-    const args = [weight1, weight2, weight3]
+    // Parse arguments
+    if (functionToCall==='storeExpertiseThreshold') {
+      const threshold1 = Number(e.target.threshold1.value)
+      const threshold2 = Number(e.target.threshold2.value)
+      const threshold3 = Number(e.target.threshold3.value)
+      args = [threshold1, threshold2, threshold3]
+    } else {
+      const weight1 = Number(e.target.weight1.value)
+      const weight2 = Number(e.target.weight2.value)
+      const weight3 = Number(e.target.weight3.value)
+      const weight4 = Number(e.target.weight4.value)
+      args = [weight1, weight2, weight3, weight4]
+    }
     const description = e.target.description.value
+
     // Submit new proposal
     await addProposal(functionToCall, args, description)
   }
@@ -171,14 +181,24 @@ const ExpertiseLevel = () => {
               <form onSubmit={handleSubmitProposal}>
                 <label htmlFor="functionToCall">Function </label>
                 <select id="functionToCall" name="functionToCall">
-                  <option value="storeExpertiseThreshold">Change Expertise Threshold</option>
+                  <option value="storeExpertiseThreshold">Change expertise threshold</option>
+                  <option value="storeCertificateWeight">Change the weights for the academic degrees</option>
                 </select>
+                <label htmlFor="threshold1">Threshold 1 </label>
+                <input type="number" id="threshold1" name="threshold1" defaultValue={1}/>
+                <label htmlFor="threshold2">Threshold 2 </label>
+                <input type="number" id="threshold2" name="threshold2" defaultValue={1}/>
+                <label htmlFor="threshold3">Threshold 3 </label>
+                <input type="number" id="threshold3" name="threshold3" defaultValue={1}/>
+                <label htmlFor="description">Description </label>
                 <label htmlFor="weight1">Weight 1 </label>
                 <input type="number" id="weight1" name="weight1" defaultValue={1}/>
                 <label htmlFor="weight2">Weight 2 </label>
                 <input type="number" id="weight2" name="weight2" defaultValue={1}/>
                 <label htmlFor="weight3">Weight 3 </label>
                 <input type="number" id="weight3" name="weight3" defaultValue={1}/>
+                <label htmlFor="weight4">Weight 4 </label>
+                <input type="number" id="weight4" name="weight4" defaultValue={1}/>
                 <label htmlFor="description">Description </label>
                 <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
                 <button type='submit'>Add proposal</button>

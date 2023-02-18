@@ -79,6 +79,24 @@ contract ExpertiseClusters is Ownable {
         emit WeightsChanged(_newWeights);
     }
 
+    /** Retrieve the weights for all the academic levels
+     *
+     * @return {uint16[4]} Values of the weights for all
+     *                     academic degrees
+     * @ dev Return an array of 4 elements. Degrees considered:
+     *       - Bachelor:     index=0
+     *       - Masters:      index=1
+     *       - Doctoral:     index=2
+     *       - Postdoctoral: index=3
+     */
+    function retrieveCertificateWeight()
+        public
+        view
+        returns (uint16[4] memory)
+    {
+        return certificateWeights;
+    }
+
     /** Set/store the expertise levels threshold
      *
      * @ dev The threshold is an array of 3 elements.
@@ -97,7 +115,7 @@ contract ExpertiseClusters is Ownable {
         emit ExpertiseThresholdChanged(_newThreshold);
     }
 
-    /** Read the expertise levels threshold
+    /** Retrieve the expertise levels threshold
      *
      * @return {uint16[4]} Values of the thresholds for all
      *                     levels of expertise in percentage
@@ -116,7 +134,7 @@ contract ExpertiseClusters is Ownable {
         return expertiseClusters;
     }
 
-    /** Read the expertise levels threshold
+    /** Retrieve the expertise levels threshold
      *
      * @return {uint16[4]} Values of the thresholds in points
      *                     for all levels of expertise
