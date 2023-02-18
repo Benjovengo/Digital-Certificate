@@ -36,7 +36,7 @@ contract ExpertiseClusters is Ownable {
     /// Array of the certificate level to be multiplied
     /// by the GPA to the actual score
     /// Controlled by the governance decision
-    uint16[4] private certificateWeight = [1, 2, 4, 8];
+    uint16[4] private certificateWeights = [1, 2, 4, 8];
     /// The expertise cluster defines the minimum values
     /// for a partucular expertise level
     /// @dev The levels are the:
@@ -45,7 +45,7 @@ contract ExpertiseClusters is Ownable {
     ///      2: expert
     /// @dev Each level must be between 0 and 65535
     /// @dev All the weights are set initially to one
-    uint16[3] private expertiseCluster = [1, 1, 1];
+    uint16[3] private expertiseClusters = [1, 1, 1];
 
     /**
      * Events
@@ -66,7 +66,7 @@ contract ExpertiseClusters is Ownable {
         public
         onlyOwner
     {
-        expertiseCluster = _newThreshold;
+        expertiseClusters = _newThreshold;
         emit ExpertiseThresholdChanged(_newThreshold);
     }
 
@@ -76,6 +76,31 @@ contract ExpertiseClusters is Ownable {
         view
         returns (uint16[3] memory)
     {
-        return expertiseCluster;
+        return expertiseClusters;
+    }
+
+
+    /** Read the expertise levels threshold
+     *
+     * @return {uint16[4]} Values of the thresholds for all levels of expertise
+     * @ dev Return an array of 3 elements. Classification:
+     *       - novice: total points <  first threshold
+     *       - intermediate: total points in [first threshold, second threshold]
+     *       - expert: total points in [second threshold, third threshold]
+     *       - jedi: total points >  third threshold
+     * @dev The trhesholds are given in percentages from 0 to 100%
+     */
+    function retrieveClustersInPoints() public view returns (uint16[3] memory) {
+        uint16 points = 8 *
+            (certificateWeights[0] +
+                certificateWeights[1] +
+                certificateWeights[2] +
+                certificateWeights[3]);
+        uint16[3] memory clustersInPoints = [
+            points * expertiseClusters[0],
+            points * expertiseClusters[1],
+            points * expertiseClusters[2]
+        ];
+        return clustersInPoints;
     }
 }
