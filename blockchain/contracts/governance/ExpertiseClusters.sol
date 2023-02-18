@@ -61,6 +61,16 @@ contract ExpertiseClusters is Ownable {
      * Functions and Methods
      */
 
+    /** Set the expertise levels threshold
+     *
+     * @ dev The threshold is an array of 3 elements.
+     *       Classification:
+     *       - novice: total points <  first threshold
+     *       - intermediate: total points in [first threshold, second threshold]
+     *       - expert: total points in [second threshold, third threshold]
+     *       - jedi: total points >  third threshold
+     * @dev The thresholds are set in percentages from 0 to 100%
+     */
     /// Stores a new certificateWeight in the contract
     function storeExpertiseThreshold(uint16[3] memory _newThreshold)
         public
@@ -70,7 +80,17 @@ contract ExpertiseClusters is Ownable {
         emit ExpertiseThresholdChanged(_newThreshold);
     }
 
-    /// Reads the weight stored for a particular level of certification
+    /** Read the expertise levels threshold
+     *
+     * @return {uint16[4]} Values of the thresholds for all
+     *                     levels of expertise in percentage
+     * @ dev Return an array of 3 elements. Classification:
+     *       - novice: total points <  first threshold
+     *       - intermediate: total points in [first threshold, second threshold]
+     *       - expert: total points in [second threshold, third threshold]
+     *       - jedi: total points >  third threshold
+     * @dev The thresholds are given in percentages from 0 to 100%
+     */
     function retrieveExpertiseThreshold()
         public
         view
@@ -79,16 +99,15 @@ contract ExpertiseClusters is Ownable {
         return expertiseClusters;
     }
 
-
     /** Read the expertise levels threshold
      *
-     * @return {uint16[4]} Values of the thresholds for all levels of expertise
+     * @return {uint16[4]} Values of the thresholds in points
+     *                     for all levels of expertise
      * @ dev Return an array of 3 elements. Classification:
      *       - novice: total points <  first threshold
      *       - intermediate: total points in [first threshold, second threshold]
      *       - expert: total points in [second threshold, third threshold]
      *       - jedi: total points >  third threshold
-     * @dev The trhesholds are given in percentages from 0 to 100%
      */
     function retrieveClustersInPoints() public view returns (uint16[3] memory) {
         uint16 points = 8 *
