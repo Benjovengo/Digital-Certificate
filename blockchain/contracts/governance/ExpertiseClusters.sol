@@ -60,7 +60,11 @@ contract ExpertiseClusters is Ownable {
      * Functions and Methods
      */
 
-    /// Stores a new certificateWeight in the contract
+    /**
+     * Stores a new certificateWeight in the contract
+     *
+     * @dev Store values as an array of four elements from 0 to 65,535
+     */
     function storeCertificateWeights(uint16[4] memory _newWeights)
         public
         onlyOwner
