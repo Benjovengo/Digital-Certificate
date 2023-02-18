@@ -77,11 +77,20 @@ const ExpertiseLevel = () => {
    *      the thresholds for the levels of expertise
    */
   const expertiseParams = async () => {
-    const threshold = await fetchExpertiseParams()
-    setExpertiseLevels(threshold)
-    document.getElementById('threshold1').value = threshold[0]
-    document.getElementById('threshold2').value = threshold[1]
-    document.getElementById('threshold3').value = threshold[2]
+    const expertise = await fetchExpertiseParams()
+    const thresholdParams = expertise[0]
+    const thresholdPercentages = expertise[1]
+    const weightParams = expertise[2]
+    setExpertiseLevels(thresholdParams)
+    // Update input values
+    document.getElementById('threshold1').value = thresholdPercentages[0]
+    document.getElementById('threshold2').value = thresholdPercentages[1]
+    document.getElementById('threshold3').value = thresholdPercentages[2]
+    /// WEIGHTS
+    document.getElementById('weight1').value = weightParams[0]
+    document.getElementById('weight2').value = weightParams[1]
+    document.getElementById('weight3').value = weightParams[2]
+    document.getElementById('weight4').value = weightParams[3]
   }
 
 
