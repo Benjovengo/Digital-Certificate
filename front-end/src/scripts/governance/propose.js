@@ -17,8 +17,8 @@ import config from '../../config.json' // contract addresses
  */
 export const addProposal = async (_functionToCall, _args, _proposalDescription) => {
   // Setup provider and network
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
-  //const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+  // const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
   const network = await provider.getNetwork()
   const signer = provider.getSigner() // get the signer
 
