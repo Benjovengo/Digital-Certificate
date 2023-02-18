@@ -52,8 +52,8 @@ const ExpertiseLevel = () => {
    *      - the expertise levels threshold
    */
   const expertiseParams = async () => {
-    const weight = await fetchExpertiseParams()
-    setExpertiseLevels(weight)
+    const threshold = await fetchExpertiseParams()
+    setExpertiseLevels(threshold)
   }
 
 
@@ -135,7 +135,7 @@ const ExpertiseLevel = () => {
               <h1>Expertise</h1>
               <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
-              <div>Expertise Threshold: {expertiseLevels[0]}, {expertiseLevels[1]}, {expertiseLevels[2]} </div>
+              <div>Expertise Threshold: {expertiseLevels[0]}, {expertiseLevels[1]}, {expertiseLevels[2]}</div>
             </Col>
           </Row>
           {/** Add proposal */}
