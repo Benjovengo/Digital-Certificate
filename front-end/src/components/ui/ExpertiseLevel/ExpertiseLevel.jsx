@@ -182,17 +182,35 @@ const ExpertiseLevel = () => {
   };
 
 
+  // Limit the thresholds based on the upper levels
   const limitThresholds = () => {
     if (threshold01>=threshold02){
-      setThreshold01(threshold02-1)
+      setThreshold01(threshold02)
     }
     if (threshold02>=threshold03){
-      setThreshold02(threshold03-1)
+      setThreshold02(threshold03)
     }
   }
   useEffect(()=>{
     limitThresholds()
   },[threshold01, threshold02, threshold03])
+
+  // Limit the thresholds based on the upper levels
+  const limitWeights = () => {
+    if (weight01>=weight02){
+      setWeight01(weight02)
+    }
+    if (weight02>=weight03){
+      setWeight02(weight03)
+    }
+    if (weight03>=weight04){
+      setWeight03(weight04)
+    }
+  }
+  useEffect(()=>{
+    limitWeights()
+  },[weight01, weight02, weight03, weight04])
+
 
 
 
@@ -290,13 +308,13 @@ const ExpertiseLevel = () => {
 
                 <div>
                   <label htmlFor="threshold01input">Intermediate lower limit:</label>
-                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01>=threshold02? threshold02-1: threshold01} onChange={handleThresholdSliderChange} />
-                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01>=threshold02? threshold02-1: threshold01} onChange={handleThresholdInputChange} />
+                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01>=threshold02? threshold02: threshold01} onChange={handleThresholdSliderChange} />
+                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01>=threshold02? threshold02: threshold01} onChange={handleThresholdInputChange} />
                 </div>
                 <div>
                   <label htmlFor="threshold02input">Expert lower limit:</label>
-                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02>=threshold03? threshold03-1: threshold02} onChange={handleThresholdSliderChange} />
-                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02>=threshold03? threshold03-1: threshold02} onChange={handleThresholdInputChange} />
+                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02>=threshold03? threshold03: threshold02} onChange={handleThresholdSliderChange} />
+                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02>=threshold03? threshold03: threshold02} onChange={handleThresholdInputChange} />
                 </div>
                 <div>
                   <label htmlFor="threshold03input">Jedi lower limit:</label>
@@ -306,18 +324,18 @@ const ExpertiseLevel = () => {
                 
                 <div>
                   <label htmlFor="weight01input">Bachelor Degree:</label>
-                  <input id='weight01slider' type="range" min="0" max="20" value={weight01} onChange={handleWeightSliderChange} />
-                  <input id='weight01input' type="number" min="0" max="20" value={weight01} onChange={handleWeightInputChange} />
+                  <input id='weight01slider' type="range" min="0" max="20" value={weight01>=weight02? weight02:weight01} onChange={handleWeightSliderChange} />
+                  <input id='weight01input' type="number" min="0" max="20" value={weight01>=weight02? weight02:weight01} onChange={handleWeightInputChange} />
                 </div>
                 <div>
                   <label htmlFor="weight02input">Masters Degree:</label>
-                  <input id='weight02slider' type="range" min="0" max="20" value={weight02} onChange={handleWeightSliderChange} />
-                  <input id='weight02input' type="number" min="0" max="20" value={weight02} onChange={handleWeightInputChange} />
+                  <input id='weight02slider' type="range" min="0" max="20" value={weight02>=weight03? weight03:weight02} onChange={handleWeightSliderChange} />
+                  <input id='weight02input' type="number" min="0" max="20" value={weight02>=weight03? weight03:weight02} onChange={handleWeightInputChange} />
                 </div>
                 <div>
                   <label htmlFor="weight03input">Doctoral Degree:</label>
-                  <input id='weight03slider' type="range" min="0" max="20" value={weight03} onChange={handleWeightSliderChange} />
-                  <input id='weight03input' type="number" min="0" max="20" value={weight03} onChange={handleWeightInputChange} />
+                  <input id='weight03slider' type="range" min="0" max="20" value={weight03>=weight04? weight04:weight03} onChange={handleWeightSliderChange} />
+                  <input id='weight03input' type="number" min="0" max="20" value={weight03>=weight04? weight04:weight03} onChange={handleWeightInputChange} />
                 </div>
                 <div>
                   <label htmlFor="weight04input">Postdoctoral Degree:</label>
