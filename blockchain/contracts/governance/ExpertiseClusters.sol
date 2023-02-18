@@ -43,8 +43,9 @@ contract ExpertiseClusters is Ownable {
     ///      1: intermediate
     ///      2: expert
     /// @dev Each level must be between 0 and 65535
-    /// @dev All the weights are set initially to one
-    uint16[3] private expertiseCluster = [1, 1, 1];
+    /// @dev The threshold for each level are given
+    ///      in percentage - from 0 t0 100
+    uint16[3] private expertiseCluster = [60, 75, 90];
 
     /**
      * Events
