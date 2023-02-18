@@ -36,7 +36,7 @@ contract ExpertiseClusters is Ownable {
     /// Array of the weight of each certification level on
     /// the total points of the user
     /// @dev Controlled by the governance decision
-    /// @dev From 0 to 255
+    /// @dev From 0 to 20
     uint16[4] private certificateWeights = [1, 2, 4, 8];
     /// The expertise cluster defines the minimum values for a partucular expertise level
     /// @dev The levels are the indices of the array
