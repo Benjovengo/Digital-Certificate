@@ -92,20 +92,11 @@ const ExpertiseLevel = () => {
     const thresholdPercentages = expertise[1]
     const weightParams = expertise[2]
     setExpertiseLevels(thresholdParams)
-    // Update input values
-    /* document.getElementById('threshold1').value = thresholdPercentages[0]
-    document.getElementById('threshold2').value = thresholdPercentages[1]
-    document.getElementById('threshold3').value = thresholdPercentages[2] */
-    // WEIGHTS
-    /* document.getElementById('weight1').value = weightParams[0]
-    document.getElementById('weight2').value = weightParams[1]
-    document.getElementById('weight3').value = weightParams[2]
-    document.getElementById('weight4').value = weightParams[3] */
-    // HOOKS - Thresholds
+    // Hooks - update thresholds
     setThreshold01(thresholdPercentages[0])
     setThreshold02(thresholdPercentages[1])
     setThreshold03(thresholdPercentages[2])
-    // HOOKS - Weights
+    // Hooks - update weights
     setWeight01(weightParams[0])
     setWeight02(weightParams[1])
     setWeight03(weightParams[2])
