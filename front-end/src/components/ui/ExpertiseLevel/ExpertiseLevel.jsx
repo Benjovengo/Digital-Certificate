@@ -23,15 +23,16 @@ const ExpertiseLevel = () => {
    */
   // Hooks
   const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
+  const [expertiseLevelsProposal, setExpertiseLevelsProposal] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
   const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
   const [maximumPoints, setMaximumPoints] = useState(0) // Theoretical maximum number of points using the blockchain values
   const [maximumPointsProposal, setMaximumPointsProposal] = useState(0) // Theoretical maximum number of points for the proposal
   // Hooks to sliders and inputs
   // Thresholds
-  const [threshold01, setThreshold01] = useState(55);
-  const [threshold02, setThreshold02] = useState(70);
-  const [threshold03, setThreshold03] = useState(90);
+  const [threshold01, setThreshold01] = useState(0);
+  const [threshold02, setThreshold02] = useState(0);
+  const [threshold03, setThreshold03] = useState(0);
   // Weights of each academic degree
   const [weight01, setWeight01] = useState(1);
   const [weight02, setWeight02] = useState(2);
@@ -187,6 +188,10 @@ const ExpertiseLevel = () => {
     const THRESHOLDmax = 100 // to compare with the thresholds
     const WEIGHTSsum = weight01 + weight02 + weight03 + weight04
     setMaximumPointsProposal(DEGREEmax*GPAmax*THRESHOLDmax*WEIGHTSsum)
+    // Hooks - levels of expertise according to this proposal
+    const basePoints = DEGREEmax*GPAmax*WEIGHTSsum
+    setExpertiseLevelsProposal([threshold01*basePoints, threshold02*basePoints, threshold03*basePoints])
+    console.log(threshold03)
   }
 
 
@@ -194,10 +199,15 @@ const ExpertiseLevel = () => {
   const limitThresholds = () => {
     if (threshold01>=threshold02){
       setThreshold01(threshold02)
+    } else {
+      setThreshold01(document.getElementById('threshold01input').value)
     }
     if (threshold02>=threshold03){
       setThreshold02(threshold03)
+    } else {
+      setThreshold02(document.getElementById('threshold02input').value)
     }
+    setThreshold03(document.getElementById('threshold03input').value)
   }
   useEffect(()=>{
     limitThresholds()
@@ -299,7 +309,8 @@ const ExpertiseLevel = () => {
               <p>Your grades (GPA) are what matters for voting power! Study hard!</p>
               <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
-              <div>Expertise Threshold: {expertiseLevels[0].toLocaleString()}, {expertiseLevels[1].toLocaleString()}, {expertiseLevels[2].toLocaleString()}</div>
+              <div>Expertise Thresholds (current): {expertiseLevels[0].toLocaleString()}, {expertiseLevels[1].toLocaleString()}, {expertiseLevels[2].toLocaleString()}</div>
+              <div>Expertise Thresholds (proposal): {expertiseLevelsProposal[0].toLocaleString()}, {expertiseLevelsProposal[1].toLocaleString()}, {expertiseLevelsProposal[2].toLocaleString()}</div>
               <div>Maximum Number of Points (current): {maximumPoints.toLocaleString()}</div>
               <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
             </Col>
