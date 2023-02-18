@@ -79,6 +79,9 @@ const ExpertiseLevel = () => {
   const expertiseParams = async () => {
     const threshold = await fetchExpertiseParams()
     setExpertiseLevels(threshold)
+    document.getElementById('threshold1').value = threshold[0]
+    document.getElementById('threshold2').value = threshold[1]
+    document.getElementById('threshold3').value = threshold[2]
   }
 
 
