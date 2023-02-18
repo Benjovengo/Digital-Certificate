@@ -182,6 +182,19 @@ const ExpertiseLevel = () => {
   };
 
 
+  const limitThresholds = () => {
+    if (threshold01>=threshold02){
+      setThreshold01(threshold02-1)
+    }
+    if (threshold02>=threshold03){
+      setThreshold02(threshold03-1)
+    }
+  }
+  useEffect(()=>{
+    limitThresholds()
+  },[threshold01, threshold02, threshold03])
+
+
 
   /**
    * Submit proposal
@@ -277,13 +290,13 @@ const ExpertiseLevel = () => {
 
                 <div>
                   <label htmlFor="threshold01input">Intermediate lower limit:</label>
-                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01} onChange={handleThresholdSliderChange} />
-                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01} onChange={handleThresholdInputChange} />
+                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01>=threshold02? threshold02-1: threshold01} onChange={handleThresholdSliderChange} />
+                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01>=threshold02? threshold02-1: threshold01} onChange={handleThresholdInputChange} />
                 </div>
                 <div>
                   <label htmlFor="threshold02input">Expert lower limit:</label>
-                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02} onChange={handleThresholdSliderChange} />
-                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02} onChange={handleThresholdInputChange} />
+                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02>=threshold03? threshold03-1: threshold02} onChange={handleThresholdSliderChange} />
+                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02>=threshold03? threshold03-1: threshold02} onChange={handleThresholdInputChange} />
                 </div>
                 <div>
                   <label htmlFor="threshold03input">Jedi lower limit:</label>
