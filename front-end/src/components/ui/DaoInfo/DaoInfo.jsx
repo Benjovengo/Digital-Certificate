@@ -66,7 +66,7 @@ const DaoInfo = () => {
    * Load the DAO parameters
    */
   const params = async () => {
-    const weight = await fetchDaoParams()
+    const weight = 1 // await fetchDaoParams()
     setWeights(weight)
   }
   useEffect( () => {
