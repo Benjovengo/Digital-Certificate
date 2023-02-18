@@ -19,7 +19,7 @@ export const fetchExpertiseParams = async () => {
   /// Javascript "version" of the smart contract
   const expertiseClusters = new ethers.Contract(config[network.chainId].expertiseClusters.address, ExpertiseClusters, signer)
 
-  let weights = await expertiseClusters.retrieveCertificateWeights
+  let weights = await expertiseClusters.retrieveClustersInPoints()
 
   return weights
 }
