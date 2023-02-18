@@ -97,14 +97,20 @@ const ExpertiseLevel = () => {
     document.getElementById('threshold2').value = thresholdPercentages[1]
     document.getElementById('threshold3').value = thresholdPercentages[2] */
     // WEIGHTS
-    document.getElementById('weight1').value = weightParams[0]
+    /* document.getElementById('weight1').value = weightParams[0]
     document.getElementById('weight2').value = weightParams[1]
     document.getElementById('weight3').value = weightParams[2]
-    document.getElementById('weight4').value = weightParams[3]
-    // HOOKS
+    document.getElementById('weight4').value = weightParams[3] */
+    // HOOKS - Thresholds
     setThreshold01(thresholdPercentages[0])
     setThreshold02(thresholdPercentages[1])
     setThreshold03(thresholdPercentages[2])
+    // HOOKS - Weights
+    setWeight01(weightParams[0])
+    setWeight02(weightParams[1])
+    setWeight03(weightParams[2])
+    setWeight04(weightParams[3])
+    
   }
 
 
@@ -152,7 +158,6 @@ const ExpertiseLevel = () => {
     }
   };
 
-
   /**
    * Input values and Sliders for the weights
    */
@@ -161,7 +166,7 @@ const ExpertiseLevel = () => {
     const elementIndex = findNumber(event.target.id)
     if (elementIndex!==-1){
       const newValue = event.target.value;
-      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
+      eval('setWeight0' + elementIndex + '(' + newValue + ')')
     }
   };
   // Function handler for changes on the inputs
@@ -172,7 +177,7 @@ const ExpertiseLevel = () => {
       event.target.value = 100
     }
     if (elementIndex!==-1){
-      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
+      eval('setWeight0' + elementIndex + '(' + newValue + ')')
     }
   };
 
@@ -286,6 +291,26 @@ const ExpertiseLevel = () => {
                   <input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdInputChange} />
                 </div>
                 
+                <div>
+                  <label htmlFor="weight01input">Bachelor Degree:</label>
+                  <input id='weight01slider' type="range" min="0" max="20" value={weight01} onChange={handleWeightSliderChange} />
+                  <input id='weight01input' type="number" min="0" max="20" value={weight01} onChange={handleWeightInputChange} />
+                </div>
+                <div>
+                  <label htmlFor="weight02input">Masters Degree:</label>
+                  <input id='weight02slider' type="range" min="0" max="20" value={weight02} onChange={handleWeightSliderChange} />
+                  <input id='weight02input' type="number" min="0" max="20" value={weight02} onChange={handleWeightInputChange} />
+                </div>
+                <div>
+                  <label htmlFor="weight03input">Doctoral Degree:</label>
+                  <input id='weight03slider' type="range" min="0" max="20" value={weight03} onChange={handleWeightSliderChange} />
+                  <input id='weight03input' type="number" min="0" max="20" value={weight03} onChange={handleWeightInputChange} />
+                </div>
+                <div>
+                  <label htmlFor="weight04input">Postdoctoral Degree:</label>
+                  <input id='weight04slider' type="range" min="0" max="20" value={weight04} onChange={handleWeightSliderChange} />
+                  <input id='weight04input' type="number" min="0" max="20" value={weight04} onChange={handleWeightInputChange} />
+                </div>
 
 
 
