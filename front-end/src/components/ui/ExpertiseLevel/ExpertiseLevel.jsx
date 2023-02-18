@@ -25,7 +25,8 @@ const ExpertiseLevel = () => {
   const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
   const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
-  const [maximumPoints, setMaximumPoints] = useState(0) // Theoretical maximum number of points
+  const [maximumPoints, setMaximumPoints] = useState(0) // Theoretical maximum number of points using the blockchain values
+  const [maximumPointsProposal, setMaximumPointsProposal] = useState(0) // Theoretical maximum number of points for the proposal
   // Hooks to sliders and inputs
   // Thresholds
   const [threshold01, setThreshold01] = useState(55);
@@ -179,6 +180,16 @@ const ExpertiseLevel = () => {
   };
 
 
+  const maximumProposal = () => {
+    // Hooks - maximum number of points
+    const DEGREEmax = 15 // times 10 for first degree; times 5 for the second for the same level
+    const GPAmax  = 400 // 100*GPA with 2 decimals
+    const THRESHOLDmax = 100 // to compare with the thresholds
+    const WEIGHTSsum = weight01 + weight02 + weight03 + weight04
+    setMaximumPointsProposal(DEGREEmax*GPAmax*THRESHOLDmax*WEIGHTSsum)
+  }
+
+
   // Limit the thresholds based on the upper levels
   const limitThresholds = () => {
     if (threshold01>=threshold02){
@@ -206,8 +217,8 @@ const ExpertiseLevel = () => {
   }
   useEffect(()=>{
     limitWeights()
+    maximumProposal()
   },[weight01, weight02, weight03, weight04])
-
 
 
 
@@ -288,7 +299,8 @@ const ExpertiseLevel = () => {
               <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
               <div>Expertise Threshold: {expertiseLevels[0].toLocaleString()}, {expertiseLevels[1].toLocaleString()}, {expertiseLevels[2].toLocaleString()}</div>
-              <div>Maximum Number of Points: {maximumPoints.toLocaleString()}</div>
+              <div>Maximum Number of Points (current): {maximumPoints.toLocaleString()}</div>
+              <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
             </Col>
           </Row>
           {/** Add proposal */}
