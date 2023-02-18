@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap"
 
 import './ExpertiseLevel.css' // CSS Style
 
-import { addProposal } from '../../../scripts/governance/propose';
-import { castVote } from '../../../scripts/governance/vote';
-import { queueAndExecute } from '../../../scripts/governance/queue-and-execute';
-import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters';
+import { addProposal } from '../../../scripts/governance/propose'
+import { castVote } from '../../../scripts/governance/vote'
+import { queueAndExecute } from '../../../scripts/governance/queue-and-execute'
+import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters'
+import { fetchActiveProposals } from '../../../scripts/governance/active-proposals'
 
 
 /**
@@ -20,6 +21,53 @@ const ExpertiseLevel = () => {
   /**
    * Definitions
    */
+  // Hooks
+  const [magnitude, setMagnitude] = useState(0); // Magnitude of the education
+  const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // Weights for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
+  const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
+  const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
+  
+
+  /**
+   * Fetch the active proposals
+   * 
+   * @dev Active for voting: status of the proposal = 1
+   * @dev Active for executing: status of the proposal = 4
+   */
+  const activeProposalsList = async () => {
+    const activeForVoting = 1
+    const votingProposalsObject = await fetchActiveProposals(activeForVoting)
+    setVotingProposalIds(votingProposalsObject)
+    const activeForExecuting = 4
+    const executingProposalsObject = await fetchActiveProposals(activeForExecuting)
+    setExecutingProposalIds(executingProposalsObject)
+  }
+
+
+  /**
+   * Load the expertise parameters
+   * 
+   * @dev The expertise parameter are:
+   *      - the weights for each levels of education
+   *      - the expertise levels threshold
+   */
+  const expertiseParams = async () => {
+    const weight = await fetchExpertiseParams()
+    setExpertiseLevels(weight)
+  }
+
+
+  /**
+   * Update the ui with the parameters from the
+   * ExpertiseClusters smart contract
+   * 
+   * @dev The last brackets is empty to automatically
+   *      update on entering the page only
+   */
+  useEffect( () => {
+    expertiseParams()
+    activeProposalsList()
+  }, [])
 
 
   /**
@@ -77,8 +125,7 @@ const ExpertiseLevel = () => {
     queueAndExecute(inputProposalId)
   }
 
-
-
+  // Components for the ui
   return (
     <>
       <section className='dao__wrapper'>
@@ -88,7 +135,7 @@ const ExpertiseLevel = () => {
               <h1>Expertise</h1>
               <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
-              {/* <div>Expertise Threshold: {weights[0]}, {weights[1]}, {weights[2]} </div> */}
+              <div>Expertise Threshold: {expertiseLevels[0]}, {expertiseLevels[1]}, {expertiseLevels[2]} </div>
             </Col>
           </Row>
           {/** Add proposal */}
