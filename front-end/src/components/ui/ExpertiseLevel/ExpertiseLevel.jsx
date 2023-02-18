@@ -144,7 +144,7 @@ const ExpertiseLevel = () => {
       const newValue = event.target.value;
       eval('setThreshold0' + elementIndex + '(' + newValue + ')')
     }
-  };
+  }
   // Function handler for changes on the inputs
   const handleThresholdInputChange = (event) => {
     const elementIndex = findNumber(event.target.id)
@@ -191,9 +191,10 @@ const ExpertiseLevel = () => {
     // Hooks - levels of expertise according to this proposal
     const basePoints = DEGREEmax*GPAmax*WEIGHTSsum
     setExpertiseLevelsProposal([threshold01*basePoints, threshold02*basePoints, threshold03*basePoints])
-    console.log(threshold03)
   }
-
+  useEffect(()=>{
+    maximumProposal()
+  },[threshold01, threshold02, threshold03])
 
   // Limit the thresholds based on the upper levels
   const limitThresholds = () => {
@@ -227,7 +228,6 @@ const ExpertiseLevel = () => {
   }
   useEffect(()=>{
     limitWeights()
-    maximumProposal()
   },[weight01, weight02, weight03, weight04])
 
 
