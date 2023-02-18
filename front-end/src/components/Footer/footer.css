@@ -1,6 +1,8 @@
 .footer .img__logo {
-  height: 1.65em;
+  height: auto;
   margin: -0.15em 0em 1em 0em;
+  padding-right: 2em;
+  width: 100%;
 }
 
 .footer .logo p {
