@@ -45,6 +45,33 @@ const ExpertiseLevel = () => {
 
 
   /**
+   * Refresh elements on changing states
+   */
+  useEffect( () => {
+    if (votingProposalIds !== null) {
+      const selectElement = document.getElementById("proposalSelect")
+      selectElement.innerHTML = ''
+      for (let i = 0; i < votingProposalIds.length; i++) {
+        const option = document.createElement("option")
+        option.value = votingProposalIds[i]['id']
+        option.text = votingProposalIds[i]['desc'];
+        selectElement.appendChild(option)
+      }
+    }
+    if (executingProposalIds !== null) {
+      const selectExecute = document.getElementById("selectExecuteProposal")
+      selectExecute.innerHTML = ''
+      for (let i = 0; i < executingProposalIds.length; i++) {
+        const option = document.createElement("option")
+        option.value = executingProposalIds[i]['id']
+        option.text = executingProposalIds[i]['desc'];
+        selectExecute.appendChild(option)
+      }
+    }
+  }, [votingProposalIds, executingProposalIds])
+
+
+  /**
    * Load the expertise parameters
    * 
    * @dev The expertise parameter are:
@@ -120,7 +147,6 @@ const ExpertiseLevel = () => {
     e.preventDefault()
     // Get values from the component's input fields
     const inputProposalId = e.target.selectExecuteProposal.value
-    console.log(inputProposalId)
     // Queue and Execute proposal
     queueAndExecute(inputProposalId)
   }

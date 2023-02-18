@@ -17,7 +17,7 @@ import config from '../../config.json' // contract addresses
  */
 export const addProposal = async (_functionToCall, _args, _proposalDescription) => {
   // Setup provider and network
-  const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
+  const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
   const network = await provider.getNetwork()
   const signer = provider.getSigner() // get the signer
 
@@ -37,8 +37,9 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
     _proposalDescription
   );
 
+
   /// Get the response of the proposal transaction
-  const proposeReceipt = await proposeTx.wait();
+  await proposeTx.wait(1);
 
   // Get the chainID
   // @dev ChainID = 31337 for the Hardhat localhost
