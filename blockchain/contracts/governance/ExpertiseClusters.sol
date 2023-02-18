@@ -134,11 +134,11 @@ contract ExpertiseClusters is Ownable {
                 certificateWeights[1] +
                 certificateWeights[2] +
                 certificateWeights[3]);
-        uint16[3] memory clusters = [
+        uint16[3] memory clustersInPoints = [
             points * expertiseClusters[0],
             points * expertiseClusters[1],
             points * expertiseClusters[2]
         ];
-        return clusters;
+        return clustersInPoints;
     }
 }
