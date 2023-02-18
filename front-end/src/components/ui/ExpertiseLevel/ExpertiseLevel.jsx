@@ -145,7 +145,7 @@ const ExpertiseLevel = () => {
               <form onSubmit={handleSubmitProposal}>
                 <label htmlFor="functionToCall">Function </label>
                 <select id="functionToCall" name="functionToCall">
-                  <option value="storeExpertiseThreshold">Change Expertise Threshold</option>
+                  <option value="storeCertificateWeights">Change Expertise Threshold</option>
                 </select>
                 <label htmlFor="weight1">Weight 1 </label>
                 <input type="number" id="weight1" name="weight1" defaultValue={1}/>

@@ -23,7 +23,7 @@ async function main() {
   console.log('\x1b[0m\nAdd a New Proposal')
 
   /// @dev Arguments
-  const _functionToCall = 'storeExpertiseThreshold'
+  const _functionToCall = 'storeCertificateWeights'
   const _args = [1, 169] // has to use the same in the queue-and-execute
   const _proposalDescription = 'Debug description'
 
