@@ -296,6 +296,7 @@ const ExpertiseLevel = () => {
           <Row>
             <Col>
               <h1>Expertise</h1>
+              <p>Your grades (GPA) are what matters for voting power! Study hard!</p>
               <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
               <div>Expertise Threshold: {expertiseLevels[0].toLocaleString()}, {expertiseLevels[1].toLocaleString()}, {expertiseLevels[2].toLocaleString()}</div>
