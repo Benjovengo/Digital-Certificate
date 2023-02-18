@@ -26,9 +26,16 @@ const ExpertiseLevel = () => {
   const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
   // Hooks to sliders and inputs
+  // Thresholds
   const [threshold01, setThreshold01] = useState(55);
   const [threshold02, setThreshold02] = useState(70);
   const [threshold03, setThreshold03] = useState(90);
+  // Weights of each academic degree
+  const [weight01, setWeight01] = useState(1);
+  const [weight02, setWeight02] = useState(2);
+  const [weight03, setWeight03] = useState(4);
+  const [weight04, setWeight04] = useState(8);
+  
 
   /**
    * Fetch the active proposals
@@ -114,9 +121,9 @@ const ExpertiseLevel = () => {
   }, [])
 
   /**
-   * Input values and Sliders
+   * Input values and Sliders for the threshold
    */
-
+  // Find a number in a string
   function findNumber(str) {
     var num = str.match(/[1-9]/); // search for a number between 1 and 9 in the string
     if (num !== null) { // if a number is found
@@ -125,16 +132,16 @@ const ExpertiseLevel = () => {
       return -1; // return -1 as a flag value
     }
   }
-
-  const handleSliderChange = (event) => {
+  // Function handler for changes on the sliders
+  const handleThresholdSliderChange = (event) => {
     const elementIndex = findNumber(event.target.id)
     if (elementIndex!==-1){
       const newValue = event.target.value;
       eval('setThreshold0' + elementIndex + '(' + newValue + ')')
     }
   };
-
-  const handleNumberInputChange = (event) => {
+  // Function handler for changes on the inputs
+  const handleThresholdInputChange = (event) => {
     const elementIndex = findNumber(event.target.id)
     const newValue = event.target.value;
     if (newValue>100) {
@@ -144,6 +151,31 @@ const ExpertiseLevel = () => {
       eval('setThreshold0' + elementIndex + '(' + newValue + ')')
     }
   };
+
+
+  /**
+   * Input values and Sliders for the weights
+   */
+  // Function handler for changes on the sliders
+  const handleWeightSliderChange = (event) => {
+    const elementIndex = findNumber(event.target.id)
+    if (elementIndex!==-1){
+      const newValue = event.target.value;
+      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
+    }
+  };
+  // Function handler for changes on the inputs
+  const handleWeightInputChange = (event) => {
+    const elementIndex = findNumber(event.target.id)
+    const newValue = event.target.value;
+    if (newValue>100) {
+      event.target.value = 100
+    }
+    if (elementIndex!==-1){
+      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
+    }
+  };
+
 
 
   /**
@@ -240,20 +272,23 @@ const ExpertiseLevel = () => {
 
                 <div>
                   <label htmlFor="threshold01input">Intermediate lower limit:</label>
-                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01} onChange={handleSliderChange} />
-                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01} onChange={handleNumberInputChange} />
+                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01} onChange={handleThresholdSliderChange} />
+                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01} onChange={handleThresholdInputChange} />
                 </div>
                 <div>
                   <label htmlFor="threshold02input">Expert lower limit:</label>
-                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02} onChange={handleSliderChange} />
-                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02} onChange={handleNumberInputChange} />
+                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02} onChange={handleThresholdSliderChange} />
+                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02} onChange={handleThresholdInputChange} />
                 </div>
                 <div>
                   <label htmlFor="threshold03input">Jedi lower limit:</label>
-                  <input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleSliderChange} />
-                  <input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleNumberInputChange} />
+                  <input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleThresholdSliderChange} />
+                  <input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdInputChange} />
                 </div>
                 
+
+
+
                 <label htmlFor="weight1">Weight 1 </label>
                 <input type="number" id="weight1" name="weight1" defaultValue={1}/>
                 <label htmlFor="weight2">Weight 2 </label>
