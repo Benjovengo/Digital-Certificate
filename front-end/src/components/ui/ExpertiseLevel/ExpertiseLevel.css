@@ -9,3 +9,8 @@
 .dao__wrapper h2 {
   font-family: 'Playfair Display SC', serif;
 }
+
+.dao__wrapper input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #858585;
+  opacity: 1; /* Firefox */
+}
