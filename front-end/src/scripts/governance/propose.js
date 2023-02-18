@@ -17,7 +17,6 @@ import config from '../../config.json' // contract addresses
  */
 export const addProposal = async (_functionToCall, _args, _proposalDescription) => {
   // Setup provider and network
-  // const provider = new ethers.providers.Web3Provider(window.ethereum)
   const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
   const network = await provider.getNetwork()
   const signer = provider.getSigner() // get the signer
@@ -43,17 +42,16 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
   /// Get the response of the proposal transaction
   await proposeTx.wait(1);
 
-  const hardhatProvider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   // Get the chainID
   // @dev ChainID = 31337 for the Hardhat localhost
   // @dev ChainID = 5 for the Goerli testnet
-  const { chainId } = await hardhatProvider.getNetwork()
+  const { chainId } = await provider.getNetwork()
   // Fast forward blocks - speed up time so we can vote
   // @dev fast forward only in localhost
   if (chainId === 31337) {
     const amount = 2 // VOTING_DELAY + 1 - the VOTING_DELAY is defined at deployment time
     for (let i = 0; i < amount; i++) {
-      await hardhatProvider.send('evm_mine', [])
+      await provider.send('evm_mine', [])
     }
   }
 
