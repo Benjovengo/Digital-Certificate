@@ -25,7 +25,10 @@ const ExpertiseLevel = () => {
   const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
   const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
-  
+  // Hooks to sliders and inputs
+  const [threshold01, setThreshold01] = useState(55);
+  const [threshold02, setThreshold02] = useState(70);
+  const [threshold03, setThreshold03] = useState(90);
 
   /**
    * Fetch the active proposals
@@ -83,14 +86,18 @@ const ExpertiseLevel = () => {
     const weightParams = expertise[2]
     setExpertiseLevels(thresholdParams)
     // Update input values
-    document.getElementById('threshold1').value = thresholdPercentages[0]
+    /* document.getElementById('threshold1').value = thresholdPercentages[0]
     document.getElementById('threshold2').value = thresholdPercentages[1]
-    document.getElementById('threshold3').value = thresholdPercentages[2]
-    /// WEIGHTS
+    document.getElementById('threshold3').value = thresholdPercentages[2] */
+    // WEIGHTS
     document.getElementById('weight1').value = weightParams[0]
     document.getElementById('weight2').value = weightParams[1]
     document.getElementById('weight3').value = weightParams[2]
     document.getElementById('weight4').value = weightParams[3]
+    // HOOKS
+    setThreshold01(thresholdPercentages[0])
+    setThreshold02(thresholdPercentages[1])
+    setThreshold03(thresholdPercentages[2])
   }
 
 
@@ -105,6 +112,38 @@ const ExpertiseLevel = () => {
     expertiseParams()
     activeProposalsList()
   }, [])
+
+  /**
+   * Input values and Sliders
+   */
+
+  function findNumber(str) {
+    var num = str.match(/[1-9]/); // search for a number between 1 and 9 in the string
+    if (num !== null) { // if a number is found
+      return num[0]; // return the first match (which is the number)
+    } else { // if no number is found
+      return -1; // return -1 as a flag value
+    }
+  }
+
+  const handleSliderChange = (event) => {
+    const elementIndex = findNumber(event.target.id)
+    if (elementIndex!==-1){
+      const newValue = event.target.value;
+      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
+    }
+  };
+
+  const handleNumberInputChange = (event) => {
+    const elementIndex = findNumber(event.target.id)
+    const newValue = event.target.value;
+    if (newValue>100) {
+      event.target.value = 100
+    }
+    if (elementIndex!==-1){
+      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
+    }
+  };
 
 
   /**
@@ -122,10 +161,10 @@ const ExpertiseLevel = () => {
     const functionToCall = e.target.functionToCall.value
     // Parse arguments
     if (functionToCall==='storeExpertiseThreshold') {
-      const threshold1 = Number(e.target.threshold1.value)
-      const threshold2 = Number(e.target.threshold2.value)
-      const threshold3 = Number(e.target.threshold3.value)
-      args = [threshold1, threshold2, threshold3]
+      const novice = Number(e.target.threshold01input.value)
+      const intermediate = Number(e.target.threshold02input.value)
+      const expert = Number(e.target.threshold03input.value)
+      args = [novice, intermediate, expert]
     } else {
       const weight1 = Number(e.target.weight1.value)
       const weight2 = Number(e.target.weight2.value)
@@ -198,13 +237,23 @@ const ExpertiseLevel = () => {
                 </select>
                 <p>Weights: from 0 to 20</p>
                 <p>Threshold: from o to 100%</p>
-                <label htmlFor="threshold1">Threshold 1 </label>
-                <input type="number" id="threshold1" name="threshold1" defaultValue={1}/>
-                <label htmlFor="threshold2">Threshold 2 </label>
-                <input type="number" id="threshold2" name="threshold2" defaultValue={1}/>
-                <label htmlFor="threshold3">Threshold 3 </label>
-                <input type="number" id="threshold3" name="threshold3" defaultValue={1}/>
-                <label htmlFor="description">Description </label>
+
+                <div>
+                  <label htmlFor="threshold01input">Intermediate lower limit:</label>
+                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01} onChange={handleSliderChange} />
+                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01} onChange={handleNumberInputChange} />
+                </div>
+                <div>
+                  <label htmlFor="threshold02input">Expert lower limit:</label>
+                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02} onChange={handleSliderChange} />
+                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02} onChange={handleNumberInputChange} />
+                </div>
+                <div>
+                  <label htmlFor="threshold03input">Jedi lower limit:</label>
+                  <input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleSliderChange} />
+                  <input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleNumberInputChange} />
+                </div>
+                
                 <label htmlFor="weight1">Weight 1 </label>
                 <input type="number" id="weight1" name="weight1" defaultValue={1}/>
                 <label htmlFor="weight2">Weight 2 </label>
