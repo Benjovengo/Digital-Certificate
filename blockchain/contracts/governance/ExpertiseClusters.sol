@@ -40,10 +40,10 @@ contract ExpertiseClusters is Ownable {
     /// The expertise cluster defines the minimum values
     /// for a partucular expertise level
     /// @dev The levels are the:
-    ///      0: novice
-    ///      1: intermediate
-    ///      2: expert
-    /// @dev Each level must be between 0 and 65535
+    ///      0: Novice
+    ///      1: Intermediate
+    ///      2: Expert
+    ///      3: Jedi Master
     /// @dev All the weights are set initially to one
     uint32[3] private expertiseClusters = [1, 1, 1];
 
