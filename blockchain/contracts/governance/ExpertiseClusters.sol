@@ -52,16 +52,16 @@ contract ExpertiseClusters is Ownable {
      */
     /// @dev This event is emitted when there is a change on the weight
     ///      for a particular level of certification
-    event ValueChanged(uint256 _certificateLevel, uint256 _newWeight);
+    event WeightsChanged(uint16[4] _newWeight);
     /// @dev This event is emitted when there is a change on the
     ///      points required for a particular level of expertise
-    event ExpertiseThresholdChanged(uint16[3] _newWeight);
+    event ExpertiseThresholdChanged(uint16[3] _newThreshold);
 
     /**
      * Functions and Methods
      */
 
-    /** Set the expertise levels threshold
+    /** Set/store the expertise levels threshold
      *
      * @ dev The threshold is an array of 3 elements.
      *       Classification:
@@ -71,7 +71,24 @@ contract ExpertiseClusters is Ownable {
      *       - jedi: total points >  third threshold
      * @dev The thresholds are set in percentages from 0 to 100%
      */
-    /// Stores a new certificateWeight in the contract
+    function storeCertificateWeight(uint16[4] memory _newWeights)
+        public
+        onlyOwner
+    {
+        certificateWeights = _newWeights;
+        emit WeightsChanged(_newWeights);
+    }
+
+    /** Set/store the expertise levels threshold
+     *
+     * @ dev The threshold is an array of 3 elements.
+     *       Classification:
+     *       - novice: total points <  first threshold
+     *       - intermediate: total points in [first threshold, second threshold]
+     *       - expert: total points in [second threshold, third threshold]
+     *       - jedi: total points >  third threshold
+     * @dev The thresholds are set in percentages from 0 to 100%
+     */
     function storeExpertiseThreshold(uint16[3] memory _newThreshold)
         public
         onlyOwner
