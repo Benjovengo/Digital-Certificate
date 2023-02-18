@@ -124,7 +124,7 @@ contract ExpertiseClusters is Ownable {
      * @ dev Return an array of 3 elements. Classification:
      *       - novice: total points <  first threshold
      *       - intermediate: total points in [first threshold, second threshold]
-     *       - advanced: total points in [second threshold, third threshold]
+     *       - expert: total points in [second threshold, third threshold]
      *       - jedi: total points >  third threshold
      * @dev The trhesholds are given in percentages from 0 to 100%
      */
