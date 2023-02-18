@@ -82,11 +82,8 @@ async function main() {
   );
   await executeTx.wait(1);
 
-  const weights = [
-    await expertiseClustersContract.retrieveExpertiseThreshold(0),
-    await expertiseClustersContract.retrieveExpertiseThreshold(1),
-    await expertiseClustersContract.retrieveExpertiseThreshold(2)
-  ]
+  const weights = await expertiseClustersContract.retrieveCertificateWeights
+  
   console.log(`   \x1b[34m*\x1b[37m ExpertiseClusters stored weights: [${weights}]`)
   console.log(`   \x1b[32m✔\x1b[37m Actions executed.`)
 }

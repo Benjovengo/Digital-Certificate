@@ -30,12 +30,13 @@ contract ExpertiseClusters is Ownable {
     /**
      * State variables
      *
-     * @dev Some of these variables are controlled by the governance decisions.
+     * @dev Some of these variables are controlled by the
+     *      governance decisions.
      */
-    /// Mapping from the certificate level times the GPA
-    /// to the actual weight for the total score
-    /// Controlled by the governance decision
-    mapping(uint256 => uint256) private certificateWeight;
+    /// Array of the weight of each certification level on
+    /// the total points of the user
+    /// @dev Controlled by the governance decision
+    uint16[4] private certificateWeights = [1, 2, 4, 8];
     /// The expertise cluster defines the minimum values for a partucular expertise level
     /// @dev The levels are the indices of the array
     ///      0: novice
@@ -45,13 +46,12 @@ contract ExpertiseClusters is Ownable {
     /// @dev All the weights are set initially to one
     uint16[3] private expertiseCluster = [1, 1, 1];
 
-
     /**
      * Events
      */
     /// @dev This event is emitted when there is a change on the weight
     ///      for a particular level of certification
-    event ValueChanged(uint256 _certificateLevel, uint256 _newWeight);
+    event WeightsChanged(uint16[4] _newWeight);
     /// @dev This event is emitted when there is a change on the
     ///      points required for a particular level of expertise
     event ExpertiseValueChanged(uint8 _expertiseLevel, uint256 _newWeight);
@@ -61,16 +61,28 @@ contract ExpertiseClusters is Ownable {
      */
 
     /// Stores a new certificateWeight in the contract
-    function storeExpertiseThreshold(uint8 _expertiseLevel, uint16 _newWeight)
+    function storeCertificateWeights(uint16[4] memory _newWeights)
         public
         onlyOwner
     {
-        expertiseCluster[_expertiseLevel] = _newWeight;
-        emit ExpertiseValueChanged(_expertiseLevel, _newWeight);
+        certificateWeights = _newWeights;
+        emit WeightsChanged(_newWeights);
     }
 
-    /// Reads the weight stored for a particular level of certification
-    function retrieveExpertiseThreshold(uint256 _expertiseLevel) public view returns (uint16) {
-        return expertiseCluster[_expertiseLevel];
+    /** Read the weights
+     *
+     * @return {uint16[4]} Values of the weights for all levels of education
+     * @ dev Return an array of 4 elements. Elements of the array:
+     *       - index 0: bachelor
+     *       - index 1: masters
+     *       - index 2: doctoral
+     *       - index 3: postdoctoral
+     */
+    function retrieveCertificateWeights()
+        public
+        view
+        returns (uint16[4] memory)
+    {
+        return certificateWeights;
     }
 }

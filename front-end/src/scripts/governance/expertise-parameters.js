@@ -8,7 +8,7 @@ import config from '../../config.json' // contract addresses
  * @title Fetch the parameters defined by the governance
  * @author Fábio Benjovengo
  * 
- * @return The weights for each of the different certification levels
+ * @return The weights for all of the different certification levels
  */
 export const fetchExpertiseParams = async () => {
   // Setup provider and network
@@ -19,10 +19,7 @@ export const fetchExpertiseParams = async () => {
   /// Javascript "version" of the smart contract
   const expertiseClusters = new ethers.Contract(config[network.chainId].expertiseClusters.address, ExpertiseClusters, signer)
 
-  let weight = []
-  for (let i = 0; i < 3; i++) {
-    weight.push(await expertiseClusters.retrieveExpertiseThreshold(i))    
-  }
+  let weights = await expertiseClusters.retrieveCertificateWeights
 
-  return weight
+  return weights
 }
