@@ -1,6 +1,5 @@
 import React, { useLayoutEffect } from 'react'
 
-import DaoInfo from '../components/ui/DaoInfo/DaoInfo';
 import ExpertiseLevel from '../components/ui/ExpertiseLevel/ExpertiseLevel';
 
 /**
@@ -19,7 +18,6 @@ const Governance = () => {
   return (
     <>
       <ExpertiseLevel/>
-      <DaoInfo/>
     </>
   )
 }
