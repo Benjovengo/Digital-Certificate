@@ -15,7 +15,7 @@ import config from '../../config.json' // contract addresses
  */
 export const castVote = async (_proposalId, _vote, _reason) => {
   // Setup provider and network
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const network = await provider.getNetwork()
   const signer = provider.getSigner() // get the signer
   /// Javascript "version" of the smart contracts
@@ -32,14 +32,13 @@ export const castVote = async (_proposalId, _vote, _reason) => {
   // Get the chain ID
   // @dev ChainID = 31337 for the Hardhat localhost
   // @dev ChainID = 5 for the Goerli testnet
-  const hardhatProvider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545');
   const { chainId } = await provider.getNetwork()
   // Fast forward blocks - speed up the number of blocks so it is possible to vote
   // @dev fast forward only in localhost
   if (chainId === 31337) {
     const amount = 6 // VOTING_PERIOD + 1 - the VOTING_PERIOD is defined at deployment time
     for (let i = 0; i < amount; i++) {
-      await hardhatProvider.send('evm_mine', [])
+      await provider.send('evm_mine', [])
     }
   }
   console.log(`SUCCESS!! Voting is completed.`)
