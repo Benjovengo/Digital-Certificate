@@ -36,6 +36,7 @@ contract ExpertiseClusters is Ownable {
     /// Array of the weight of each certification level on
     /// the total points of the user
     /// @dev Controlled by the governance decision
+    /// @dev From 0 to 255
     uint16[4] private certificateWeights = [1, 2, 4, 8];
     /// The expertise cluster defines the minimum values for a partucular expertise level
     /// @dev The levels are the indices of the array
@@ -44,8 +45,8 @@ contract ExpertiseClusters is Ownable {
     ///      2: expert
     /// @dev Each level must be between 0 and 65535
     /// @dev The threshold for each level are given
-    ///      in percentage - from 0 t0 100
-    uint16[3] private expertiseCluster = [60, 75, 90];
+    ///      in percentage - from 0 to 100
+    uint16[3] private expertiseClusters = [60, 75, 90];
 
     /**
      * Events
@@ -55,14 +56,14 @@ contract ExpertiseClusters is Ownable {
     event WeightsChanged(uint16[4] _newWeight);
     /// @dev This event is emitted when there is a change on the
     ///      points required for a particular level of expertise
-    event ExpertiseValueChanged(uint8 _expertiseLevel, uint256 _newWeight);
+    event ExpertiseClustersChanged(uint16[3] _newThresholds);
 
     /**
      * Functions and Methods
      */
 
     /**
-     * Stores a new certificateWeight in the contract
+     * Stores the new weights for the certifications
      *
      * @dev Store values as an array of four elements from 0 to 65,535
      */
@@ -89,5 +90,55 @@ contract ExpertiseClusters is Ownable {
         returns (uint16[4] memory)
     {
         return certificateWeights;
+    }
+
+    /**
+     * Stores a new certificateWeight in the contract
+     *
+     * @dev Store values as an array of four elements from 0 to 65,535
+     */
+    function storeExpertiseClusters(uint16[3] memory _newThresholds)
+        public
+        onlyOwner
+    {
+        expertiseClusters = _newThresholds;
+        emit ExpertiseClustersChanged(_newThresholds);
+    }
+
+    /** Read the expertise levels threshold
+     *
+     * @return {uint16[4]} Values of the thresholds for all levels of expertise
+     * @ dev Return an array of 3 elements.
+     */
+    function retrieveExpertiseClusters()
+        public
+        view
+        returns (uint16[3] memory)
+    {
+        return expertiseClusters;
+    }
+
+    /** Read the expertise levels threshold
+     *
+     * @return {uint16[4]} Values of the thresholds for all levels of expertise
+     * @ dev Return an array of 3 elements. Classification:
+     *       - novice: total points <  first threshold
+     *       - intermediate: total points in [first threshold, second threshold]
+     *       - advanced: total points in [second threshold, third threshold]
+     *       - jedi: total points >  third threshold
+     * @dev The trhesholds are given in percentages from 0 to 100%
+     */
+    function retrieveClustersInPoints() public view returns (uint16[3] memory) {
+        uint16 points = 8 *
+            (certificateWeights[0] +
+                certificateWeights[1] +
+                certificateWeights[2] +
+                certificateWeights[3]);
+        uint16[3] memory clusters = [
+            points * expertiseClusters[0],
+            points * expertiseClusters[1],
+            points * expertiseClusters[2]
+        ];
+        return clusters;
     }
 }
