@@ -25,6 +25,7 @@ const ExpertiseLevel = () => {
   const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
   const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
+  const [maximumPoints, setMaximumPoints] = useState(0) // Theoretical maximum number of points
   // Hooks to sliders and inputs
   // Thresholds
   const [threshold01, setThreshold01] = useState(55);
@@ -101,7 +102,12 @@ const ExpertiseLevel = () => {
     setWeight02(weightParams[1])
     setWeight03(weightParams[2])
     setWeight04(weightParams[3])
-    
+    // Hooks - maximum number of points
+    const DEGREEmax = 15 // times 10 for first degree; times 5 for the second for the same level
+    const GPAmax  = 400 // 100*GPA with 2 decimals
+    const THRESHOLDmax = 100 // to compare with the thresholds
+    const WEIGHTSsum = weightParams[0] + weightParams[1] + weightParams[2] + weightParams[3]
+    setMaximumPoints(DEGREEmax*GPAmax*THRESHOLDmax*WEIGHTSsum)
   }
 
 
@@ -281,7 +287,8 @@ const ExpertiseLevel = () => {
               <h1>Expertise</h1>
               <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
-              <div>Expertise Threshold: {expertiseLevels[0]}, {expertiseLevels[1]}, {expertiseLevels[2]}</div>
+              <div>Expertise Threshold: {expertiseLevels[0].toLocaleString()}, {expertiseLevels[1].toLocaleString()}, {expertiseLevels[2].toLocaleString()}</div>
+              <div>Maximum Number of Points: {maximumPoints.toLocaleString()}</div>
             </Col>
           </Row>
           {/** Add proposal */}
