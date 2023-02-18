@@ -25,9 +25,12 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
   const governorContract = new ethers.Contract(config[network.chainId].governorContract.address, GovernorContract, signer)
   const expertiseClusters = new ethers.Contract(config[network.chainId].expertiseClusters.address, ExpertiseClusters, signer)
 
+  console.log('DEBUG', _args)
+
   /// Encode the function to be called
   /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
   const encodedFunctionCall = expertiseClusters.interface.encodeFunctionData(_functionToCall, _args)
+
 
   /// Add the proposal
   const proposeTx = await governorContract.propose(

@@ -37,7 +37,7 @@ contract ExpertiseClusters is Ownable {
     /// the total points of the user
     /// @dev Controlled by the governance decision
     /// @dev From 0 to 20
-    uint16[4] private certificateWeights = [1, 2, 4, 8];
+    uint256[4] private certificateWeights = [1, 2, 4, 8];
     /// The expertise cluster defines the minimum values for a partucular expertise level
     /// @dev The levels are the indices of the array
     ///      0: novice
@@ -46,17 +46,17 @@ contract ExpertiseClusters is Ownable {
     /// @dev Each level must be between 0 and 65535
     /// @dev The threshold for each level are given
     ///      in percentage - from 0 to 100
-    uint16[3] private expertiseClusters = [60, 75, 90];
+    uint256[3] private expertiseClusters = [60, 75, 90];
 
     /**
      * Events
      */
     /// @dev This event is emitted when there is a change on the weight
     ///      for a particular level of certification
-    event WeightsChanged(uint16[4] _newWeight);
+    event WeightsChanged(uint256[4] _newWeight);
     /// @dev This event is emitted when there is a change on the
     ///      points required for a particular level of expertise
-    event ExpertiseClustersChanged(uint16[3] _newThresholds);
+    event ExpertiseClustersChanged(uint256[3] _newThresholds);
 
     /**
      * Functions and Methods
@@ -67,7 +67,7 @@ contract ExpertiseClusters is Ownable {
      *
      * @dev Store values as an array of four elements from 0 to 65,535
      */
-    function storeCertificateWeights(uint16[4] memory _newWeights)
+    function storeCertificateWeights(uint256[4] memory _newWeights)
         public
         onlyOwner
     {
@@ -77,7 +77,7 @@ contract ExpertiseClusters is Ownable {
 
     /** Read the weights
      *
-     * @return {uint16[4]} Values of the weights for all levels of education
+     * @return {uint256[4]} Values of the weights for all levels of education
      * @ dev Return an array of 4 elements. Elements of the array:
      *       - index 0: bachelor
      *       - index 1: masters
@@ -87,7 +87,7 @@ contract ExpertiseClusters is Ownable {
     function retrieveCertificateWeights()
         public
         view
-        returns (uint16[4] memory)
+        returns (uint256[4] memory)
     {
         return certificateWeights;
     }
@@ -97,7 +97,7 @@ contract ExpertiseClusters is Ownable {
      *
      * @dev Store values as an array of four elements from 0 to 65,535
      */
-    function storeExpertiseClusters(uint16[3] memory _newThresholds)
+    function storeExpertiseClusters(uint256[3] memory _newThresholds)
         public
         onlyOwner
     {
@@ -107,20 +107,20 @@ contract ExpertiseClusters is Ownable {
 
     /** Read the expertise levels threshold
      *
-     * @return {uint16[4]} Values of the thresholds for all levels of expertise
+     * @return {uint256[4]} Values of the thresholds for all levels of expertise
      * @ dev Return an array of 3 elements.
      */
     function retrieveExpertiseClusters()
         public
         view
-        returns (uint16[3] memory)
+        returns (uint256[3] memory)
     {
         return expertiseClusters;
     }
 
     /** Read the expertise levels threshold
      *
-     * @return {uint16[4]} Values of the thresholds for all levels of expertise
+     * @return {uint256[4]} Values of the thresholds for all levels of expertise
      * @ dev Return an array of 3 elements. Classification:
      *       - novice: total points <  first threshold
      *       - intermediate: total points in [first threshold, second threshold]
@@ -128,13 +128,13 @@ contract ExpertiseClusters is Ownable {
      *       - jedi: total points >  third threshold
      * @dev The trhesholds are given in percentages from 0 to 100%
      */
-    function retrieveClustersInPoints() public view returns (uint16[3] memory) {
-        uint16 points = 8 *
+    function retrieveClustersInPoints() public view returns (uint256[3] memory) {
+        uint256 points = 8 *
             (certificateWeights[0] +
                 certificateWeights[1] +
                 certificateWeights[2] +
                 certificateWeights[3]);
-        uint16[3] memory clustersInPoints = [
+        uint256[3] memory clustersInPoints = [
             points * expertiseClusters[0],
             points * expertiseClusters[1],
             points * expertiseClusters[2]
