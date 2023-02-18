@@ -196,6 +196,8 @@ const ExpertiseLevel = () => {
                   <option value="storeExpertiseThreshold">Change expertise threshold</option>
                   <option value="storeCertificateWeight">Change the weights for the academic degrees</option>
                 </select>
+                <p>Weights: from 0 to 20</p>
+                <p>Threshold: from o to 100%</p>
                 <label htmlFor="threshold1">Threshold 1 </label>
                 <input type="number" id="threshold1" name="threshold1" defaultValue={1}/>
                 <label htmlFor="threshold2">Threshold 2 </label>
