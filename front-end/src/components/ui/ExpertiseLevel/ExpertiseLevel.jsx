@@ -9,6 +9,7 @@ import { queueAndExecute } from '../../../scripts/governance/queue-and-execute'
 import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters'
 import { fetchActiveProposals } from '../../../scripts/governance/active-proposals'
 
+import ProgressBar from '../../../scripts/governance/progress-bar.component'
 
 /**
  * React component
@@ -298,6 +299,14 @@ const ExpertiseLevel = () => {
     queueAndExecute(inputProposalId)
   }
 
+
+  const testData = [
+    { bgcolor: "#6a1b9a", completed: 60 },
+    { bgcolor: "#00695c", completed: 30 },
+    { bgcolor: "#ef6c00", completed: 53 },
+  ];
+
+
   // Components for the ui
   return (
     <>
@@ -307,12 +316,21 @@ const ExpertiseLevel = () => {
             <Col>
               <h1>Expertise</h1>
               <p>Your grades (GPA) are what matters for voting power! Study hard!</p>
+              <div>Maximum Number of Points (current): {maximumPoints.toLocaleString()}</div>
+              <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
               <h2>Levels of Expertise</h2>
               <h2>Your Expertise</h2>
               <div>Expertise Thresholds (current): {expertiseLevels[0].toLocaleString()}, {expertiseLevels[1].toLocaleString()}, {expertiseLevels[2].toLocaleString()}</div>
               <div>Expertise Thresholds (proposal): {expertiseLevelsProposal[0].toLocaleString()}, {expertiseLevelsProposal[1].toLocaleString()}, {expertiseLevelsProposal[2].toLocaleString()}</div>
-              <div>Maximum Number of Points (current): {maximumPoints.toLocaleString()}</div>
-              <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className="App">
+                {testData.map((item, idx) => (
+                  <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
+                ))}
+              </div>
             </Col>
           </Row>
           {/** Add proposal */}
