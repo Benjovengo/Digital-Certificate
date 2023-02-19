@@ -125,6 +125,7 @@ const ExpertiseLevel = () => {
     activeProposalsList()
   }, [])
 
+
   /**
    * Input values and Sliders for the threshold
    */
@@ -137,6 +138,8 @@ const ExpertiseLevel = () => {
       return -1; // return -1 as a flag value
     }
   }
+
+  
   // Function handler for changes on the sliders
   const handleThresholdChanger = (event) => {
     const elementIndex = Number(findNumber(event.target.id))
