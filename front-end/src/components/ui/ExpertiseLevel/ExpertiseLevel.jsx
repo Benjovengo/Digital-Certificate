@@ -351,18 +351,18 @@ const ExpertiseLevel = () => {
                   <tr>
                     <td>Novice to Intermediate</td>
                     <td>{expertiseLevels[0].toLocaleString()}</td>
-                    <td style={{textAlign: 'center'}}>({expertiseLevels[0]/maximumPoints*100}%)</td>
+                    <td style={{textAlign: 'center'}}>{expertiseLevels[0]/maximumPoints*100}%</td>
                     <td style={{paddingLeft: '6em', textAlign: 'center'}}>{maximumPoints.toLocaleString()}</td>
                   </tr>
                   <tr>
                     <td>Intermediate to Expert</td>
                     <td>{expertiseLevels[1].toLocaleString()}</td>
-                    <td style={{textAlign: 'center'}}>({expertiseLevels[1]/maximumPoints*100}%)</td>
+                    <td style={{textAlign: 'center'}}>{expertiseLevels[1]/maximumPoints*100}%</td>
                   </tr>
                   <tr>
                     <td>Expert to Jedi Master</td>
                     <td>{expertiseLevels[2].toLocaleString()}</td>
-                    <td style={{textAlign: 'center'}}>({expertiseLevels[2]/maximumPoints*100}%)</td>
+                    <td style={{textAlign: 'center'}}>{expertiseLevels[2]/maximumPoints*100}%</td>
                   </tr>
                 </tbody>
               </table>

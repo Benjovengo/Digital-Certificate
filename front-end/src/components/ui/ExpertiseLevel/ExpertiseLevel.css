@@ -90,24 +90,24 @@
 }
 
 .jediBar {
-  background-color: #F89104;
+  background-color: #4b50e6;
   z-index: 1;
 }
 
 .expertBar {
-  background-color: #C86E01;
+  background-color: #ad47ca;
   margin-top: -1.5em;
   z-index: 2;
 }
 
 .intermediateBar {
-  background-color: #A84E01;
+  background-color: #862b60;
   margin-top: -1.5em;
   z-index: 3;
 }
 
 .noviceBar {
-  background-color: #882E01;
+  background-color: #982100;
   margin-top: -1.5em;
   z-index: 4;
 }
