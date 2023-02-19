@@ -16,7 +16,23 @@
 }
 
 
+.dao__wrapper input[type=range] {
+  background: #14141a;
+  opacity: 1;
+}
 
+.dao__wrapper input[type=range]::-moz-range-thumb {
+  background: #333;
+  cursor: pointer;
+}
+
+.dao__wrapper input[type=range]::-moz-range-thumb:active {
+  background: #D87E01;
+}
+
+.dao__wrapper input[type="range"]::-moz-range-progress {
+  background-color: #F89104; 
+}
 
 
 
