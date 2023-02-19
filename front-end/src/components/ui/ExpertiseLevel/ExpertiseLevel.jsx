@@ -192,7 +192,21 @@ const ExpertiseLevel = () => {
     const basePoints = DEGREEmax*GPAmax*WEIGHTSsum
     setExpertiseLevelsProposal([threshold01*basePoints, threshold02*basePoints, threshold03*basePoints])
   }
+
+  // Limit the thresholds based on the upper levels
+  const limitThresholds = () => {
+    if (threshold01>=threshold02){
+      setThreshold01(threshold02)
+    }
+    if (threshold02>=threshold03){
+      setThreshold02(threshold03)
+    }
+    if (threshold03>=100){
+      setThreshold03(100)
+    }
+  }
   useEffect(()=>{
+    limitThresholds()
     maximumProposal()
   },[threshold01, threshold02, threshold03])
 
