@@ -21,13 +21,6 @@ const ExpertiseLevel = () => {
   /**
    * Definitions
    */
-  // Progress Bar - initial data
-  let proposalThresholdDataObject = [
-    { thresholdPercentage: 100, level: "Jedi" },
-    { thresholdPercentage: 30, level: "Novice" },
-    { thresholdPercentage: 50, level: "Intermediate" },
-    { thresholdPercentage: 75, level: "Expert" },
-  ];
   // Hooks
   const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
   const [expertiseLevelsProposal, setExpertiseLevelsProposal] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
@@ -312,16 +305,16 @@ const ExpertiseLevel = () => {
               <div className='containerStyles'>
                 <div className="App">
                 <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
-                    <span className='labelStyles'></span>
+                    <span className='labelStyles'>Jedi</span>
                   </div>
                   <div className='fillerStyles expertBar' style={{width: threshold03 + "%"}}>
-                    <span className='labelStyles'></span>
+                    <span className='labelStyles'>Expert</span>
                   </div>
                   <div className='fillerStyles intermediateBar' style={{width: threshold02 + "%"}}>
-                    <span className='labelStyles'></span>
+                    <span className='labelStyles'>Intermediate</span>
                   </div>
                   <div className='fillerStyles noviceBar' style={{width: threshold01 + "%"}}>
-                    <span className='labelStyles'></span>
+                    <span className='labelStyles'>Novice</span>
                   </div>
                 </div>
               </div>
