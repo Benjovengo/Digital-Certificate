@@ -302,6 +302,29 @@ const ExpertiseLevel = () => {
           {/** Bar chart */}
           <Row>
             <Col>
+              <p>Current registered thresholds</p>
+              <div className='containerStyles'>
+                <div className="App">
+                <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
+                    <span className='labelStyles'>Jedi</span>
+                  </div>
+                  <div className='fillerStyles expertBar' style={{width: expertiseLevels[2]/maximumPoints*100 + "%"}}>
+                    <span className='labelStyles'>Expert</span>
+                  </div>
+                  <div className='fillerStyles intermediateBar' style={{width: expertiseLevels[1]/maximumPoints*100 + "%"}}>
+                    <span className='labelStyles'>Intermediate</span>
+                  </div>
+                  <div className='fillerStyles noviceBar' style={{width: expertiseLevels[0]/maximumPoints*100 + "%"}}>
+                    <span className='labelStyles'>Novice</span>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          {/** Bar chart */}
+          <Row>
+            <Col>
+              <p>Proposal thresholds</p>
               <div className='containerStyles'>
                 <div className="App">
                 <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
