@@ -49,22 +49,32 @@
 }
 
 
-.dao__wrapper input[type=range] {
-  background: #14141a;
-  opacity: 1;
+.dao__wrapper input[type="range"] {
+  margin-right: 15px;
+  width: 200px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  background-size: 70% 100%;
+  background-repeat: no-repeat;
 }
 
-.dao__wrapper input[type=range]::-moz-range-thumb {
-  background: #333;
-  cursor: pointer;
+.dao__wrapper 
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
 }
 
 .dao__wrapper input[type=range]::-moz-range-thumb:active {
-  background: #D87E01;
+  background: #3b40d6;
 }
 
 .dao__wrapper input[type="range"]::-moz-range-progress {
-  background-color: #F89104; 
+  background-color: #4b50e6; 
 }
 
 
