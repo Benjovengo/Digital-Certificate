@@ -300,10 +300,15 @@ const ExpertiseLevel = () => {
   }
 
 
+
+  /**
+   * Progress Bar Data
+   */
   const testData = [
-    { bgcolor: "#6a1b9a", completed: 60 },
-    { bgcolor: "#00695c", completed: 30 },
-    { bgcolor: "#ef6c00", completed: 53 },
+    { bgcolor: "#6c6c72", completed: 100, level: "Jedi" },
+    { bgcolor: "#f89104", completed: 75, level: "Expert" },
+    { bgcolor: "#00695c", completed: 50, level: "Intermediate" },
+    { bgcolor: "#6a1b9a", completed: 30, level: "Novice" },    
   ];
 
 
@@ -328,7 +333,7 @@ const ExpertiseLevel = () => {
             <Col>
               <div className="App">
                 {testData.map((item, idx) => (
-                  <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} />
+                  <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} level={item.level} />
                 ))}
               </div>
             </Col>
