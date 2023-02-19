@@ -40,7 +40,6 @@ const ExpertiseLevel = () => {
   const [threshold01, setThreshold01] = useState(0);
   const [threshold02, setThreshold02] = useState(0);
   const [threshold03, setThreshold03] = useState(0);
-  const [proposalThresholdData, setProposalThresholdData] = useState(proposalThresholdDataObject)
   // Weights of each academic degree
   const [weight01, setWeight01] = useState(1);
   const [weight02, setWeight02] = useState(2);
