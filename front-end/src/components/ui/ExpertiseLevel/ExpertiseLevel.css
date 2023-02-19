@@ -36,26 +36,31 @@
   border-radius: 50px;
   height: 100%;
   padding: 0;
+  position: relative;
   text-align: right;
 }
 
 .jediBar {
   background-color: #F89104;
+  z-index: 1;
 }
 
 .expertBar {
   background-color: #C86E01;
   margin-top: -1.5em;
+  z-index: 2;
 }
 
 .intermediateBar {
   background-color: #A84E01;
   margin-top: -1.5em;
+  z-index: 3;
 }
 
 .noviceBar {
   background-color: #882E01;
   margin-top: -1.5em;
+  z-index: 4;
 }
 
 .labelStyles {
