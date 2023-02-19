@@ -92,7 +92,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .fillerStyles {
-  border-radius: 50px;
+  border-radius: 0px;
   height: 100%;
   padding: 0;
   position: relative;
@@ -106,18 +106,21 @@ input[type="range"]::-webkit-slider-thumb {
 
 .expertBar {
   background-color: #ad47ca;
+  clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 2;
 }
 
 .intermediateBar {
   background-color: #862b60;
+  clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 3;
 }
 
 .noviceBar {
   background-color: #982100;
+  clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 4;
 }
