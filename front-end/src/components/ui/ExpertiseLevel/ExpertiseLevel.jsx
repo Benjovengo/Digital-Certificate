@@ -311,19 +311,13 @@ const ExpertiseLevel = () => {
               <p>Your grades (GPA) are what matters for voting power! Study hard!</p>
             </Col>
           </Row>
+
           {/** Levels of Expertise */}
-          <Row className='row__wrapper'>
+          <Row className='row__wrapper mb-5'>
             <h2>Levels of Expertise - Blockchain Values</h2>
-            <Col>
-              <h5>Number of Points</h5>
-              <p>Maximum Number of Points: {maximumPoints.toLocaleString()}</p>
-              <p><i>Theoretical maximum value considering the values of the weights for each degree level as well as the limits on the number of certifications for each level one can have</i></p>
-              <h5>Thresholds in Points</h5>
-              <p>Expertise Thresholds</p>
-            </Col>
-            <Col xs="8">
+            <Col xs="9">
               {/** Bar chart */}
-              <Row>
+              <Row className='mb-5'>
                 <Col>
                   <h5>Blockchain current thresholds</h5>
                   <div className='containerStyles'>
@@ -344,42 +338,47 @@ const ExpertiseLevel = () => {
                   </div>
                 </Col>
               </Row>
-              <table className='mt-4'>
-                <tr>
+              <table className='table__settings mt-2'>
+                <thead>
+                  <tr>
                   <th>Threshold</th>
                   <th>Points</th>
                   <th>Percentages</th>
+                  <th style={{paddingLeft: '6em', textAlign: 'center'}}>Maximum number of points</th>
                 </tr>
-                <tr>
-                  <td>Novice to Intermediate</td>
-                  <td>{expertiseLevels[0].toLocaleString()}</td>
-                  <td>({expertiseLevels[0]/maximumPoints*100}%)</td>
-                </tr>
-                <tr>
-                  <td>Intermediate to Expert</td>
-                  <td>{expertiseLevels[1].toLocaleString()}</td>
-                  <td>({expertiseLevels[1]/maximumPoints*100}%)</td>
-                </tr>
-                <tr>
-                  <td>Expert to Jedi Master</td>
-                  <td>{expertiseLevels[2].toLocaleString()}</td>
-                  <td>({expertiseLevels[2]/maximumPoints*100}%)</td>
-                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Novice to Intermediate</td>
+                    <td>{expertiseLevels[0].toLocaleString()}</td>
+                    <td style={{textAlign: 'center'}}>({expertiseLevels[0]/maximumPoints*100}%)</td>
+                    <td style={{paddingLeft: '6em', textAlign: 'center'}}>{maximumPoints.toLocaleString()}</td>
+                  </tr>
+                  <tr>
+                    <td>Intermediate to Expert</td>
+                    <td>{expertiseLevels[1].toLocaleString()}</td>
+                    <td style={{textAlign: 'center'}}>({expertiseLevels[1]/maximumPoints*100}%)</td>
+                  </tr>
+                  <tr>
+                    <td>Expert to Jedi Master</td>
+                    <td>{expertiseLevels[2].toLocaleString()}</td>
+                    <td style={{textAlign: 'center'}}>({expertiseLevels[2]/maximumPoints*100}%)</td>
+                  </tr>
+                </tbody>
               </table>
+            </Col>
+            <Col>
+              <h5>Maximum Number of Points</h5>
+              <p><i>The theoretical maximum value considers the values of the weights for each degree level as well as the limits on the number of certifications for each level one can have</i></p>
+              <h5>Thresholds</h5>
+              <p><i>The thresholds are defined as a percentage of the maximum theoretical number of points. These values are preserved when changing the weights for the different degree levels.</i></p>
             </Col>
           </Row>
 
 
-
-
-
-
-
-
-
           <Row>
             <Col>
-              <h2>Your Expertise</h2>
+              <h2>Proposals</h2>
               <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
               <div>Expertise Thresholds (proposal): {expertiseLevelsProposal[0].toLocaleString()}, {expertiseLevelsProposal[1].toLocaleString()}, {expertiseLevelsProposal[2].toLocaleString()}</div>
             </Col>

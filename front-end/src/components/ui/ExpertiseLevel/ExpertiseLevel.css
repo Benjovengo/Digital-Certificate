@@ -1,6 +1,8 @@
 .dao__wrapper {
   color: white;
   font-family: 'Montserrat', sans-serif;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .dao__wrapper h1 {
@@ -29,6 +31,11 @@
   line-height: normal;
 }
 
+
+.table__settings td,
+.table__settings th {
+  padding: 0 0.5em;
+}
 
 
 .row__wrapper h2 {
