@@ -139,7 +139,7 @@ const ExpertiseLevel = () => {
     }
   }
 
-  
+
   // Function handler for changes on the sliders
   const handleThresholdChanger = (event) => {
     const elementIndex = Number(findNumber(event.target.id))
@@ -304,6 +304,7 @@ const ExpertiseLevel = () => {
     <>
       <section className='dao__wrapper'>
         <Container fluid>
+          {/** Header */}
           <Row>
             <Col>
               <h1>Expertise</h1>
