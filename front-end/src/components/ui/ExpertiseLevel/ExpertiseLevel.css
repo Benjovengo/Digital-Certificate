@@ -14,3 +14,50 @@
   color: #858585;
   opacity: 1; /* Firefox */
 }
+
+
+
+
+
+.containerStyles {
+  background: transparent;
+  border-radius: 50px;
+  margin: 10;
+  position: relative;
+  height: 20;
+  width: 100%;
+  z-index: 1;
+}
+
+.fillerStyles {
+  border-radius: 50px;
+  height: 100%;
+  padding: 0;
+  text-align: right;
+}
+
+.jediBar {
+  background-color: #F89104;
+}
+
+.expertBar {
+  background-color: #C86E01;
+  margin-top: -1.5em;
+}
+
+.intermediateBar {
+  background-color: #A84E01;
+  margin-top: -1.5em;
+}
+
+.noviceBar {
+  background-color: #882E01;
+  margin-top: -1.5em;
+}
+
+.labelStyles {
+  color: white;
+  font-weight: bold;
+  margin-right: 20px;
+  padding: 5;
+}

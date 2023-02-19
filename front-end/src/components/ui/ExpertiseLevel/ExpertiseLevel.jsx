@@ -9,7 +9,6 @@ import { queueAndExecute } from '../../../scripts/governance/queue-and-execute'
 import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters'
 import { fetchActiveProposals } from '../../../scripts/governance/active-proposals'
 
-import ProgressBar from '../../../scripts/governance/progress-bar.component'
 
 /**
  * React component
@@ -305,10 +304,10 @@ const ExpertiseLevel = () => {
    * Progress Bar Data
    */
   const testData = [
-    { bgcolor: "#6c6c72", completed: 100, level: "Jedi" },
-    { bgcolor: "#f89104", completed: 75, level: "Expert" },
-    { bgcolor: "#00695c", completed: 50, level: "Intermediate" },
-    { bgcolor: "#6a1b9a", completed: 30, level: "Novice" },    
+    { completed: 100, level: "Jedi" },
+    { completed: 75, level: "Expert" },
+    { completed: 50, level: "Intermediate" },
+    { completed: 30, level: "Novice" },
   ];
 
 
@@ -331,10 +330,21 @@ const ExpertiseLevel = () => {
           </Row>
           <Row>
             <Col>
-              <div className="App">
-                {testData.map((item, idx) => (
-                  <ProgressBar key={idx} bgcolor={item.bgcolor} completed={item.completed} level={item.level} />
-                ))}
+              <div className='containerStyles'>
+                <div className="App">
+                <div className='fillerStyles jediBar' style={{width: testData[0].completed + "%"}}>
+                    <span className='labelStyles'>{testData[0].level}</span>
+                  </div>
+                  <div className='fillerStyles expertBar' style={{width: testData[1].completed + "%"}}>
+                    <span className='labelStyles'>{testData[1].level}</span>
+                  </div>
+                  <div className='fillerStyles intermediateBar' style={{width: testData[2].completed + "%"}}>
+                    <span className='labelStyles'>{testData[2].level}</span>
+                  </div>
+                  <div className='fillerStyles noviceBar' style={{width: testData[3].completed + "%"}}>
+                    <span className='labelStyles'>{testData[3].level}</span>
+                  </div>
+                </div>
               </div>
             </Col>
           </Row>
