@@ -328,6 +328,7 @@ const ExpertiseLevel = () => {
               <div>Expertise Thresholds (proposal): {expertiseLevelsProposal[0].toLocaleString()}, {expertiseLevelsProposal[1].toLocaleString()}, {expertiseLevelsProposal[2].toLocaleString()}</div>
             </Col>
           </Row>
+          {/** Bar chart */}
           <Row>
             <Col>
               <div className='containerStyles'>
