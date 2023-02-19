@@ -146,28 +146,24 @@ const ExpertiseLevel = () => {
     }
   }
   // Function handler for changes on the sliders
-  const handleThresholdSliderChange = (event) => {
-    const elementIndex = findNumber(event.target.id)
+  const handleThresholdChanger = (event) => {
+    const elementIndex = Number(findNumber(event.target.id))
     if (elementIndex!==-1){
-      const newValue = event.target.value;
-      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
-      proposalThresholdDataObject[elementIndex].thresholdPercentage = document.getElementById('threshold0' + elementIndex + 'input').value
-      setProposalThresholdData(proposalThresholdDataObject)
+      // const newValue = event.target.value;
+      let newValue
+      if (elementIndex === 1) {
+        newValue = (event.target.value >= threshold02)? threshold02 : event.target.value
+        setThreshold01(newValue)
+      } else if (elementIndex === 2) {
+        newValue = (event.target.value >= threshold03)? threshold03 : event.target.value
+        setThreshold02(newValue)
+      } else if (elementIndex === 3) {
+        newValue = (event.target.value >= 100)? 100 : event.target.value
+        setThreshold03(newValue)
+      }
     }
   }
-  // Function handler for changes on the inputs
-  const handleThresholdInputChange = (event) => {
-    const elementIndex = findNumber(event.target.id)
-    const newValue = event.target.value;
-    if (newValue>100) {
-      event.target.value = 100
-    }
-    if (elementIndex!==-1){
-      eval('setThreshold0' + elementIndex + '(' + newValue + ')')
-    }
-    proposalThresholdDataObject[elementIndex].thresholdPercentage = newValue
-    setProposalThresholdData(proposalThresholdDataObject)
-  };
+
 
   /**
    * Input values and Sliders for the weights
@@ -184,8 +180,8 @@ const ExpertiseLevel = () => {
   const handleWeightInputChange = (event) => {
     const elementIndex = findNumber(event.target.id)
     const newValue = event.target.value;
-    if (newValue>100) {
-      event.target.value = 100
+    if (newValue>20) {
+      event.target.value = 20
     }
     if (elementIndex!==-1){
       eval('setWeight0' + elementIndex + '(' + newValue + ')')
@@ -208,23 +204,6 @@ const ExpertiseLevel = () => {
     maximumProposal()
   },[threshold01, threshold02, threshold03])
 
-  // Limit the thresholds based on the upper levels
-  const limitThresholds = () => {
-    if (threshold01>=threshold02){
-      setThreshold01(threshold02)
-    } else {
-      setThreshold01(document.getElementById('threshold01input').value)
-    }
-    if (threshold02>=threshold03){
-      setThreshold02(threshold03)
-    } else {
-      setThreshold02(document.getElementById('threshold02input').value)
-    }
-    setThreshold03(document.getElementById('threshold03input').value)
-  }
-  useEffect(()=>{
-    limitThresholds()
-  },[threshold01, threshold02, threshold03])
 
   // Limit the thresholds based on the upper levels
   const limitWeights = () => {
@@ -333,17 +312,17 @@ const ExpertiseLevel = () => {
             <Col>
               <div className='containerStyles'>
                 <div className="App">
-                <div className='fillerStyles jediBar' style={{width: proposalThresholdData[0].thresholdPercentage + "%"}}>
-                    <span className='labelStyles'>{proposalThresholdData[0].level}</span>
+                <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
+                    <span className='labelStyles'></span>
                   </div>
-                  <div className='fillerStyles expertBar' style={{width: proposalThresholdData[3].thresholdPercentage + "%"}}>
-                    <span className='labelStyles'>{proposalThresholdData[3].level}</span>
+                  <div className='fillerStyles expertBar' style={{width: threshold03 + "%"}}>
+                    <span className='labelStyles'></span>
                   </div>
-                  <div className='fillerStyles intermediateBar' style={{width: proposalThresholdData[2].thresholdPercentage + "%"}}>
-                    <span className='labelStyles'>{proposalThresholdData[2].level}</span>
+                  <div className='fillerStyles intermediateBar' style={{width: threshold02 + "%"}}>
+                    <span className='labelStyles'></span>
                   </div>
-                  <div className='fillerStyles noviceBar' style={{width: proposalThresholdData[1].thresholdPercentage + "%"}}>
-                    <span className='labelStyles'>{proposalThresholdData[1].level}</span>
+                  <div className='fillerStyles noviceBar' style={{width: threshold01 + "%"}}>
+                    <span className='labelStyles'></span>
                   </div>
                 </div>
               </div>
@@ -364,18 +343,18 @@ const ExpertiseLevel = () => {
 
                 <div>
                   <label htmlFor="threshold01input">Intermediate lower limit:</label>
-                  <input id='threshold01slider' type="range" min="0" max="100" value={threshold01>=threshold02? threshold02: threshold01} onChange={handleThresholdSliderChange} />
-                  <input id='threshold01input' type="number" min="0" max="100" value={threshold01>=threshold02? threshold02: threshold01} onChange={handleThresholdInputChange} />
+                  <input id='threshold01slider' type="range" min="0" max="98" value={threshold01} onChange={handleThresholdChanger} />
+                  <input id='threshold01input' type="number" min="0" max="98" value={threshold01} onChange={handleThresholdChanger} />
                 </div>
                 <div>
                   <label htmlFor="threshold02input">Expert lower limit:</label>
-                  <input id='threshold02slider' type="range" min="0" max="100" value={threshold02>=threshold03? threshold03: threshold02} onChange={handleThresholdSliderChange} />
-                  <input id='threshold02input' type="number" min="0" max="100" value={threshold02>=threshold03? threshold03: threshold02} onChange={handleThresholdInputChange} />
+                  <input id='threshold02slider' type="range" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} />
+                  <input id='threshold02input' type="number" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} />
                 </div>
                 <div>
                   <label htmlFor="threshold03input">Jedi lower limit:</label>
-                  <input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleThresholdSliderChange} />
-                  <input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdInputChange} />
+                  <input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} />
+                  <input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} />
                 </div>
                 
                 <div>
