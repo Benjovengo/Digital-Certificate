@@ -313,12 +313,13 @@ const ExpertiseLevel = () => {
           </Row>
 
           {/** Levels of Expertise */}
-          <Row className='row__wrapper mb-5'>
-            <h2>Levels of Expertise - Blockchain Values</h2>
+          <Row className='row__wrapper mb-5 align-items-start'>
+            
             <Col xs="9">
               {/** Bar chart */}
               <Row className='mb-5'>
                 <Col>
+                  <h2>Levels of Expertise - Blockchain Values</h2>
                   <h5>Blockchain current thresholds</h5>
                   <div className='containerStyles'>
                     <div className="App">
@@ -368,6 +369,7 @@ const ExpertiseLevel = () => {
               </table>
             </Col>
             <Col>
+              <h2>Information</h2>
               <h5>Maximum Number of Points</h5>
               <p><i>The theoretical maximum value considers the values of the weights for each degree level as well as the limits on the number of certifications for each level one can have.</i></p>
               <h5>Thresholds</h5>
