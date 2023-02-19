@@ -309,34 +309,79 @@ const ExpertiseLevel = () => {
             <Col>
               <h1>Expertise</h1>
               <p>Your grades (GPA) are what matters for voting power! Study hard!</p>
-              <div>Maximum Number of Points (current): {maximumPoints.toLocaleString()}</div>
-              <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
-              <h2>Levels of Expertise</h2>
-              <h2>Your Expertise</h2>
-              <div>Expertise Thresholds (current): {expertiseLevels[0].toLocaleString()}, {expertiseLevels[1].toLocaleString()}, {expertiseLevels[2].toLocaleString()}</div>
-              <div>Expertise Thresholds (proposal): {expertiseLevelsProposal[0].toLocaleString()}, {expertiseLevelsProposal[1].toLocaleString()}, {expertiseLevelsProposal[2].toLocaleString()}</div>
             </Col>
           </Row>
-          {/** Bar chart */}
+          {/** Levels of Expertise */}
+          <Row className='row__wrapper'>
+            <h2>Levels of Expertise - Blockchain Values</h2>
+            <Col>
+              <h5>Number of Points</h5>
+              <p>Maximum Number of Points: {maximumPoints.toLocaleString()}</p>
+              <p><i>Theoretical maximum value considering the values of the weights for each degree level as well as the limits on the number of certifications for each level one can have</i></p>
+              <h5>Thresholds in Points</h5>
+              <p>Expertise Thresholds</p>
+            </Col>
+            <Col xs="8">
+              {/** Bar chart */}
+              <Row>
+                <Col>
+                  <h5>Blockchain current thresholds</h5>
+                  <div className='containerStyles'>
+                    <div className="App">
+                    <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
+                        <span className='labelStyles'>Jedi</span>
+                      </div>
+                      <div className='fillerStyles expertBar' style={{width: expertiseLevels[2]/maximumPoints*100 + "%"}}>
+                        <span className='labelStyles'>Expert</span>
+                      </div>
+                      <div className='fillerStyles intermediateBar' style={{width: expertiseLevels[1]/maximumPoints*100 + "%"}}>
+                        <span className='labelStyles'>Intermediate</span>
+                      </div>
+                      <div className='fillerStyles noviceBar' style={{width: expertiseLevels[0]/maximumPoints*100 + "%"}}>
+                        <span className='labelStyles'>Novice</span>
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+              <table className='mt-4'>
+                <tr>
+                  <th>Threshold</th>
+                  <th>Points</th>
+                  <th>Percentages</th>
+                </tr>
+                <tr>
+                  <td>Novice to Intermediate</td>
+                  <td>{expertiseLevels[0].toLocaleString()}</td>
+                  <td>({expertiseLevels[0]/maximumPoints*100}%)</td>
+                </tr>
+                <tr>
+                  <td>Intermediate to Expert</td>
+                  <td>{expertiseLevels[1].toLocaleString()}</td>
+                  <td>({expertiseLevels[1]/maximumPoints*100}%)</td>
+                </tr>
+                <tr>
+                  <td>Expert to Jedi Master</td>
+                  <td>{expertiseLevels[2].toLocaleString()}</td>
+                  <td>({expertiseLevels[2]/maximumPoints*100}%)</td>
+                </tr>
+              </table>
+            </Col>
+          </Row>
+
+
+
+
+
+
+
+
+
           <Row>
             <Col>
-              <p>Current registered thresholds</p>
-              <div className='containerStyles'>
-                <div className="App">
-                <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
-                    <span className='labelStyles'>Jedi</span>
-                  </div>
-                  <div className='fillerStyles expertBar' style={{width: expertiseLevels[2]/maximumPoints*100 + "%"}}>
-                    <span className='labelStyles'>Expert</span>
-                  </div>
-                  <div className='fillerStyles intermediateBar' style={{width: expertiseLevels[1]/maximumPoints*100 + "%"}}>
-                    <span className='labelStyles'>Intermediate</span>
-                  </div>
-                  <div className='fillerStyles noviceBar' style={{width: expertiseLevels[0]/maximumPoints*100 + "%"}}>
-                    <span className='labelStyles'>Novice</span>
-                  </div>
-                </div>
-              </div>
+              <h2>Your Expertise</h2>
+              <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
+              <div>Expertise Thresholds (proposal): {expertiseLevelsProposal[0].toLocaleString()}, {expertiseLevelsProposal[1].toLocaleString()}, {expertiseLevelsProposal[2].toLocaleString()}</div>
             </Col>
           </Row>
           {/** Bar chart */}

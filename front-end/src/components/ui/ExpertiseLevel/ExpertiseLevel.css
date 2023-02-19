@@ -1,5 +1,6 @@
 .dao__wrapper {
   color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .dao__wrapper h1 {
@@ -9,6 +10,31 @@
 .dao__wrapper h2 {
   font-family: 'Playfair Display SC', serif;
 }
+
+.dao__wrapper h5 {
+  font-family: 'Playfair Display SC', serif;
+  margin-top: 0.5em;
+}
+
+.dao__wrapper p {
+  font-family: 'Montserrat', sans-serif;
+  line-height: normal;
+  margin: 0;
+}
+
+.dao__wrapper p i {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: normal;
+}
+
+
+
+.row__wrapper h2 {
+  margin-top: 1em;
+}
+
 
 .dao__wrapper input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #858585;
