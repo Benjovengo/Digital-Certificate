@@ -21,6 +21,13 @@ const ExpertiseLevel = () => {
   /**
    * Definitions
    */
+  // Progress Bar - initial data
+  let proposalThresholdDataObject = [
+    { thresholdPercentage: 100, level: "Jedi" },
+    { thresholdPercentage: 30, level: "Novice" },
+    { thresholdPercentage: 50, level: "Intermediate" },
+    { thresholdPercentage: 75, level: "Expert" },
+  ];
   // Hooks
   const [expertiseLevels, setExpertiseLevels] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
   const [expertiseLevelsProposal, setExpertiseLevelsProposal] = useState([0, 0, 0]) // thresholds for the certification levels. Indices - 0: novice; 1: intermediate; 2: expert
@@ -33,6 +40,7 @@ const ExpertiseLevel = () => {
   const [threshold01, setThreshold01] = useState(0);
   const [threshold02, setThreshold02] = useState(0);
   const [threshold03, setThreshold03] = useState(0);
+  const [proposalThresholdData, setProposalThresholdData] = useState(proposalThresholdDataObject)
   // Weights of each academic degree
   const [weight01, setWeight01] = useState(1);
   const [weight02, setWeight02] = useState(2);
@@ -143,6 +151,8 @@ const ExpertiseLevel = () => {
     if (elementIndex!==-1){
       const newValue = event.target.value;
       eval('setThreshold0' + elementIndex + '(' + newValue + ')')
+      proposalThresholdDataObject[elementIndex].thresholdPercentage = document.getElementById('threshold0' + elementIndex + 'input').value
+      setProposalThresholdData(proposalThresholdDataObject)
     }
   }
   // Function handler for changes on the inputs
@@ -155,6 +165,8 @@ const ExpertiseLevel = () => {
     if (elementIndex!==-1){
       eval('setThreshold0' + elementIndex + '(' + newValue + ')')
     }
+    proposalThresholdDataObject[elementIndex].thresholdPercentage = newValue
+    setProposalThresholdData(proposalThresholdDataObject)
   };
 
   /**
@@ -299,18 +311,6 @@ const ExpertiseLevel = () => {
   }
 
 
-
-  /**
-   * Progress Bar Data
-   */
-  const testData = [
-    { completed: 100, level: "Jedi" },
-    { completed: 75, level: "Expert" },
-    { completed: 50, level: "Intermediate" },
-    { completed: 30, level: "Novice" },
-  ];
-
-
   // Components for the ui
   return (
     <>
@@ -333,17 +333,17 @@ const ExpertiseLevel = () => {
             <Col>
               <div className='containerStyles'>
                 <div className="App">
-                <div className='fillerStyles jediBar' style={{width: testData[0].completed + "%"}}>
-                    <span className='labelStyles'>{testData[0].level}</span>
+                <div className='fillerStyles jediBar' style={{width: proposalThresholdData[0].thresholdPercentage + "%"}}>
+                    <span className='labelStyles'>{proposalThresholdData[0].level}</span>
                   </div>
-                  <div className='fillerStyles expertBar' style={{width: testData[1].completed + "%"}}>
-                    <span className='labelStyles'>{testData[1].level}</span>
+                  <div className='fillerStyles expertBar' style={{width: proposalThresholdData[3].thresholdPercentage + "%"}}>
+                    <span className='labelStyles'>{proposalThresholdData[3].level}</span>
                   </div>
-                  <div className='fillerStyles intermediateBar' style={{width: testData[2].completed + "%"}}>
-                    <span className='labelStyles'>{testData[2].level}</span>
+                  <div className='fillerStyles intermediateBar' style={{width: proposalThresholdData[2].thresholdPercentage + "%"}}>
+                    <span className='labelStyles'>{proposalThresholdData[2].level}</span>
                   </div>
-                  <div className='fillerStyles noviceBar' style={{width: testData[3].completed + "%"}}>
-                    <span className='labelStyles'>{testData[3].level}</span>
+                  <div className='fillerStyles noviceBar' style={{width: proposalThresholdData[1].thresholdPercentage + "%"}}>
+                    <span className='labelStyles'>{proposalThresholdData[1].level}</span>
                   </div>
                 </div>
               </div>
