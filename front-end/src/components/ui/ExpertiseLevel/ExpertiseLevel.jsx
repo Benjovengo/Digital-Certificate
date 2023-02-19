@@ -369,7 +369,7 @@ const ExpertiseLevel = () => {
             </Col>
             <Col>
               <h5>Maximum Number of Points</h5>
-              <p><i>The theoretical maximum value considers the values of the weights for each degree level as well as the limits on the number of certifications for each level one can have</i></p>
+              <p><i>The theoretical maximum value considers the values of the weights for each degree level as well as the limits on the number of certifications for each level one can have.</i></p>
               <h5>Thresholds</h5>
               <p><i>The thresholds are defined as a percentage of the maximum theoretical number of points. These values are preserved when changing the weights for the different degree levels.</i></p>
             </Col>
