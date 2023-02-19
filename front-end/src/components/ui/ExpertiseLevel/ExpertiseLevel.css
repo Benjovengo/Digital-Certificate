@@ -100,26 +100,26 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .jediBar {
-  background-color: #4b50e6;
+  background-color: #93a7ac;
   z-index: 1;
 }
 
 .expertBar {
-  background-color: #ad47ca;
+  background-color: #6f8a91;
   clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 2;
 }
 
 .intermediateBar {
-  background-color: #862b60;
+  background-color: #53676c;
   clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 3;
 }
 
 .noviceBar {
-  background-color: #982100;
+  background-color: #374548;
   clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 4;
