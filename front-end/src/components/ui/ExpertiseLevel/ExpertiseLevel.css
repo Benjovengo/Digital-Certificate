@@ -34,6 +34,7 @@
 
 .table__settings td,
 .table__settings th {
+  font-weight: 300;
   padding: 0 0.5em;
 }
 
@@ -75,6 +76,21 @@ input[type="range"]::-webkit-slider-thumb {
 
 .dao__wrapper input[type="range"]::-moz-range-progress {
   background-color: #4b50e6; 
+}
+
+.add__proposal__wrapper{
+  margin: 0.5em 1em;
+  padding: 0.25em;
+}
+
+.proposal__function {
+  background-color: #1d1d27;
+  padding: 0 0 0 0.5em;
+}
+
+.change__parameters__wrapper {
+  background-color: #282834;
+  padding: 0.5em 0;
 }
 
 

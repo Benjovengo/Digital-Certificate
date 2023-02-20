@@ -377,7 +377,6 @@ const ExpertiseLevel = () => {
             </Col>
           </Row>
 
-
           <Row>
             <Col>
               <h2>Proposals</h2>
@@ -412,28 +411,42 @@ const ExpertiseLevel = () => {
             <Col>
               <h2>Add proposal</h2>
               <form onSubmit={handleSubmitProposal}>
-                <label htmlFor="functionToCall">Function </label>
-                <select id="functionToCall" name="functionToCall">
-                  <option value="storeExpertiseThreshold">Change expertise threshold</option>
-                  <option value="storeCertificateWeight">Change the weights for the academic degrees</option>
-                </select>
-                <p>Weights: from 0 to 20</p>
-                <p>Threshold: from o to 100%</p>
-
-                <div>
-                  <label htmlFor="threshold01input">Intermediate lower limit:</label>
-                  <input id='threshold01slider' type="range" min="0" max="98" value={threshold01} onChange={handleThresholdChanger} />
-                  <input id='threshold01input' type="number" min="0" max="98" value={threshold01} onChange={handleThresholdChanger} />
-                </div>
-                <div>
-                  <label htmlFor="threshold02input">Expert lower limit:</label>
-                  <input id='threshold02slider' type="range" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} />
-                  <input id='threshold02input' type="number" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} />
-                </div>
-                <div>
-                  <label htmlFor="threshold03input">Jedi lower limit:</label>
-                  <input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} />
-                  <input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} />
+                
+                <div className="add__proposal__wrapper">
+                  <div className='proposal__function'>
+                    <Row>
+                      <Col className='col-auto'>
+                        <label htmlFor="functionToCall">Function </label>
+                      </Col>
+                      <Col> 
+                        <select id="functionToCall" name="functionToCall">
+                          <option value="storeExpertiseThreshold">Change expertise threshold</option>
+                          <option value="storeCertificateWeight">Change the weights for the academic degrees</option>
+                        </select>
+                      </Col>
+                    </Row>
+                  </div>
+                  <div className="change__parameters__wrapper">
+                      <table className='table__settings'>
+                        <tbody>
+                          <tr>
+                            <td><label htmlFor="threshold01input">Intermediate lower limit</label></td>
+                            <td><input id='threshold01slider' type="range" min="0" max="98" value={threshold01} onChange={handleThresholdChanger} /></td>
+                            <td><input id='threshold01input' type="number" min="0" max="98" value={threshold01} onChange={handleThresholdChanger} /></td>
+                          </tr>
+                          <tr>
+                            <td><label htmlFor="threshold02input">Expert lower limit:</label></td>
+                            <td><input id='threshold02slider' type="range" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} /></td>
+                            <td><input id='threshold02input' type="number" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} /></td>
+                          </tr>
+                          <tr>
+                            <td><label htmlFor="threshold03input">Jedi lower limit:</label></td>
+                            <td><input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} /></td>
+                            <td><input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} /></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
                 </div>
                 
                 <div>
@@ -457,16 +470,6 @@ const ExpertiseLevel = () => {
                   <input id='weight04input' type="number" min="0" max="20" value={weight04} onChange={handleWeightInputChange} />
                 </div>
 
-
-
-                <label htmlFor="weight1">Weight 1 </label>
-                <input type="number" id="weight1" name="weight1" defaultValue={1}/>
-                <label htmlFor="weight2">Weight 2 </label>
-                <input type="number" id="weight2" name="weight2" defaultValue={1}/>
-                <label htmlFor="weight3">Weight 3 </label>
-                <input type="number" id="weight3" name="weight3" defaultValue={1}/>
-                <label htmlFor="weight4">Weight 4 </label>
-                <input type="number" id="weight4" name="weight4" defaultValue={1}/>
                 <label htmlFor="description">Description </label>
                 <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
                 <button type='submit'>Add proposal</button>
