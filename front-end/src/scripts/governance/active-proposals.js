@@ -30,6 +30,13 @@ export const fetchActiveProposals = async (_state) => {
   // @dev Pass the filter object through the queryFilter method for blocks from 0 to the latest
   const events = await governorContract.queryFilter(eventsFilter, 0, "latest")
 
+console.log('\nDEBUG')
+console.log(events[21])
+console.log(Object.keys(events[21]))
+console.log('Remove Listener ', events[21]['args'][5]) // encoded function
+/* const encodedFunctionFromTx = governorContract.interface.parseTransaction(events[22])['args'][2][0] */
+
+
   for (let i = 0; i < events.length; i++) {
     const eventProposalId = events[i]['args']['proposalId'].toString()
     const eventDescription = events[i]['args']['description']
