@@ -488,6 +488,27 @@ const ExpertiseLevel = () => {
                     </Row>
                   </div> : <div className="change__parameters__wrapper">
                     <h4>Proposal - Change Certifications Weight</h4>
+                    <Row className='expertise__proposal__plot'>
+                      <Col>
+                        <p>Contribution of each Certification Levels</p>
+                        <div className='containerStyles'>
+                          <div className="App">
+                          <div className='fillerStyles postdoctoralBar' style={{width: 100 + "%"}}>
+                              <span className='labelStyles'>Postdoctoral</span>
+                            </div>
+                            <div className='fillerStyles doctoralBar' style={{width: 100*weight01/(weight01+weight02+weight03+weight04)+100*weight02/(weight01+weight02+weight03+weight04)+100*weight03/(weight01+weight02+weight03+weight04) + "%"}}>
+                              <span className='labelStyles'>Doctoral</span>
+                            </div>
+                            <div className='fillerStyles mastersBar' style={{width: 100*weight01/(weight01+weight02+weight03+weight04)+100*weight02/(weight01+weight02+weight03+weight04) + "%"}}>
+                              <span className='labelStyles'>Masters</span>
+                            </div>
+                            <div className='fillerStyles bachelorBar' style={{width: 100*weight01/(weight01+weight02+weight03+weight04) + "%"}}>
+                              <span className='labelStyles'>Bachelor</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
                     <Row>
                       <Col>
                         <table className='table__input__settings'>

@@ -219,6 +219,35 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 4;
 }
 
+
+
+.postdoctoralBar {
+  background-color: #6453ff;
+  z-index: 1;
+}
+
+.doctoralBar {
+  background-color: #4b50e6;
+  margin-top: -1.5em;
+  z-index: 2;
+}
+
+.mastersBar {
+  background-color: #3a3eb3;
+  margin-top: -1.5em;
+  z-index: 3;
+}
+
+.bachelorBar {
+  background-color: #212366;
+  margin-top: -1.5em;
+  z-index: 4;
+}
+
+
+
+
+
 .labelStyles {
   color: white;
   font-weight: normal;
