@@ -439,6 +439,12 @@ const ExpertiseLevel = () => {
                             <td><input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} /></td>
                             <td><input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} /></td>
                           </tr>
+                          <tr>
+                            <td colspan="3">
+                              <label htmlFor="description">Description </label>
+                              <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                   </div>
