@@ -490,7 +490,7 @@ const ExpertiseLevel = () => {
                     <h4>Proposal - Change Certifications Weight</h4>
                     <Row className='expertise__proposal__plot'>
                       <Col>
-                        <p>Contribution of each Certification Levels</p>
+                        <p>Contribution of each Certification Level</p>
                         <div className='containerStyles'>
                           <div className="App">
                           <div className='fillerStyles postdoctoralBar' style={{width: 100 + "%"}}>
