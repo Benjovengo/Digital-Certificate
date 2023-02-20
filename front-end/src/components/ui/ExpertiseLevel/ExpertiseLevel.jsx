@@ -409,6 +409,7 @@ const ExpertiseLevel = () => {
                     </Row>
                   </div>
 
+                  {/** Arguments */}
                   {(expertiseFunction === 'storeExpertiseThreshold')? <div className="change__parameters__wrapper">
                     <h4>Proposal - Change Expertise Thresholds</h4>
                     <Row className='expertise__proposal__plot'>
@@ -547,7 +548,6 @@ const ExpertiseLevel = () => {
                     </Row>
                   </div>
                   }                  
-
                   <div className="submit__wrapper">
                     <Row>
                       <Col className="text-center">
@@ -559,6 +559,7 @@ const ExpertiseLevel = () => {
               </form>
             </Col>
           </Row>
+
           {/** Vote in a proposal */}
           <Row>
             <Col>
@@ -577,6 +578,7 @@ const ExpertiseLevel = () => {
               </form>
             </Col>
           </Row>
+
           {/** Queue and Execute */}
           <Row>
             <Col>
@@ -588,6 +590,7 @@ const ExpertiseLevel = () => {
               </form>
             </Col>
           </Row>
+          
         </Container>
       </section>
     </>
