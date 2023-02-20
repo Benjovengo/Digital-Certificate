@@ -28,6 +28,7 @@ const ExpertiseLevel = () => {
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
   const [maximumPoints, setMaximumPoints] = useState(0) // Theoretical maximum number of points using the blockchain values
   const [maximumPointsProposal, setMaximumPointsProposal] = useState(0) // Theoretical maximum number of points for the proposal
+  const [expertiseFunction, setExpertiseFunction] = useState('storeExpertiseThreshold')
   // Hooks to sliders and inputs
   // Thresholds
   const [threshold01, setThreshold01] = useState(0);
@@ -245,6 +246,7 @@ const ExpertiseLevel = () => {
     let args
     // Get values from the component's input fields
     const functionToCall = e.target.functionToCall.value
+    setExpertiseFunction(functionToCall)
     // Parse arguments
     if (functionToCall==='storeExpertiseThreshold') {
       const novice = Number(e.target.threshold01input.value)
@@ -398,6 +400,7 @@ const ExpertiseLevel = () => {
                     </Row>
                   </div>
 
+                  {(expertiseFunction === 'setExpertiseFunction')? console.log('DEBUG') : console.log("TEST") }
                   {/** Change Expertise Thresholds */}
                   <div className="change__parameters__wrapper">
                     <h4>Proposal - Change Expertise Thresholds</h4>
@@ -476,9 +479,88 @@ const ExpertiseLevel = () => {
                       </Col>
                     </Row>
                   </div>
+                  
+                  {/** Change Expertise Thresholds */}
+                  <div className="change__parameters__wrapper">
+                    <h4>Proposal - Change Certifications Weight</h4>
+                    <Row>
+                      <Col>
+                        <table className='table__input__settings'>
+                          <tbody>
+                            <tr>
+                              <td><label htmlFor="weight01input">Bachelor Degree:</label></td>
+                              <td><input id='weight01slider' type="range" min="0" max="20" value={weight01>=weight02? weight02:weight01} onChange={handleWeightSliderChange} /></td>
+                              <td><input id='weight01input' type="number" min="0" max="20" value={weight01>=weight02? weight02:weight01} onChange={handleWeightInputChange} /></td>
+                            </tr>
+                            <tr>
+                              <td><label htmlFor="weight02input">Masters Degree:</label></td>
+                              <td><input id='weight02slider' type="range" min="0" max="20" value={weight02>=weight03? weight03:weight02} onChange={handleWeightSliderChange} /></td>
+                              <td><input id='weight02input' type="number" min="0" max="20" value={weight02>=weight03? weight03:weight02} onChange={handleWeightInputChange} /></td>
+                            </tr>
+                            <tr>
+                              <td><label htmlFor="weight03input">Doctoral Degree:</label></td>
+                              <td><input id='weight03slider' type="range" min="0" max="20" value={weight03>=weight04? weight04:weight03} onChange={handleWeightSliderChange} /></td>
+                              <td><input id='weight03input' type="number" min="0" max="20" value={weight03>=weight04? weight04:weight03} onChange={handleWeightInputChange} /></td>
+                            </tr>
+                            <tr>
+                              <td><label htmlFor="weight04input">Postdoctoral Degree:</label></td>
+                              <td><input id='weight04slider' type="range" min="0" max="20" value={weight04} onChange={handleWeightSliderChange} /></td>
+                              <td><input id='weight04input' type="number" min="0" max="20" value={weight04} onChange={handleWeightInputChange} /></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3">
+                                <label htmlFor="description">Description </label>
+                                <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </Col>
+                      <Col>
+                        <table className='table__input__settings  mt-1'>
+                          <thead>
+                            <tr>
+                              <td>Thresholds</td>
+                              <td>Points</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>From novice to intermediate:</td>
+                              <td>{(threshold01*maximumPoints).toLocaleString()} points</td>
+                            </tr>
+                            <tr>
+                              <td>From intermediate to expert:</td>
+                              <td>{(threshold02*maximumPoints).toLocaleString()} points</td>
+                            </tr>
+                            <tr>
+                              <td>From expert to a jedi master:</td>
+                              <td>{(threshold03*maximumPoints).toLocaleString()} points</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </Col>
+                    </Row>
+                  </div>
+                  
 
 
-                  <div className="description__add__wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <div className="submit__wrapper">
                     <Row>
                       <Col xs="5" className="text-end">
                         <button className='submit__button' type='submit'>Add proposal</button>
@@ -508,9 +590,6 @@ const ExpertiseLevel = () => {
                   <input id='weight04input' type="number" min="0" max="20" value={weight04} onChange={handleWeightInputChange} />
                 </div>
 
-                <label htmlFor="description">Description </label>
-                <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
-                <button type='submit'>Add proposal</button>
               </form>
             </Col>
           </Row>
