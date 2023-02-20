@@ -440,6 +440,17 @@ const ExpertiseLevel = () => {
                         </tbody>
                       </table>
                   </div>
+                  <div className="description__add__wrapper">
+                    <Row>
+                      <Col className='col-auto'>
+                        <label htmlFor="description">Description </label>
+                        <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
+                      </Col>
+                      <Col>
+                        <button type='submit'>Add proposal</button>
+                      </Col>
+                    </Row>
+                  </div>
                 </div>
                 
                 <div>

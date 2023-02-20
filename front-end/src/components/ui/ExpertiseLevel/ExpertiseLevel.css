@@ -98,6 +98,11 @@ input[type="range"]::-webkit-slider-thumb {
   padding: 1em;
 }
 
+.description__add__wrapper {
+  background-color: #181821;
+  padding: 0.5em 0;
+}
+
 
 
 /* Bar Chart Style */
