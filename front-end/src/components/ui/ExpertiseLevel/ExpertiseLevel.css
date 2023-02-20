@@ -164,7 +164,7 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 0.9rem;
   margin: 0 1em;
   outline: none;
-  padding: 7px 25px !important;
+  padding: 7px 55px !important;
 }
 
 .submit__button:hover {

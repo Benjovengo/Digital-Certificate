@@ -234,6 +234,16 @@ const ExpertiseLevel = () => {
 
 
   /**
+   * Set the function to be called on submitting new proposal
+   * 
+   * @param {event} event Event value for the select element
+   */
+  const proposalArguments = (event) => {
+    setExpertiseFunction(event.target.value)
+  }
+
+
+  /**
    * Submit proposal
    * 
    * @param {event} e Submitting form event
@@ -246,7 +256,6 @@ const ExpertiseLevel = () => {
     let args
     // Get values from the component's input fields
     const functionToCall = e.target.functionToCall.value
-    setExpertiseFunction(functionToCall)
     // Parse arguments
     if (functionToCall==='storeExpertiseThreshold') {
       const novice = Number(e.target.threshold01input.value)
@@ -392,7 +401,7 @@ const ExpertiseLevel = () => {
                         <label htmlFor="functionToCall">Select Function</label>
                       </Col>
                       <Col> 
-                        <select className='select__function' id="functionToCall" name="functionToCall">
+                        <select className='select__function' id="functionToCall" name="functionToCall" onChange={proposalArguments} >
                           <option value="storeExpertiseThreshold">Change expertise thresholds</option>
                           <option value="storeCertificateWeight">Change the weights for each of the academic degrees</option>
                         </select>
@@ -400,9 +409,7 @@ const ExpertiseLevel = () => {
                     </Row>
                   </div>
 
-                  {(expertiseFunction === 'setExpertiseFunction')? console.log('DEBUG') : console.log("TEST") }
-                  {/** Change Expertise Thresholds */}
-                  <div className="change__parameters__wrapper">
+                  {(expertiseFunction === 'storeExpertiseThreshold')? <div className="change__parameters__wrapper">
                     <h4>Proposal - Change Expertise Thresholds</h4>
                     <Row className='expertise__proposal__plot'>
                       <Col>
@@ -478,10 +485,7 @@ const ExpertiseLevel = () => {
                         </table>
                       </Col>
                     </Row>
-                  </div>
-                  
-                  {/** Change Expertise Thresholds */}
-                  <div className="change__parameters__wrapper">
+                  </div> : <div className="change__parameters__wrapper">
                     <h4>Proposal - Change Certifications Weight</h4>
                     <Row>
                       <Col>
@@ -542,54 +546,16 @@ const ExpertiseLevel = () => {
                       </Col>
                     </Row>
                   </div>
-                  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  }                  
 
                   <div className="submit__wrapper">
                     <Row>
-                      <Col xs="5" className="text-end">
+                      <Col className="text-center">
                         <button className='submit__button' type='submit'>Add proposal</button>
                       </Col>
                     </Row>
                   </div>
                 </div>
-                
-                <div>
-                  <label htmlFor="weight01input">Bachelor Degree:</label>
-                  <input id='weight01slider' type="range" min="0" max="20" value={weight01>=weight02? weight02:weight01} onChange={handleWeightSliderChange} />
-                  <input id='weight01input' type="number" min="0" max="20" value={weight01>=weight02? weight02:weight01} onChange={handleWeightInputChange} />
-                </div>
-                <div>
-                  <label htmlFor="weight02input">Masters Degree:</label>
-                  <input id='weight02slider' type="range" min="0" max="20" value={weight02>=weight03? weight03:weight02} onChange={handleWeightSliderChange} />
-                  <input id='weight02input' type="number" min="0" max="20" value={weight02>=weight03? weight03:weight02} onChange={handleWeightInputChange} />
-                </div>
-                <div>
-                  <label htmlFor="weight03input">Doctoral Degree:</label>
-                  <input id='weight03slider' type="range" min="0" max="20" value={weight03>=weight04? weight04:weight03} onChange={handleWeightSliderChange} />
-                  <input id='weight03input' type="number" min="0" max="20" value={weight03>=weight04? weight04:weight03} onChange={handleWeightInputChange} />
-                </div>
-                <div>
-                  <label htmlFor="weight04input">Postdoctoral Degree:</label>
-                  <input id='weight04slider' type="range" min="0" max="20" value={weight04} onChange={handleWeightSliderChange} />
-                  <input id='weight04input' type="number" min="0" max="20" value={weight04} onChange={handleWeightInputChange} />
-                </div>
-
               </form>
             </Col>
           </Row>
