@@ -78,6 +78,31 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: #4b50e6; 
 }
 
+
+.dao__wrapper input[type="number"] {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 3em;
+}
+
+
+.table__input__settings td,
+.table__input__settings th {
+  font-weight: 300;
+  padding: 0.125em 0.5em;
+}
+
+
+.dao__wrapper input[type="text"] {
+  background: #14141a;
+  border-color: #282834;
+  color: white;
+  width: 100%;
+}
+
+
+
 .add__proposal__wrapper{
   margin: 0.5em 1em;
   padding: 0.25em;

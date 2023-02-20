@@ -422,7 +422,7 @@ const ExpertiseLevel = () => {
                       </Col>
                     </Row>
 
-                      <table className='table__settings'>
+                      <table className='table__input__settings'>
                         <tbody>
                           <tr>
                             <td><label htmlFor="threshold01input">Intermediate lower limit</label></td>
