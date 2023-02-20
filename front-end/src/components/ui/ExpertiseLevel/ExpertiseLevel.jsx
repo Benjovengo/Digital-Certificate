@@ -424,6 +424,7 @@ const ExpertiseLevel = () => {
 
                     <Row>
                       <Col>
+                        <h5>Change Expertise Thresholds</h5>
                         <table className='table__input__settings'>
                           <tbody>
                             <tr>
@@ -451,7 +452,7 @@ const ExpertiseLevel = () => {
                         </table>
                       </Col>
                       <Col>
-                        <table className='table__input__settings'>
+                        <table className='table__input__settings  mt-4'>
                           <thead>
                             <tr>
                               <td>Thresholds</td>
@@ -478,7 +479,7 @@ const ExpertiseLevel = () => {
 
                   </div>
 
-                  
+
                   <div className="description__add__wrapper">
                     <Row>
                       <Col xs="5" className="text-end">

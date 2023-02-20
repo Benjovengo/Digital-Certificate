@@ -86,9 +86,18 @@ input[type="range"]::-webkit-slider-thumb {
   width: 3em;
 }
 
+.table__input__settings thead {
+  background-color: #212366;
+  font-weight: 400;
+}
 
 .table__input__settings td,
 .table__input__settings th {
+  padding: 0.125em 0.5em;
+}
+
+.table__input__settings tbody td,
+.table__input__settings tbody th {
   font-weight: 300;
   padding: 0.125em 0.5em;
 }
