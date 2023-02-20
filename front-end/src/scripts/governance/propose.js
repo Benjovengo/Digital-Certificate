@@ -59,11 +59,12 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
 
 
   console.log('\nDEBUG')
-  console.log('Encoded function call: ', governorContract.interface.parseTransaction(proposeTx)['args'][2][0]) // encoded function
+  const encodedFunctionFromTx = governorContract.interface.parseTransaction(proposeTx)['args'][2][0] // encoded function
+  console.log('Encoded function call: ', encodedFunctionFromTx)
   try {
-    console.log(expertiseClusters.interface.decodeFunctionData("storeCertificateWeight", encodedFunctionCall)) // decode arguments
+    console.log(expertiseClusters.interface.decodeFunctionData("storeCertificateWeight", encodedFunctionFromTx)[0]) // decode arguments
   } catch (error) {
-    console.log(expertiseClusters.interface.decodeFunctionData("storeExpertiseThreshold", encodedFunctionCall)) // decode arguments
+    console.log(expertiseClusters.interface.decodeFunctionData("storeExpertiseThreshold", encodedFunctionFromTx)[0]) // decode arguments
   }
   
 }
