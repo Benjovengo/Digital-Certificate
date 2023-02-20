@@ -430,12 +430,12 @@ const ExpertiseLevel = () => {
                             <td><input id='threshold01input' type="number" min="0" max="98" value={threshold01} onChange={handleThresholdChanger} /></td>
                           </tr>
                           <tr>
-                            <td><label htmlFor="threshold02input">Expert lower limit:</label></td>
+                            <td><label htmlFor="threshold02input">Expert lower limit</label></td>
                             <td><input id='threshold02slider' type="range" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} /></td>
                             <td><input id='threshold02input' type="number" min="0" max="99" value={threshold02} onChange={handleThresholdChanger} /></td>
                           </tr>
                           <tr>
-                            <td><label htmlFor="threshold03input">Jedi lower limit:</label></td>
+                            <td><label htmlFor="threshold03input">Jedi lower limit</label></td>
                             <td><input id='threshold03slider' type="range" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} /></td>
                             <td><input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} /></td>
                           </tr>
@@ -450,12 +450,8 @@ const ExpertiseLevel = () => {
                   </div>
                   <div className="description__add__wrapper">
                     <Row>
-                      <Col className='col-auto'>
-                        <label htmlFor="description">Description </label>
-                        <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
-                      </Col>
-                      <Col>
-                        <button type='submit'>Add proposal</button>
+                      <Col xs="5" className="text-end">
+                        <button className='submit__button' type='submit'>Add proposal</button>
                       </Col>
                     </Row>
                   </div>

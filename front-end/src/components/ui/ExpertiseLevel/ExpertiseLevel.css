@@ -101,8 +101,6 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100%;
 }
 
-
-
 .add__proposal__wrapper{
   margin: 0.5em 1em;
   padding: 0.25em;
@@ -126,6 +124,20 @@ input[type="range"]::-webkit-slider-thumb {
 .description__add__wrapper {
   background-color: #181821;
   padding: 0.5em 0;
+}
+
+.submit__button {
+  background-color: #3642a8;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  margin: 0 1em;
+  outline: none;
+  padding: 7px 25px !important;
+}
+
+.submit__button:hover {
+  background-color: #4b50e6;
 }
 
 
