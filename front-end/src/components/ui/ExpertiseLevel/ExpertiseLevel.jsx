@@ -377,35 +377,6 @@ const ExpertiseLevel = () => {
             </Col>
           </Row>
 
-          <Row>
-            <Col>
-              <h2>Proposals</h2>
-              <div>Maximum Number of Points (proposal): {maximumPointsProposal.toLocaleString()}</div>
-              <div>Expertise Thresholds (proposal): {expertiseLevelsProposal[0].toLocaleString()}, {expertiseLevelsProposal[1].toLocaleString()}, {expertiseLevelsProposal[2].toLocaleString()}</div>
-            </Col>
-          </Row>
-          {/** Bar chart */}
-          <Row>
-            <Col>
-              <p>Proposal thresholds</p>
-              <div className='containerStyles'>
-                <div className="App">
-                <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
-                    <span className='labelStyles'>Jedi</span>
-                  </div>
-                  <div className='fillerStyles expertBar' style={{width: threshold03 + "%"}}>
-                    <span className='labelStyles'>Expert</span>
-                  </div>
-                  <div className='fillerStyles intermediateBar' style={{width: threshold02 + "%"}}>
-                    <span className='labelStyles'>Intermediate</span>
-                  </div>
-                  <div className='fillerStyles noviceBar' style={{width: threshold01 + "%"}}>
-                    <span className='labelStyles'>Novice</span>
-                  </div>
-                </div>
-              </div>
-            </Col>
-          </Row>
           {/** Add proposal */}
           <Row>
             <Col>
@@ -416,17 +387,39 @@ const ExpertiseLevel = () => {
                   <div className='proposal__function'>
                     <Row>
                       <Col className='col-auto'>
-                        <label htmlFor="functionToCall">Function </label>
+                        <label htmlFor="functionToCall">Select Function</label>
                       </Col>
                       <Col> 
                         <select id="functionToCall" name="functionToCall">
-                          <option value="storeExpertiseThreshold">Change expertise threshold</option>
-                          <option value="storeCertificateWeight">Change the weights for the academic degrees</option>
+                          <option value="storeExpertiseThreshold">Change expertise thresholds</option>
+                          <option value="storeCertificateWeight">Change the weights for each of the academic degrees</option>
                         </select>
                       </Col>
                     </Row>
                   </div>
                   <div className="change__parameters__wrapper">
+                    {/** Bar chart */}
+                    <Row className='expertise__proposal__plot'>
+                      <Col>
+                        <div className='containerStyles'>
+                          <div className="App">
+                          <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
+                              <span className='labelStyles'>Jedi</span>
+                            </div>
+                            <div className='fillerStyles expertBar' style={{width: threshold03 + "%"}}>
+                              <span className='labelStyles'>Expert</span>
+                            </div>
+                            <div className='fillerStyles intermediateBar' style={{width: threshold02 + "%"}}>
+                              <span className='labelStyles'>Intermediate</span>
+                            </div>
+                            <div className='fillerStyles noviceBar' style={{width: threshold01 + "%"}}>
+                              <span className='labelStyles'>Novice</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+
                       <table className='table__settings'>
                         <tbody>
                           <tr>

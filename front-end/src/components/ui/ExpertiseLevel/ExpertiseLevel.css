@@ -85,12 +85,17 @@ input[type="range"]::-webkit-slider-thumb {
 
 .proposal__function {
   background-color: #1d1d27;
-  padding: 0 0 0 0.5em;
+  padding: 0.25em 0 0.25em 0.5em;
 }
 
 .change__parameters__wrapper {
   background-color: #282834;
   padding: 0.5em 0;
+}
+
+.expertise__proposal__plot {
+  margin: 0.5em;
+  padding: 1em;
 }
 
 
