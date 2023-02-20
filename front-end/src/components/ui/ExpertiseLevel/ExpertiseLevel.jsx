@@ -475,7 +475,10 @@ const ExpertiseLevel = () => {
                         </table>
                       </Col>
                     </Row>
+
                   </div>
+
+                  
                   <div className="description__add__wrapper">
                     <Row>
                       <Col xs="5" className="text-end">

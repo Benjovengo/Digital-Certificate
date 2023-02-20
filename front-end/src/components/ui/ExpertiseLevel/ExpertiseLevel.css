@@ -179,26 +179,26 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .jediBar {
-  background-color: #93a7ac;
+  background-color: #6453ff;
   z-index: 1;
 }
 
 .expertBar {
-  background-color: #6f8a91;
+  background-color: #4b50e6;
   clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 2;
 }
 
 .intermediateBar {
-  background-color: #53676c;
+  background-color: #3a3eb3;
   clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 3;
 }
 
 .noviceBar {
-  background-color: #374548;
+  background-color: #212366;
   clip-path: polygon(0 0, calc(100% - 13px) 0%, 100% 50%, calc(100% - 13px) 100%, 0 100%);
   margin-top: -1.5em;
   z-index: 4;
