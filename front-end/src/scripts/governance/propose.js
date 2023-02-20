@@ -56,4 +56,10 @@ export const addProposal = async (_functionToCall, _args, _proposalDescription) 
   }
 
   console.log('SUCCESS!! Proposal added.')
+
+
+  console.log('\nDEBUG')
+  console.log('Encoded function call: ', encodedFunctionCall)
+  console.log(expertiseClusters.interface.decodeFunctionData("storeExpertiseThreshold", encodedFunctionCall)) // decode arguments
+  console.log(governorContract.interface.parseTransaction(proposeTx)['args'][2][0]) // encoded function
 }
