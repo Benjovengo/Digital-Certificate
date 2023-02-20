@@ -398,9 +398,11 @@ const ExpertiseLevel = () => {
                     </Row>
                   </div>
                   <div className="change__parameters__wrapper">
+                    
                     {/** Bar chart */}
                     <Row className='expertise__proposal__plot'>
                       <Col>
+                        <p>Thresholds for the Different Expertise Levels</p>
                         <div className='containerStyles'>
                           <div className="App">
                           <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
