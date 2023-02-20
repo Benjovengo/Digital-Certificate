@@ -397,9 +397,9 @@ const ExpertiseLevel = () => {
                       </Col>
                     </Row>
                   </div>
+
+                  {/** Change Expertise Thresholds */}
                   <div className="change__parameters__wrapper">
-                    
-                    {/** Bar chart */}
                     <h4>Proposal - Change Expertise Thresholds</h4>
                     <Row className='expertise__proposal__plot'>
                       <Col>
@@ -422,7 +422,6 @@ const ExpertiseLevel = () => {
                         </div>
                       </Col>
                     </Row>
-
                     <Row>
                       <Col>
                         <table className='table__input__settings'>
@@ -476,7 +475,6 @@ const ExpertiseLevel = () => {
                         </table>
                       </Col>
                     </Row>
-
                   </div>
 
 
