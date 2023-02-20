@@ -93,6 +93,22 @@ input[type="range"]::-webkit-slider-thumb {
   padding: 0.125em 0.5em;
 }
 
+.select__function {
+  background: #35353f;
+  border: none;
+  cursor: pointer;
+  color: white;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0.125em 0.125em;
+  max-width: 100%;
+}
+
+
+.select__function option {
+  font-family: 'Montserrat', sans-serif;
+}
 
 .dao__wrapper input[type="text"] {
   background: #14141a;
