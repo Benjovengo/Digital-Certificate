@@ -85,6 +85,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
+.dao__wrapper input[type="text"]::-moz-range-progress {
+  width: 100%;
+}
+
 .dao__wrapper input[type="number"] {
   background: transparent;
   border: none;

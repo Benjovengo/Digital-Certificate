@@ -34,12 +34,17 @@ const VotingProposals = ( props ) => {
   return (
     <>
       <div className="proposal__wrapper">
-         <Row>
+        <Row>
           <Col>
             <h6><span>Proposal description</span></h6>
             <h4>{proposalDescription}</h4>
             <p>Id: {proposalId}</p>
             <p>Function: <span>{proposalFunction}</span></p>
+          </Col>
+        </Row>
+         <Row>
+          <Col className='col-auto'>
+            
             {(proposalFunction === 'storeExpertiseThreshold')?
               <>
                 <table>
@@ -94,8 +99,6 @@ const VotingProposals = ( props ) => {
                 </table>
               </>}
           </Col>
-        </Row>
-        <Row>
           <Col>
             <form className='submit__form' onSubmit={handleSubmitVote}>
               <Row>
@@ -105,14 +108,18 @@ const VotingProposals = ( props ) => {
               </Row>
               <Row className='mt-3 vote__wrapper'>
                 <Col>
-                  <label htmlFor="vote">Vote: </label>
+                  <label htmlFor="vote">Vote - </label>
                   <select className='select__vote' id="vote" name="vote">
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                     <option value="2">Abstain</option>
                   </select>
-                  <label className='ms-3' htmlFor="voteReason">Reason:</label>
-                  <input className='reason__input' type="text" id="voteReason" name="voteReason"/>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <label className='mt-2 me-2' htmlFor="voteReason">Reason</label>
+                  <input style={{ width: '100%' }} className='reason__input' type="text" id="voteReason" name="voteReason"/>
                 </Col>
               </Row>
               <div className="submit__wrapper">
@@ -125,6 +132,7 @@ const VotingProposals = ( props ) => {
             </form>
           </Col>
         </Row>
+
       </div>
     </>
   )
