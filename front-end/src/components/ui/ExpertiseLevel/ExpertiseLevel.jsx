@@ -62,16 +62,6 @@ const ExpertiseLevel = () => {
    * Refresh elements on changing states
    */
   useEffect( () => {
-    if (votingProposalIds !== null) {
-      const selectElement = document.getElementById("proposalSelect")
-      selectElement.innerHTML = ''
-      for (let i = 0; i < votingProposalIds.length; i++) {
-        const option = document.createElement("option")
-        option.value = votingProposalIds[i]['id']
-        option.text = votingProposalIds[i]['desc'];
-        selectElement.appendChild(option)
-      }
-    }
     if (executingProposalIds !== null) {
       const selectExecute = document.getElementById("selectExecuteProposal")
       selectExecute.innerHTML = ''
@@ -274,24 +264,6 @@ const ExpertiseLevel = () => {
 
     // Submit new proposal
     await addProposal(functionToCall, args, description)
-  }
-
-
-  /**
-   * Submit votes
-   * 
-   * @param {event} e Submitting form event
-   * @dev The event has all the information about the
-   *      submission of all the fields inside the form
-   */
-  const handleSubmitVote = async (e) => {
-    e.preventDefault()
-    // Get values from the component's input fields
-    const inputProposalId = e.target.proposalSelect.value
-    const inputVote = e.target.vote.value
-    const inputReason = e.target.voteReason.value
-    // Vote
-    castVote(inputProposalId, inputVote, inputReason)
   }
 
 
@@ -585,20 +557,10 @@ const ExpertiseLevel = () => {
           {/** Vote in a proposal */}
           <Row>
             <Col>
-              <h2>Vote</h2>
-              {VotingProposals(1, 'Debug element', 'function()', [1, 2, 3])}
-              <form onSubmit={handleSubmitVote}>
-                <label htmlFor="vote">Vote:</label>
-                <select name="proposalSelect" id="proposalSelect"></select>
-                <select id="vote" name="vote">
-                  <option value="1">Yes</option>
-                  <option value="0">No</option>
-                  <option value="2">Abstain</option>
-                </select>
-                <label htmlFor="voteReason">Reason </label>
-                <input type="text" id="voteReason" name="voteReason"/>
-                <button type='submit'>Vote</button>
-              </form>
+              <h2>Opened for voting</h2>
+              {(votingProposalIds===null)? <></> : votingProposalIds.map((item, index) => (
+                <VotingProposals key={index} item={item} />
+                ))}
             </Col>
           </Row>
 

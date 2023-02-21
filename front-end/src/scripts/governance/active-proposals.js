@@ -49,7 +49,7 @@ try {
   for (let i = 0; i < events.length; i++) {
     const eventProposalId = events[i]['args']['proposalId'].toString()
     const eventDescription = events[i]['args']['description']
-    const encodedFunctionFromEvent = events[0]['args'][5][0]
+    const encodedFunctionFromEvent = events[i]['args'][5][0]
     const proposalState = await governorContract.state(eventProposalId)
     let proposalArguments
     let calledFunction
