@@ -64,7 +64,31 @@ const VotingProposals = ( props ) => {
                   </tbody>
                 </table>
               </> : <>
-              Weights
+              <table>
+                  <thead>
+                    <tr>
+                      <td colspan="2">Certification weights<br/><span>weight of the certification level</span></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Bachelor degree</td>
+                      <td>{proposalArgs[0]}</td>
+                    </tr>
+                    <tr>
+                      <td>Masters degree</td>
+                      <td>{proposalArgs[1]}</td>
+                    </tr>
+                    <tr>
+                      <td>Doctoral degree</td>
+                      <td>{proposalArgs[2]}</td>
+                    </tr>
+                    <tr>
+                      <td>Postdoctoral degree</td>
+                      <td>{proposalArgs[3]}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </>}
           </Col>
         </Row>
