@@ -76,19 +76,19 @@ const VotingProposals = ( props ) => {
                   <tbody>
                     <tr>
                       <td>Bachelor degree</td>
-                      <td>{proposalArgs[0]}</td>
+                      <td style={{textAlign: "center"}}>{proposalArgs[0]}</td>
                     </tr>
                     <tr>
                       <td>Masters degree</td>
-                      <td>{proposalArgs[1]}</td>
+                      <td style={{textAlign: "center"}}>{proposalArgs[1]}</td>
                     </tr>
                     <tr>
                       <td>Doctoral degree</td>
-                      <td>{proposalArgs[2]}</td>
+                      <td style={{textAlign: "center"}}>{proposalArgs[2]}</td>
                     </tr>
                     <tr>
                       <td>Postdoctoral degree</td>
-                      <td>{proposalArgs[3]}</td>
+                      <td style={{textAlign: "center"}}>{proposalArgs[3]}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -97,17 +97,24 @@ const VotingProposals = ( props ) => {
         </Row>
         <Row>
           <Col>
-            <form onSubmit={handleSubmitVote}>
-              
-              <label htmlFor="vote">Vote:</label>
-              <select id="vote" name="vote">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-                <option value="2">Abstain</option>
-              </select>
-              <label htmlFor="voteReason">Reason </label>
-              <input type="text" id="voteReason" name="voteReason"/>
-
+            <form className='submit__form' onSubmit={handleSubmitVote}>
+              <Row>
+                <Col>
+                  <h5>Your Vote</h5>
+                </Col>
+              </Row>
+              <Row className='mt-3 vote__wrapper'>
+                <Col>
+                  <label htmlFor="vote">Vote: </label>
+                  <select className='select__vote' id="vote" name="vote">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                    <option value="2">Abstain</option>
+                  </select>
+                  <label className='ms-3' htmlFor="voteReason">Reason:</label>
+                  <input className='reason__input' type="text" id="voteReason" name="voteReason"/>
+                </Col>
+              </Row>
               <div className="submit__wrapper">
                 <Row>
                   <Col className="text-center">
