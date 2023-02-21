@@ -4,11 +4,10 @@ import { Container, Row, Col } from "reactstrap"
 import './ExpertiseLevel.css' // CSS Style
 
 import { addProposal } from '../../../scripts/governance/propose'
-import { castVote } from '../../../scripts/governance/vote'
-import { queueAndExecute } from '../../../scripts/governance/queue-and-execute'
 import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters'
 import { fetchActiveProposals } from '../../../scripts/governance/active-proposals'
 import VotingProposals from '../VotingProposals/VotingProposals'
+import ExecutingProposals from '../ExecutingProposals/ExecutingProposals'
 
 
 /**
@@ -56,23 +55,6 @@ const ExpertiseLevel = () => {
     const executingProposalsObject = await fetchActiveProposals(activeForExecuting)
     setExecutingProposalIds(executingProposalsObject)
   }
-
-
-  /**
-   * Refresh elements on changing states
-   */
-  useEffect( () => {
-    if (executingProposalIds !== null) {
-      const selectExecute = document.getElementById("selectExecuteProposal")
-      selectExecute.innerHTML = ''
-      for (let i = 0; i < executingProposalIds.length; i++) {
-        const option = document.createElement("option")
-        option.value = executingProposalIds[i]['id']
-        option.text = executingProposalIds[i]['desc'];
-        selectExecute.appendChild(option)
-      }
-    }
-  }, [votingProposalIds, executingProposalIds])
 
 
   /**
@@ -267,20 +249,7 @@ const ExpertiseLevel = () => {
   }
 
 
-   /**
-   * Submit queue and execute for a successful proposal
-   * 
-   * @param {event} e Submitting form event
-   * @dev The event has all the information about the
-   *      submission of all the fields inside the form
-   */
-   const handleSubmitExecution = async (e) => {
-    e.preventDefault()
-    // Get values from the component's input fields
-    const inputProposalId = e.target.selectExecuteProposal.value
-    // Queue and Execute proposal
-    queueAndExecute(inputProposalId)
-  }
+   
 
 
   // Components for the ui
@@ -564,15 +533,13 @@ const ExpertiseLevel = () => {
             </Col>
           </Row>
 
-          {/** Queue and Execute */}
+          {/** Execute an approved proposal */}
           <Row>
             <Col>
-              <h2>Queue and Execute</h2>
-              <form onSubmit={handleSubmitExecution}>
-                <label htmlFor="selectExecuteProposal">Execute:</label>
-                <select name="selectExecuteProposal" id="selectExecuteProposal"></select>
-                <button type='submit'>Execute</button>
-              </form>
+              <h2>Execute approved proposals</h2>
+              {(executingProposalIds===null)? <></> : executingProposalIds.map((item, index) => (
+                <ExecutingProposals key={index} item={item} />
+                ))}
             </Col>
           </Row>
           
