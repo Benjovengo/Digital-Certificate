@@ -23,8 +23,8 @@ async function main() {
   console.log('\x1b[0m\nAdd a New Proposal')
 
   /// @dev Arguments
-  const _functionToCall = 'storeCertificateWeights'
-  const _args = [1, 169] // has to use the same in the queue-and-execute
+  const _functionToCall = 'storeCertificateWeight'
+  const _args = [10, 12, 14, 16] // has to use the same in the queue-and-execute
   const _proposalDescription = 'Debug description'
 
   /// @dev Path to the file containing the addresses of the contracts after deployment
@@ -47,7 +47,7 @@ async function main() {
 
   /// @notice Encode the function to be called
   /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
-  const encodedFunctionCall = expertiseClustersContract.interface.encodeFunctionData(_functionToCall, _args)
+  const encodedFunctionCall = expertiseClustersContract.interface.encodeFunctionData(_functionToCall, [_args])
 
   /// @dev Display the information about the function to be called in the target contract
   console.log(`   \x1b[34m*\x1b[37m Proposal Description: ${_proposalDescription}`)
