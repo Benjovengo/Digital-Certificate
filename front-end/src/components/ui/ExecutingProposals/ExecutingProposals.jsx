@@ -32,7 +32,7 @@ const ExecutingProposals = ( props ) => {
 
   return (
     <>
-      <div className="proposal__wrapper">
+      <div className="execute__proposal__wrapper">
         <Row>
           <Col>
             <h6><span>Proposal description</span></h6>

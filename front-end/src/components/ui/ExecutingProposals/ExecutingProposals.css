@@ -1,29 +1,29 @@
-.proposal__wrapper {
+.execute__proposal__wrapper {
   background-color: #141414;
-  border: 1px solid #f89104;
+  border: 1px solid #D87E01;
   margin: 0 1em 1.5em 1em;
   padding: 0 1em 1em 1em;
 }
 
-.proposal__wrapper h6 {
+.execute__proposal__wrapper h6 {
   color: #aaa;
   line-height: normal;
   margin: 1.5em 0 0 0;
   padding: 0;
 }
 
-.proposal__wrapper h6 span {
+.execute__proposal__wrapper h6 span {
   color: #f89104;
 }
 
-.proposal__wrapper h4 {
+.execute__proposal__wrapper h4 {
   line-height: normal;
   margin: -0.125em 0 0em 0;
   padding: 0;
 }
 
 
-.proposal__wrapper p {
+.execute__proposal__wrapper p {
   font-size: 0.8rem;
   font-weight: 300;
   line-height: normal;
@@ -31,25 +31,25 @@
   padding: 0;
 }
 
-.proposal__wrapper p span {
+.execute__proposal__wrapper p span {
   color: #D87E01;
   font-family: 'Ubuntu Mono', monospace;
 }
 
 
-.proposal__wrapper table {
+.execute__proposal__wrapper table {
   font-weight: 300;
   margin: 1.5em 0;
 }
 
-.proposal__wrapper thead {
+.execute__proposal__wrapper thead {
   background-color: #212366;
   font-weight: 400;
   padding: 0.25em;
   text-align: center;
 }
 
-.proposal__wrapper thead span {
+.execute__proposal__wrapper thead span {
   display: block;
   font-size: 0.8rem;
   font-weight: 300;
@@ -62,12 +62,12 @@
   padding: 0 1em;
 }
 
-.proposal__wrapper .reason_wrapper {
+.execute__proposal__wrapper .reason_wrapper {
   margin-top: 0.5em;
 }
 
 
-.proposal__wrapper .submit__wrapper {
+.execute__proposal__wrapper .submit__wrapper {
   background-color: transparent;
   padding: 0.5em 0;
 }
@@ -83,7 +83,7 @@
   max-width: 100%;
 }
 
-.proposal__wrapper .vote__wrapper input[type="text"] {
+.execute__proposal__wrapper .vote__wrapper input[type="text"] {
   color: white;
   margin-left: 0.5em;
 }
