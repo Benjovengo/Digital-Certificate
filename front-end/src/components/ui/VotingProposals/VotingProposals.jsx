@@ -98,6 +98,7 @@ const VotingProposals = ( props ) => {
         <Row>
           <Col>
             <form onSubmit={handleSubmitVote}>
+              
               <label htmlFor="vote">Vote:</label>
               <select id="vote" name="vote">
                 <option value="1">Yes</option>
@@ -106,7 +107,14 @@ const VotingProposals = ( props ) => {
               </select>
               <label htmlFor="voteReason">Reason </label>
               <input type="text" id="voteReason" name="voteReason"/>
-              <button type='submit'>Vote</button>
+
+              <div className="submit__wrapper">
+                <Row>
+                  <Col className="text-center">
+                    <button className='submit__button' type='submit'>Vote</button>
+                  </Col>
+                </Row>
+              </div>
             </form>
           </Col>
         </Row>
