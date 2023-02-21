@@ -8,6 +8,7 @@ import { castVote } from '../../../scripts/governance/vote'
 import { queueAndExecute } from '../../../scripts/governance/queue-and-execute'
 import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters'
 import { fetchActiveProposals } from '../../../scripts/governance/active-proposals'
+import VotingProposals from '../VotingProposals/VotingProposals'
 
 
 /**
@@ -585,6 +586,7 @@ const ExpertiseLevel = () => {
           <Row>
             <Col>
               <h2>Vote</h2>
+              {VotingProposals(1, 'Debug element', 'function()', [1, 2, 3])}
               <form onSubmit={handleSubmitVote}>
                 <label htmlFor="vote">Vote:</label>
                 <select name="proposalSelect" id="proposalSelect"></select>
