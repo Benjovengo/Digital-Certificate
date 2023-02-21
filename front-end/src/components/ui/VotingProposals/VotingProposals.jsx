@@ -36,10 +36,10 @@ const VotingProposals = ( props ) => {
       <div className="proposal__wrapper">
          <Row>
           <Col>
-            <p><span>Proposal description</span></p>
-            <h5>{proposalDescription}</h5>
-            <p>Proposal Id: {proposalId}</p>
-            <h6>Function called: {proposalFunction}</h6>
+            <h6><span>Proposal description</span></h6>
+            <h4>{proposalDescription}</h4>
+            <p>Id: {proposalId}</p>
+            <p>Function: <span>{proposalFunction}</span></p>
             {(proposalFunction === 'storeExpertiseThreshold')?
               <>
                 <table>
