@@ -59,8 +59,7 @@
 
 .submit__form {
   background: #282834;
-  padding: 1em;
-  padding-top: 0;
+  padding: 0 1em;
 }
 
 .proposal__wrapper .reason_wrapper {
