@@ -45,16 +45,19 @@ const VotingProposals = ( props ) => {
                 <table>
                   <thead>
                     <tr>
-                      <td colspan="2">Expertise Thresholds<br/><span>percentages of the maximum value</span></td>
+                      <td colspan="2">Expertise Thresholds</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>in percentages of the maximum number of points</span></td>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Intermediate</td>
+                      <td>Intermediate level</td>
                       <td>{proposalArgs[0]}%</td>
                     </tr>
                     <tr>
-                      <td>Expert</td>
+                      <td>Expert level</td>
                       <td>{proposalArgs[1]}%</td>
                     </tr>
                     <tr>
@@ -67,7 +70,7 @@ const VotingProposals = ( props ) => {
               <table>
                   <thead>
                     <tr>
-                      <td colspan="2">Certification weights<br/><span>weight of the certification level</span></td>
+                      <td colspan="2">Certification weights<br/><span>the weight of each certification level</span></td>
                     </tr>
                   </thead>
                   <tbody>

@@ -35,3 +35,22 @@
   color: #D87E01;
   font-family: 'Ubuntu Mono', monospace;
 }
+
+
+.proposal__wrapper table {
+  margin: 1.5em 0;
+}
+
+.proposal__wrapper thead {
+  background-color: #212366;
+  font-weight: 400;
+  padding: 0.25em;
+  text-align: center;
+}
+
+.proposal__wrapper thead span {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 300;
+  padding: 0 0.5em;
+}
