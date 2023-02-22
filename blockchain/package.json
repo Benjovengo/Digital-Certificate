@@ -5,6 +5,7 @@
   "description": "A decentralized certificate system.",
   "license": "UNLICENSED",
   "dependencies": {
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
     "@openzeppelin/contracts": "^4.8.1",
     "@types/chai": "^4.3.4",
     "@types/node": "^18.11.18",
@@ -20,6 +21,8 @@
     "hardhat": "^2.12.6"
   },
   "standard": {
-    "env": [ "mocha" ]
+    "env": [
+      "mocha"
+    ]
   }
 }
