@@ -12,7 +12,7 @@ const expertiseClustersTesting = async () => {
 
   let proposalId
 
-  describe('Expertise Clusters Contract', () => {
+  describe('Propose', () => {
     // Run before each test
     beforeEach(async () => {
       // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
@@ -43,9 +43,10 @@ const expertiseClustersTesting = async () => {
       // Deploy ExpertiseClusters
       const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
       expertiseClusters = await ExpertiseClusters.deploy()
-    })
 
-    it('Propose.', async () => {
+
+
+      /** Propose */
       /// @dev Arguments
       const _functionToCall = 'storeCertificateWeight'
       const _args = [10, 12, 14, 16] // has to use the same in the queue-and-execute
@@ -56,11 +57,86 @@ const expertiseClustersTesting = async () => {
       const encodedFunctionCall = expertiseClusters.interface.encodeFunctionData(_functionToCall, [_args])
       const EXPERTISE_CONTRACT_ADDRESS = await expertiseClusters.address
 
-      /// @dev Display the information about the function to be called in the target contract
-      /* console.log(`   \x1b[34m*\x1b[37m Proposal Description: ${_proposalDescription}`)
-      console.log(`   \x1b[34m*\x1b[37m Function to call: ${_functionToCall}`)
-      console.log(`   \x1b[34m*\x1b[37m Args: ${_args}`)
-      console.log(`   \x1b[34m*\x1b[37m Encoded Function Call: ${encodedFunctionCall}`) */
+      /// @notice Add the proposal
+      const proposeTx = await governorContract.propose(
+        [EXPERTISE_CONTRACT_ADDRESS],
+        [0],
+        [encodedFunctionCall],
+        _proposalDescription
+      );
+      /// @notice Get the response of the proposal
+      const proposeReceipt = await proposeTx.wait();
+
+      /// @notice Get the ID of the proposal
+      proposalId = proposeReceipt.events[0].args.proposalId;
+
+      await mine(2)
+    })
+
+    it('Propose.', async () => {
+      const proposalState = await governorContract.state(proposalId);
+      expect(proposalState).to.equal(1)
+    })
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  describe('Vote', () => {
+    // Run before each test
+    beforeEach(async () => {
+      // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
+      const [deployer, account01] = await ethers.getSigners()
+      // Deploy VotingToken
+      const VotingToken = await ethers.getContractFactory('VotingToken')
+      votingToken = await VotingToken.deploy()
+
+      /// Definitions for the TimeLock contract
+      const MIN_DELAY = 3600
+      const PROPOSERS = []
+      const EXECUTORS = []
+      // Deploy TimeLock
+      const TimeLock = await ethers.getContractFactory('TimeLock')
+      timeLock = await TimeLock.deploy(MIN_DELAY, PROPOSERS, EXECUTORS)
+
+      /**
+       * Governor Contract Deployment
+       */
+      /// Definitions for the Governor Contract
+      const VOTING_DELAY = 1 // blocks
+      const VOTING_PERIOD = 5 // blocks
+      const QUORUM_PERCENTAGE = 0 // percentage
+      /// Deploy Governor contract
+      const GovernorContract = await ethers.getContractFactory('GovernorContract')
+      governorContract = await GovernorContract.deploy(global.votingToken.address, global.timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
+
+      // Deploy ExpertiseClusters
+      const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
+      expertiseClusters = await ExpertiseClusters.deploy()
+
+
+
+      /** Propose */
+      /// @dev Arguments
+      const _functionToCall = 'storeCertificateWeight'
+      const _args = [10, 12, 14, 16] // has to use the same in the queue-and-execute
+      const _proposalDescription = 'Debug description'
+
+      /// @notice Encode the function to be called
+      /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
+      const encodedFunctionCall = expertiseClusters.interface.encodeFunctionData(_functionToCall, [_args])
+      const EXPERTISE_CONTRACT_ADDRESS = await expertiseClusters.address
 
       /// @notice Add the proposal
       const proposeTx = await governorContract.propose(
@@ -77,11 +153,32 @@ const expertiseClustersTesting = async () => {
 
       await mine(2)
 
-      const proposalState = await governorContract.state(proposalId);
-      expect(proposalState).to.equal(1)
     })
-    
+
+    it('Voting.', async () => {
+      /// @notice Definitions
+      const VOTE_NO = 0;
+      const VOTE_YES = 1;
+      const VOTE_ABSTAIN = 2;
+
+      const VOTE_REASON = "Explain why you are voting like that."
+
+      /// @notice Cast a vote
+      const voteTx = await governorContract.castVoteWithReason(
+        proposalId,
+        VOTE_YES,
+        VOTE_REASON
+      );
+      voteTx.wait(1);
+  
+      await mine(6)
+
+      const proposalState = await governorContract.state(proposalId);
+      expect(proposalState).to.equal(4)
+    })
   })
+
+  
 }
 
 module.exports = expertiseClustersTesting
