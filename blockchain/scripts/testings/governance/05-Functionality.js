@@ -79,20 +79,7 @@ const expertiseClustersTesting = async () => {
     })
   })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
   describe('Vote', () => {
     // Run before each test
     beforeEach(async () => {
