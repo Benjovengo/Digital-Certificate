@@ -102,6 +102,14 @@ const expertiseClustersTesting = async () => {
       const VotingToken = await ethers.getContractFactory('VotingToken')
       votingToken = await VotingToken.deploy()
 
+
+      /// Delegate votes to deployer.
+      const txResponse = await votingToken.delegate(deployer.address);
+      await txResponse.wait();
+      console.log(`       Checkpoints: ${await votingToken.numCheckpoints(deployer.address)}`);
+      console.log('       Delegated')
+
+
       /// Definitions for the TimeLock contract
       const MIN_DELAY = 3600
       const PROPOSERS = []
@@ -124,7 +132,6 @@ const expertiseClustersTesting = async () => {
       // Deploy ExpertiseClusters
       const ExpertiseClusters = await ethers.getContractFactory('ExpertiseClusters')
       expertiseClusters = await ExpertiseClusters.deploy()
-
 
 
       /** Propose */
@@ -153,29 +160,31 @@ const expertiseClustersTesting = async () => {
 
       await mine(2)
 
-      const proposalState = await governorContract.state(proposalId);
-      console.log(proposalState)
-
-    })
-
-    it('Voting.', async () => {
-      /// @notice Definitions
-      const VOTE_NO = 0;
-      const VOTE_YES = 1;
-      const VOTE_ABSTAIN = 2;
-
-      const VOTE_REASON = "Explain why you are voting like that."
-
-      /// @notice Cast a vote
-      const voteTx = await governorContract.castVoteWithReason(
+       /// @notice Definitions
+       const VOTE_NO = 0;
+       const VOTE_YES = 1;
+       const VOTE_ABSTAIN = 2;
+ 
+       const VOTE_REASON = "Explain why you are voting like that."
+ 
+       /// @notice Cast a vote
+       /* const voteTx = await governorContract.castVoteWithReason(
+         proposalId,
+         VOTE_YES,
+         VOTE_REASON
+       );
+       voteTx.wait(); */
+       const voteTx2 = await governorContract.connect(account01).castVoteWithReason(
         proposalId,
         VOTE_YES,
         VOTE_REASON
       );
-      voteTx.wait(1);
-  
-      await mine(6)
+      voteTx2.wait();
+   
+       await mine(6)
+    })
 
+    it('Voting.', async () => {
       const proposalState = await governorContract.state(proposalId);
       expect(proposalState).to.equal(4)
     })
