@@ -153,6 +153,9 @@ const expertiseClustersTesting = async () => {
 
       await mine(2)
 
+      const proposalState = await governorContract.state(proposalId);
+      console.log(proposalState)
+
     })
 
     it('Voting.', async () => {
