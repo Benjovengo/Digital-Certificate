@@ -1,4 +1,5 @@
 require('@nomicfoundation/hardhat-toolbox')
+require("hardhat-gas-reporter")
 require('dotenv').config()
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -18,6 +19,10 @@ module.exports = {
       blockExplorerUrl: "https://goerli.etherscan.io/",
       accounts: [process.env.GOERLI_PRIVATE_KEY],
     },
+  },
+  gasReporter: {
+    currency: 'ETH',
+    enabled: true
   },
   solidity: {
     version: '0.8.17',
