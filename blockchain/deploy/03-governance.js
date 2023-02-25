@@ -17,8 +17,7 @@ const deployGovernance = async () => {
   console.log('\x1b[0m\nGovernance - Contracts Addresses and Setup')
 
   // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
-  let deployer
-  [deployer] = await ethers.getSigners()
+  const [deployer] = await ethers.getSigners()
 
   /**
    * Governance Token
