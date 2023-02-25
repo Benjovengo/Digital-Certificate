@@ -395,7 +395,7 @@ const ExpertiseLevel = () => {
                               <td><input id='threshold03input' type="number" min="0" max="100" value={threshold03} onChange={handleThresholdChanger} /></td>
                             </tr>
                             <tr>
-                              <td colspan="3">
+                              <td colSpan="3">
                                 <label htmlFor="description">Description </label>
                                 <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
                               </td>
@@ -476,7 +476,7 @@ const ExpertiseLevel = () => {
                               <td><input id='weight04input' type="number" min="0" max="20" value={weight04} onChange={handleWeightInputChange} /></td>
                             </tr>
                             <tr>
-                              <td colspan="3">
+                              <td colSpan="3">
                                 <label htmlFor="description">Description </label>
                                 <input type="text" id="description" name="description" placeholder='Describe action to be proposed.'/>
                               </td>

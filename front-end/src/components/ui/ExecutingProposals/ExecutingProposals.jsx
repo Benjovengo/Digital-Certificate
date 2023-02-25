@@ -49,10 +49,10 @@ const ExecutingProposals = ( props ) => {
                 <table>
                   <thead>
                     <tr>
-                      <td colspan="2">Expertise Thresholds</td>
+                      <td colSpan="2">Expertise Thresholds</td>
                     </tr>
                     <tr>
-                      <td colspan="2"><span>in percentages of the maximum number of points</span></td>
+                      <td colSpan="2"><span>in percentages of the maximum number of points</span></td>
                     </tr>
                   </thead>
                   <tbody>
@@ -74,7 +74,7 @@ const ExecutingProposals = ( props ) => {
               <table>
                   <thead>
                     <tr>
-                      <td colspan="2">Certification weights<br/><span>the weight of each certification level</span></td>
+                      <td colSpan="2">Certification weights<br/><span>the weight of each certification level</span></td>
                     </tr>
                   </thead>
                   <tbody>
