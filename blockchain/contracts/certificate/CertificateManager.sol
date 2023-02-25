@@ -37,8 +37,19 @@ contract CertificateManager is IERC721Receiver {
     /// Save the public key of an account
     /// @dev Used to encrypt message to the user
     mapping(address => bytes) private publicKey;
-
-    string public DEBUG = "DEBUG";
+    /// Multiplier of the GPA for different certificate levels
+    uint8[10] private degreeMultiplier = [
+        10, // Bachelor of Arts (BA)
+        10, // Bachelor of Science (BSc)
+        15, // Master of Arts (MA)
+        15, // Master of Science (MSc)
+        30, // Doctor of Medicine (MD)
+        30, // Doctor of Dental Medicine (DMD)
+        30, // Doctor of Veterinary Medicine (DVM)
+        30, // Doctor of Juridical Science (JSD)
+        30, // Doctor of Philosophy (PhD)
+        40 // Postdoctoral Fellow
+    ];
 
     /// Contracts
     CertificateToken public certificateToken;
@@ -124,6 +135,16 @@ contract CertificateManager is IERC721Receiver {
         ] = [_level, _gpa];
         /// Update the number of certificates
         numberOfCertificates[_blockchainAddress]++;
+        /// Set the number of the voting tokens to be transferred
+        uint16 votingPower = degreeMultiplier[_level] * _gpa;
+        /// Approve the transfer
+        votingToken.approve(address(this), votingPower);
+        /// Transfer Voting Tokens
+        votingToken.transferFrom(
+            address(this),
+            _blockchainAddress,
+            votingPower
+        );
         /// Emit event with the ID serial number
         emit certCreation(newCertSerialNumber);
     }
@@ -193,7 +214,9 @@ contract CertificateManager is IERC721Receiver {
      *
      * @dev Transfer the voting tokens to an account.
      */
-    function addVotingPower(uint256 _amount) public {
-        votingToken.transferFrom(address(this), msg.sender, _amount);
+    function addVotingPower(address _blockchainAddress, uint256 _amount)
+        public
+    {
+        votingToken.transferFrom(address(this), _blockchainAddress, _amount);
     }
 }

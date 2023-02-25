@@ -41,7 +41,7 @@ const CreateCertificate = () => {
     const metadataHash = metadata['hash']
 
 
-    await issueNewCertificate(blockchainAddress, metadataURI, metadataHash)
+    await issueNewCertificate(blockchainAddress, degree, gpa, metadataURI, metadataHash)
     
     console.log('Certificate successfully added!')
   }
@@ -95,7 +95,7 @@ const CreateCertificate = () => {
                         <option value="7">Doctor of Veterinary Medicine (DVM)</option>
                         <option value="8">Doctor of Juridical Science (JSD)</option>
                         <option value="9">Doctor of Philosophy (PhD)</option>
-                        <option value="10"> Postdoctoral Fellow</option>
+                        <option value="10">Postdoctoral Fellow</option>
                       </select>
                     </Col>
                     <Col>

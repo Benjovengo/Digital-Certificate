@@ -66,8 +66,7 @@ async function main() {
 
   // Transfer some voting tokens to the deployer in order to be able to vote
   await certificateManagerContract.approveTransfer(10)
-  await certificateManagerContract.addVotingPower(1)
-
+  await certificateManagerContract.addVotingPower(deployer.address, 1)
 
   /// @notice Add the proposal
   const proposeTx = await governorContract.propose(
