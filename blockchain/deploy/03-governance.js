@@ -58,7 +58,7 @@ const deployGovernance = async () => {
   /// Definitions for the Governor Contract
   const VOTING_DELAY = 1; // blocks
   const VOTING_PERIOD = 5; // blocks
-  const QUORUM_PERCENTAGE = 4; // percentage
+  const QUORUM_PERCENTAGE = 0; // percentage
 
   /// Deploy Governor contract
   const GovernorContract = await ethers.getContractFactory('GovernorContract')
@@ -72,6 +72,12 @@ const deployGovernance = async () => {
   /**
    * Governor Setup
    */
+  /// Transfer the initial supply of voting tokens to the Governor contract
+  await votingToken.approve(deployer.address, '1000000000000000000000000')
+  await votingToken.transferFrom(deployer.address, governorContract.address, '1000000000000000000000000')
+  /// Transfer ownership of the Voting Token contract
+  await votingToken.transferOwnership(governorContract.address)
+
   /// Setup roles
   /// @dev This this to be placed after the deployment of the Governor contract because
   ///      the proposer role must be granted to the Governor contract address

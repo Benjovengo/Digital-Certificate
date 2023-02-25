@@ -2,6 +2,7 @@
 pragma solidity ^0.8.17;
 
 import "../../node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import "../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title ERC-20 Voting Token - Governance (Digital Certificate)
@@ -13,7 +14,7 @@ import "../../node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20V
  * @custom:experimental This is an experimental contract.
  * @custom:security-contact fabio.benjovengo@gmail.com
  */
-contract VotingToken is ERC20Votes {
+contract VotingToken is ERC20Votes, Ownable {
     /**
      * @dev Initializes the contract with the following parameters:
      *
@@ -51,5 +52,23 @@ contract VotingToken is ERC20Votes {
         override(ERC20Votes)
     {
         super._burn(account, amount);
+    }
+
+    /**
+     * @notice The following functions are overrides required by Solidity.
+     *
+     * @dev Created by OpenZeppelin Wizard at https://docs.openzeppelin.com/contracts/4.x/wizard
+     */
+
+    function _transfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override(ERC20) {
+        require(
+            msg.sender == this.owner(),
+            "Only the contract owner can transfer voting tokens."
+        );
+        super._transfer(from, to, tokenId);
     }
 }
