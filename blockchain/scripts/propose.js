@@ -60,7 +60,8 @@ async function main() {
   
 
   // Transfer some voting tokens to the deployer in order to be able to vote
-
+  await governorContract.approveTransfer(10)
+  await governorContract.addVotingPower(1)
 
 
   /// @notice Add the proposal

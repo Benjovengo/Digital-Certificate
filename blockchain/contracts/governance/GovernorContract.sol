@@ -7,6 +7,7 @@ import "../../node_modules/@openzeppelin/contracts/governance/extensions/Governo
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
 import "../../node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
+import "./VotingToken.sol";
 
 /**
  * @title The Governance Contract - Governance (Digital Certificate)
@@ -29,6 +30,13 @@ contract GovernorContract is
     GovernorTimelockControl
 {
     /**
+     * Access the VotingToken contract
+     *
+     * @dev Required to transfer the tokens to the accounts on adding the certificates.
+     */
+    VotingToken public votingToken;
+
+    /**
      * @dev Initializes the contract with the following parameters:
      *
      * @param _token: interface for the ERC20Votes
@@ -46,7 +54,8 @@ contract GovernorContract is
         TimelockController _timelock,
         uint256 _votingDelay,
         uint256 _votingPeriod,
-        uint256 _quorumPercentage
+        uint256 _quorumPercentage,
+        address _votingTokenAddress
     )
         Governor("DAO Banking")
         /**
@@ -66,7 +75,17 @@ contract GovernorContract is
         /// @param _quorum: quorum required for a proposal to pass (using 4%)
         GovernorVotesQuorumFraction(_quorumPercentage)
         GovernorTimelockControl(_timelock)
-    {}
+    {
+        votingToken = VotingToken(_votingTokenAddress);
+    }
+
+    function approveTransfer(uint256 _amount) public {
+        votingToken.approve(address(this), _amount);
+    }
+
+    function addVotingPower(uint256 _amount) public {
+        votingToken.transferFrom(address(this), msg.sender, _amount);
+    }
 
     /** @dev The following functions are overrides required by Solidity.
      *

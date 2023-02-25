@@ -61,7 +61,7 @@ const deployGovernance = async () => {
 
   /// Deploy Governor contract
   const GovernorContract = await ethers.getContractFactory('GovernorContract')
-  const governorContract = await GovernorContract.deploy(votingToken.address, timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
+  const governorContract = await GovernorContract.deploy(votingToken.address, timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE, votingToken.address)
   await governorContract.deployed()
   console.log(`   \x1b[34m✔\x1b[37m Governor Contract deployed to     ${governorContract.address}`)
 
