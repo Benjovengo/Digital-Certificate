@@ -22,6 +22,9 @@ const fastForwardBlocks = require("./utils/speedUpTime.js")
 async function main() {
   console.log('\x1b[0m\nAdd a New Proposal')
 
+  // Setup accounts - to get signers use `const signers = await ethers.getSigners()`
+  const [deployer] = await ethers.getSigners()
+
   /// @dev Arguments
   const _functionToCall = 'storeCertificateWeight'
   const _args = [10, 12, 14, 16] // has to use the same in the queue-and-execute
@@ -55,6 +58,10 @@ async function main() {
   console.log(`   \x1b[34m*\x1b[37m Args: ${_args}`)
   console.log(`   \x1b[34m*\x1b[37m Encoded Function Call: ${encodedFunctionCall}`)
   
+
+  // Transfer some voting tokens to the deployer in order to be able to vote
+
+
 
   /// @notice Add the proposal
   const proposeTx = await governorContract.propose(
