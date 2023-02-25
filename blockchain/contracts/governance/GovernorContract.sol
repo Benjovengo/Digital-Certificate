@@ -79,19 +79,31 @@ contract GovernorContract is
         votingToken = VotingToken(_votingTokenAddress);
     }
 
+    /**
+     * Approve a certain amount of tokens to be transferred from
+     * the Governor contract
+     *
+     * @dev The approval is required before transferring the
+     *      tokens on registering a new certificate.
+     */
     function approveTransfer(uint256 _amount) public {
         votingToken.approve(address(this), _amount);
     }
 
+    /**
+     * Give voting power to account
+     *
+     * @dev Transfer the voting tokens to an account.
+     */
     function addVotingPower(uint256 _amount) public {
         votingToken.transferFrom(address(this), msg.sender, _amount);
     }
 
-    /** @dev The following functions are overrides required by Solidity.
+    /** @notice The following functions are overrides required by Solidity.
      *
-     * @notice this overrides add the definitions set in the contructor
+     * @dev this overrides add the definitions set in the contructor
      * to the functions of the parent contract `Governor.sol`
-     * @notice In inheritance, when a contract inherits from another
+     * @dev In inheritance, when a contract inherits from another
      * contract, it can override the functions defined in the parent contract.
      * The `super` keyword allows the child contract to call the
      * implementation of the parent contract's function.
