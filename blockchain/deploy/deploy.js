@@ -13,8 +13,8 @@ const path = require('path');
 
 // Deployment Scripts
 const deployIdentity = require('./01-identity')
-const deployCertificate = require('./02-certificate')
-const deployGovernance = require('./03-governance')
+const deployGovernance = require('./02-governance')
+const deployCertificate = require('./03-certificate')
 
 // Propose an Action
 //const proposeAction = require('../scripts/propose')
@@ -55,16 +55,7 @@ const deployment = async () => {
   identityTokenAddress = identityAddresses[0]
   identityManagerAddress = identityAddresses[1]
 
-  /**
-   * Certificate Contracts
-   *
-   * @dev Deployment scripts for the contracts responsible
-   *      for storing and managing the certificates
-   */
-  const certificateAddresses = await deployCertificate()
-  certificateTokenAddress = certificateAddresses[0]
-  certificateManagerAddress = certificateAddresses[1]
-
+  
   /**
    * Governance Contracts
    *
@@ -76,6 +67,18 @@ const deployment = async () => {
   timeLockAddress = governanceAddresses[1]
   governorContractAddress = governanceAddresses[2]
   expertiseClustersAddress = governanceAddresses[3]
+
+
+  /**
+   * Certificate Contracts
+   *
+   * @dev Deployment scripts for the contracts responsible
+   *      for storing and managing the certificates
+   */
+  const certificateAddresses = await deployCertificate(votingTokenAddress)
+  certificateTokenAddress = certificateAddresses[0]
+  certificateManagerAddress = certificateAddresses[1]
+
 }
 
 

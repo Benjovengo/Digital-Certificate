@@ -32,13 +32,16 @@ async function main() {
 
   /// @dev Path to the file containing the addresses of the contracts after deployment
   const ADDRESSES_FILE = './util/contractsAddresses.json' // json file created upon deployment
+  const CERTIFICATE_ADDRESSES_FILE = './util/certificateContractsAddresses.json' // json file created upon deployment
 
   /// @dev Get the JSON with all the addresses from file
   const addressesFile = JSON.parse(fs.readFileSync(ADDRESSES_FILE, "utf8"));
+  const certificateAddressesFile = JSON.parse(fs.readFileSync(CERTIFICATE_ADDRESSES_FILE, "utf8"));
 
   /// @dev Get the addresses for the contracts
-  const GOVERNOR_ADDRESS = addressesFile['GOVERNOR_ADDRESS'][0];
-  const EXPERTISE_CONTRACT_ADDRESS = addressesFile['EXPERTISE_CONTRACT_ADDRESS'][0];
+  const GOVERNOR_ADDRESS = addressesFile['GOVERNOR_ADDRESS'][0]
+  const EXPERTISE_CONTRACT_ADDRESS = addressesFile['EXPERTISE_CONTRACT_ADDRESS'][0]
+  const CERTIFICATE_ADDRESS = certificateAddressesFile['CERTIFICATE_CONTRACT_ADDRESS'][0]
 
 
   /// @dev Connect to Governor deployed contract
@@ -47,6 +50,8 @@ async function main() {
   /// @dev Connect to ExpertiseClusters deployed contract
   const expertiseClustersContract = await hre.ethers.getContractAt("ExpertiseClusters", EXPERTISE_CONTRACT_ADDRESS);
 
+  /// @dev Connect to CertificateManager deployed contract
+  const certificateManagerContract = await hre.ethers.getContractAt("CertificateManager", CERTIFICATE_ADDRESS);
 
   /// @notice Encode the function to be called
   /// @dev <target_contract>.interface.encodeFunctionData(<function_name_string>,[<arguments>])
@@ -60,8 +65,8 @@ async function main() {
   
 
   // Transfer some voting tokens to the deployer in order to be able to vote
-  await governorContract.approveTransfer(10)
-  await governorContract.addVotingPower(1)
+  await certificateManagerContract.approveTransfer(10)
+  await certificateManagerContract.addVotingPower(1)
 
 
   /// @notice Add the proposal

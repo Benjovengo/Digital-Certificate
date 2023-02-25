@@ -3,6 +3,7 @@ pragma solidity ^0.8.17;
 
 import "../../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "./CertificateToken.sol";
+import "../governance/VotingToken.sol";
 
 /**
  * @title Certificate Manager - Digital Certificate
@@ -41,6 +42,12 @@ contract CertificateManager is IERC721Receiver {
 
     /// Contracts
     CertificateToken public certificateToken;
+    /**
+     * Access the VotingToken contract
+     *
+     * @dev Required to transfer the tokens to the accounts on adding the certificates.
+     */
+    VotingToken public votingToken;
 
     /**
      * Events
@@ -52,9 +59,10 @@ contract CertificateManager is IERC721Receiver {
      *
      * @param _nftTokenAddress the address of the CertificateToken contract on the blockchain
      */
-    constructor(address _nftTokenAddress) {
+    constructor(address _nftTokenAddress, address _votingTokenAddress) {
         certTokenAddress = _nftTokenAddress;
         certificateToken = CertificateToken(_nftTokenAddress);
+        votingToken = VotingToken(_votingTokenAddress);
     }
 
     /**
@@ -167,5 +175,25 @@ contract CertificateManager is IERC721Receiver {
      */
     function setHash(uint256 _serialNumber, bytes32 _transactionHash) public {
         certificateToken.setTransactionHash(_serialNumber, _transactionHash);
+    }
+
+    /**
+     * Approve a certain amount of tokens to be transferred from
+     * the Governor contract
+     *
+     * @dev The approval is required before transferring the
+     *      tokens on registering a new certificate.
+     */
+    function approveTransfer(uint256 _amount) public {
+        votingToken.approve(address(this), _amount);
+    }
+
+    /**
+     * Give voting power to account
+     *
+     * @dev Transfer the voting tokens to an account.
+     */
+    function addVotingPower(uint256 _amount) public {
+        votingToken.transferFrom(address(this), msg.sender, _amount);
     }
 }

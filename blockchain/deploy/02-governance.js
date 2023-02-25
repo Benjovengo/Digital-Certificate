@@ -61,7 +61,7 @@ const deployGovernance = async () => {
 
   /// Deploy Governor contract
   const GovernorContract = await ethers.getContractFactory('GovernorContract')
-  const governorContract = await GovernorContract.deploy(votingToken.address, timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE, votingToken.address)
+  const governorContract = await GovernorContract.deploy(votingToken.address, timeLock.address, VOTING_DELAY, VOTING_PERIOD, QUORUM_PERCENTAGE)
   await governorContract.deployed()
   console.log(`   \x1b[34m✔\x1b[37m Governor Contract deployed to     ${governorContract.address}`)
 
@@ -71,12 +71,6 @@ const deployGovernance = async () => {
   /**
    * Governor Setup
    */
-  /// Transfer the initial supply of voting tokens to the Governor contract
-  await votingToken.approve(deployer.address, '1000000000000000000000000')
-  await votingToken.transferFrom(deployer.address, governorContract.address, '1000000000000000000000000')
-  /// Transfer ownership of the Voting Token contract
-  await votingToken.transferOwnership(governorContract.address)
-
   /// Setup roles
   /// @dev This this to be placed after the deployment of the Governor contract because
   ///      the proposer role must be granted to the Governor contract address
