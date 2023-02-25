@@ -24,7 +24,7 @@ export const issueNewCertificate = async (_blockchainAddress, _level, _gpa, _tok
 
   /// Create new Id Token
   const newHash = buf2hex(_hash).substring(0, 66)
-  const createTx = await certificateManager.createNewCertificate(_blockchainAddress, _level, _gpa*100, _tokenURI, newHash, publicKey)
+  const createTx = await certificateManager.createNewCertificate(_blockchainAddress, parseInt(_level), _gpa*100, _tokenURI, newHash, ethers.utils.toUtf8Bytes(publicKey))
 
   // Store the hash
   certificateManager.setHash(total, createTx.hash)
