@@ -14,8 +14,8 @@ import ExecutingProposals from '../ExecutingProposals/ExecutingProposals'
  * React component
  * 
  * @returns React component
- *  @ dev The elements of the component are based
- *        on the ExpertiseClusters smart contract
+ * @dev The elements of the component are based
+ *      on the ExpertiseClusters smart contract
  */
 const ExpertiseLevel = () => {
   /**
