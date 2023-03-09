@@ -211,7 +211,7 @@ const ExpertiseLevel = () => {
   }
   useEffect(()=>{
     limitWeights()
-  },[weight01, weight02, weight03, weight04])
+  }, [weight01, weight02, weight03, weight04])
 
 
 
