@@ -276,7 +276,7 @@ const ExpertiseLevel = () => {
                   <h5>Blockchain current thresholds</h5>
                   <div className='containerStyles'>
                     <div className="App">
-                    <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
+                      <div className='fillerStyles jediBar' style={{width: 100 + "%"}}>
                         <span className='labelStyles'>Jedi</span>
                       </div>
                       <div className='fillerStyles expertBar' style={{width: expertiseLevels[2]/maximumPoints*100 + "%"}}>
