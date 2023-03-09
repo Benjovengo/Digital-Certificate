@@ -304,19 +304,19 @@ const ExpertiseLevel = () => {
                 <tbody>
                   <tr>
                     <td>Novice to Intermediate</td>
-                    <td>{expertiseLevels[0].toLocaleString()}</td>
-                    <td style={{textAlign: 'center'}}>{(expertiseLevels[0]/maximumPoints*100).toFixed(2)}%</td>
+                    <td align='right'>{expertiseLevels[0].toLocaleString()}</td>
+                    <td align='right' style={{textAlign: 'center'}}>{(expertiseLevels[0]/maximumPoints*100).toFixed(2)}%</td>
                     <td style={{paddingLeft: '6em', textAlign: 'center'}}>{maximumPoints.toLocaleString()}</td>
                   </tr>
                   <tr>
                     <td>Intermediate to Expert</td>
-                    <td>{expertiseLevels[1].toLocaleString()}</td>
-                    <td style={{textAlign: 'center'}}>{(expertiseLevels[1]/maximumPoints*100).toFixed(2)}%</td>
+                    <td align='right'>{expertiseLevels[1].toLocaleString()}</td>
+                    <td align='right' style={{textAlign: 'center'}}>{(expertiseLevels[1]/maximumPoints*100).toFixed(2)}%</td>
                   </tr>
                   <tr>
                     <td>Expert to Jedi Master</td>
-                    <td>{expertiseLevels[2].toLocaleString()}</td>
-                    <td style={{textAlign: 'center'}}>{(expertiseLevels[2]/maximumPoints*100).toFixed(2)}%</td>
+                    <td align='right'>{expertiseLevels[2].toLocaleString()}</td>
+                    <td align='right' style={{textAlign: 'center'}}>{(expertiseLevels[2]/maximumPoints*100).toFixed(2)}%</td>
                   </tr>
                 </tbody>
               </table>
