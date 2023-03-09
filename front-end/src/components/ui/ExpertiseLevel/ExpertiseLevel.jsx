@@ -3,6 +3,8 @@ import { Container, Row, Col } from "reactstrap"
 
 import './ExpertiseLevel.css' // CSS Style
 
+// Blockchain integration
+import { fetchCertificatesList, fetchCertificateJSON } from '../../../scripts/certificates/fetchCertificate';
 import { addProposal } from '../../../scripts/governance/propose'
 import { fetchExpertiseParams } from '../../../scripts/governance/expertise-parameters'
 import { fetchActiveProposals } from '../../../scripts/governance/active-proposals'
@@ -27,6 +29,7 @@ const ExpertiseLevel = () => {
   const [votingProposalIds, setVotingProposalIds] = useState(null) // Array with the active proposal Ids
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
   const [maximumPoints, setMaximumPoints] = useState(0) // Theoretical maximum number of points using the blockchain values
+  const [userPoints, setUserPoints] = useState(0) // Number of points for the combination of the user's certificates and the current weights
   const [maximumPointsProposal, setMaximumPointsProposal] = useState(0) // Theoretical maximum number of points for the proposal
   const [expertiseFunction, setExpertiseFunction] = useState('storeExpertiseThreshold')
   // Hooks to sliders and inputs
@@ -99,6 +102,10 @@ const ExpertiseLevel = () => {
     activeProposalsList()
   }, [])
 
+  useEffect( () => {
+    userCertificates()
+  }, [weight01, weight02, weight03, weight04])
+
 
   /**
    * Input values and Sliders for the threshold
@@ -144,7 +151,7 @@ const ExpertiseLevel = () => {
       const newValue = event.target.value;
       eval('setWeight0' + elementIndex + '(' + newValue + ')')
     }
-  };
+  }
   // Function handler for changes on the inputs
   const handleWeightInputChange = (event) => {
     const elementIndex = findNumber(event.target.id)
@@ -155,7 +162,7 @@ const ExpertiseLevel = () => {
     if (elementIndex!==-1){
       eval('setWeight0' + elementIndex + '(' + newValue + ')')
     }
-  };
+  }
 
 
   const maximumProposal = () => {
@@ -169,6 +176,7 @@ const ExpertiseLevel = () => {
     const basePoints = DEGREEmax*GPAmax*WEIGHTSsum
     setExpertiseLevelsProposal([threshold01*basePoints, threshold02*basePoints, threshold03*basePoints])
   }
+
 
   // Limit the thresholds based on the upper levels
   const limitThresholds = () => {
@@ -249,7 +257,39 @@ const ExpertiseLevel = () => {
   }
 
 
-   
+  /** Get the degrees for the certificates owned by the logged address
+    * 
+    */
+  const userCertificates = async () => {
+    const list = await fetchCertificatesList() // list of certificates for the logged account
+    
+    let points = 0
+    let numberOfCertificates = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // placeholder for the number of degrees for each level
+    let JSON // placeholder for the TokenURI
+
+    // loop through all the certificates
+    for (let i = 0; i < list.length; i++) {
+      JSON = await fetchCertificateJSON(list[i])
+      const certificateDegree = Number(JSON.degree)
+      const certificateGPA = Number(JSON.gpa)
+
+      if (certificateDegree === 1 || certificateDegree === 2) {
+        points += (certificateGPA * 100) * weight01 * 100
+      } else if (certificateDegree === 3 || certificateDegree === 4) {
+        points += 3 * (certificateGPA * 100) * weight02 * 100
+      } else if (certificateDegree > 4 && certificateDegree < 10) {
+        points += 7 * (certificateGPA * 100) * weight03 * 100
+      } else if (certificateDegree === 10) {
+        points += 10 * 400 * weight04 * 100
+      }
+
+      numberOfCertificates[certificateDegree-1] += 1
+
+    }
+
+    console.log('Number of points:', points)
+    console.log('Number of certificates:', numberOfCertificates)
+  }
 
 
   // Components for the ui
