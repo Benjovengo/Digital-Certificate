@@ -282,13 +282,12 @@ const ExpertiseLevel = () => {
       } else if (certificateDegree === 10) {
         points += 10 * 400 * weight04 * 100
       }
-
       numberOfCertificates[certificateDegree-1] += 1
-
     }
 
-    console.log('Number of points:', points)
-    console.log('Number of certificates:', numberOfCertificates)
+    setUserPoints(Math.min(points, maximumPoints))
+    /* console.log('Number of points:', points)
+    console.log('Number of certificates:', numberOfCertificates) */
   }
 
 
@@ -535,15 +534,15 @@ const ExpertiseLevel = () => {
                           <tbody>
                             <tr>
                               <td>From novice to intermediate:</td>
-                              <td>{(threshold01*maximumPoints).toLocaleString()} points</td>
+                              <td>{(threshold01*maximumPoints/100).toLocaleString()} points</td>
                             </tr>
                             <tr>
                               <td>From intermediate to expert:</td>
-                              <td>{(threshold02*maximumPoints).toLocaleString()} points</td>
+                              <td>{(threshold02*maximumPoints/100).toLocaleString()} points</td>
                             </tr>
                             <tr>
                               <td>From expert to a jedi master:</td>
-                              <td>{(threshold03*maximumPoints).toLocaleString()} points</td>
+                              <td>{(threshold03*maximumPoints/100).toLocaleString()} points</td>
                             </tr>
                           </tbody>
                         </table>
