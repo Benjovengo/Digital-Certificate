@@ -39,7 +39,7 @@ const DisplayCertificates = () => {
 
 
 
-   /** Get the headline fort the certificates owned by the logged address
+   /** Get the headline for the certificates owned by the logged address
     * 
     * @dev set hook to be used on the 'select multiple' element
     */
