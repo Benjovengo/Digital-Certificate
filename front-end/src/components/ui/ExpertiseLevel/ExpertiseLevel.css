@@ -224,6 +224,13 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
+.pointsBar {
+  background-color: #F89104;
+  clip-path: polygon(calc(100% - 10px) 0, calc(100% - 6px) 0%, 100% 50%, calc(100% - 6px) 100%, calc(100% - 10px) 100%, calc(100% - 4px) 50%);
+  margin-top: -1.5em;
+  z-index: 4;
+}
+
 
 .postdoctoralBar {
   background-color: #6453ff;

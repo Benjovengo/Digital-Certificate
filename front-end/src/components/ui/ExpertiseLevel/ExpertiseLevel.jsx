@@ -30,6 +30,7 @@ const ExpertiseLevel = () => {
   const [executingProposalIds, setExecutingProposalIds] = useState(null) // Array with the active proposal Ids
   const [maximumPoints, setMaximumPoints] = useState(0) // Theoretical maximum number of points using the blockchain values
   const [userPoints, setUserPoints] = useState(0) // Number of points for the combination of the user's certificates and the current weights
+  const [classification, setClassification] = useState('Novice') // Classification based on the points and the thresholds
   const [maximumPointsProposal, setMaximumPointsProposal] = useState(0) // Theoretical maximum number of points for the proposal
   const [expertiseFunction, setExpertiseFunction] = useState('storeExpertiseThreshold')
   // Hooks to sliders and inputs
@@ -286,8 +287,15 @@ const ExpertiseLevel = () => {
     }
 
     setUserPoints(Math.min(points, maximumPoints))
-    /* console.log('Number of points:', points)
-    console.log('Number of certificates:', numberOfCertificates) */
+    if (points < expertiseLevels[0]) {
+      setClassification('Novice')
+    } else if (points < expertiseLevels[1]) {
+      setClassification('Intermediate')
+    } else if (points < expertiseLevels[2]) {
+      setClassification('Expert')
+    } else {
+      setClassification('Jedi Master!')
+    }
   }
 
 
@@ -309,7 +317,7 @@ const ExpertiseLevel = () => {
             
             <Col xs="9">
               {/** Bar chart */}
-              <Row className='mb-5'>
+              <Row>
                 <Col>
                   <h2>Levels of Expertise - Blockchain Values</h2>
                   <h5>Blockchain current thresholds</h5>
@@ -327,8 +335,19 @@ const ExpertiseLevel = () => {
                       <div className='fillerStyles noviceBar' style={{width: expertiseLevels[0]/maximumPoints*100 + "%"}}>
                         <span className='labelStyles'>Novice</span>
                       </div>
+                      <div className='fillerStyles pointsBar' style={{width: userPoints/maximumPoints*100 + "%"}}>
+                        <span className='labelStyles'>USER POINTS</span>
+                      </div>
                     </div>
                   </div>
+                </Col>
+              </Row>
+              <Row className='mb-5'>
+                <Col>
+                  Classification: {classification}
+                </Col>
+                <Col>
+                  Total of points: {userPoints.toLocaleString()}
                 </Col>
               </Row>
               <table className='table__settings mt-2'>
