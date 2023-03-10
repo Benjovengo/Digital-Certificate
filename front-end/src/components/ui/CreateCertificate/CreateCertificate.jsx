@@ -31,11 +31,12 @@ const CreateCertificate = () => {
     const advisor = e.target.advisor.value;
     const studyingArea = e.target.studyingArea.value;
     const degree = e.target.degree.value;
+    const degreeHeader = e.target.degree[Number(e.target.degree.value)-1].textContent;
     const gpa = e.target.gpa.value;
     const date = e.target.date.value;
 
     // Upload a certificate to IPFS
-    const metadata = await uploadCertificateJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, studyingArea, degree, gpa, date);
+    const metadata = await uploadCertificateJSONtoIPFS(institution, blockchainAddress, workTitle, advisor, studyingArea, degree, degreeHeader, gpa, date);
 
     const metadataURI = metadata['tokenURI']
     const metadataHash = metadata['hash']
