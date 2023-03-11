@@ -25,6 +25,7 @@ const DisplayCertificates = () => {
   const [fullName, setFullName] = useState('');
   const [blockchainAddress, setBlockchainAddress] = useState('');
   const [degree, setDegree] = useState('');
+  const [degreeHeader, setDegreeHeader] = useState('');
   const [area, setArea] = useState('');
   const [advisor, setAdvisor] = useState('');
   const [hash, setHash] = useState('');
@@ -103,6 +104,7 @@ const DisplayCertificates = () => {
     setFullName(identityName)
     setBlockchainAddress(JSON.blockchainAddress)
     setDegree(JSON.degree)
+    setDegreeHeader(JSON.degreeHeader)
     setArea(JSON.studyingArea)
     setAdvisor(JSON.advisor)
     setHash(JSON.hash)
@@ -149,7 +151,7 @@ const DisplayCertificates = () => {
                 </Row>
                 
               </> : <>
-                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} area={area} advisor={advisor} certificateId={certificateId} hash={hash} date={dateString} txHash={txHash} />
+                <CertificateTemplate institution={institution} fullName={fullName} blockchainAddress={blockchainAddress} degree={degree} degreeHeader={degreeHeader} area={area} advisor={advisor} certificateId={certificateId} hash={hash} date={dateString} txHash={txHash} />
               </>
               }
             </Col>
