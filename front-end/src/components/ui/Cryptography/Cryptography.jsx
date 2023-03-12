@@ -163,6 +163,11 @@ const encryptText = async () => {
     const encrypted = encryptData(publicKey, data)
 
     document.getElementById('encryptedText').innerHTML = encrypted
+
+    //DECRYPT
+    const decrypted = await decryptData(account, encrypted)
+
+    document.getElementById('decryptedText').innerHTML = decrypted
 }
 
 
@@ -176,6 +181,8 @@ const encryptText = async () => {
         <button onClick={() => {encryptText()}}>Encrypt</button>
         <input type="text" id="inputText" />
         <h3 id='encryptedText'>Encrypted Text</h3>
+        <h3 id='decryptedText'>Decrypted Text</h3>
+        
 
         <button onClick={() => {getPublicKey()}}>Get Public Key</button>
         <h3 id='publicKeyText'>Public Key</h3>
