@@ -9,21 +9,27 @@ import { ethers } from 'ethers';
  * @param {bytes64} _data Encrypted data
  * @returns {string} Decrypted message
  */
-
 export const decryptData = async (_account, _data) => {
-  // Send request to MetaMask to decrypt the cyphered text
-  // Once again application must have access to the account
-  const decrypt = await window.ethereum.request({
-    method: 'eth_decrypt',
-    params: [_data, _account]
-  })
-
-  return decrypt
+  try {
+    // Send request to MetaMask to decrypt the cyphered text
+    // The application must have access to the account
+    const decrypt = await window.ethereum.request({
+      method: 'eth_decrypt',
+      params: [_data, _account]
+    })
+    return decrypt
+  } catch (error) {
+    return error.message
+  }
 }
 
 
 
-
+/**
+ * 
+ * @param {bytes} value Encrypted data using MetaMask public key
+ * @returns Hex representation of the encrypted message
+ */
 function stringifiableToHex(value) {
   return ethers.utils.hexlify(Buffer.from(JSON.stringify(value)));
 }
