@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { Buffer } from 'buffer';
 
-
-import { encrypt } from '@metamask/eth-sig-util';
-
 // Style
 import "./cryptography.css"
 
