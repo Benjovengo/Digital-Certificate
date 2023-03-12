@@ -146,25 +146,25 @@ const Cryptography = () => {
 
 const encryptText = async () => {
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-    const account = ethers.utils.getAddress(accounts[0])
+  const account = ethers.utils.getAddress(accounts[0])
 
-    // Key is returned as base64
-    const keyB64 = await window.ethereum.request({
-      method: 'eth_getEncryptionPublicKey',
-      params: [account],
-    });
-    const publicKey = Buffer.from(keyB64, 'base64');
+  // Key is returned as base64
+  const keyB64 = await window.ethereum.request({
+    method: 'eth_getEncryptionPublicKey',
+    params: [account],
+  });
+  const publicKey = Buffer.from(keyB64, 'base64');
 
-    // ENCRYPT
-    const data =  document.getElementById('inputText').value
-    const encrypted = encryptData(publicKey, data)
+  // ENCRYPT
+  const data =  document.getElementById('inputText').value
+  const encrypted = encryptData(publicKey, data)
 
-    document.getElementById('encryptedText').innerHTML = encrypted
+  document.getElementById('encryptedText').innerHTML = encrypted
 
-    //DECRYPT
-    const decrypted = await decryptData(account, encrypted)
+  //DECRYPT
+  const decrypted = await decryptData(account, encrypted)
 
-    document.getElementById('decryptedText').innerHTML = decrypted
+  document.getElementById('decryptedText').innerHTML = decrypted
 }
 
 
