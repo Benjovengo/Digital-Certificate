@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Buffer } from 'buffer';
 
+
+import { encrypt } from '@metamask/eth-sig-util';
+
 // Style
 import "./cryptography.css"
 
@@ -144,15 +147,23 @@ const Cryptography = () => {
 
 
 
+const encryptText = async () => {
+  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    const account = ethers.utils.getAddress(accounts[0])
 
+    // Key is returned as base64
+    const keyB64 = await window.ethereum.request({
+      method: 'eth_getEncryptionPublicKey',
+      params: [account],
+    });
+    const publicKey = Buffer.from(keyB64, 'base64');
 
+    // ENCRYPT
+    const data =  document.getElementById('inputText').value
+    const encrypted = encryptData(publicKey, data)
 
-
-
-
-
-
-
+    document.getElementById('encryptedText').innerHTML = encrypted
+}
 
 
 
@@ -162,6 +173,10 @@ const Cryptography = () => {
     <>
       <div className='cryptography__container'>
         <h1>Cryptography</h1>
+        <button onClick={() => {encryptText()}}>Encrypt</button>
+        <input type="text" id="inputText" />
+        <h3 id='encryptedText'>Encrypted Text</h3>
+
         <button onClick={() => {getPublicKey()}}>Get Public Key</button>
         <h3 id='publicKeyText'>Public Key</h3>
         <button onClick={() => {uploadFile()}}>Use DotEnv</button>
